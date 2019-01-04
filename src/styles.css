@@ -1,1 +1,112 @@
 /* You can add global styles to this file, and also import other style files */
+
+.text-grey {
+    color: #6c757d!important;
+}
+
+.centrar {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column
+}
+
+.centrar-fas {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.centrar-fas span:hover {
+    background: #3e3e3e!important;
+    color: orangered!important;
+}
+
+header .buscador {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-top: 12px;
+}
+
+header .submenu {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+header .submenu ul {
+    margin-bottom: 0px!important;
+}
+
+.container a.navbar-brand {
+    font-family: 'Anton', 'sans-serif';
+    font-size: 2em;
+}
+
+.cuerpo {
+    background: #fff;
+    padding-left: 0px!important;
+    padding-right: 0px!important;
+}
+
+.buscador form {
+    display: flex;
+}
+
+.buscador form .form-group {
+    margin-bottom: 0px!important;
+}
+
+.buscador form input {
+    border-radius: 0px!important;
+    width: 250px;
+    height: 25px;
+    padding: 0px 5px 0px 5px;
+}
+
+.buscador form button {
+    border-radius: 0px!important;
+    height: 25px;
+    padding: 0px 5px 0px 5px;
+}
+
+.nuevo-producto .card-body,
+.promocion-producto .card-body,
+.mas-vendidos .card-body {
+    padding: 0px!important;
+}
+
+.mas-vedidos .card a,
+.registro .form-check-label a {
+    color: #3e3e3e!important;
+}
+
+.registro .form-check-label a {
+    text-decoration: none;
+}
+
+.cobertura-conteo {
+    background-image: url('https://picsum.photos/g/1000/400/?random');
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-size: 1500px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cobertura-conteo .dato {
+    background: rgba(0, 0, 0, 0.898);
+    border-radius: 5px;
+    max-width: 200px!important;
+}
+
+.marcas {
+    height: 300px;
+}
+
+footer .redes ul li {
+    font-size: 1.5em;
+}

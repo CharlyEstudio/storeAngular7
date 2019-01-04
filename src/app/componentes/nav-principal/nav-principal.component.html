@@ -1,0 +1,105 @@
+<header>
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-12 buscador">
+
+                <form #f="ngForm">
+
+                    <div class="form-group">
+
+                        <input type="text" name="buscador" [ngModel]="buscador" class="form-control">
+
+                    </div>
+
+                </form>
+
+            </div>
+
+            <div class="col-12 submenu">
+
+                <ul class="list-inline">
+
+                    <li class="list-inline-item font-weight-bold" *ngIf="!logeado">
+
+                        <a routerLink="/registro" class="nav-link">
+
+                            <i class="mdi mdi-human-greeting"></i> Registro
+
+                        </a>
+
+                    </li>
+
+                    <li class="list-inline-item font-weight-bold" *ngIf="!logeado">|</li>
+
+                    <li class="list-inline-item font-weight-bold" *ngIf="!logeado">
+
+                        <a routerLink="/acceso" class="nav-link">
+
+                            <i class="mdi mdi-access-point"></i> Acceso
+
+                        </a>
+
+                    </li>
+
+                    <li class="list-inline-item font-weight-bold" *ngIf="logeado">|</li>
+
+                    <li class="list-inline-item font-weight-bold" *ngIf="logeado">
+
+                        <a routerLink="" class="nav-link">
+
+                            <i class="mdi mdi-account-outline"></i> Mi Cuenta
+
+                        </a>
+
+                    </li>
+
+                    <li class="list-inline-item font-weight-bold">|</li>
+
+                    <li class="list-inline-item font-weight-bold">
+
+                        <a routerLink="/favoritos" class="nav-link">
+
+                            <i class="mdi mdi-star-outline"></i> Favoritos
+
+                        </a>
+
+                    </li>
+
+                    <li class="list-inline-item font-weight-bold">|</li>
+
+                    <li class="list-inline-item font-weight-bold">
+
+                        <a routerLink="/carrito" class="nav-link" *ngIf="carrito">
+
+                            <span class="badge badge-danger pl-2 pr-2">
+
+                              {{ cantidad | number }}
+
+                            </span>
+
+                        </a>
+
+                        <span *ngIf="!carrito">
+
+                          <span class="text-danger">
+
+                            <i class="mdi mdi-basket"></i>
+
+                          </span> {{ 'no items' }}
+
+                        </span>
+
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</header>

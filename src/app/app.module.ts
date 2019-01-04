@@ -29,6 +29,8 @@ import { AccesoComponent } from './acceso/acceso.component';
 import { FavoritosComponent } from './favoritos/favoritos.component';
 import { CarritoComponent } from './carrito/carrito.component';
 import { BuscadorComponent } from './buscador/buscador.component';
+import { NavPrincipalComponent } from './componentes/nav-principal/nav-principal.component';
+import { FooterComponent } from './componentes/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +47,8 @@ import { BuscadorComponent } from './buscador/buscador.component';
     FavoritosComponent,
     CarritoComponent,
     BuscadorComponent,
+    NavPrincipalComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
