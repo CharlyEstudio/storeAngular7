@@ -1,0 +1,41 @@
+<div class="row mas-vendidos">
+
+    <div class="col-12 col-lg-3 col-md-6 col-sm-12 pt-2" *ngFor="let mejor of mejores">
+
+        <div class="card">
+
+            <div class="card-body text-center">
+
+                <img [src]="mejor.img" class="img-fluig" width="200"> <small class="desc2"> -{{ (mejor.descuento * 100) }}%</small>
+
+                <h5 class="pt-2 pb-4">{{mejor.descripcion}}</h5>
+
+                <h6 class="text-muted">
+
+                    <small>
+
+                        <s>{{ mejor.precioAumentado | currency }}</s>
+                        
+                    </small>
+
+                </h6>
+
+                <h4 class="font-weight-bold text-danger">
+
+                    {{ mejor.precio | currency }}
+
+                </h4>
+
+                <button class="btn btn-linkedin" type="button" (click)="irA(mejor)">
+
+                    Comprar
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

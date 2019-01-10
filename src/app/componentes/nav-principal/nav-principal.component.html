@@ -6,15 +6,7 @@
 
             <div class="col-12 buscador">
 
-                <form #f="ngForm">
-
-                    <div class="form-group">
-
-                        <input type="text" name="buscador" [ngModel]="buscador" class="form-control">
-
-                    </div>
-
-                </form>
+                <app-buscar (actualizaValor)="obtener($event)"></app-buscar>
 
             </div>
 
@@ -24,7 +16,7 @@
 
                     <li class="list-inline-item font-weight-bold" *ngIf="!logeado">
 
-                        <a routerLink="/registro" class="nav-link">
+                        <a routerLink="/registro" class="nav-link text-grey">
 
                             <i class="mdi mdi-human-greeting"></i> Registro
 
@@ -36,7 +28,7 @@
 
                     <li class="list-inline-item font-weight-bold" *ngIf="!logeado">
 
-                        <a routerLink="/acceso" class="nav-link">
+                        <a routerLink="/acceso" class="nav-link  text-grey">
 
                             <i class="mdi mdi-access-point"></i> Acceso
 
@@ -48,7 +40,7 @@
 
                     <li class="list-inline-item font-weight-bold" *ngIf="logeado">
 
-                        <a routerLink="" class="nav-link">
+                        <a routerLink="" class="nav-link  text-grey">
 
                             <i class="mdi mdi-account-outline"></i> Mi Cuenta
 
@@ -60,7 +52,7 @@
 
                     <li class="list-inline-item font-weight-bold">
 
-                        <a routerLink="/favoritos" class="nav-link">
+                        <a routerLink="/favoritos" class="nav-link text-grey">
 
                             <i class="mdi mdi-star-outline"></i> Favoritos
 
@@ -72,7 +64,13 @@
 
                     <li class="list-inline-item font-weight-bold">
 
-                        <a routerLink="/carrito" class="nav-link" *ngIf="carrito">
+                        <a routerLink="/carrito" class="nav-link text-grey" *ngIf="carrito">
+
+                            <span class="text-grey pr-1">
+
+                                <i class="mdi mdi-shopping font-20"></i>
+                                
+                            </span>
 
                             <span class="badge badge-danger pl-2 pr-2">
 
@@ -103,3 +101,63 @@
     </div>
 
 </header>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-danger">
+
+    <div class="container">
+
+        <a class="navbar-brand" href="#">Ferremayoristas</a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            
+            <span class="navbar-toggler-icon"></span>
+
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+            <ul class="navbar-nav ml-auto">
+
+                <li class="nav-item">
+
+                    <a class="nav-link" routerLink="/inicio">Inicio <span class="sr-only">(current)</span></a>
+
+                </li>
+
+                <li class="nav-item dropdown">
+
+                    <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        
+                        Marcas
+
+                    </a>
+
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                        <a class="dropdown-item" routerLink="/marcaTruper">Truper</a>
+
+                        <a class="dropdown-item" routerLink="/marcaFmo">FMO</a>
+
+                    </div>
+
+                </li>
+
+                <li class="nav-item">
+
+                    <a class="nav-link" routerLink="/nosotros">Nosotros</a>
+
+                </li>
+
+                <li class="nav-item">
+
+                    <a class="nav-link" routerLink="/cobertura">Cobertura</a>
+
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</nav>

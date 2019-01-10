@@ -1,0 +1,76 @@
+<nav class="breadcrumb bg-transparent">
+
+    <a class="breadcrumb-item" routerLink="/inicio">Inicio</a>
+
+    <a class="breadcrumb-item" routerLink="" (click)="comeBack()">Producto Encontrado</a>
+
+    <span class="breadcrumb-item active">{{ descripcion }}</span>
+
+</nav>
+
+<div class="row mb-5 pb-5">
+
+    <div class="col-lg-4 col-md-4 col-sm-12 col-12 text-center">
+
+        <img [src]="imagen" class="img-fluid">
+
+    </div>
+
+    <div class="col-lg-5 col-md-5 col-sm-12 col-12">
+
+        <h2 class="font-weight-bold">{{ descripcion }}</h2>
+
+        <h6 class="text-muted lin">Clave: {{ clave }}</h6>
+
+        <h6 class="text-muted">Código: {{ codigo }}</h6>
+
+    </div>
+
+    <div class="col-lg-3 col-md-3 col-sm-12 col-12 text-center">
+
+        <h6 class="text-muted" *ngIf="descuentoBol">Precio Regular <s>{{ precioAumentado | currency }}</s></h6>
+
+        <h6 class="font-bold" *ngIf="descuentoBol">Precio Especial {{ precio | currency }} <small class="desc">-{{ (desc * 100) }}%</small></h6>
+
+        <h6 class="font-bold" *ngIf="!descuentoBol">Precio {{ precio | currency }}</h6>
+
+        <form #f="ngForm" class="pt-3">
+
+            <label for="cantidad">Cantidad:</label>
+
+            <div class="form-group">
+
+
+                <input type="number" [ngModel]="cantidad" id="cantidad" min="1" name="cantidad" class="form-control text-center" placeholder="1" style="width: 100px;">
+
+            </div>
+
+            <div class="form-group">
+
+                <select class="form-control" name="unidad" [ngModel]="unidad">
+
+                    <option value="0">Elige una unidad</option>
+
+                    <option [value]="unidad.equivale" *ngFor="let unidad of unidades">{{ unidad.equivale }}</option>
+
+                </select>
+
+            </div>
+
+            <div class="form-group">
+
+                <button type="button" class="btn btn-outline-danger" (click)="agregarCarrito(producto, f)">Agregar al Carrito</button>
+
+            </div>
+
+            <div class="form-group">
+
+                <button type="button" class="btn btn-outline-success" (click)="agregarFavoritos(producto, f)">Agregar a Favoritos</button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>

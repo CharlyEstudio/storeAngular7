@@ -1,3 +1,46 @@
-<p>
-  cobertura works!
-</p>
+<div class="row pt-5 pb-5 ml-3 mr-3">
+
+    <div class="col-12 col-lg-6 col-md-12 centrar">
+
+        <h1>Cobertura</h1>
+
+        <p class="text-justify">Somos expertos en el surtido y entrega de productos TRUPER y sus Submarcas, de igual forma tenemos a la disposición varias marcas que puede ayudar a tu negocios en sus ventas, acércate a nosotros y con gusto te ayudaremos, solo recibe consejos
+            de los expertos y nosotros somos uno de ellos.</p>
+
+    </div>
+
+    <div class="col-12 col-lg-6 col-md-12 centrar">
+
+        <img src="assets/images/logo-min.png" class="img-fluid">
+
+    </div>
+
+</div>
+
+<div class="row cobertura-conteo bg-danger text-white pb-5 pt-5 mt-3 mb-3">
+
+    <div class="col-12 col-lg-4 col-md-12 dato mr-5 text-center">
+
+        <h3 class="display-4 text-white">{{ municipios | number }}</h3>
+
+        <p class="lead">Municipios</p>
+
+    </div>
+
+    <div class="col-12 col-lg-4 col-md-12 dato mr-5 text-center">
+
+        <h3 class="display-4 text-white">{{ clientes | number }}</h3>
+
+        <p class="lead">Clientes</p>
+
+    </div>
+
+    <div class="col-12 col-lg-4 col-md-12 dato mr-5 text-center">
+
+        <h3 class="display-4 text-white">{{ pedidos | number }}</h3>
+
+        <p class="lead">Pedidos en el {{ fecha | date: 'yyyy' }}</p>
+
+    </div>
+
+</div>

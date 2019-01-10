@@ -16,6 +16,7 @@ import { FavoritosComponent } from './favoritos/favoritos.component';
 import { CarritoComponent } from './carrito/carrito.component';
 import { BuscadorComponent } from './buscador/buscador.component';
 import { NopagefoundComponent } from './nopagefound/nopagefound.component';
+import { DescripcionComponent } from './descripcion/descripcion.component';
 
 const appRoutes: Routes = [
     { path: 'inicio', component: InicioComponent },
@@ -28,6 +29,7 @@ const appRoutes: Routes = [
     { path: 'favoritos', component: FavoritosComponent },
     { path: 'carrito', component: CarritoComponent },
     { path: 'buscador/:buscando', component: BuscadorComponent },
+    { path: 'ver/:producto', component: DescripcionComponent },
     {
         path: '',
         component: PaginasComponent,

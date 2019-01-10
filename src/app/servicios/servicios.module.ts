@@ -2,8 +2,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-// Servicios
-import { LoginGuard } from './guards/login.guard';
+// Servicios & Guardias
+import { LoginGuard, UsuarioServicesService, ProductosService, DatosService, ShoppingService } from './servicios.index';
 
 @NgModule({
     imports: [
@@ -12,7 +12,12 @@ import { LoginGuard } from './guards/login.guard';
     ],
     providers: [
         // Guardias
-        LoginGuard
+        LoginGuard,
+        // Servicios
+        UsuarioServicesService,
+        ProductosService,
+        DatosService,
+        ShoppingService
     ],
     declarations: []
 })

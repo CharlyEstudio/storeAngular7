@@ -1,3 +1,85 @@
-<p>
-  buscador works!
-</p>
+<div class="alert alert-success mt-5 animated fadeIn pt-5 pb-5" role="start" *ngIf="buscandoBol">
+
+    <h4 class="alert-heading">Buscando <b>{{ buscando }}</b></h4>
+
+    <p>Espere mientras obtenemos los resultados</p>
+
+    <div class="progress">
+
+        <div class="progress-bar progress-bar-striped bg-danger progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
+
+    </div>
+
+    <p class="mb-0 h3 pt-2">
+
+        <i class="mdi mdi-glasses animated infinite pulse"></i>
+
+    </p>
+
+</div>
+
+<div class="alert alert-danger mt-5 animated fadeIn pt-5 pb-5" role="start" *ngIf="errorBol">
+
+    <h4 class="alert-heading">No se encontro <b>{{ buscando }}</b></h4>
+
+    <p>No se pudo obtener ningún resultado a su busqueda, favor de intentar con otro termino.</p>
+
+    <p class="mb-0 h3 pt-2">
+
+        <i class="mdi mdi-ghost animated infinite pulse"></i>
+
+    </p>
+
+</div>
+
+<nav class="breadcrumb bg-transparent" *ngIf="encontradoBol">
+
+    <a class="breadcrumb-item" routerLink="/inicio">Inicio</a>
+
+    <span class="breadcrumb-item active">Productos Encontrados</span>
+
+    <span class="breadcrumb-item active">{{ buscando }}</span>
+
+</nav>
+
+<div class="row mas-vendidos" *ngIf="encontradoBol">
+
+    <div class="col-12 col-lg-3 col-md-6 col-sm-12 pt-2" *ngFor="let enc of encontrado">
+
+        <div class="card">
+
+            <div class="card-body text-center">
+
+                <img [src]="enc.img" class="img-fluig" width="200"> <small class="desc3" *ngIf="enc.descuento > 0"> -{{ (enc.descuento * 100) }}%</small>
+
+                <h5 class="pt-2 pb-4">{{enc.descripcion}}</h5>
+
+                <h6 class="text-muted">
+
+                    <small>
+
+                    <s>{{ enc.precioAumentado | currency }}</s>
+                    
+                </small>
+
+                </h6>
+
+                <h4 class="font-weight-bold text-danger">
+
+                    {{ enc.precio | currency }}
+
+                </h4>
+
+                <button class="btn btn-linkedin" type="button" (click)="irA(enc)">
+
+                Comprar
+
+            </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

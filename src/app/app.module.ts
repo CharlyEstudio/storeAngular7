@@ -31,6 +31,12 @@ import { CarritoComponent } from './carrito/carrito.component';
 import { BuscadorComponent } from './buscador/buscador.component';
 import { NavPrincipalComponent } from './componentes/nav-principal/nav-principal.component';
 import { FooterComponent } from './componentes/footer/footer.component';
+import { CarruselComponent } from './componentes/carrusel/carrusel.component';
+import { NuevosProductosComponent } from './componentes/nuevos-productos/nuevos-productos.component';
+import { PromocionProductosComponent } from './componentes/promocion-productos/promocion-productos.component';
+import { VentaDiaComponent } from './componentes/venta-dia/venta-dia.component';
+import { DescripcionComponent } from './descripcion/descripcion.component';
+import { BuscarComponent } from './componentes/buscar/buscar.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +55,12 @@ import { FooterComponent } from './componentes/footer/footer.component';
     BuscadorComponent,
     NavPrincipalComponent,
     FooterComponent,
+    CarruselComponent,
+    NuevosProductosComponent,
+    PromocionProductosComponent,
+    VentaDiaComponent,
+    DescripcionComponent,
+    BuscarComponent,
   ],
   imports: [
     BrowserModule,

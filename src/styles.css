@@ -1,7 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
 
-.text-grey {
+html,
+body {
+    font-family: 'Dosis', 'sans-serif'!important;
+}
+
+.text-grey,
+.text-claro {
     color: #6c757d!important;
+}
+
+.text-grey:hover {
+    color: #232324!important;
 }
 
 .centrar {
@@ -40,8 +50,8 @@ header .submenu ul {
 }
 
 .container a.navbar-brand {
-    font-family: 'Anton', 'sans-serif';
-    font-size: 2em;
+    font-family: 'Anton', 'sans-serif'!important;
+    font-size: 2em!important;
 }
 
 .cuerpo {
@@ -58,11 +68,12 @@ header .submenu ul {
     margin-bottom: 0px!important;
 }
 
-.buscador form input {
+.buscador form .inputBuscar {
     border-radius: 0px!important;
-    width: 250px;
-    height: 25px;
-    padding: 0px 5px 0px 5px;
+    width: 250px!important;
+    height: 25px!important;
+    padding: 0px 5px 0px 5px!important;
+    min-height: 25px!important;
 }
 
 .buscador form button {
@@ -77,9 +88,13 @@ header .submenu ul {
     padding: 0px!important;
 }
 
-.mas-vedidos .card a,
+.mas-vendidos .card a {
+    color: white!important;
+}
+
 .registro .form-check-label a {
     color: #3e3e3e!important;
+    font-size: 1.3rem!important;
 }
 
 .registro .form-check-label a {
@@ -87,19 +102,19 @@ header .submenu ul {
 }
 
 .cobertura-conteo {
-    background-image: url('https://picsum.photos/g/1000/400/?random');
+    /* background-image: url('https://picsum.photos/g/1000/400/?random');
     background-position: bottom;
     background-repeat: no-repeat;
     background-size: 1500px;
-    border-radius: 5px;
+    border-radius: 5px; */
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .cobertura-conteo .dato {
-    background: rgba(0, 0, 0, 0.898);
-    border-radius: 5px;
+    /* background: rgba(0, 0, 0, 0.898);
+    border-radius: 5px; */
     max-width: 200px!important;
 }
 
@@ -107,6 +122,58 @@ header .submenu ul {
     height: 300px;
 }
 
+footer {
+    margin-bottom: -25px;
+}
+
 footer .redes ul li {
     font-size: 1.5em;
+}
+
+footer .redes ul li a {
+    color: #6c757d!important;
+}
+
+footer .redes ul li a:hover {
+    color: #a0293d!important;
+}
+
+.mas-vendidos .card a:hover {
+    color: black!important;
+}
+
+.iconos-footer {
+    padding: 0px!important;
+    border-radius: 20px;
+    background: #ef5350 !important;
+    border-top: none!important;
+}
+
+.desc {
+    padding: 10px 6px;
+    border-radius: 100%;
+    background: #ef5350;
+    color: white;
+}
+
+.desc2 {
+    padding: 12px 6px;
+    position: relative;
+    font-size: 1.5rem;
+    top: -200px;
+    left: 100px;
+    border-radius: 100%;
+    background: #e43d0a;
+    color: white;
+}
+
+.desc3 {
+    padding: 12px 6px;
+    position: relative;
+    font-size: 1.5rem;
+    top: -70px;
+    left: -20px;
+    border-radius: 100%;
+    background: #e43d0a;
+    color: white;
 }
