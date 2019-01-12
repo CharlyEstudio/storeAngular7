@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { Producto } from '../../modelos/productos.model';
 
 // Link
-import { LINK } from 'src/app/config/config';
+import { PATH_LINK } from '../../config/config';
 
 // Servicios
 import { ProductosService } from 'src/app/servicios/servicios.index';
@@ -29,13 +29,13 @@ export class VentaDiaComponent implements OnInit {
   }
 
   irA(producto: Producto) {
-    this.router.navigate(['/ver/', producto.id]);
+    this.router.navigate(['/ver/', producto.articuloid]);
   }
 
   obtenerEstrellas() {
     this._productosServices.obtenerMejoresVentasDia().subscribe( (mejores: any) => {
-      for (let i = 0; i < mejores.length; i++) {
-        this._productosServices.obtenerImagenes(mejores[i].codigo).subscribe((imagenes: any) => {
+      for (let i = 0; i < mejores.respuesta.length; i++) {
+        this._productosServices.obtenerImagenes(mejores.respuesta[i].codigo).subscribe((imagenes: any) => {
           let image;
 
           if (imagenes.length > 0) {
@@ -44,21 +44,59 @@ export class VentaDiaComponent implements OnInit {
             image = 'product.png';
           }
 
-          const datos: Producto = {
-            id: mejores[i].articuloid,
-            descripcion: mejores[i].descripcion,
-            clave: mejores[i].clave,
-            codigo: mejores[i].codigo,
-            precioneto: mejores[i].precioneto,
-            iva: mejores[i].iva,
-            precio: mejores[i].precio,
-            precioAumentado: mejores[i].precio * (1 + (mejores[i].descuento)),
-            img: LINK + '/assets/img_products/' + image,
-            descuento: mejores[i].descuento,
-            entregado: mejores[i].entregado,
-          };
+          this._productosServices.obtenerMarca(mejores.respuesta[i].articuloid).subscribe((marca: any) => {
 
-          this.mejores.push(datos);
+            let datos: Producto;
+
+            if (marca.respuesta.length > 0) {
+
+              datos = {
+                articuloid: mejores.respuesta[i].articuloid,
+                descripcion: mejores.respuesta[i].descripcion,
+                clave: mejores.respuesta[i].clave,
+                codigo: mejores.respuesta[i].codigo,
+                marca: marca.respuesta[0].marca,
+                cantidad: 1,
+                precioneto: mejores.respuesta[i].precioneto,
+                iva: mejores.respuesta[i].iva,
+                precio: mejores.respuesta[i].precio,
+                precioAumentado: mejores.respuesta[i].precio * (1 + (mejores.respuesta[i].descuento)),
+                img: PATH_LINK + '/assets/img_products/' + image,
+                descuento: mejores.respuesta[i].descuento,
+                entregado: mejores.respuesta[i].entregado,
+              };
+            } else {
+              datos = {
+                articuloid: mejores.respuesta[i].articuloid,
+                descripcion: mejores.respuesta[i].descripcion,
+                clave: mejores.respuesta[i].clave,
+                codigo: mejores.respuesta[i].codigo,
+                marca: 'Sin Marca',
+                cantidad: 1,
+                precioneto: mejores.respuesta[i].precioneto,
+                iva: mejores.respuesta[i].iva,
+                precio: mejores.respuesta[i].precio,
+                precioAumentado: mejores.respuesta[i].precio * (1 + (mejores.respuesta[i].descuento)),
+                img: PATH_LINK + '/assets/img_products/' + image,
+                descuento: mejores.respuesta[i].descuento,
+                entregado: mejores.respuesta[i].entregado,
+              };
+            }
+
+            this.mejores.push(datos);
+
+              this.mejores.sort((a, b) => {
+                if (a.precio < b.precio) {
+                  return 1;
+                }
+
+                if (a.precio > b.precio) {
+                  return -1;
+                }
+
+                return 0;
+              });
+          });
         });
       }
     });

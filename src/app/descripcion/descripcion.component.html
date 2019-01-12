@@ -24,15 +24,45 @@
 
         <h6 class="text-muted">Código: {{ codigo }}</h6>
 
+        <h6 class="text-muted"><small>Articulo: {{ articuloid }}</small></h6>
+
+        <h3 class="text-muted">
+
+            <span class="badge badge-danger">{{ marca }}</span>
+
+        </h3>
+
+        <h6 class="pt-4">Forma de Surtido</h6>
+
+        <table class="table table-borderless">
+
+            <tbody>
+
+                <tr *ngFor="let unidad of unidades">
+
+                    <td>{{ unidad.equivale2 }}</td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
     </div>
 
     <div class="col-lg-3 col-md-3 col-sm-12 col-12 text-center">
 
-        <h6 class="text-muted" *ngIf="descuentoBol">Precio Regular <s>{{ precioAumentado | currency }}</s></h6>
+        <h6 class="text-muted" *ngIf="descuentoBol">Precio Regular</h6>
 
-        <h6 class="font-bold" *ngIf="descuentoBol">Precio Especial {{ precio | currency }} <small class="desc">-{{ (desc * 100) }}%</small></h6>
+        <h6 class="text-muted" *ngIf="descuentoBol"><s>{{ precioAumentado | currency }}</s></h6>
 
-        <h6 class="font-bold" *ngIf="!descuentoBol">Precio {{ precio | currency }}</h6>
+        <h4 class="font-bold pt-3" *ngIf="descuentoBol">Oferta <small class="desc">-{{ (desc * 100) }}%</small></h4>
+
+        <h3 class="font-bold" *ngIf="descuentoBol">{{ precio | currency }}</h3>
+
+        <h6 class="font-bold" *ngIf="!descuentoBol">Precio</h6>
+
+        <h3 class="font-bold" *ngIf="!descuentoBol">{{ precio | currency }}</h3>
 
         <form #f="ngForm" class="pt-3">
 
@@ -47,19 +77,7 @@
 
             <div class="form-group">
 
-                <select class="form-control" name="unidad" [ngModel]="unidad">
-
-                    <option value="0">Elige una unidad</option>
-
-                    <option [value]="unidad.equivale" *ngFor="let unidad of unidades">{{ unidad.equivale }}</option>
-
-                </select>
-
-            </div>
-
-            <div class="form-group">
-
-                <button type="button" class="btn btn-outline-danger" (click)="agregarCarrito(producto, f)">Agregar al Carrito</button>
+                <button type="button" class="btn btn-outline-danger" (click)="agregarCarrito(producto, unidades, f, marca)">Agregar al Carrito</button>
 
             </div>
 
@@ -70,6 +88,8 @@
             </div>
 
         </form>
+
+        <p>*Al Seleccionar la cantidad, en automático se le realizará la forma de surtido.</p>
 
     </div>
 

@@ -5,7 +5,7 @@ import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { Producto } from '../modelos/productos.model';
 
 // Config
-import { LINK } from '../config/config';
+import { PATH_LINK } from '../config/config';
 
 // Servicios
 import { ProductosService } from 'src/app/servicios/servicios.index';
@@ -47,35 +47,74 @@ export class BuscadorComponent implements OnInit, OnDestroy {
   obtenerBusqueda(buscar: any) {
     this.encontrado = [];
     this._productosService.buscarProductos(buscar).subscribe((encontrado: any) => {
-      if (encontrado.length > 0) {
+      if (encontrado.respuesta.length > 0) {
         this.buscandoBol = false;
         this.errorBol = false;
         this.encontradoBol = true;
-        for (let i = 0; i < encontrado.length; i++) {
-          this._productosService.obtenerImagenes(encontrado[i].codigo).subscribe((imagenes: any) => {
+        for (let i = 0; i < encontrado.respuesta.length; i++) {
+          this._productosService.obtenerImagenes(encontrado.respuesta[i].codigo).subscribe((imagenes: any) => {
             let image;
 
-            if (imagenes.length > 0) {
-              image = imagenes[0].imagen;
+            if (imagenes.respuesta.length > 0) {
+              image = imagenes.respuesta[0].imagen;
             } else {
               image = 'product.png';
             }
 
-            const datos: Producto = {
-              id: encontrado[i].articuloid,
-              descripcion: encontrado[i].descripcion,
-              clave: encontrado[i].clave,
-              codigo: encontrado[i].codigo,
-              precioneto: encontrado[i].precioneto,
-              iva: encontrado[i].iva,
-              precio: encontrado[i].precio,
-              precioAumentado: 0,
-              img: LINK + '/assets/img_products/' + image,
-              descuento: encontrado[i].descuento,
-              entregado: encontrado[i].entregado,
-            };
+            this._productosService.obtenerMarca(encontrado.respuesta[i].articuloid).subscribe((marca: any) => {
+              let datos: Producto;
 
-            this.encontrado.push(datos);
+              if (marca.respuesta.length > 0) {
+
+                datos = {
+                  articuloid: encontrado.respuesta[i].articuloid,
+                  descripcion: encontrado.respuesta[i].descripcion,
+                  clave: encontrado.respuesta[i].clave,
+                  codigo: encontrado.respuesta[i].codigo,
+                  marca: marca.respuesta[0].marca,
+                  cantidad: 1,
+                  precioneto: encontrado.respuesta[i].precioneto,
+                  iva: encontrado.respuesta[i].iva,
+                  precio: encontrado.respuesta[i].precio,
+                  precioAumentado: encontrado.respuesta[i].precio * (1 + (encontrado.respuesta[i].descuento)),
+                  img: PATH_LINK + '/assets/img_products/' + image,
+                  descuento: encontrado.respuesta[i].descuento,
+                  entregado: encontrado.respuesta[i].entregado,
+                };
+
+              } else {
+
+                datos = {
+                  articuloid: encontrado.respuesta[i].articuloid,
+                  descripcion: encontrado.respuesta[i].descripcion,
+                  clave: encontrado.respuesta[i].clave,
+                  codigo: encontrado.respuesta[i].codigo,
+                  marca: 'Sin Marca',
+                  cantidad: 1,
+                  precioneto: encontrado.respuesta[i].precioneto,
+                  iva: encontrado.respuesta[i].iva,
+                  precio: encontrado.respuesta[i].precio,
+                  precioAumentado: encontrado.respuesta[i].precio * (1 + (encontrado.respuesta[i].descuento)),
+                  img: PATH_LINK + '/assets/img_products/' + image,
+                  descuento: encontrado.respuesta[i].descuento,
+                  entregado: encontrado.respuesta[i].entregado,
+                };
+
+              }
+
+              this.encontrado.push(datos);
+              this.encontrado.sort((a, b) => {
+                if (a.precio < b.precio) {
+                  return 1;
+                }
+
+                if (a.precio > b.precio) {
+                  return -1;
+                }
+
+                return 0;
+              });
+            });
           });
         }
       } else {
@@ -88,11 +127,40 @@ export class BuscadorComponent implements OnInit, OnDestroy {
   }
 
   irA(producto: Producto) {
-    this.route.navigate(['/ver/', producto.id]);
+    this.route.navigate(['/ver/', producto.articuloid]);
   }
 
   comeBack() {
     window.history.back();
+  }
+
+  ordernar(valor: any) {
+    const orden = Number(valor);
+    if (orden === 1) {
+      this.encontrado.sort((a, b) => {
+        if (a.precio < b.precio) {
+          return 1;
+        }
+
+        if (a.precio > b.precio) {
+          return -1;
+        }
+
+        return 0;
+      });
+    } else if (orden === 2) {
+      this.encontrado.sort((a, b) => {
+        if (a.precio > b.precio) {
+          return 1;
+        }
+
+        if (a.precio < b.precio) {
+          return -1;
+        }
+
+        return 0;
+      });
+    }
   }
 
 }

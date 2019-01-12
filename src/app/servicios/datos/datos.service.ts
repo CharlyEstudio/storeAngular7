@@ -14,19 +14,19 @@ export class DatosService {
   ) { }
 
   obtenerMunicipios() {
-    const url = LINK + '/api/store/datos.php?opcion=1';
+    const url = LINK + '/cobertura/municipios';
 
     return this.http.get(url);
   }
 
   obtenerClientes() {
-    const url = LINK + '/api/store/datos.php?opcion=2';
+    const url = LINK + '/cobertura/clientes';
 
     return this.http.get(url);
   }
 
-  obtenerPedidos() {
-    const url = LINK + '/api/store/datos.php?opcion=3';
+  obtenerPedidos(inicio: any, final: any) {
+    const url = LINK + '/cobertura/pedidos/' + inicio + '/' + final;
 
     return this.http.get(url);
   }

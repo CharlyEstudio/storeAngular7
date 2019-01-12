@@ -6,9 +6,15 @@
 
             <div class="card-body text-center">
 
-                <img [src]="mejor.img" class="img-fluig" width="200"> <small class="desc2"> -{{ (mejor.descuento * 100) }}%</small>
+                <img [src]="mejor.img" class="img-fluig" width="200">
 
                 <h5 class="pt-2 pb-4">{{mejor.descripcion}}</h5>
+
+                <h3>
+
+                    <span class="badge badge-danger">{{ (mejor.descuento * 100) }}% de Descuento</span>
+
+                </h3>
 
                 <h6 class="text-muted">
 
@@ -25,6 +31,12 @@
                     {{ mejor.precio | currency }}
 
                 </h4>
+
+                <h3>
+
+                    <span class="badge badge-pill badge-dark">{{ mejor.marca }}</span>
+
+                </h3>
 
                 <button class="btn btn-linkedin" type="button" (click)="irA(mejor)">
 

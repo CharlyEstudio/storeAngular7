@@ -12,31 +12,37 @@ export class ProductosService {
   ) { }
 
   obtenerMejoresVentasDia() {
-    const url = LINK + '/api/store/public.php?opcion=1';
+    const url = LINK + '/productos/descuento';
+
+    return this.http.get(url);
+  }
+
+  obtenerMarca (id: any) {
+    const url = LINK + '/productos/marca/' + id;
 
     return this.http.get(url);
   }
 
   obtenerImagenes (codigo: any) {
-    const url = LINK + '/api/store/public.php?opcion=2&codigo=' + codigo;
+    const url = LINK + '/productos/imagen/' + codigo;
 
     return this.http.get(url);
   }
 
   obtenerDescripcion(id: any) {
-    const url = LINK + '/api/store/public.php?opcion=3&articuloid=' + id;
+    const url = LINK + '/productos/descripcion/' + id;
 
     return this.http.get(url);
   }
 
   buscarProductos(termino: any) {
-    const url = LINK + '/api/store/public.php?opcion=4&termino=' + termino;
+    const url = LINK + '/productos/buscar/' + termino;
 
     return this.http.get(url);
   }
 
   obtenerUnidades(id: any) {
-    const url = LINK + '/api/store/public.php?opcion=5&articuloid=' + id;
+    const url = LINK + '/productos/unidades/' + id;
 
     return this.http.get(url);
   }

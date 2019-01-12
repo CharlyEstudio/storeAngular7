@@ -1,38 +1,122 @@
-<div class="row">
+<div class="row pb-5">
 
-    <div class="col-12 col-lg-3 col-md-6 col-sm-12" *ngFor="let car of carrito">
+    <div class="col-12 col-lg-12 col-md-6 col-sm-12 pt-5 pb-5">
 
-        <div class="card">
+        <div class="row">
 
-            <div class="card-body text-center">
+            <div class="col-lg-10 col-md-6 col-sm-12 text-left">
 
-                <img [src]="car.img" class="img-fluig" width="200"> <small class="desc2"> -{{ (car.descuento * 100) }}%</small>
-
-                <h5 class="pt-2 pb-4">{{car.descripcion}}</h5>
-
-                <h6 class="text-muted">
-
-                    <small>
-
-                    <s>{{ car.precioAumentado | currency }}</s>
-                    
-                </small>
-
-                </h6>
-
-                <h4 class="font-weight-bold text-danger">
-
-                    {{ car.precio | currency }}
-
-                </h4>
-
-                <button class="btn btn-linkedin" type="button" (click)="irA(car)">
-
-                Comprar
-
-            </button>
+                <h2>Su carrito contiene {{ items }} producto(s).</h2>
 
             </div>
+
+            <div class="col-lg-2 col-md-6 col-sm-12 text-right">
+
+                <button class="btn btn-danger" type="button" (click)="eliminarTodo()">
+
+                    Eliminar Todo
+        
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-12 col-lg-12 col-md-6 col-sm-12">
+
+        <div class="table-responsive">
+
+            <table class="table table-hover table-striped">
+
+                <thead>
+
+                    <tr>
+
+                        <th scope="col" colspan="2" class="text-left">Descripción</th>
+
+                        <th scope="col" class="text-center">Cantidad</th>
+
+                        <th scope="col" class="text-center">Final</th>
+
+                        <th scope="col" class="text-center">Eliminar</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr *ngFor="let car of carrito; let i = index">
+
+                        <td class="text-center">
+
+                            <img [src]="car.img" class="img-fluig rounded" width="200">
+
+                        </td>
+
+                        <td class="text-left">
+
+                            <h4 class="font-weight-bold">{{ car.descripcion }}</h4>
+
+                            <h6>Clave: <b>{{ car.clave }}</b> Código: <b>{{ car.codigo }}</b></h6>
+
+                            <h3 class="text-muted">
+
+                                <span class="badge badge-danger">{{ car.marca }}</span>
+
+                            </h3>
+
+                            <h6>
+
+                                <small>Artículo {{ car.articuloid }}</small>
+
+                            </h6>
+
+                            <h6 class="text-muted" *ngIf="car.descuento > 0">
+
+                                <s>{{ car.precioAumentado | currency }}</s>
+
+                            </h6>
+
+                            <h5 *ngIf="car.descuento > 0">
+
+                                <span class="badge badge-danger" style="font-size: 1rem;">{{ (car.descuento * 100) }}% de Descuento</span>
+
+                            </h5>
+
+                            <h3 *ngIf="car.descuento > 0" class="font-weight-bold">Oferta: {{ car.precio | currency }}</h3>
+
+                            <h3 *ngIf="car.descuento === 0">{{ car.precio | currency }}</h3>
+
+                            <p>{{ car.msg }}</p>
+
+                        </td>
+
+                        <td class="text-center">
+
+                            <input #input type="number" class="form-control text-center" min="1" name="cantidad" [value]="car.cantidad" (change)="cambiarCantidad(car, input.value)">
+
+                        </td>
+
+                        <td class="text-center font-weight-bold">{{ car.precioFinal | currency }}</td>
+
+                        <td class="text-center">
+
+                            <button class="btn btn-danger" type="button" (click)="eliminarProducto(i)">
+
+                                Eliminar
+            
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
 
         </div>
 

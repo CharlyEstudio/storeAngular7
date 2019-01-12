@@ -32,17 +32,43 @@
 
 </div>
 
-<nav class="breadcrumb bg-transparent" *ngIf="encontradoBol">
+<div class="row pt-3">
 
-    <a class="breadcrumb-item" routerLink="/inicio">Inicio</a>
+    <div class="col-lg-10 col-md-6 col-sm-12">
 
-    <span class="breadcrumb-item active">Productos Encontrados</span>
+        <nav class="breadcrumb bg-transparent" *ngIf="encontradoBol">
 
-    <span class="breadcrumb-item active">{{ buscando }}</span>
+            <a class="breadcrumb-item" routerLink="/inicio">Inicio</a>
 
-</nav>
+            <span class="breadcrumb-item active">Productos Encontrados</span>
 
-<div class="row mas-vendidos" *ngIf="encontradoBol">
+            <span class="breadcrumb-item active">{{ buscando }}</span>
+
+        </nav>
+
+    </div>
+
+    <div class="col-lg-2 col-md-6 col-sm-12">
+
+        <div class="form-group">
+
+            <select #select name="orden" class="form-control" (change)="ordernar(select.value)">
+
+                <option value="0">Ordenar por</option>
+
+                <option value="1">Mayor a menor</option>
+
+                <option value="2">Menor a mayor</option>
+
+            </select>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="row mas-vendidos pb-5" *ngIf="encontradoBol">
 
     <div class="col-12 col-lg-3 col-md-6 col-sm-12 pt-2" *ngFor="let enc of encontrado">
 
@@ -50,17 +76,17 @@
 
             <div class="card-body text-center">
 
-                <img [src]="enc.img" class="img-fluig" width="200"> <small class="desc3" *ngIf="enc.descuento > 0"> -{{ (enc.descuento * 100) }}%</small>
+                <img [src]="enc.img" class="img-fluig" width="200"> <small class="desc2" *ngIf="enc.descuento > 0"> -{{ (enc.descuento * 100) }}%</small>
 
                 <h5 class="pt-2 pb-4">{{enc.descripcion}}</h5>
 
-                <h6 class="text-muted">
+                <h6 class="text-muted" *ngIf="enc.descuento > 0">
 
                     <small>
 
-                    <s>{{ enc.precioAumentado | currency }}</s>
-                    
-                </small>
+                        <s>{{ enc.precioAumentado | currency }}</s>
+                        
+                    </small>
 
                 </h6>
 
@@ -70,11 +96,17 @@
 
                 </h4>
 
+                <h3>
+
+                    <span class="badge badge-pill badge-dark">{{ enc.marca }}</span>
+
+                </h3>
+
                 <button class="btn btn-linkedin" type="button" (click)="irA(enc)">
 
-                Comprar
+                    Comprar
 
-            </button>
+                </button>
 
             </div>
 

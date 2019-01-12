@@ -20,15 +20,39 @@ export class CoberturaComponent implements OnInit {
     private _datosServices: DatosService
   ) {
     this._datosServices.obtenerMunicipios().subscribe((municipios: any) => {
-      this.municipios = municipios.length;
+      this.municipios = municipios.respuesta.length;
     });
 
     this._datosServices.obtenerClientes().subscribe((clientes: any) => {
-      this.clientes = clientes[0].clientes;
+      this.clientes = clientes.respuesta[0].clientes;
     });
 
-    this._datosServices.obtenerPedidos().subscribe((pedidos: any) => {
-      this.pedidos = pedidos[0].pedidos;
+    const h = new Date();
+
+    let dia;
+
+    if (h.getDate() < 10) {
+      dia = '0' + h.getDate();
+    } else {
+      dia = h.getDate();
+    }
+
+    let mes;
+
+    if (h.getMonth() < 10) {
+      mes = '0' + (h.getMonth() + 1);
+    } else {
+      mes = (h.getMonth() + 1);
+    }
+
+    const anio = h.getFullYear();
+
+    const inicio = anio + '-' + '01' + '-' + '01';
+
+    const final = anio + '-' + mes + '-' + dia;
+
+    this._datosServices.obtenerPedidos(inicio, final).subscribe((pedidos: any) => {
+      this.pedidos = pedidos.respuesta[0].pedidos;
     });
   }
 
