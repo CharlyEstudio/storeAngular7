@@ -38,17 +38,16 @@ export class VentaDiaComponent implements OnInit {
         this._productosServices.obtenerImagenes(mejores.respuesta[i].codigo).subscribe((imagenes: any) => {
           let image;
 
-          if (imagenes.length > 0) {
-            image = imagenes[0].imagen;
+          if (imagenes.status) {
+            image = imagenes.respuesta[0].imagen;
           } else {
             image = 'product.png';
           }
 
           this._productosServices.obtenerMarca(mejores.respuesta[i].articuloid).subscribe((marca: any) => {
-
             let datos: Producto;
 
-            if (marca.respuesta.length > 0) {
+            if (marca.status) {
 
               datos = {
                 articuloid: mejores.respuesta[i].articuloid,

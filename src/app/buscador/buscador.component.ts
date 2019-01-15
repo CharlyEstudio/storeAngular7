@@ -22,6 +22,7 @@ export class BuscadorComponent implements OnInit, OnDestroy {
   errorBol = false;
   encontrado: any[] = [];
   encontradoBol = false;
+  msg: string;
 
   constructor(
     private route: Router,
@@ -47,7 +48,7 @@ export class BuscadorComponent implements OnInit, OnDestroy {
   obtenerBusqueda(buscar: any) {
     this.encontrado = [];
     this._productosService.buscarProductos(buscar).subscribe((encontrado: any) => {
-      if (encontrado.respuesta.length > 0) {
+      if (encontrado.status) {
         this.buscandoBol = false;
         this.errorBol = false;
         this.encontradoBol = true;
@@ -55,7 +56,7 @@ export class BuscadorComponent implements OnInit, OnDestroy {
           this._productosService.obtenerImagenes(encontrado.respuesta[i].codigo).subscribe((imagenes: any) => {
             let image;
 
-            if (imagenes.respuesta.length > 0) {
+            if (imagenes.status) {
               image = imagenes.respuesta[0].imagen;
             } else {
               image = 'product.png';
@@ -64,7 +65,7 @@ export class BuscadorComponent implements OnInit, OnDestroy {
             this._productosService.obtenerMarca(encontrado.respuesta[i].articuloid).subscribe((marca: any) => {
               let datos: Producto;
 
-              if (marca.respuesta.length > 0) {
+              if (marca.status) {
 
                 datos = {
                   articuloid: encontrado.respuesta[i].articuloid,
@@ -118,6 +119,7 @@ export class BuscadorComponent implements OnInit, OnDestroy {
           });
         }
       } else {
+        this.msg = encontrado.msg;
         this.encontrado = [];
         this.buscandoBol = false;
         this.errorBol = true;

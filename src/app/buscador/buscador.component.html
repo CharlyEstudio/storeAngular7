@@ -26,7 +26,7 @@
 
     <p class="mb-0 h3 pt-2">
 
-        <i class="mdi mdi-ghost animated infinite pulse"></i>
+        <i class="mdi mdi-ghost animated infinite pulse"></i> {{ msg }}
 
     </p>
 
@@ -76,33 +76,43 @@
 
             <div class="card-body text-center">
 
-                <img [src]="enc.img" class="img-fluig" width="200"> <small class="desc2" *ngIf="enc.descuento > 0"> -{{ (enc.descuento * 100) }}%</small>
+                <img [src]="enc.img" class="img-fluig" width="200">
 
                 <h5 class="pt-2 pb-4">{{enc.descripcion}}</h5>
 
-                <h6 class="text-muted" *ngIf="enc.descuento > 0">
+                <div class="centro" style="height: 95px; min-height: 95px; max-height: 95px;">
 
-                    <small>
+                    <h6 class="text-muted" *ngIf="enc.descuento > 0">
 
-                        <s>{{ enc.precioAumentado | currency }}</s>
-                        
-                    </small>
+                        <small>
 
-                </h6>
+                            <s>{{ enc.precioAumentado | currency }}</s>
+                            
+                        </small>
 
-                <h4 class="font-weight-bold text-danger">
+                    </h6>
 
-                    {{ enc.precio | currency }}
+                    <h4 class="font-weight-bold text-danger">
 
-                </h4>
+                        {{ enc.precio | currency }}
+
+                    </h4>
+
+                    <h3 *ngIf="enc.descuento > 0">
+
+                        <span class="badge badge-inverse">{{ (enc.descuento * 100) }}% de Descuento</span>
+
+                    </h3>
+
+                </div>
 
                 <h3>
 
-                    <span class="badge badge-pill badge-dark">{{ enc.marca }}</span>
+                    <span class="badge badge-light">{{ enc.marca }}</span>
 
                 </h3>
 
-                <button class="btn btn-linkedin" type="button" (click)="irA(enc)">
+                <button class="btn btn-danger" type="button" (click)="irA(enc)">
 
                     Comprar
 

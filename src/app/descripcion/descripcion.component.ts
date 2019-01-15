@@ -70,7 +70,7 @@ export class DescripcionComponent implements OnInit {
       this.desc = producto.respuesta[0].descuento;
 
       this._productoServices.obtenerMarca(producto.respuesta[0].articuloid).subscribe((marca: any) => {
-        if (marca.respuesta.length > 0) {
+        if (marca.status) {
           this.marca = marca.respuesta[0].marca;
         } else {
           this.marca = 'Sin Marca';
@@ -86,7 +86,7 @@ export class DescripcionComponent implements OnInit {
       this._productoServices.obtenerImagenes(this.codigo).subscribe((imagen: any) => {
         let image;
 
-        if (imagen.respuesta.length > 0) {
+        if (imagen.status) {
           image = imagen.respuesta[0].imagen;
         } else {
           image = 'product.png';
