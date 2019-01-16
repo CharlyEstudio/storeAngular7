@@ -30,4 +30,10 @@ export class DatosService {
 
     return this.http.get(url);
   }
+
+  obtenerClienteFerrum(numero: any) {
+    const url = LINK + '/cobertura/cliente/' + numero;
+
+    return this.http.get(url);
+  }
 }

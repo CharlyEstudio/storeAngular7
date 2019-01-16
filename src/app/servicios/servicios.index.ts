@@ -8,3 +8,4 @@ export { UsuarioServicesService } from './usuario-servicios/usuario-services.ser
 export { ProductosService } from './productos-services/productos.service';
 export { DatosService } from './datos/datos.service';
 export { ShoppingService } from './shopping/shopping.service';
+export { MenuService } from './menu/menu.service';

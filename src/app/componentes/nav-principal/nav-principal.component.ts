@@ -4,6 +4,9 @@ import { Router } from '@angular/router';
 // Observable
 import { Subscription, Observable, Subscriber } from 'rxjs';
 
+// Modelos
+import { UsuarioServicesService } from 'src/app/servicios/servicios.index';
+
 @Component({
   selector: 'app-nav-principal',
   templateUrl: './nav-principal.component.html',
@@ -22,7 +25,8 @@ export class NavPrincipalComponent implements OnInit {
   carrito = false;
 
   constructor(
-    private route: Router
+    private route: Router,
+    private _usuarioService: UsuarioServicesService
   ) {
     this.car = this.regresa().subscribe(
       datos => {
@@ -45,6 +49,7 @@ export class NavPrincipalComponent implements OnInit {
   regresa(): Observable<any> {
     return new Observable((observer: Subscriber<any>) => {
       this.intervalo = setInterval(() => {
+        this.logeado = this._usuarioService.estaLogueado();
         if (localStorage.getItem('carrito') !== null) {
           observer.next(JSON.parse(localStorage.getItem('carrito')));
         } else {
@@ -58,6 +63,10 @@ export class NavPrincipalComponent implements OnInit {
 
   obtener(event: any) {
     this.route.navigate(['/buscador/', event]);
+  }
+
+  logout() {
+    this._usuarioService.logout();
   }
 
 }

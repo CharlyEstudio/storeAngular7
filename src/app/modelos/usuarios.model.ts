@@ -3,12 +3,14 @@ export class Usuario {
         public nombre: string,
         public email: string,
         public password: string,
+        public factura: boolean,
         public numero?: string,
         public idFerrum?: string,
-        public serie?: string,
         public cat_cli?: string,
-        public img?: string,
+        public diavis?: string,
+        public perid?: string,
         public rol?: string,
+        public img?: string,
         public activo?: string,
         public _id?: string
     ) { }
