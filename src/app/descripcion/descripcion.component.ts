@@ -26,7 +26,7 @@ export class DescripcionComponent implements OnInit {
   id: any;
 
   // Producto
-  producto: Producto;
+  producto: Producto[] = [];
   descripcion: any;
   clave: any;
   codigo: any;
@@ -178,6 +178,7 @@ export class DescripcionComponent implements OnInit {
     producto.precioFinal = producto.precio * cantidad;
 
     this._shoppingService.guardarCarrito(producto);
+    this._shoppingService.addCarrito(producto);
   }
 
   agregarFavoritos(producto: Producto, forma: NgForm) {

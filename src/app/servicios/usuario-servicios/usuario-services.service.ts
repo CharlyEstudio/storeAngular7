@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
+import { BehaviorSubject } from 'rxjs';
 import 'rxjs';
 
 // URL PRINCIPAL
@@ -13,6 +14,9 @@ import { Usuario } from 'src/app/modelos/usuarios.model';
 @Injectable()
 export class UsuarioServicesService {
 
+  private session: BehaviorSubject<Usuario[]> = new BehaviorSubject([]);
+  private user: Usuario[] = [];
+
   usuario: Usuario;
   token: string;
   menu: any[] = [];
@@ -22,7 +26,29 @@ export class UsuarioServicesService {
     public router: Router,
     private http: HttpClient
   ) {
+    this.session.subscribe(login => {
+      let status;
+      if (login) {
+        if (login.length > 0) {
+          status = login;
+        } else {
+          status = [];
+        }
+      } else {
+        status = [];
+      }
+      return this.user = status;
+    });
+
     this.cargarStorage();
+  }
+
+  isSession() {
+    return this.session;
+  }
+
+  iniciar(usuario: Usuario) {
+    this.session.next([...this.user, usuario]);
   }
 
   estaLogueado() {
@@ -58,14 +84,16 @@ export class UsuarioServicesService {
     this.token = '';
     this.menu = [];
 
-
     localStorage.removeItem('token');
     localStorage.removeItem('usuario');
     localStorage.removeItem('menu');
     localStorage.removeItem('rol');
     localStorage.removeItem('id');
+    localStorage.removeItem('login');
 
     this.router.navigate(['/inicio']);
+    this.session.next([]);
+    return this.session;
   }
 
   login( usuario: Usuario, recordar: boolean = false ) {

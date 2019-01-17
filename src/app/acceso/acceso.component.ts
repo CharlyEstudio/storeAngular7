@@ -40,10 +40,12 @@ export class AccesoComponent implements OnInit {
 
     const usuario = new Usuario( null, forma.value.email, forma.value.password, null );
 
+    this._usuarioService.iniciar(usuario);
+
     this._usuarioService.login(usuario, forma.value.recuerdame).subscribe((resp: any) => {
       if (resp.status) {
         this._usuarioService.guardarStorage(resp.id, resp.token, resp.usuario, resp.menu, resp.usuario.rol);
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/compras']);
         // this.wsService.login( 'web', forma.value.email, null, this._usuarioService.usuario.rol );
       } else {
         swal('Error de Login', resp.mensaje, 'error');

@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { Subscription, Observable, Subscriber } from 'rxjs';
 
 // Modelos
-import { UsuarioServicesService } from 'src/app/servicios/servicios.index';
+import { UsuarioServicesService, ShoppingService } from 'src/app/servicios/servicios.index';
 
 @Component({
   selector: 'app-nav-principal',
@@ -14,11 +14,7 @@ import { UsuarioServicesService } from 'src/app/servicios/servicios.index';
 })
 export class NavPrincipalComponent implements OnInit {
 
-  cantidad = 0;
-
-  // Observar para el carrito
-  car: Subscription;
-  intervalo: any;
+  cantidad: number = 0;
 
   // Booleanos
   logeado = false;
@@ -26,40 +22,38 @@ export class NavPrincipalComponent implements OnInit {
 
   constructor(
     private route: Router,
-    private _usuarioService: UsuarioServicesService
-  ) {
-    this.car = this.regresa().subscribe(
-      datos => {
-        if (datos.length > 0) {
-          this.cantidad = datos.length;
-          this.carrito = true;
-        } else if (datos.articuloid !== undefined) {
-          this.cantidad = 1;
-          this.carrito = true;
-        } else {
-          this.cantidad = 0;
-          this.carrito = false;
-        }
-      },
-      err => console.error(err),
-      () => console.log('Termina')
-    );
-  }
+    private _usuarioService: UsuarioServicesService,
+    private _shoppingCar: ShoppingService
+  ) { }
 
-  regresa(): Observable<any> {
-    return new Observable((observer: Subscriber<any>) => {
-      this.intervalo = setInterval(() => {
-        this.logeado = this._usuarioService.estaLogueado();
-        if (localStorage.getItem('carrito') !== null) {
-          observer.next(JSON.parse(localStorage.getItem('carrito')));
+  ngOnInit() {
+    this._usuarioService.isSession().subscribe(login => {
+      if (login.length !== 0) {
+        localStorage.setItem('login', 'ok');
+        this.logeado = true;
+      } else {
+        const sessions = localStorage.getItem('login');
+        if (sessions === 'ok') {
+          this.logeado = true;
         } else {
-          observer.next([]);
+          this.logeado = false;
         }
-      }, 100);
+      }
+    });
+
+    this._shoppingCar.getCarrito().subscribe(data => {
+      let carrito;
+      if (localStorage.getItem('carrito') !== null) {
+        carrito = JSON.parse(localStorage.getItem('carrito'));
+        this.cantidad = carrito.length;
+        this.carrito = true;
+      } else {
+        carrito = [];
+        this.cantidad = 0;
+        this.carrito = false;
+      }
     });
   }
-
-  ngOnInit() { }
 
   obtener(event: any) {
     this.route.navigate(['/buscador/', event]);

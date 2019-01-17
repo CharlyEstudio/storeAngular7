@@ -26,7 +26,6 @@ import { CoberturaComponent } from './cobertura/cobertura.component';
 import { NopagefoundComponent } from './nopagefound/nopagefound.component';
 import { RegistroComponent } from './registro/registro.component';
 import { AccesoComponent } from './acceso/acceso.component';
-import { FavoritosComponent } from './favoritos/favoritos.component';
 import { CarritoComponent } from './carrito/carrito.component';
 import { BuscadorComponent } from './buscador/buscador.component';
 import { NavPrincipalComponent } from './componentes/nav-principal/nav-principal.component';
@@ -50,7 +49,6 @@ import { BuscarComponent } from './componentes/buscar/buscar.component';
     NopagefoundComponent,
     RegistroComponent,
     AccesoComponent,
-    FavoritosComponent,
     CarritoComponent,
     BuscadorComponent,
     NavPrincipalComponent,

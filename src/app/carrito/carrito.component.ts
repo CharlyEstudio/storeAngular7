@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Subscription, Observable, Subscriber } from 'rxjs';
+import { Router } from '@angular/router';
 
 // Modelos
 import { Producto } from '../modelos/productos.model';
-import { Router } from '@angular/router';
 
 // Link
 import { PATH_LINK } from '../config/config';
 
 // Servicios
-import { ProductosService } from '../servicios/servicios.index';
+import { ProductosService, ShoppingService } from '../servicios/servicios.index';
 
 @Component({
   selector: 'app-carrito',
@@ -30,6 +30,7 @@ export class CarritoComponent implements OnInit {
 
   constructor(
     private _productosServices: ProductosService,
+    private _shoppingCar: ShoppingService,
     private router: Router
   ) {
     const carro = JSON.parse(localStorage.getItem('carrito'));
@@ -40,7 +41,7 @@ export class CarritoComponent implements OnInit {
         this._productosServices.obtenerImagenes(carro[i].codigo).subscribe((imagenes: any) => {
           let image;
 
-          if (imagenes.respuesta.length > 0) {
+          if (imagenes.status) {
             image = imagenes.respuesta[0].imagen;
           } else {
             image = 'product.png';
@@ -73,63 +74,6 @@ export class CarritoComponent implements OnInit {
     } else {
       this.router.navigate(['/inicio']);
     }
-
-    // Subscripción
-    this.car = this.regresa().subscribe(
-      datos => {
-        if (datos.length > 0) {
-          // this.carrito = datos;
-          for (let i = 0; i < datos.length; i++) {
-            this._productosServices.obtenerImagenes(datos[i].codigo).subscribe((imagenes: any) => {
-              let image;
-
-              if (imagenes.respuesta.length > 0) {
-                image = imagenes.respuesta[0].imagen;
-              } else {
-                image = 'product.png';
-              }
-
-              const data: Producto = {
-                articuloid: datos[i].articuloid,
-                descripcion: datos[i].descripcion,
-                clave: datos[i].clave,
-                codigo: datos[i].codigo,
-                marca: datos[i].marca,
-                cantidad: 1,
-                precioneto: datos[i].precioneto,
-                iva: datos[i].iva,
-                precio: datos[i].precio,
-                precioAumentado: datos[i].precio * (1 + (datos[i].descuento)),
-                img: PATH_LINK + '/assets/img_products/' + image,
-                descuento: datos[i].descuento,
-                precioFinal: datos[i].precio,
-                entregado: datos[i].entregado,
-                msg: datos[i].msg,
-                pz: datos[i].pz,
-                inner: datos[i].inner,
-                ma: datos[i].ma
-              };
-
-              this.carrito.push(data);
-            });
-          }
-        }
-      },
-      err => console.error(err),
-      () => console.log('Termina')
-    );
-  }
-
-  regresa(): Observable<any> {
-    return new Observable((observer: Subscriber<any>) => {
-      this.intervalo = setInterval(() => {
-        if (localStorage.getItem('carrito') !== null) {
-          if (JSON.parse(localStorage.getItem('carrito')).length !== this.carrito.length) {
-            observer.next(JSON.parse(localStorage.getItem('carrito')));
-          }
-        }
-      }, 100);
-    });
   }
 
   eliminarProducto(index: number) {
@@ -144,13 +88,9 @@ export class CarritoComponent implements OnInit {
     })
     .then(accion => {
       if (accion) {
+        this._shoppingCar.deleteProducto(index);
         this.carrito.splice(index, 1);
-        localStorage.removeItem('carrito');
-        if (this.carrito.length > 0) {
-          localStorage.setItem('carrito', JSON.stringify(this.carrito));
-        } else {
-          this.router.navigate(['/inicio']);
-        }
+        this.items = this.carrito.length;
       }
     });
   }
@@ -169,6 +109,7 @@ export class CarritoComponent implements OnInit {
       if (accion) {
         this.carrito = [];
         localStorage.removeItem('carrito');
+        this._shoppingCar.clearCarrito();
         this.router.navigate(['/inicio']);
       }
     });

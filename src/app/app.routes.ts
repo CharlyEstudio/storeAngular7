@@ -12,24 +12,22 @@ import { NosotrosComponent } from './nosotros/nosotros.component';
 import { CoberturaComponent } from './cobertura/cobertura.component';
 import { RegistroComponent } from './registro/registro.component';
 import { AccesoComponent } from './acceso/acceso.component';
-import { FavoritosComponent } from './favoritos/favoritos.component';
 import { CarritoComponent } from './carrito/carrito.component';
 import { BuscadorComponent } from './buscador/buscador.component';
 import { NopagefoundComponent } from './nopagefound/nopagefound.component';
 import { DescripcionComponent } from './descripcion/descripcion.component';
 
 const appRoutes: Routes = [
-    { path: 'inicio', component: InicioComponent },
-    { path: 'marcaTruper', component: TruperComponent },
-    { path: 'marcaFmo', component: FmoComponent },
-    { path: 'nosotros', component: NosotrosComponent },
-    { path: 'cobertura', component: CoberturaComponent },
-    { path: 'registro', component: RegistroComponent },
-    { path: 'acceso', component: AccesoComponent },
-    { path: 'favoritos', component: FavoritosComponent },
-    { path: 'carrito', component: CarritoComponent },
-    { path: 'buscador/:buscando', component: BuscadorComponent },
-    { path: 'ver/:producto', component: DescripcionComponent },
+    { path: 'inicio', component: InicioComponent, data: { titulo: 'Sitio Oficial Ferremayoristas Olvera', name: 'description' } },
+    { path: 'marcaTruper', component: TruperComponent, data: { titulo: 'Marca Truper', name: 'description' } },
+    { path: 'marcaFmo', component: FmoComponent, data: { titulo: 'Marca FMO', name: 'description' } },
+    { path: 'nosotros', component: NosotrosComponent, data: { titulo: 'Nosotros', name: 'description' } },
+    { path: 'cobertura', component: CoberturaComponent, data: { titulo: 'Cobertura', name: 'description' } },
+    { path: 'registro', component: RegistroComponent, data: { titulo: 'Registro', name: 'description' } },
+    { path: 'acceso', component: AccesoComponent, data: { titulo: 'Acceso', name: 'description' } },
+    { path: 'carrito', component: CarritoComponent, data: { titulo: 'Carrito de Compras', name: 'description' } },
+    { path: 'buscador/:buscando', component: BuscadorComponent, data: { titulo: 'Buscando...', name: 'description' } },
+    { path: 'ver/:producto', component: DescripcionComponent, data: { titulo: 'Descripción', name: 'description' } },
     {
         path: '',
         component: PaginasComponent,
