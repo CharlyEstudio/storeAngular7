@@ -18,16 +18,16 @@
 
 
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    
-                                    {{ menu.titulo }}
-                                
-                                </a>
+
+                            <i [class]="menu.icono"></i> {{ menu.titulo }}
+
+                        </a>
 
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 
-                            <a class="dropdown-item" [routerLink]="[ submenu.url ]" *ngFor="let submenu of menu.submenu">{{ submenu.titulo}} </a>
+                            <a class="dropdown-item" [routerLink]="[ submenu.url ]" *ngFor="let submenu of menu.submenu"><i [class]="submenu.icono"></i> {{ submenu.titulo}} </a>
 
-                            <div class="dropdown-divider"></div>
+                            <!-- <div class="dropdown-divider"></div> -->
 
                         </div>
 

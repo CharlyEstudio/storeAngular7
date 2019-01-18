@@ -10,6 +10,7 @@ import { DatosService, UsuarioServicesService } from 'src/app/servicios/servicio
 })
 export class EdoCtaComponent implements OnInit {
 
+  logo: string;
   fecha: string;
   numero: string;
   nombre: string;
@@ -34,6 +35,7 @@ export class EdoCtaComponent implements OnInit {
     private _datoService: DatosService,
     private _usuarioService: UsuarioServicesService
   ) {
+    this.logo = 'http://192.168.1.250/assets/img/logo-min.png';
     const h = new Date();
 
     let dia;

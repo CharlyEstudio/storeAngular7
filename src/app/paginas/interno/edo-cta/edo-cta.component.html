@@ -139,6 +139,7 @@
     <div class="col-lg-6 col-md-6 col-sm-12 centro">
 
         <img src="http://www.ferremayoristas.com.mx/assets/img/logo-min.png" width="40%" class="img-responsive">
+        <!-- <img [src]="logo" width="40%" class="img-responsive"> -->
 
     </div>
 
@@ -226,9 +227,14 @@
 
                         <td class="text-center">
 
-                            <a href="#modalFolio" data-toggle="modal" (click)="modalFolio(sal, 1)">
+                            <a class="btn btn-success" href="#modalFolio" data-toggle="modal" (click)="modalFolio(sal, 1)">
 
-                                <i class="fa fa-cc-visa" aria-hidden="true"></i>
+                                <!-- <span class="badge badge-info"> -->
+
+                                <!-- <i class="fa fa-cc-visa" aria-hidden="true"></i> -->
+                                <i class="mdi mdi-credit-card-scan" aria-hidden="true"></i>
+
+                                <!-- </span> -->
 
                             </a>
 
@@ -250,7 +256,7 @@
 
     <div class="table-responsive pt-3">
 
-        <h4>MOVIMIENTOS DEL PERIODO</h4>
+        <h4>MOVIMIENTOS DE FACTURAS VIGENTES</h4>
 
         <div class="table-responsive">
 
