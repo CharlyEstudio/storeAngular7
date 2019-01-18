@@ -8,6 +8,9 @@ import { ChartsModule } from 'ng2-charts';
 // Rutas Internas
 import { PAGES_ROUTES } from './paginas.routes';
 
+// Pipes
+import { PipesModule } from '../servicios/pipes/pipes.module';
+
 // Componentes - Páginas Internas
 import { DistComponent } from './interno/dist/dist.component';
 import { ComprasComponent } from './interno/compras/compras.component';
@@ -40,7 +43,8 @@ import { PerfilComponent } from './interno/perfil/perfil.component';
         CommonModule,
         FormsModule,
         ChartsModule,
-        PAGES_ROUTES
+        PAGES_ROUTES,
+        PipesModule
     ]
 })
 

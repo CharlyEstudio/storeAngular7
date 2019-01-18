@@ -26,6 +26,7 @@ export class DistComponent implements OnInit {
   domicilio: string;
   colonia: string;
   ciudad: string;
+  cp: number = 0;
   limite: number = 0;
   saldo: number = 0;
   saldoDispo: number = 0;
@@ -36,6 +37,7 @@ export class DistComponent implements OnInit {
   asesor: string;
   emailAsesor: string;
   telAsesor: string;
+  imagenAsesor: string;
 
   // Si tiene por vencer
   texto: string = 'Sin Vencimiento';
@@ -67,6 +69,7 @@ export class DistComponent implements OnInit {
       this.rfc = data.RFC;
       this.colonia = data.COLONIA;
       this.ciudad = data.CIUDAD;
+      this.cp = data.CP;
       this.limite = data.LIMITE;
       this.saldo = data.SALDO;
       this.diasCred = data.DIACREDITO;
@@ -98,9 +101,19 @@ export class DistComponent implements OnInit {
       }
 
       this.asesor = data.ASESOR;
-      this.emailAsesor = 'user@ferremayoristas.com.mx';
-      this.telAsesor = '442 000 0000';
-      console.log(data);
+
+      this._datosService.obtenerAsesor(data.VENDEDORID).subscribe((asesor: any) => {
+        if (asesor.status) {
+          this.emailAsesor = asesor.usuario[0].email;
+          this.imagenAsesor = asesor.usuario[0].iamgen;
+          this.telAsesor = asesor.usuario[0].tel;
+        } else {
+          this.emailAsesor = 'Sin asesor';
+          this.imagenAsesor = '';
+          this.telAsesor = '';
+        }
+      });
+      // console.log(data);
     });
   }
 

@@ -2,7 +2,7 @@
 
     <div class="col-md-2 col-sm-6 col-xs-12">
 
-        <h4>Nombre</h4>
+        <h4 class="text-uppercase">Nombre</h4>
 
     </div>
 
@@ -38,11 +38,11 @@
 
     <div class="col-md-2 col-sm-6 col-xs-12">
 
-        <h4>Empresa</h4>
+        <h4 class="text-uppercase">Empresa</h4>
 
     </div>
 
-    <div class="col-md-5 col-sm-6 col-xs-12">
+    <div class="col-md-7 col-sm-6 col-xs-12">
 
         <h4 class="font-weight-bold">{{empresa}}</h4>
 
@@ -54,190 +54,65 @@
 
     </div>
 
-    <div class="col-md-4 col-sm-6 col-xs-12">
+    <div class="col-md-2 col-sm-6 col-xs-12">
 
         <h4 class="font-weight-bold">{{rfc}}</h4>
 
     </div>
 
-    <div class="col-md-1 col-sm-6 col-xs-12">
+    <div class="col-md-12 col-sm-12 col-xs-12">
 
-        <h4>Domicilio</h4>
-
-    </div>
-
-    <div class="col-md-3 col-sm-6 col-xs-12">
-
-        <h4 class="font-weight-bold">{{domicilio}}</h4>
+        <h4 class="text-uppercase">Domicilio Negocio</h4>
 
     </div>
 
-    <div class="col-md-1 col-sm-6 col-xs-12">
+    <div class="col-md-12 col-sm-12 col-xs-12">
 
-        <h4>Colonia</h4>
-
-    </div>
-
-    <div class="col-md-3 col-sm-6 col-xs-12">
-
-        <h4 class="font-weight-bold">{{colonia}}</h4>
+        <h4 class="text-uppercase"><span class="font-weight-bold">{{domicilio}} {{colonia}}, {{ciudad}} {{cp}}</span></h4>
 
     </div>
-
-    <div class="col-md-1 col-sm-6 col-xs-12">
-
-        <h4>Ciudad</h4>
-
-    </div>
-
-    <div class="col-md-3 col-sm-6 col-xs-12">
-
-        <h4 class="font-weight-bold">{{ciudad}}</h4>
-
-    </div>
-
-    <div class="clearfix"></div>
 
     <hr>
 
-    <div class="col-md-2 col-sm-6 col-xs-12">
+    <div class="col-md-4 col-sm-6 col-xs-12">
 
-        <h4>Límite de crédito</h4>
-
-    </div>
-
-    <div class="col-md-2 col-sm-6 col-xs-12">
-
-        <h4 class="font-weight-bold text-success">MXN <span>{{limite | currency}}</span></h4>
+        <h4 class="text-uppercase">Límite de crédito <span class="font-weight-bold text-success">{{limite | currency}}</span></h4>
 
     </div>
 
-    <div class="col-md-2 col-sm-6 col-xs-12">
+    <div class="col-md-4 col-sm-6 col-xs-12">
 
-        <h4>Saldo</h4>
-
-    </div>
-
-    <div class="col-md-2 col-sm-6 col-xs-12 saldo">
-
-        <h4 class="font-weight-bold" [ngClass]="{'text-danger': saldo > 0, 'text-info': saldo === 0}">MXN <span>{{saldo | currency}}</span></h4>
+        <h4 class="text-uppercase">Saldo <span class="font-weight-bold" [ngClass]="{'text-danger': saldo > 0, 'text-info': saldo === 0}">{{saldo | currency}}</span></h4>
 
     </div>
 
-    <div class="col-md-2 col-sm-6 col-xs-12">
+    <div class="col-md-4 col-sm-6 col-xs-12">
 
-        <h4>Disponible</h4>
-
-    </div>
-
-    <div class="col-md-2 col-sm-6 col-xs-12 disponible">
-
-        <h4 class="font-weight-bold" [ngClass]="{'text-danger': saldoDispo < 0, 'text-info': saldoDispo >= 0}">MXN <span>{{saldoDispo | currency}}</span></h4>
+        <h4 class="text-uppercase">Disponible <span class="font-weight-bold" [ngClass]="{'text-danger': saldoDispo < 0, 'text-info': saldoDispo >= 0}">{{saldoDispo | currency}}</span></h4>
 
     </div>
-
-    <div class="clearfix"></div>
 
     <hr>
-    <div class="col-md-1 col-sm-6 col-xs-12">
 
-        <h4>Vencido</h4>
+    <div class="col-md-4 col-sm-6 col-xs-12">
+
+        <h4 class="text-uppercase">Vencido <span class="font-weight-bold" [ngClass]="{'text-danger': saldoVenc < 0, 'text-info': saldoVenc === 0}">{{saldoVenc | currency}}</span></h4>
 
     </div>
 
-    <div class="col-md-2 col-sm-6 col-xs-12">
+    <div class="col-md-4 col-sm-6 col-xs-12">
 
-        <h4 [ngClass]="{'text-danger': saldoVenc < 0, 'text-info': saldoVenc === 0}">
+        <h4 class="text-uppercase">Crédito <span class="font-weight-bold">{{diasCred}} Día(s)</span></h4>
 
-            MXN <span class="font-weight-bold">{{saldoVenc | currency}}</span>
+    </div>
+
+    <div class="col-md-4 col-sm-6 col-xs-12">
+
+        <h4 class="text-uppercase">
+
+            <span class="badge badge-success">Última Compra: {{ultimaCompra | date: 'dd-MM-yyyy'}}</span>
 
         </h4>
-
-    </div>
-
-    <div class="col-md-1 col-sm-6 col-xs-12">
-
-        <h4>Crédito</h4>
-
-    </div>
-
-    <div class="col-md-2 col-sm-6 col-xs-12">
-
-        <h4 class="font-weight-bold">
-
-            <span>{{diasCred}} Día(s)</span>
-
-        </h4>
-
-    </div>
-
-    <div class="col-md-1 col-sm-6 col-xs-12">
-
-        <h4>
-
-            <span class="badge badge-success">Últ. Compra</span>
-
-        </h4>
-
-    </div>
-
-    <div class="col-md-2 col-sm-6 col-xs-12">
-
-        <h4 class="font-weight-bold">
-
-            <span class="badge badge-success">{{ultimaCompra | date: 'dd-MM-yyyy'}}</span>
-
-        </h4>
-
-    </div>
-
-    <div class="col-md-3 col-sm-6 col-xs-12 text-center">
-
-        <h4>Próximo Vencimiento</h4>
-
-        <div class="row">
-
-            <div class="col-md-6 col-xs-12">
-
-                <h5>
-
-                    <span>Fol. 0000</span>
-
-                </h5>
-
-            </div>
-
-            <div class="col-md-6 col-xs-12">
-
-                <h5>
-
-                    <span>Vence: 17/01/2019</span>
-
-                </h5>
-
-            </div>
-
-            <div class="col-md-6 col-xs-12">
-
-                <h5>
-
-                    <span>MXN $ 0.00</span>
-
-                </h5>
-
-            </div>
-
-            <div class="col-md-6 col-xs-12">
-
-                <h5>
-
-                    <span>Restan 1 día(s)</span>
-
-                </h5>
-
-            </div>
-
-        </div>
 
     </div>
 
@@ -253,13 +128,13 @@
 
         <figure id="imgPerfil">
 
-            <img src="https://picsum.photos/300/300" class="img-thumbnail img-circle">
+            <img [src]="imagenAsesor | imagen" class="img-thumbnail img-circle">
 
         </figure>
 
     </div>
 
-    <div class="col-md-9 col-sm-8 col-xs-12">
+    <div class="col-md-4 col-sm-4 col-xs-12">
 
         <br>
 
@@ -294,6 +169,56 @@
             <span class="input-group-addon"><i class="mdi mdi-email-outline"></i></span>
 
             <input type="text" class="form-control" [value]="emailAsesor" readonly>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4 col-sm-4 col-xs-12 text-center centro">
+
+        <h4 class="text-uppercase">Próximo Vencimiento</h4>
+
+        <div class="row">
+
+            <div class="col-md-6 col-xs-12">
+
+                <h5 class="text-uppercase">
+
+                    Fol. <span>0000</span>
+
+                </h5>
+
+            </div>
+
+            <div class="col-md-6 col-xs-12">
+
+                <h5 class="text-uppercase">
+
+                    Vence: <span>17/01/2019</span>
+
+                </h5>
+
+            </div>
+
+            <div class="col-md-6 col-xs-12">
+
+                <h5 class="text-uppercase">
+
+                    $ <span>0.00</span>
+
+                </h5>
+
+            </div>
+
+            <div class="col-md-6 col-xs-12">
+
+                <h5 class="text-uppercase">
+
+                    Restan <span>1</span> día(s)
+
+                </h5>
+
+            </div>
 
         </div>
 
