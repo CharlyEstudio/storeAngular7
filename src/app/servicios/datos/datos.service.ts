@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { map } from 'rxjs/operators';
 
@@ -117,6 +117,12 @@ export class DatosService {
 
   compras(numero: any, inicio: any, final: any) {
     const url = LINK + '/cobertura/compras/' + numero + '/' + inicio + '/' + final;
+
+    return this.http.get(url);
+  }
+
+  obtenerFacturasMes(clienteid: any, inicio: any, final: any) {
+    const url = LINK + '/cobertura/facturas/mes/' + clienteid + '/' + inicio + '/' + final;
 
     return this.http.get(url);
   }
