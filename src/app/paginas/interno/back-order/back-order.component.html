@@ -1,3 +1,47 @@
-<p>
-  back-order works!
-</p>
+<h1>Back Order</h1>
+
+<p>Solícita tus productos faltantes.</p>
+
+<div class="row mas-vendidos">
+
+    <div class="col-12 col-lg-3 col-md-6 col-sm-12 pt-2" *ngFor="let back of backOrder">
+
+        <div class="card">
+
+            <div class="card-body text-center">
+
+                <img [src]="back.img" class="img-fluig" width="200">
+
+                <h5 class="pt-2 pb-4">{{back.nombre}}</h5>
+
+                <h3>
+
+                    <span class="badge badge-danger" *ngIf="back.descuento > 0">{{ (back.descuento * 100) }}% de Descuento</span>
+
+                </h3>
+
+                <h4>
+
+                    <span class="badge badge-info">BackOrder de {{back.back}} pz(s).</span>
+
+                </h4>
+
+                <h4 class="font-weight-bold text-danger">
+
+                    {{ back.precio | currency }}
+
+                </h4>
+
+                <button class="btn btn-linkedin" type="button" (click)="irA(back)">
+
+                    Solicitar
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

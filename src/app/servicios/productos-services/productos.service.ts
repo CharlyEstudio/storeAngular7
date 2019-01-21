@@ -46,4 +46,10 @@ export class ProductosService {
 
     return this.http.get(url);
   }
+
+  obtenerBackOrder(numero: any, inicio: any, final: any, precio: any) {
+    const url = LINK + '/productos/back/order/' + numero + '/' + inicio + '/' + final + '/' + precio;
+
+    return this.http.get(url);
+  }
 }

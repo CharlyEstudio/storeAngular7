@@ -28,6 +28,7 @@ const appRoutes: Routes = [
     { path: 'carrito', component: CarritoComponent, data: { titulo: 'Carrito de Compras', name: 'description' } },
     { path: 'buscador/:buscando', component: BuscadorComponent, data: { titulo: 'Buscando...', name: 'description' } },
     { path: 'ver/:producto', component: DescripcionComponent, data: { titulo: 'Descripción', name: 'description' } },
+    { path: 'verBack', component: DescripcionComponent, data: { titulo: 'Descripción', name: 'description' } },
     {
         path: '',
         component: PaginasComponent,

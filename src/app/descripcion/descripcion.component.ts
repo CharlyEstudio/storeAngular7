@@ -35,8 +35,10 @@ export class DescripcionComponent implements OnInit {
   articuloid: any;
   imagen = PATH_LINK + '/assets/img_products/product.png';
   precio: number;
+  precioNeto: number;
   desc: number;
   unidades: any[] = [];
+  cantidadBack: number = 0;
 
   // Form
   unidad = 0;
@@ -46,7 +48,8 @@ export class DescripcionComponent implements OnInit {
   precioAumentado: number;
 
   // Booleanos
-  descuentoBol = false;
+  descuentoBol: boolean = false;
+  backO: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -54,7 +57,15 @@ export class DescripcionComponent implements OnInit {
     private _productoServices: ProductosService,
     private _shoppingService: ShoppingService
   ) {
-    this.id = Number(this.route.snapshot.paramMap.get('producto'));
+    if (this.route.snapshot.paramMap.params.id) {
+      this.id = Number(this.route.snapshot.paramMap.params.id);
+      this.cantidadBack = Number(this.route.snapshot.paramMap.params.cantidad);
+      this.backO = true;
+    } else {
+      this.id = Number(this.route.snapshot.paramMap.get('producto'));
+      this.backO = false;
+    }
+
     this._usuarioService.isSession().subscribe(login => {
       if (login.length === 0) {
         if (this._usuarioService.usuario !== null) {
