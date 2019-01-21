@@ -1,3 +1,75 @@
-<p>
-    top-ventas works!
-</p>
+<div class="row mas-vendidos pb-5">
+
+    <div class="col-lg-12 col-md-12 col-sm-12">
+
+        <h1 class="text-uppercase">Productos mas comprados</h1>
+
+    </div>
+
+    <div class="col-12 col-lg-3 col-md-6 col-sm-12 pt-2" *ngFor="let top of topTen">
+
+        <div class="card">
+
+            <div class="card-body text-center">
+
+                <img [src]="top.img" class="img-fluig" width="200">
+
+                <h5 class="pt-2">{{top.nombre}}</h5>
+
+                <h5 class="text-muted">
+
+                    <small>
+                    
+                      {{top.clave}} | {{top.codigo}}
+                    
+                    </small>
+
+                </h5>
+
+                <h3>{{top.entregado | number}} piezas</h3>
+
+                <div class="centro" style="height: 95px; min-height: 95px; max-height: 95px;">
+
+                    <h6 class="text-muted" *ngIf="">
+
+                        <small>
+
+                            <s>{{ top.precio | currency }}</s>
+                            
+                        </small>
+
+                    </h6>
+
+                    <h4 class="font-weight-bold text-danger">
+
+                        {{ top.precio | currency }}
+
+                    </h4>
+
+                    <h3 *ngIf="">
+
+                        <span class="badge badge-inverse">{{ (0 * 100) }}% de Descuento</span>
+
+                    </h3>
+
+                </div>
+
+                <h3>
+
+                    <span class="badge badge-light">{{ 'marca' }}</span>
+
+                </h3>
+
+                <button class="btn btn-danger" type="button" (click)="irA(top)">
+
+                    Pedir
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

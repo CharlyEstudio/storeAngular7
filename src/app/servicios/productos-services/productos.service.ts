@@ -52,4 +52,10 @@ export class ProductosService {
 
     return this.http.get(url);
   }
+
+  obtenerTopTen(numero: any, inicio: any, final: any, precio: any) {
+    const url = LINK + '/productos/top/ten/' + numero + '/' + inicio + '/' + final + '/' + precio;
+
+    return this.http.get(url);
+  }
 }
