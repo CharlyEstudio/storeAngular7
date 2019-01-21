@@ -3,7 +3,13 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 // Servicios & Guardias
-import { LoginGuard, UsuarioServicesService, ProductosService, DatosService, ShoppingService, MenuService } from './servicios.index';
+import { LoginGuard,
+    UsuarioServicesService,
+    ProductosService,
+    DatosService,
+    ShoppingService,
+    MenuService,
+    ExportarService } from './servicios.index';
 
 @NgModule({
     imports: [
@@ -18,7 +24,8 @@ import { LoginGuard, UsuarioServicesService, ProductosService, DatosService, Sho
         ProductosService,
         DatosService,
         ShoppingService,
-        MenuService
+        MenuService,
+        ExportarService
     ],
     declarations: []
 })

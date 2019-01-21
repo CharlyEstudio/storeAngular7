@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
 // Servicios
-import { UsuarioServicesService, DatosService } from 'src/app/servicios/servicios.index';
-import { LINK } from '../../../config/config';
+import { UsuarioServicesService, DatosService, ExportarService } from 'src/app/servicios/servicios.index';
 
 @Component({
   selector: 'app-facturas',
@@ -33,7 +32,8 @@ export class FacturasComponent implements OnInit {
   constructor(
     public sanitizer: DomSanitizer,
     private _datoService: DatosService,
-    private _usuarioService: UsuarioServicesService
+    private _usuarioService: UsuarioServicesService,
+    private _exportar: ExportarService
   ) {
     const h = new Date();
 
@@ -83,27 +83,24 @@ export class FacturasComponent implements OnInit {
     this.fechaFactura = factura.FECHA;
     this.importe = factura.TOTAL;
 
-    const carpeta = String(arregloFecha[0] + arregloFecha[1]);
-    const file = String(arregloFecha[0] + arregloFecha[1] + dia[0] + '-' + factura.SERIE.toLowerCase() + factura.FOLIO + '.' + ext);
     switch (ext) {
       case 'pdf':
+        const carpeta = String(arregloFecha[0] + arregloFecha[1]);
+        const file = String(arregloFecha[0] + arregloFecha[1] + dia[0] + '-' + factura.SERIE.toLowerCase() + factura.FOLIO + '.' + ext);
         this.pdf = carpeta + '/' + file;
       break;
       case 'xml':
-        this.pdf = carpeta + '/' + file;
-      break;
-      case 'ver':
-        console.log('VER');
+        this.xml = factura.XML;
       break;
     }
   }
 
-  obtenerPDFS() {
-    const carpeta = String(this.year + this.mes);
-    const file = String(this.year + this.mes + this.dia + '-' + 'b13763.xml');
-    // this._datoService.obtenerPDF(carpeta, file).subscribe((pdf: any) => {
-    //   this.xml = pdf;
-    // });
+  exportar(data: any, serie: any, factura: any, tipo: any) {
+    const fileName = `${serie}${factura}`;
+    const file = Array({
+      data: data
+    });
+    this._exportar.exportAsFile(file, fileName, tipo);
   }
 
 }

@@ -10,6 +10,7 @@ export class Usuario {
         public diavis?: string,
         public perid?: string,
         public rol?: string,
+        public precio?: number,
         public img?: string,
         public activo?: string,
         public _id?: string

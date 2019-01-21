@@ -8,7 +8,7 @@ import { Producto } from '../modelos/productos.model';
 import { PATH_LINK } from '../config/config';
 
 // Servicios
-import { ProductosService } from 'src/app/servicios/servicios.index';
+import { ProductosService, UsuarioServicesService } from 'src/app/servicios/servicios.index';
 
 @Component({
   selector: 'app-buscador',
@@ -16,6 +16,8 @@ import { ProductosService } from 'src/app/servicios/servicios.index';
   styles: []
 })
 export class BuscadorComponent implements OnInit, OnDestroy {
+
+  precio: number = 3;
 
   buscando: any;
   buscandoBol = true;
@@ -27,8 +29,13 @@ export class BuscadorComponent implements OnInit, OnDestroy {
   constructor(
     private route: Router,
     private activateRoute: ActivatedRoute,
-    private _productosService: ProductosService
+    private _productosService: ProductosService,
+    private _usuarioService: UsuarioServicesService
   ) {
+    if (this._usuarioService.usuario !== null) {
+      this.precio = this._usuarioService.usuario.precio;
+    }
+
     this.route.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         this.buscando = this.activateRoute.snapshot.params.buscando;
@@ -47,7 +54,7 @@ export class BuscadorComponent implements OnInit, OnDestroy {
 
   obtenerBusqueda(buscar: any) {
     this.encontrado = [];
-    this._productosService.buscarProductos(buscar).subscribe((encontrado: any) => {
+    this._productosService.buscarProductos(buscar, this.precio).subscribe((encontrado: any) => {
       if (encontrado.status) {
         this.buscandoBol = false;
         this.errorBol = false;
@@ -76,7 +83,7 @@ export class BuscadorComponent implements OnInit, OnDestroy {
                   cantidad: 1,
                   precioneto: encontrado.respuesta[i].precioneto,
                   iva: encontrado.respuesta[i].iva,
-                  precio: encontrado.respuesta[i].precio,
+                  precio: (encontrado.respuesta[i].precio - (encontrado.respuesta[i].precio * encontrado.respuesta[i].descuento)),
                   precioAumentado: encontrado.respuesta[i].precio * (1 + (encontrado.respuesta[i].descuento)),
                   img: PATH_LINK + '/assets/img_products/' + image,
                   descuento: encontrado.respuesta[i].descuento,
@@ -94,7 +101,7 @@ export class BuscadorComponent implements OnInit, OnDestroy {
                   cantidad: 1,
                   precioneto: encontrado.respuesta[i].precioneto,
                   iva: encontrado.respuesta[i].iva,
-                  precio: encontrado.respuesta[i].precio,
+                  precio: (encontrado.respuesta[i].precio - (encontrado.respuesta[i].precio * encontrado.respuesta[i].descuento)),
                   precioAumentado: encontrado.respuesta[i].precio * (1 + (encontrado.respuesta[i].descuento)),
                   img: PATH_LINK + '/assets/img_products/' + image,
                   descuento: encontrado.respuesta[i].descuento,

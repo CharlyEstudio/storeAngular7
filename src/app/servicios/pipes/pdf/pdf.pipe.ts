@@ -37,7 +37,6 @@ export class PdfPipe implements PipeTransform {
         break;
       case 'xml':
         url += '/' + pdf;
-        console.log(url);
 
         file = url;
         break;

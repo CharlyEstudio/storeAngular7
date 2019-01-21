@@ -13,6 +13,8 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 })
 export class DistComponent implements OnInit {
 
+  fecha: any;
+
   usuario: Usuario;
 
   // Datos del Usuario si es Distribuidor
@@ -33,6 +35,12 @@ export class DistComponent implements OnInit {
   saldoVenc: number = 0;
   diasCred: number = 0;
   ultimaCompra: string;
+  diasVen: number = 0;
+  folioVenc: number = 0;
+  fecVen: any;
+  impoVenc: number = 0;
+  vigente: boolean = true;
+  vencido: boolean = false;
 
   asesor: string;
   emailAsesor: string;
@@ -51,6 +59,27 @@ export class DistComponent implements OnInit {
     private _datosService: DatosService
   ) {
     this.usuario = this._usuarioService.usuario;
+    const h = new Date();
+
+    let dia;
+
+    if (h.getDate() < 10) {
+      dia = '0' + h.getDate();
+    } else {
+      dia = h.getDate();
+    }
+
+    let mes;
+
+    if (h.getMonth() < 10) {
+      mes = '0' + (h.getMonth() + 1);
+    } else {
+      mes = (h.getMonth() + 1);
+    }
+
+    const anio = h.getFullYear();
+
+    this.fecha = anio + '-' + mes + '-' + dia;
     this.obtenerDatos();
   }
 
@@ -64,7 +93,6 @@ export class DistComponent implements OnInit {
       this.nombre = data.NOMBRE;
       this.numero = data.EXTERNO;
       this.zona = data.ZONA;
-      // this.lista = data.LISTA;
       this.empresa = data.NOMBRECOM;
       this.rfc = data.RFC;
       this.colonia = data.COLONIA;
@@ -113,7 +141,23 @@ export class DistComponent implements OnInit {
           this.telAsesor = '';
         }
       });
-      // console.log(data);
+    });
+
+    this._datosService.obtenerSaldo(this.fecha, this.usuario.numero).subscribe((saldo: any) => {
+      if (saldo.respuesta) {
+        this.diasVen = saldo.respuesta[0].dias;
+        this.folioVenc = saldo.respuesta[0].folio;
+        this.fecVen = saldo.respuesta[0].feccap;
+        this.impoVenc = saldo.respuesta[0].saldo;
+
+        if (saldo.respuesta[0].estatus === 'VIGENTE') {
+          this.vigente = true;
+          this.vencido = false;
+        } else {
+          this.vigente = false;
+          this.vencido = true;
+        }
+      }
     });
   }
 

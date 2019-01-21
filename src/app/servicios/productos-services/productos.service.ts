@@ -11,8 +11,8 @@ export class ProductosService {
     private http: HttpClient
   ) { }
 
-  obtenerMejoresVentasDia() {
-    const url = LINK + '/productos/descuento';
+  obtenerMejoresVentasDia(precio: number = 3) {
+    const url = LINK + '/productos/descuento/' + precio;
 
     return this.http.get(url);
   }
@@ -29,14 +29,14 @@ export class ProductosService {
     return this.http.get(url);
   }
 
-  obtenerDescripcion(id: any) {
-    const url = LINK + '/productos/descripcion/' + id;
+  obtenerDescripcion(id: any, precio: number) {
+    const url = LINK + '/productos/descripcion/' + id + '/' + precio;
 
     return this.http.get(url);
   }
 
-  buscarProductos(termino: any) {
-    const url = LINK + '/productos/buscar/' + termino;
+  buscarProductos(termino: any, precio: number = 3) {
+    const url = LINK + '/productos/buscar/' + termino + '/' + precio;
 
     return this.http.get(url);
   }

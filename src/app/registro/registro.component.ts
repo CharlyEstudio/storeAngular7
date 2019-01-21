@@ -71,7 +71,6 @@ export class RegistroComponent implements OnInit {
 
     if (this.forma.value.numero !== '') {
       this._datosService.obtenerClienteFerrum(this.forma.value.numero).subscribe(( cliente: any ) => {
-        console.log(cliente);
         if (cliente.status) {
           usuario = new Usuario(
             cliente.respuesta[0].NOMBRE,
@@ -83,7 +82,8 @@ export class RegistroComponent implements OnInit {
             cliente.respuesta[0].CATALOGO,
             cliente.respuesta[0].DIAVIS,
             cliente.respuesta[0].VENDEDORID,
-            'DIST_ROLE'
+            'DIST_ROLE',
+            cliente.respuesta[0].LISTA
           );
         } else {
           usuario = new Usuario(

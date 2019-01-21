@@ -14,7 +14,7 @@ import { Producto } from '../modelos/productos.model';
 import { PATH_LINK } from '../config/config';
 
 // Servicios
-import { ProductosService, ShoppingService } from '../servicios/servicios.index';
+import { ProductosService, ShoppingService, UsuarioServicesService } from '../servicios/servicios.index';
 
 @Component({
   selector: 'app-descripcion',
@@ -24,6 +24,7 @@ import { ProductosService, ShoppingService } from '../servicios/servicios.index'
 export class DescripcionComponent implements OnInit {
 
   id: any;
+  precioUser: number = 3;
 
   // Producto
   producto: Producto[] = [];
@@ -49,24 +50,37 @@ export class DescripcionComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private _usuarioService: UsuarioServicesService,
     private _productoServices: ProductosService,
     private _shoppingService: ShoppingService
   ) {
     this.id = Number(this.route.snapshot.paramMap.get('producto'));
-    this.obtenerProducto(this.id);
+    this._usuarioService.isSession().subscribe(login => {
+      if (login.length === 0) {
+        if (this._usuarioService.usuario !== null) {
+          this.precioUser = this._usuarioService.usuario.precio;
+        } else {
+          this.precioUser = 3;
+        }
+        this.obtenerProducto(this.id, this.precioUser);
+      } else {
+        this.obtenerProducto(this.id, this.precioUser);
+      }
+    });
   }
 
   ngOnInit() {
   }
 
-  obtenerProducto(id: any) {
-    this._productoServices.obtenerDescripcion(id).subscribe((producto: any) => {
+  obtenerProducto(id: any, precio: number) {
+    this._productoServices.obtenerDescripcion(id, precio).subscribe((producto: any) => {
       this.producto = producto.respuesta[0];
       this.descripcion = producto.respuesta[0].descripcion;
       this.clave = producto.respuesta[0].clave;
       this.codigo = producto.respuesta[0].codigo;
       this.articuloid = producto.respuesta[0].articuloid;
       this.precio = producto.respuesta[0].precio;
+      this.precioNeto = producto.respuesta[0].precioneto;
       this.desc = producto.respuesta[0].descuento;
 
       this._productoServices.obtenerMarca(producto.respuesta[0].articuloid).subscribe((marca: any) => {
@@ -77,7 +91,7 @@ export class DescripcionComponent implements OnInit {
         }
       });
 
-      this.precioAumentado = this.precio * (1 + (producto.respuesta[0].descuento));
+      this.precioAumentado = this.precioNeto;
 
       if (producto.respuesta[0].descuento > 0) {
         this.descuentoBol = true;

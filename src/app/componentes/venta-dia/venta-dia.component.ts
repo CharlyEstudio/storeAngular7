@@ -8,7 +8,7 @@ import { Producto } from '../../modelos/productos.model';
 import { PATH_LINK } from '../../config/config';
 
 // Servicios
-import { ProductosService } from 'src/app/servicios/servicios.index';
+import { ProductosService, UsuarioServicesService } from 'src/app/servicios/servicios.index';
 
 @Component({
   selector: 'app-venta-dia',
@@ -18,14 +18,32 @@ import { ProductosService } from 'src/app/servicios/servicios.index';
 export class VentaDiaComponent implements OnInit {
 
   mejores: any[] = [];
+  public precio: number = 3;
 
   constructor(
     private _productosServices: ProductosService,
+    private _usuarioService: UsuarioServicesService,
     private router: Router
-  ) { }
+  ) {
+    if (this._usuarioService.usuario !== null) {
+      this.precio = this._usuarioService.usuario.precio;
+    }
+  }
 
   ngOnInit() {
-    this.obtenerEstrellas();
+    this._usuarioService.isSession().subscribe(login => {
+      if (login.length === 0) {
+        if (this._usuarioService.usuario !== null) {
+          this.precio = this._usuarioService.usuario.precio;
+        } else {
+          this.precio = 3;
+        }
+        this.mejores = [];
+        this.obtenerEstrellas();
+      } else {
+        this.obtenerEstrellas();
+      }
+    });
   }
 
   irA(producto: Producto) {
@@ -33,7 +51,7 @@ export class VentaDiaComponent implements OnInit {
   }
 
   obtenerEstrellas() {
-    this._productosServices.obtenerMejoresVentasDia().subscribe( (mejores: any) => {
+    this._productosServices.obtenerMejoresVentasDia(this.precio).subscribe( (mejores: any) => {
       for (let i = 0; i < mejores.respuesta.length; i++) {
         this._productosServices.obtenerImagenes(mejores.respuesta[i].codigo).subscribe((imagenes: any) => {
           let image;
@@ -58,8 +76,8 @@ export class VentaDiaComponent implements OnInit {
                 cantidad: 1,
                 precioneto: mejores.respuesta[i].precioneto,
                 iva: mejores.respuesta[i].iva,
-                precio: mejores.respuesta[i].precio,
-                precioAumentado: mejores.respuesta[i].precio * (1 + (mejores.respuesta[i].descuento)),
+                precio: (mejores.respuesta[i].precio - (mejores.respuesta[i].precio * mejores.respuesta[i].descuento)),
+                precioAumentado: mejores.respuesta[i].precio,
                 img: PATH_LINK + '/assets/img_products/' + image,
                 descuento: mejores.respuesta[i].descuento,
                 entregado: mejores.respuesta[i].entregado,
@@ -74,8 +92,8 @@ export class VentaDiaComponent implements OnInit {
                 cantidad: 1,
                 precioneto: mejores.respuesta[i].precioneto,
                 iva: mejores.respuesta[i].iva,
-                precio: mejores.respuesta[i].precio,
-                precioAumentado: mejores.respuesta[i].precio * (1 + (mejores.respuesta[i].descuento)),
+                precio: (mejores.respuesta[i].precio - (mejores.respuesta[i].precio * mejores.respuesta[i].descuento)),
+                precioAumentado: mejores.respuesta[i].precio,
                 img: PATH_LINK + '/assets/img_products/' + image,
                 descuento: mejores.respuesta[i].descuento,
                 entregado: mejores.respuesta[i].entregado,

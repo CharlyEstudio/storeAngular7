@@ -57,7 +57,7 @@ export class CarritoComponent implements OnInit {
             precioneto: carro[i].precioneto,
             iva: carro[i].iva,
             precio: carro[i].precio,
-            precioAumentado: carro[i].precio * (1 + (carro[i].descuento)),
+            precioAumentado: carro[i].precioneto,
             img: PATH_LINK + '/assets/img_products/' + image,
             descuento: carro[i].descuento,
             precioFinal: carro[i].precioFinal,
