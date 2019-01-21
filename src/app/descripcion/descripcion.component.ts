@@ -57,9 +57,9 @@ export class DescripcionComponent implements OnInit {
     private _productoServices: ProductosService,
     private _shoppingService: ShoppingService
   ) {
-    if (this.route.snapshot.paramMap.params.id) {
-      this.id = Number(this.route.snapshot.paramMap.params.id);
-      this.cantidadBack = Number(this.route.snapshot.paramMap.params.cantidad);
+    if (this.route.snapshot.params['id']) {
+      this.id = Number(this.route.snapshot.params['id']);
+      this.cantidadBack = Number(this.route.snapshot.params['cantidad']);
       this.backO = true;
     } else {
       this.id = Number(this.route.snapshot.paramMap.get('producto'));
