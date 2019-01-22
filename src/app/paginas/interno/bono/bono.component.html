@@ -1,161 +1,323 @@
 <div class="row">
+
     <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+
         <h1>EJERCICIO DEL BONO DEL MES ACTUAL</h1>
+
     </div>
+
     <div class="col-lg-12 col-md-12 col-sm-12 text-right">
+
         <h5>FECHA DE REVISIÓN EN LIBROS:
+
             <b>
-							<span>{{firstDate | date: 'dd-MM-yyyy'}} / {{fecha | date: 'dd-MM-yyyy'}}</span>
-						</b>
+
+                <span>{{firstDate | date: 'dd-MM-yyyy'}} / {{fecha | date: 'dd-MM-yyyy'}}</span>
+
+            </b>
+
         </h5>
+
     </div>
+
     <div class="col-lg-6 col-md-6 col-sm-12">
+
         <div class="row">
+
             <div class="col-lg-4 col-md-4 col-sm-12">
+
                 <h5 class="text-uppercase">No. de Cuenta:</h5>
+
             </div>
+
             <div class="col-lg-8 col-md-8 col-sm-12">
+
                 <h5 class="text-uppercase"><b>{{numero}}/{{idFerrum}}</b></h5>
+
             </div>
+
             <div class="col-lg-4 col-md-4 col-sm-12">
+
                 <h5 class="text-uppercase">Cliente:</h5>
+
             </div>
+
             <div class="col-lg-8 col-md-8 col-sm-12">
+
                 <h5 class="text-uppercase"><b>{{nombre}}</b></h5>
+
             </div>
+
         </div>
+
     </div>
+
     <div class="col-lg-6 col-md-6 col-sm-12"></div>
+
     <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+
         <h3 class="font-weight-bold">INFORMACIÓN FINANCIERA</h3>
+
     </div>
+
     <div class="clearfix"></div>
+
     <hr>
+
     <div class="col-lg-6 col-md-6 col-sm-12">
+
         <h5 class="font-weight-bold">COMPORTAMIENTO</h5>
+
         <div class="clearfix"></div>
+
         <hr>
+
         <div class="row">
+
             <div class="col-lg-4 col-md-4 col-sm-12">
+
                 <h5 class="text-uppercase">saldo actual</h5>
+
             </div>
+
             <div class="col-lg-8 col-md-8 col-sm-12 text-right">
+
                 <h5 class="text-uppercase">
+
                     <span class="font-weight-bold" [ngClass]="{'text-success': saldoTotal === 0, 'text-danger': saldoTotal > 0}">mxn {{saldoTotal | currency}}</span>
+
                 </h5>
+
             </div>
+
             <div class="col-lg-4 col-md-4 col-sm-12">
+
                 <h5 class="text-uppercase">saldo vencido</h5>
+
             </div>
+
             <div class="col-lg-8 col-md-8 col-sm-12 text-right">
+
                 <h5 class="text-uppercase">
+
                     <span class="font-weight-bold" [ngClass]="{'text-danger': saldoVencido > 0, 'text-success': saldoVencido === 0}">mxn {{saldoVencido | currency}}</span>
+
                 </h5>
+
             </div>
+
         </div>
+
     </div>
+
     <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+
         <h3 class="font-weight-bold">COMPORTAMIENTO ACTUAL</h3>
+
     </div>
+
     <div class="clearfix"></div>
+
     <hr>
+
     <div class="col-lg-6 col-md-6 col-sm-12">
+
         <h5 class="font-weight-bold">COMPRAS</h5>
+
         <div class="clearfix"></div>
+
         <hr>
+
         <div class="row">
+
             <div class="col-lg-4 col-md-4 col-sm-12">
+
                 <h5 class="text-uppercase">saldo actual</h5>
+
             </div>
+
             <div class="col-lg-8 col-md-8 col-sm-12 text-right">
+
                 <h5 class="text-uppercase">
+
                     <span class="font-weight-bold">mxn {{compras | currency}}</span>
+
                 </h5>
+
             </div>
+
             <div class="col-lg-12 col-md-12 col-sm-12">
+
                 <blockquote class="blockquote" style="height: 100%!important;">
+
                     <p class="mb-0">Sus compras trimestrales debe ser mayor o igual a $ 20,000.00 pesos.</p>
+
                     <footer class="blockquote-footer">No entran los códigos que inicien con <cite title="Source Title">8/5/6</cite>, excepto de la marca <b>Klintek</b>.</footer>
+
                 </blockquote>
+
             </div>
+
         </div>
+
     </div>
+
     <div class="col-lg-6 col-md-6 col-sm-12 text-center">
+
         <div class="jumbotron">
+
             <h1 class="filtroDanger">
+
                 <i class="fa fa-exclamation-circle filtroDanger" aria-hidden="true"></i>
+
                 <span>Crítico</span>
+
             </h1>
+
         </div>
+
     </div>
+
     <div class="clearfix"></div>
+
     <hr>
+
     <div class="col-lg-6 col-md-6 col-sm-12">
+
         <h5 class="font-weight-bold">FACTURAS VENCIDAS</h5>
+
         <div class="clearfix"></div>
+
         <hr>
+
         <div class="row">
+
             <div class="col-lg-6 col-md-6 col-sm-12">
+
                 <h5 class="text-uppercase">numero de documentos</h5>
+
             </div>
+
             <div class="col-lg-6 col-md-6 col-sm-12 text-right">
+
                 <h5 class="text-uppercase">
+
                     <span class="font-weight-bold">{{numVenc | number}}</span>
+
                 </h5>
+
             </div>
+
             <div class="col-lg-12 col-md-12 col-sm-12">
+
                 <blockquote class="blockquote" style="height: 100%!important;">
+
                     <p class="mb-0">No debe tener ninguna factura vencida antes de que termine el trimestre.</p>
+
                     <footer class="blockquote-footer">Excepto si el último día de pago cae en <cite title="Source Title"><b>Domingo</b></cite>, se pasa al día siguiente.</footer>
+
                 </blockquote>
+
             </div>
+
         </div>
+
     </div>
+
     <div class="col-lg-6 col-md-6 col-sm-12 text-center">
+
         <div class="jumbotron">
+
             <h1 class="filtroDanger">
+
                 <i class="fa fa-exclamation-circle filtroDanger" aria-hidden="true"></i>
+
                 <span>Crítico</span>
+
             </h1>
+
         </div>
+
     </div>
+
     <div class="clearfix"></div>
+
     <hr>
+
     <div class="col-lg-6 col-md-6 col-sm-12">
+
         <h5>COMPRAS SEMANALES EN EL TRIMESTRE</h5>
+
         <div class="clearfix"></div>
+
         <hr>
+
         <div class="row">
+
             <div class="col-lg-12 col-md-12 col-sm-12">
+
+                <app-grafica-lineal [lineChartColors]="lineChartColors" [lineChartLabels]="lineChartLabels" [lineChartOptions]="lineChartOptions" [lineChartData]="lineChartData"></app-grafica-lineal>
+
             </div>
+
             <div class="col-lg-12 col-md-12 col-sm-12">
+
                 <blockquote class="blockquote" style="height: 100%!important;">
+
                     <p class="mb-0">Debe de tener registrado por lo menos 1 compra por semana distinta.</p>
+
                     <footer class="blockquote-footer">No se puede registrar <cite title="Source Title"><b>4 compras al principio o final del mes</b></cite>.</footer>
+
                 </blockquote>
+
             </div>
+
         </div>
+
     </div>
+
     <div class="col-lg-6 col-md-6 col-sm-12 text-center">
+
         <div class="jumbotron">
+
             <h1 class="filtroDanger">
+
                 <i class="fa fa-exclamation-circle filtroDanger" aria-hidden="true"></i>
+
                 <span>Crítico</span>
+
             </h1>
+
         </div>
+
     </div>
+
     <div class="clearfix"></div>
+
     <hr>
-    <div class="col-lg-12 col-md-12 col-sm-12">
+
+    <div class="col-lg-12 col-md-12 col-sm-12 pt-5">
+
         <div class="jumbotron">
+
             <h1 class="filtroSuccess text-center">
+
                 <span>!Felicidades!</span>
+
                 <br>
+
                 <span>
+
                 Bono Mes Actual<br>
+
                 MNX $ <b>0.00</b>
+
               </span>
+
             </h1>
+
         </div>
+
     </div>
+
 </div>

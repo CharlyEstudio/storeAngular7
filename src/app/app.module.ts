@@ -5,6 +5,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // Rutas
 import { APP_ROUTES } from './app.routes';
 
+// Graficas ng2-charts
+import { ChartsModule } from 'ng2-charts';
+
 // Enviroment
 import { environment } from '../environments/environment';
 
@@ -36,6 +39,7 @@ import { PromocionProductosComponent } from './componentes/promocion-productos/p
 import { VentaDiaComponent } from './componentes/venta-dia/venta-dia.component';
 import { DescripcionComponent } from './descripcion/descripcion.component';
 import { BuscarComponent } from './componentes/buscar/buscar.component';
+import { GraficaBarrasComponent } from './componentes/grafica-barras/grafica-barras.component';
 
 @NgModule({
   declarations: [
@@ -59,13 +63,15 @@ import { BuscarComponent } from './componentes/buscar/buscar.component';
     VentaDiaComponent,
     DescripcionComponent,
     BuscarComponent,
+    GraficaBarrasComponent
   ],
   imports: [
     BrowserModule,
     APP_ROUTES,
     FormsModule,
     ReactiveFormsModule,
-    ServicioModule
+    ServicioModule,
+    ChartsModule,
     // SocketIoModule.forRoot(config)
   ],
   providers: [],

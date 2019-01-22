@@ -2,14 +2,14 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
-// Graficas ng2-charts
-import { ChartsModule } from 'ng2-charts';
-
 // Rutas Internas
 import { PAGES_ROUTES } from './paginas.routes';
 
 // Pipes
 import { PipesModule } from '../servicios/pipes/pipes.module';
+
+// Charts
+import { ChartsModule } from 'ng2-charts';
 
 // Componentes - Páginas Internas
 import { DistComponent } from './interno/dist/dist.component';
@@ -22,6 +22,7 @@ import { TopVentasComponent } from './interno/top-ventas/top-ventas.component';
 import { FavoritosComponent } from './interno/favoritos/favoritos.component';
 import { OfertasComponent } from './interno/ofertas/ofertas.component';
 import { PerfilComponent } from './interno/perfil/perfil.component';
+import { GraficaLinealComponent } from '../componentes/grafica-lineal/grafica-lineal.component';
 
 @NgModule({
     declarations: [
@@ -34,7 +35,8 @@ import { PerfilComponent } from './interno/perfil/perfil.component';
         TopVentasComponent,
         FavoritosComponent,
         OfertasComponent,
-        PerfilComponent
+        PerfilComponent,
+        GraficaLinealComponent
     ],
     exports: [
         ComprasComponent
@@ -42,9 +44,9 @@ import { PerfilComponent } from './interno/perfil/perfil.component';
     imports: [
         CommonModule,
         FormsModule,
-        ChartsModule,
         PAGES_ROUTES,
-        PipesModule
+        PipesModule,
+        ChartsModule
     ]
 })
 
