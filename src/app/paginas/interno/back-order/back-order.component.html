@@ -1,8 +1,8 @@
 <h1>Back Order</h1>
 
-<p>Solícita tus productos faltantes.</p>
+<p *ngIf="backOrder.length > 0">Solícita tus productos faltantes.</p>
 
-<div class="row mas-vendidos">
+<div class="row mas-vendidos" *ngIf="backOrder.length > 0">
 
     <div class="col-12 col-lg-3 col-md-6 col-sm-12 pt-2" *ngFor="let back of backOrder">
 
@@ -41,6 +41,16 @@
             </div>
 
         </div>
+
+    </div>
+
+</div>
+
+<div class="row" *ngIf="backOrder.length === 0">
+
+    <div class="col-lg-12 col-md-12 col-sm-12 alert alert-info">
+
+        <span>No tiene Back Order en este mes.</span>
 
     </div>
 

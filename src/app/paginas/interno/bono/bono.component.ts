@@ -134,6 +134,10 @@ export class BonoComponent implements OnInit {
           }
           this.saldoTotal += saldo.respuesta[m].saldo;
         }
+      } else {
+        this.saldoTotal = 0;
+        this.numVenc = 0;
+        this.saldoVencido = 0;
       }
     });
 
@@ -142,6 +146,8 @@ export class BonoComponent implements OnInit {
       this._datoService.compras(this._usuarioService.usuario.numero, fechas.mesInicio, fechas.mesFinal).subscribe((compras: any) => {
         if (compras.status) {
           this.compras = compras.respuesta[0].compra;
+        } else {
+          this.compras = 0;
         }
       });
     });
@@ -252,7 +258,7 @@ export class BonoComponent implements OnInit {
           this.promMes3 += 1;
         }
 
-        if (2 >= this.promMes1 && 2 >= this.promMes2 && 2 >= this.promMes3) {
+        if (this.promMes1 >= 2 && this.promMes2 >= 2 && this.promMes3 >= 2) {
           this.pasaCompras = true;
         } else {
           this.pasaCompras = false;

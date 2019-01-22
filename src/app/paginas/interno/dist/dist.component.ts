@@ -121,13 +121,6 @@ export class DistComponent implements OnInit {
 
       this.saldoDispo = this.limite - this.saldo;
 
-      const salVen = this.limite - this.saldo;
-      if (salVen < 0) {
-        this.saldoVenc = salVen;
-      } else {
-        this.saldoVenc = 0;
-      }
-
       this.asesor = data.ASESOR;
 
       this._datosService.obtenerAsesor(data.VENDEDORID).subscribe((asesor: any) => {
@@ -149,6 +142,12 @@ export class DistComponent implements OnInit {
         this.folioVenc = saldo.respuesta[0].folio;
         this.fecVen = saldo.respuesta[0].feccap;
         this.impoVenc = saldo.respuesta[0].saldo;
+
+        for (let m = 0; m < saldo.respuesta.length; m++) {
+          if (saldo.respuesta[m].vence < this.fecha) {
+            this.saldoVenc += saldo.respuesta[m].saldo;
+          }
+        }
 
         if (saldo.respuesta[0].estatus === 'VIGENTE') {
           this.vigente = true;
