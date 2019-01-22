@@ -110,7 +110,7 @@
 
     </div>
 
-    <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+    <div class="col-lg-12 col-md-12 col-sm-12 text-center pt-5">
 
         <h3 class="font-weight-bold">COMPORTAMIENTO ACTUAL</h3>
 
@@ -120,7 +120,7 @@
 
     <hr>
 
-    <div class="col-lg-6 col-md-6 col-sm-12">
+    <div class="col-lg-6 col-md-6 col-sm-12 pt-3 pb-5">
 
         <h5 class="font-weight-bold">COMPRAS</h5>
 
@@ -138,11 +138,11 @@
 
             <div class="col-lg-8 col-md-8 col-sm-12 text-right">
 
-                <h5 class="text-uppercase">
+                <h2 class="text-uppercase">
 
-                    <span class="font-weight-bold">mxn {{compras | currency}}</span>
+                    <span class="font-weight-bold" [ngClass]="{'text-success': compras >= 20000, 'text-danger': compras < 20000}">mxn {{compras | currency}}</span>
 
-                </h5>
+                </h2>
 
             </div>
 
@@ -150,7 +150,7 @@
 
                 <blockquote class="blockquote" style="height: 100%!important;">
 
-                    <p class="mb-0">Sus compras trimestrales debe ser mayor o igual a $ 20,000.00 pesos.</p>
+                    <p class="mb-0">Sus compras trimestrales debe ser mayor o igual a <span class="font-weight-bold text-blue">$ 20,000.00</span> pesos.</p>
 
                     <footer class="blockquote-footer">No entran los códigos que inicien con <cite title="Source Title">8/5/6</cite>, excepto de la marca <b>Klintek</b>.</footer>
 
@@ -162,15 +162,19 @@
 
     </div>
 
-    <div class="col-lg-6 col-md-6 col-sm-12 text-center">
+    <div class="col-lg-6 col-md-6 col-sm-12 text-center pt-3 pb-5 centro">
 
-        <div class="jumbotron">
+        <div class="jumbotron" style="margin-bottom: 0px!important" [ngClass]="{'bg-danger': compras < 20000, 'bg-success': compras >= 20000}">
 
-            <h1 class="filtroDanger">
+            <h1 class="text-white">
 
-                <i class="fa fa-exclamation-circle filtroDanger" aria-hidden="true"></i>
+                <i class="fa fa-exclamation-circle " aria-hidden="true" *ngIf="compras < 20000"></i>
 
-                <span>Crítico</span>
+                <span *ngIf="compras < 20000">No Pasa</span>
+
+                <i class="mdi mdi-check-circle" aria-hidden="true" *ngIf="compras >= 20000"></i>
+
+                <span *ngIf="compras >= 20000">Correcto</span>
 
             </h1>
 
@@ -182,7 +186,7 @@
 
     <hr>
 
-    <div class="col-lg-6 col-md-6 col-sm-12">
+    <div class="col-lg-6 col-md-6 col-sm-12  pt-3 pb-5">
 
         <h5 class="font-weight-bold">FACTURAS VENCIDAS</h5>
 
@@ -200,11 +204,11 @@
 
             <div class="col-lg-6 col-md-6 col-sm-12 text-right">
 
-                <h5 class="text-uppercase">
+                <h2 class="text-uppercase">
 
-                    <span class="font-weight-bold">{{numVenc | number}}</span>
+                    <span class="font-weight-bold" [ngClass]="{'text-success': numVenc === 0, 'text-danger': numVenc > 0}">{{numVenc | number}}</span>
 
-                </h5>
+                </h2>
 
             </div>
 
@@ -224,15 +228,19 @@
 
     </div>
 
-    <div class="col-lg-6 col-md-6 col-sm-12 text-center">
+    <div class="col-lg-6 col-md-6 col-sm-12 text-center pt-3 pb-5 centro">
 
-        <div class="jumbotron">
+        <div class="jumbotron" style="margin-bottom: 0px!important" [ngClass]="{'bg-danger': numVenc > 0, 'bg-success': numVenc === 0}">
 
-            <h1 class="filtroDanger">
+            <h1 class="text-white">
 
-                <i class="fa fa-exclamation-circle filtroDanger" aria-hidden="true"></i>
+                <i class="fa fa-exclamation-circle" aria-hidden="true" *ngIf="numVenc > 0"></i>
 
-                <span>Crítico</span>
+                <span *ngIf="numVenc > 0">No pasa</span>
+
+                <i class="mdi mdi-check-circle" aria-hidden="true" *ngIf="numVenc === 0"></i>
+
+                <span *ngIf="numVenc === 0">Correcto</span>
 
             </h1>
 
@@ -244,7 +252,7 @@
 
     <hr>
 
-    <div class="col-lg-6 col-md-6 col-sm-12">
+    <div class="col-lg-6 col-md-6 col-sm-12  pt-3 pb-5">
 
         <h5>COMPRAS SEMANALES EN EL TRIMESTRE</h5>
 
@@ -253,6 +261,12 @@
         <hr>
 
         <div class="row">
+
+            <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+
+                <h4 class="font-weight-bold">Año {{fec | date: 'yyyy'}}</h4>
+
+            </div>
 
             <div class="col-lg-12 col-md-12 col-sm-12">
 
@@ -276,15 +290,19 @@
 
     </div>
 
-    <div class="col-lg-6 col-md-6 col-sm-12 text-center">
+    <div class="col-lg-6 col-md-6 col-sm-12 text-center  pt-3 pb-5 centro">
 
-        <div class="jumbotron">
+        <div class="jumbotron" style="margin-bottom: 0px!important" [ngClass]="{'bg-danger': pasaCompras === false, 'bg-success': pasaCompras === true}">
 
-            <h1 class="filtroDanger">
+            <h1 class="text-white">
 
-                <i class="fa fa-exclamation-circle filtroDanger" aria-hidden="true"></i>
+                <i class="fa fa-exclamation-circle" aria-hidden="true" *ngIf="pasaCompras === false"></i>
 
-                <span>Crítico</span>
+                <span class="text-white" *ngIf="pasaCompras === false">No Pasa</span>
+
+                <i class="mdi mdi-check-circle" aria-hidden="true" *ngIf="pasaCompras"></i>
+
+                <span class="text-white" *ngIf="pasaCompras">Correcto</span>
 
             </h1>
 
@@ -298,21 +316,17 @@
 
     <div class="col-lg-12 col-md-12 col-sm-12 pt-5">
 
-        <div class="jumbotron">
+        <div class="jumbotron" [ngClass]="{'bg-danger': pasaComision === false, 'bg-success': pasaComision === true}">
 
-            <h1 class="filtroSuccess text-center">
+            <h1 class="text-white text-center" *ngIf="pasaComision">
 
-                <span>!Felicidades!</span>
+                <span>!Felicidades está calificando para bono de este mes!</span>
 
-                <br>
+            </h1>
 
-                <span>
+            <h1 class="text-white text-center" *ngIf="pasaComision === false">
 
-                Bono Mes Actual<br>
-
-                MNX $ <b>0.00</b>
-
-              </span>
+                <span>No está calificando para bono de este mes.</span>
 
             </h1>
 

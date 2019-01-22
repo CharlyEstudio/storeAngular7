@@ -128,7 +128,7 @@
 
                 <h5 class="text-uppercase" *ngIf="diasProximoVenc < 5">No. Fac <span class="font-weight-bold badge badge-danger">{{proximoVenc}}</span></h5>
 
-                <h5 class="text-uppercase" *ngIf="diasProximoVenc >= 5">No. Fac <span class="font-weight-bold badge badge-success">Sin Vencimiento</span></h5>
+                <h5 class="text-uppercase" *ngIf="diasProximoVenc >= 5"><span class="font-weight-bold badge badge-success">Sin Vencimiento</span></h5>
 
             </div>
 
@@ -139,7 +139,6 @@
     <div class="col-lg-6 col-md-6 col-sm-12 centro">
 
         <img src="http://www.ferremayoristas.com.mx/assets/img/logo-min.png" width="40%" class="img-responsive">
-        <!-- <img [src]="logo" width="40%" class="img-responsive"> -->
 
     </div>
 
@@ -229,12 +228,7 @@
 
                             <a class="btn btn-success" href="#modalFolio" data-toggle="modal" (click)="modalFolio(sal, 1)">
 
-                                <!-- <span class="badge badge-info"> -->
-
-                                <!-- <i class="fa fa-cc-visa" aria-hidden="true"></i> -->
                                 <i class="mdi mdi-credit-card-scan" aria-hidden="true"></i>
-
-                                <!-- </span> -->
 
                             </a>
 
