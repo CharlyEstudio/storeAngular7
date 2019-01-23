@@ -16,9 +16,13 @@
 
                     <li class="list-inline-item font-weight-bold" *ngIf="logeado">
 
-                        <a routerLink="" class="nav-link text-grey" (click)="logout()">
+                        <a routerLink="" class="nav-link text-grey">
 
-                            <i class="mdi mdi-logout"></i> LogOut
+                            <img [src]="imagen | imagen" class="img-circle" width="50px">
+
+                            <!-- <i class="mdi mdi-account-outline"></i> Mi Cuenta -->
+
+                            {{nombre}}
 
                         </a>
 
@@ -40,7 +44,7 @@
 
                         <a routerLink="/acceso" class="nav-link  text-grey">
 
-                            <i class="mdi mdi-access-point"></i> Acceso
+                            <i class="mdi mdi-access-point"></i> Accesar
 
                         </a>
 
@@ -50,9 +54,9 @@
 
                     <li class="list-inline-item font-weight-bold" *ngIf="logeado">
 
-                        <a routerLink="" class="nav-link  text-grey">
+                        <a routerLink="" class="nav-link text-grey" (click)="logout()">
 
-                            <i class="mdi mdi-account-outline"></i> Mi Cuenta
+                            <i class="mdi mdi-logout"></i> Salir
 
                         </a>
 

@@ -45,7 +45,9 @@
 
         <p class="uk-text-justify">Solo necesitas registrarte y poder empezar a usar todos nuestros servicios. Empieza ya!</p>
 
-        <button type="button" class="btn btn-danger">Registrarse!</button>
+        <a routerLink="/registro" class="btn btn-danger" *ngIf="!conetado">Registrarse!</a>
+
+        <a routerLink="/registro" class="btn btn-success" *ngIf="conetado">Ir a mi cuenta!</a>
 
     </div>
 

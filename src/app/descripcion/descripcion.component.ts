@@ -127,7 +127,7 @@ export class DescripcionComponent implements OnInit {
     });
   }
 
-  agregarCarrito(producto: Producto, unidades: any, forma: NgForm, marca: any) {
+  agregarCarrito(producto: any, unidades: any, forma: NgForm, marca: any) {
     const cantidad =  Number(forma.value.cantidad);
     let pzs;
     let inner;
@@ -206,7 +206,7 @@ export class DescripcionComponent implements OnInit {
     this._shoppingService.addCarrito(producto);
   }
 
-  agregarFavoritos(producto: Producto, forma: NgForm) {
+  agregarFavoritos(producto: any, forma: NgForm) {
     console.log('Agregando Producto a Favoritos:', producto);
   }
 

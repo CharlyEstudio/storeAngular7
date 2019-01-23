@@ -18,6 +18,9 @@ import { environment } from '../environments/environment';
 // Servicios & Guardias
 import { ServicioModule } from './servicios/servicios.module';
 
+// Pipes
+import { PipesModule } from './servicios/pipes/pipes.module';
+
 // Componentes - Páginas
 import { AppComponent } from './app.component';
 import { PaginasComponent } from './paginas/paginas.component';
@@ -72,6 +75,7 @@ import { GraficaBarrasComponent } from './componentes/grafica-barras/grafica-bar
     ReactiveFormsModule,
     ServicioModule,
     ChartsModule,
+    PipesModule,
     // SocketIoModule.forRoot(config)
   ],
   providers: [],

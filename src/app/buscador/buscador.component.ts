@@ -56,9 +56,6 @@ export class BuscadorComponent implements OnInit, OnDestroy {
     this.encontrado = [];
     this._productosService.buscarProductos(buscar, this.precio).subscribe((encontrado: any) => {
       if (encontrado.status) {
-        this.buscandoBol = false;
-        this.errorBol = false;
-        this.encontradoBol = true;
         for (let i = 0; i < encontrado.respuesta.length; i++) {
           this._productosService.obtenerImagenes(encontrado.respuesta[i].codigo).subscribe((imagenes: any) => {
             let image;
@@ -125,6 +122,9 @@ export class BuscadorComponent implements OnInit, OnDestroy {
             });
           });
         }
+        this.buscandoBol = false;
+        this.errorBol = false;
+        this.encontradoBol = true;
       } else {
         this.msg = encontrado.msg;
         this.encontrado = [];
