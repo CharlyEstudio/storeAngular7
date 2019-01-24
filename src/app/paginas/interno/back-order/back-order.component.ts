@@ -79,6 +79,7 @@ export class BackOrderComponent implements OnInit {
             const bo = (back.respuesta[i].SOLICITADO - back.respuesta[i].ENTREGADO);
 
             datos = {
+              fecha: back.respuesta[i].FECHA,
               articuloid: back.respuesta[i].ARTICULOID,
               clave: back.respuesta[i].CLAVE,
               codigo: back.respuesta[i].CODIGO,

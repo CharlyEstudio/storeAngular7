@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-// Observable
-import { Subscription, Observable, Subscriber } from 'rxjs';
-
-// Modelos
+// Servicios
 import { UsuarioServicesService, ShoppingService } from 'src/app/servicios/servicios.index';
 
 @Component({
@@ -35,17 +32,17 @@ export class NavPrincipalComponent implements OnInit {
 
   ngOnInit() {
     this._usuarioService.isSession().subscribe(login => {
-      if (login.length !== 0) {
-        localStorage.setItem('login', 'ok');
-        this.logeado = true;
-      } else {
-        const sessions = localStorage.getItem('login');
-        if (sessions === 'ok') {
-          this.logeado = true;
+        if (login.length > 0) {
+            localStorage.setItem('login', 'ok');
+            this.logeado = true;
         } else {
-          this.logeado = false;
+          const sessions = localStorage.getItem('login');
+          if (sessions === 'ok') {
+            this.logeado = true;
+          } else {
+            this.logeado = false;
+          }
         }
-      }
     });
 
     this._shoppingCar.getCarrito().subscribe(data => {
