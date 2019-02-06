@@ -12,8 +12,8 @@ import { ChartsModule } from 'ng2-charts';
 import { environment } from '../environments/environment';
 
 // Sockets
-// import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
-// const config: SocketIoConfig = { url: environment.wsUrl, options: {} };
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+const config: SocketIoConfig = { url: environment.wsUrl, options: {} };
 
 // Servicios & Guardias
 import { ServicioModule } from './servicios/servicios.module';
@@ -76,7 +76,7 @@ import { GraficaBarrasComponent } from './componentes/grafica-barras/grafica-bar
     ServicioModule,
     ChartsModule,
     PipesModule,
-    // SocketIoModule.forRoot(config)
+    SocketIoModule.forRoot(config)
   ],
   providers: [],
   bootstrap: [AppComponent]

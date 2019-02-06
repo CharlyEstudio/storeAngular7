@@ -4,6 +4,9 @@ import { Title, Meta } from '@angular/platform-browser';
 
 import { filter, map } from 'rxjs/operators';
 
+// Web Socket
+import { WebsocketService } from './servicios/servicios.index';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -16,7 +19,8 @@ export class AppComponent {
   constructor(
         private router: Router,
         private title: Title,
-        private meta: Meta
+        private meta: Meta,
+        private _webSocket: WebsocketService
   ) {
       this.getDataRoute().subscribe( data => {
         this.titulo = data.titulo;

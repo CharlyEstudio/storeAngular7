@@ -5,12 +5,14 @@ import { Router } from '@angular/router';
 
 // Modelos
 import { Producto } from '../modelos/productos.model';
+import { XmlString } from 'src/app/modelos/xml.model';
+import { Usuario } from '../modelos/usuarios.model';
 
 // Link
 import { PATH_LINK } from '../config/config';
 
 // Servicios
-import { ProductosService, ShoppingService } from '../servicios/servicios.index';
+import { ProductosService, ShoppingService, UsuarioServicesService, DatosService } from '../servicios/servicios.index';
 
 @Component({
   selector: 'app-carrito',
@@ -19,25 +21,42 @@ import { ProductosService, ShoppingService } from '../servicios/servicios.index'
 })
 export class CarritoComponent implements OnInit {
 
+  cliente: Usuario;
+
   carrito: any[] = [];
   cantidad = 1;
   precioFinal = 0;
   items = 0;
+  subtotal = 0;
+  impuesto = 0;
+  total = 0;
+
+  vigente: boolean = false;
 
   // Observar para el carrito
   car: Subscription;
   intervalo: any;
 
   constructor(
+    private router: Router,
+    private _usuarioService: UsuarioServicesService,
     private _productosServices: ProductosService,
     private _shoppingCar: ShoppingService,
-    private router: Router
+    private _datosService: DatosService
   ) {
     const carro = JSON.parse(localStorage.getItem('carrito'));
 
     if (carro.length > 0) {
       this.items = carro.length;
       for (let i = 0; i < carro.length; i++) {
+        if (carro[i].iva > 0) {
+          this.subtotal += carro[i].precioFinal / (1 + carro[i].iva);
+        } else {
+          this.subtotal += carro[i].precioFinal;
+        }
+
+        this.total += carro[i].precioFinal;
+
         this._productosServices.obtenerImagenes(carro[i].codigo).subscribe((imagenes: any) => {
           let image;
 
@@ -71,6 +90,8 @@ export class CarritoComponent implements OnInit {
           this.carrito.push(data);
         });
       }
+
+      this.impuesto = this.total - this.subtotal;
     } else {
       this.router.navigate(['/inicio']);
     }
@@ -135,6 +156,56 @@ export class CarritoComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (this._usuarioService.usuario !== null) {
+      this.cliente = this._usuarioService.usuario;
+      this.vigente = Boolean(localStorage.getItem('vigente'));
+      console.log(this.vigente);
+    } else {
+      this.vigente = false;
+      console.log('Aquí va el código si es cliente público.');
+    }
+  }
+
+  enviarPedido(pedido: any) {
+    let xml;
+    let usuario;
+    this._usuarioService.obtenerDatos(this.cliente.numero).subscribe((cliente: any) => {
+      usuario = cliente.respuesta;
+      if (cliente.status) {
+        xml = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' +
+              '<cfdi:Comprobante Version="3.3" Serie="W"></cfdi:Comprobante><cfdi:Receptor rfc="' +
+              usuario[0].RFC + '" clinumero="' + usuario[0].NUMERO + '" /><cfdi:Conceptos>';
+        for (let i = 0; i < pedido.length; i++) {
+          xml += '<cfdi:Concepto NoIdentificacion="' + pedido[i].articuloid + '" cantidad="' + pedido[i].cantidad + '"></cfdi:Concepto>';
+        }
+        xml += '</cfdi:Conceptos></cfdi:Comprobante>';
+        swal({
+          title: 'Su pedido será procesado, ¿Seguro que desea enviar su pedido?',
+          icon: 'warning',
+          buttons: {
+            cancel: true,
+            confirm: true
+          }
+        })
+        .then(( status ) => {
+          if (!status) { return null; }
+
+          const enviarXml: XmlString = {
+            texto: xml
+          };
+
+          this._shoppingCar.enviarPedido(enviarXml).subscribe((info: any) => {
+            console.log(info);
+            this.carrito = [];
+            localStorage.removeItem('carrito');
+            this._shoppingCar.clearCarrito();
+            this.router.navigate(['/inicio']);
+          });
+        });
+      } else {
+        alert('Cliente no registrado en nuestro sistema.');
+      }
+    });
   }
 
 }

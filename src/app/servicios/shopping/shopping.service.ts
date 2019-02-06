@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+
+import { BehaviorSubject } from 'rxjs';
 
 // Modelos
 import { Producto } from 'src/app/modelos/productos.model';
-import { BehaviorSubject } from 'rxjs';
+import { XmlString } from 'src/app/modelos/xml.model';
 
 @Injectable()
 export class ShoppingService {
@@ -14,7 +17,8 @@ export class ShoppingService {
   dato: any[] = [];
 
   constructor(
-    private router: Router
+    private router: Router,
+    private http: HttpClient
   ) {
     this.subject.subscribe((data) => {
       let num;
@@ -88,5 +92,11 @@ export class ShoppingService {
       }
 
     }
+  }
+
+  enviarPedido(xml: XmlString) {
+    const url = 'http://177.244.55.122:3001/ferrum/subir/pedido';
+
+    return this.http.post(url, xml);
   }
 }

@@ -9,7 +9,9 @@ import { LoginGuard,
     DatosService,
     ShoppingService,
     MenuService,
-    ExportarService } from './servicios.index';
+    ExportarService,
+    WebsocketService
+} from './servicios.index';
 
 @NgModule({
     imports: [
@@ -25,7 +27,8 @@ import { LoginGuard,
         DatosService,
         ShoppingService,
         MenuService,
-        ExportarService
+        ExportarService,
+        WebsocketService
     ],
     declarations: []
 })

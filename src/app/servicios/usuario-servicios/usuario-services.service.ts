@@ -67,16 +67,44 @@ export class UsuarioServicesService {
     }
   }
 
-  guardarStorage(id: string, token: string, usuario: Usuario, menu: any, rol: any) {
+  guardarStorage(id: string, token: string, usuario: Usuario, menu: any, rol: any, vigente: any) {
+    console.log(vigente);
     localStorage.setItem( 'id', id );
     localStorage.setItem( 'token', token );
     localStorage.setItem( 'usuario', JSON.stringify( usuario ));
     localStorage.setItem( 'menu', JSON.stringify( menu ));
     localStorage.setItem( 'rol', rol);
+    localStorage.setItem( 'vigente', vigente);
 
     this.usuario = usuario;
     this.token = token;
     this.menu = menu;
+  }
+
+  fechaActual() {
+    const h = new Date();
+
+    let dia;
+
+    if (h.getDate() < 10) {
+      dia = '0' + h.getDate();
+    } else {
+      dia = h.getDate();
+    }
+
+    let mes;
+
+    if (h.getMonth() < 10) {
+      mes = '0' + (h.getMonth() + 1);
+    } else {
+      mes = (h.getMonth() + 1);
+    }
+
+    const anio = h.getFullYear();
+
+    const fecha = anio + '-' + mes + '-' + dia;
+
+    return fecha;
   }
 
   logout() {
@@ -90,6 +118,7 @@ export class UsuarioServicesService {
     localStorage.removeItem('rol');
     localStorage.removeItem('id');
     localStorage.removeItem('login');
+    localStorage.removeItem('vigente');
 
     this.router.navigate(['/inicio']);
     this.session.next([]);
@@ -168,6 +197,12 @@ export class UsuarioServicesService {
       //   swal('¡Usuario Borrado!', 'El usuario ha sido eliminado correctamente', 'success');
       //   return true;
       // });
+  }
+
+  obtenerDatos(numero: any) {
+    const url = LINK + '/cobertura/cliente/' + numero;
+
+    return this.http.get(url);
   }
 
 }

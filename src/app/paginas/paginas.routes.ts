@@ -83,7 +83,7 @@ const pageRoutes: Routes = [
     {
         path: '',
         canActivate: [LoginGuard],
-        redirectTo: '/compras',
+        redirectTo: '/dist',
         pathMatch: 'full'
     }
 ];

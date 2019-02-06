@@ -8,7 +8,7 @@ import { Producto } from '../modelos/productos.model';
 import { PATH_LINK } from '../config/config';
 
 // Servicios
-import { ProductosService, UsuarioServicesService } from 'src/app/servicios/servicios.index';
+import { ProductosService, UsuarioServicesService, WebsocketService } from 'src/app/servicios/servicios.index';
 
 @Component({
   selector: 'app-buscador',
@@ -30,7 +30,8 @@ export class BuscadorComponent implements OnInit, OnDestroy {
     private route: Router,
     private activateRoute: ActivatedRoute,
     private _productosService: ProductosService,
-    private _usuarioService: UsuarioServicesService
+    private _usuarioService: UsuarioServicesService,
+    private _webSocket: WebsocketService
   ) {
     if (this._usuarioService.usuario !== null) {
       this.precio = this._usuarioService.usuario.precio;
@@ -57,14 +58,14 @@ export class BuscadorComponent implements OnInit, OnDestroy {
     this._productosService.buscarProductos(buscar, this.precio).subscribe((encontrado: any) => {
       if (encontrado.status) {
         for (let i = 0; i < encontrado.respuesta.length; i++) {
-          this._productosService.obtenerImagenes(encontrado.respuesta[i].codigo).subscribe((imagenes: any) => {
-            let image;
+          // this._productosService.obtenerImagenes(encontrado.respuesta[i].codigo).subscribe((imagenes: any) => {
+          //   let image;
 
-            if (imagenes.status) {
-              image = imagenes.respuesta[0].imagen;
-            } else {
-              image = 'product.png';
-            }
+          //   if (imagenes.status) {
+          //     image = imagenes.respuesta[0].imagen;
+          //   } else {
+          //     image = 'product.png';
+          //   }
 
             this._productosService.obtenerMarca(encontrado.respuesta[i].articuloid).subscribe((marca: any) => {
               let datos: Producto;
@@ -82,7 +83,7 @@ export class BuscadorComponent implements OnInit, OnDestroy {
                   iva: encontrado.respuesta[i].iva,
                   precio: (encontrado.respuesta[i].precio - (encontrado.respuesta[i].precio * encontrado.respuesta[i].descuento)),
                   precioAumentado: encontrado.respuesta[i].precio * (1 + (encontrado.respuesta[i].descuento)),
-                  img: PATH_LINK + '/assets/img_products/' + image,
+                  img: PATH_LINK + '/assets/img_products/' + encontrado.respuesta[i].clave + '.jpg',
                   descuento: encontrado.respuesta[i].descuento,
                   entregado: encontrado.respuesta[i].entregado,
                 };
@@ -100,7 +101,7 @@ export class BuscadorComponent implements OnInit, OnDestroy {
                   iva: encontrado.respuesta[i].iva,
                   precio: (encontrado.respuesta[i].precio - (encontrado.respuesta[i].precio * encontrado.respuesta[i].descuento)),
                   precioAumentado: encontrado.respuesta[i].precio * (1 + (encontrado.respuesta[i].descuento)),
-                  img: PATH_LINK + '/assets/img_products/' + image,
+                  img: PATH_LINK + '/assets/img_products/' + encontrado.respuesta[i].clave + '.jpg',
                   descuento: encontrado.respuesta[i].descuento,
                   entregado: encontrado.respuesta[i].entregado,
                 };
@@ -120,7 +121,7 @@ export class BuscadorComponent implements OnInit, OnDestroy {
                 return 0;
               });
             });
-          });
+          // });
         }
         this.buscandoBol = false;
         this.errorBol = false;
@@ -136,6 +137,7 @@ export class BuscadorComponent implements OnInit, OnDestroy {
   }
 
   irA(producto: Producto) {
+    // this._webSocket.acciones('producto-visto', producto);
     this.route.navigate(['/ver/', producto.articuloid]);
   }
 

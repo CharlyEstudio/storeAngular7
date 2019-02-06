@@ -3,7 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 
 // Servicios
-import { UsuarioServicesService } from '../servicios/servicios.index';
+import { UsuarioServicesService, DatosService } from '../servicios/servicios.index';
 
 // Modelos
 import { Usuario } from '../modelos/usuarios.model';
@@ -17,11 +17,14 @@ export class AccesoComponent implements OnInit {
 
   email: any;
   password: any;
-  recuerdame = false;
+  saldoVenc: number = 0;
+  vigente: boolean = false;
+  recuerdame: boolean = false;
 
   constructor(
     public router: Router,
     public _usuarioService: UsuarioServicesService,
+    private _datosService: DatosService
   ) {
     this.email = localStorage.getItem('email') || '';
 
@@ -40,13 +43,33 @@ export class AccesoComponent implements OnInit {
 
     const usuario = new Usuario( null, forma.value.email, forma.value.password, null );
 
-    this._usuarioService.iniciar(usuario);
-
     this._usuarioService.login(usuario, forma.value.recuerdame).subscribe((resp: any) => {
       if (resp.status) {
-        this._usuarioService.guardarStorage(resp.id, resp.token, resp.usuario, resp.menu, resp.usuario.rol);
-        this.router.navigate(['/compras']);
-        // this.wsService.login( 'web', forma.value.email, null, this._usuarioService.usuario.rol );
+        const fecha = this._usuarioService.fechaActual();
+        this._datosService.obtenerSaldo(fecha, resp.usuario.numero).subscribe((saldo: any) => {
+          if (saldo.respuesta) {
+
+            for (let m = 0; m < saldo.respuesta.length; m++) {
+              if (saldo.respuesta[m].vence < fecha) {
+                this.saldoVenc += saldo.respuesta[m].saldo;
+              }
+            }
+
+            if (this.saldoVenc > 0) {
+              this.vigente = false;
+            } else {
+              this.vigente = true;
+            }
+          } else {
+            // Aquí si es público
+            this.vigente = false;
+          }
+
+          this._usuarioService.iniciar(usuario);
+          this._usuarioService.guardarStorage(resp.id, resp.token, resp.usuario, resp.menu, resp.usuario.rol, this.vigente);
+          this.router.navigate(['/dist']);
+          // this.wsService.login( 'web', forma.value.email, null, this._usuarioService.usuario.rol );
+        });
       } else {
         swal('Error de Login', resp.mensaje, 'error');
       }

@@ -28,7 +28,7 @@
 
         <div class="table-responsive">
 
-            <table class="table table-hover table-striped">
+            <table class="table table-borderless">
 
                 <thead>
 
@@ -111,6 +111,48 @@
                             </button>
 
                         </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td colspan="2" rowspan="3" style="vertical-align: middle; text-align: center">
+
+                            <button type="button" class="btn btn-primary" (click)="enviarPedido(carrito)" *ngIf="vigente">RELIZAR PEDIDO</button>
+
+                            <div class="alert alert-danger" role="alert" *ngIf="!vigente">En este momento no puedes realizar tu pedido, solo es una cotización.</div>
+
+                        </td>
+
+                        <td class="text-right font-weight-bold text-uppercase">Sub-Total</td>
+
+                        <td class="text-right font-weight-bold">{{ subtotal | currency }}</td>
+
+                        <td></td>
+
+                    </tr>
+
+                    <tr>
+
+                        <!-- <td colspan="2"></td> -->
+
+                        <td class="text-right font-weight-bold text-uppercase" style="border-top-color: transparent!important;">Iva</td>
+
+                        <td class="text-right font-weight-bold" style="border-top-color: transparent!important;">{{ impuesto | currency }}</td>
+
+                        <td style="border-top-color: transparent!important;"></td>
+
+                    </tr>
+
+                    <tr>
+
+                        <!-- <td colspan="2"></td> -->
+
+                        <td class="text-right font-weight-bold text-uppercase" style="border-top-color: transparent!important;">Total</td>
+
+                        <td class="text-right font-weight-bold" style="border-top-color: transparent!important;">{{ total | currency }}</td>
+
+                        <td style="border-top-color: transparent!important;"></td>
 
                     </tr>
 
