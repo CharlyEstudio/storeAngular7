@@ -158,8 +158,11 @@ export class CarritoComponent implements OnInit {
   ngOnInit() {
     if (this._usuarioService.usuario !== null) {
       this.cliente = this._usuarioService.usuario;
-      this.vigente = Boolean(localStorage.getItem('vigente'));
-      console.log(this.vigente);
+      if (localStorage.getItem('vigente') === 'true') {
+        this.vigente = true;
+      } else {
+        this.vigente = false;
+      }
     } else {
       this.vigente = false;
       console.log('Aquí va el código si es cliente público.');
