@@ -10,33 +10,49 @@
 
             <div class="card-body text-center">
 
-                <img [src]="back.img" class="img-fluig" width="200">
+                <img [src]="back.IMAGEN" class="img-fluig" width="200">
 
-                <h5 class="pt-2 pb-4">{{back.nombre}}</h5>
+                <h5 class="pt-2 pb-4">{{back.NOMBRE}}</h5>
 
-                <h3>
+                <h4>
 
-                    <span class="badge badge-danger" *ngIf="back.descuento > 0">{{ (back.descuento * 100) }}% de Descuento</span>
+                    <span class="badge badge-info">BackOrder de {{back.BACK}} pz(s).</span>
+
+                </h4>
+
+                <h4>
+
+                    <span class="badge badge-secondary">Fecha solicitado {{back.FECHA | date:'dd-MM-yyyy'}}</span>
+
+                </h4>
+
+                <h6 class="text-muted" *ngIf="back.DESCUENTO > 0">
+
+                    <small>
+
+                        <s>{{ back.PRECIO | currency }}</s>
+                        
+                    </small>
+
+                </h6>
+
+                <h4 class="font-weight-bold text-danger" *ngIf="back.DESCUENTO > 0">
+
+                    {{ back.PRECIO | currency }}
+
+                </h4>
+
+                <h4 class="font-weight-bold text-danger" *ngIf="back.DESCUENTO === 0">
+
+                    {{ back.PRECIONETO | currency }}
+
+                </h4>
+
+                <h3 *ngIf="back.DESCUENTO > 0">
+
+                    <span class="badge badge-inverse">{{ back.DESCUENTO }}% de Descuento</span>
 
                 </h3>
-
-                <h4>
-
-                    <span class="badge badge-info">BackOrder de {{back.back}} pz(s).</span>
-
-                </h4>
-
-                <h4>
-
-                    <span class="badge badge-secondary">Fecha solicitado {{back.fecha | date:'dd-MM-yyyy'}}</span>
-
-                </h4>
-
-                <h4 class="font-weight-bold text-danger">
-
-                    {{ back.precio | currency }}
-
-                </h4>
 
                 <button class="btn btn-linkedin" type="button" (click)="irA(back)">
 

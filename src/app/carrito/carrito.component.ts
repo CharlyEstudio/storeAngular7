@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ɵConsole } from '@angular/core';
 
 import { Subscription, Observable, Subscriber } from 'rxjs';
 import { Router } from '@angular/router';
@@ -171,43 +171,38 @@ export class CarritoComponent implements OnInit {
 
   enviarPedido(pedido: any) {
     let xml;
-    let usuario;
-    this._usuarioService.obtenerDatos(this.cliente.numero).subscribe((cliente: any) => {
-      usuario = cliente.respuesta;
-      if (cliente.status) {
-        xml = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' +
-              '<cfdi:Comprobante Version="3.3" Serie="W"></cfdi:Comprobante><cfdi:Receptor rfc="' +
-              usuario[0].RFC + '" clinumero="' + usuario[0].NUMERO + '" /><cfdi:Conceptos>';
-        for (let i = 0; i < pedido.length; i++) {
-          xml += '<cfdi:Concepto NoIdentificacion="' + pedido[i].articuloid + '" cantidad="' + pedido[i].cantidad + '"></cfdi:Concepto>';
-        }
-        xml += '</cfdi:Conceptos></cfdi:Comprobante>';
-        swal({
-          title: 'Su pedido será procesado, ¿Seguro que desea enviar su pedido?',
-          icon: 'warning',
-          buttons: {
-            cancel: true,
-            confirm: true
-          }
-        })
-        .then(( status ) => {
-          if (!status) { return null; }
 
-          const enviarXml: XmlString = {
-            texto: xml
-          };
+    xml = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' +
+          '<cfdi:Comprobante Version="3.3" Serie="W"></cfdi:Comprobante><cfdi:Receptor rfc="' +
+          this.cliente.rfc + '" clinumero="' + this.cliente.numero + '" /><cfdi:Conceptos>';
 
-          this._shoppingCar.enviarPedido(enviarXml).subscribe((info: any) => {
-            console.log(info);
-            this.carrito = [];
-            localStorage.removeItem('carrito');
-            this._shoppingCar.clearCarrito();
-            this.router.navigate(['/inicio']);
-          });
-        });
-      } else {
-        alert('Cliente no registrado en nuestro sistema.');
+    for (let i = 0; i < pedido.length; i++) {
+      xml += '<cfdi:Concepto NoIdentificacion="' + pedido[i].articuloid + '" cantidad="' + pedido[i].cantidad + '"></cfdi:Concepto>';
+    }
+
+    xml += '</cfdi:Conceptos></cfdi:Comprobante>';
+
+    swal({
+      title: 'Su pedido será procesado, ¿Seguro que desea enviar su pedido?',
+      icon: 'warning',
+      buttons: {
+        cancel: true,
+        confirm: true
       }
+    })
+    .then(( status ) => {
+      if (!status) { return null; }
+
+      const enviarXml: XmlString = {
+        texto: xml
+      };
+
+      this._shoppingCar.enviarPedido(enviarXml).subscribe((info: any) => {
+        this.carrito = [];
+        localStorage.removeItem('carrito');
+        this._shoppingCar.clearCarrito();
+        this.router.navigate(['/inicio']);
+      });
     });
   }
 

@@ -61,8 +61,7 @@ export class AccesoComponent implements OnInit {
               this.vigente = true;
             }
           } else {
-            // Aquí si es público
-            this.vigente = false;
+            this.vigente = true;
           }
 
           this._usuarioService.iniciar(usuario);

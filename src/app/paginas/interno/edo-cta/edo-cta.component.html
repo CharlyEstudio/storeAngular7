@@ -158,9 +158,9 @@
 
     <hr>
 
-    <div class="alert alert-success" role="alert" *ngIf="saldo.length === 0">Obteniendo Facturas Vigentes</div>
+    <div class="alert alert-success" role="alert" *ngIf="saldo.length === 0 && !sindatoFacVig">Obteniendo Facturas Vigentes</div>
 
-    <div class="alert alert-info" role="alert" *ngIf="saldo.length === 0 && sindato">Sin Facturas Vigentes</div>
+    <div class="alert alert-info" role="alert" *ngIf="saldo.length === 0 && sindatoFacVig">Sin Facturas con Saldo Vigente</div>
 
     <div class="table-responsive" *ngIf="saldo.length > 0">
 
@@ -264,7 +264,7 @@
 
     <hr>
 
-    <div class="alert alert-success" role="alert" *ngIf="edocta.length === 0">Obteniendo Movimientos de Facturas</div>
+    <div class="alert alert-success" role="alert" *ngIf="edocta.length === 0 && !sindato">Obteniendo Movimientos de Facturas</div>
 
     <div class="alert alert-info" role="alert" *ngIf="edocta.length === 0 && sindato">Sin Movimientos de Facturas</div>
 

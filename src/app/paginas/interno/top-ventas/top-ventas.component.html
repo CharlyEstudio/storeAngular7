@@ -12,43 +12,49 @@
 
             <div class="card-body text-center">
 
-                <img [src]="top.img" class="img-fluig" width="200">
+                <img [src]="top.IMAGEN" class="img-fluig" width="200">
 
-                <h5 class="pt-2">{{top.nombre}}</h5>
+                <h5 class="pt-2">{{top.NOMBRE}}</h5>
 
                 <h5 class="text-muted">
 
                     <small>
                     
-                      {{top.clave}} | {{top.codigo}}
+                      {{top.CLAVE}} | {{top.CODIGO}}
                     
                     </small>
 
                 </h5>
 
-                <h3>{{top.entregado | number}} piezas</h3>
+                <h3>{{top.ENTREGADO | number}} piezas</h3>
 
                 <div class="centro" style="height: 95px; min-height: 95px; max-height: 95px;">
 
-                    <h6 class="text-muted" *ngIf="">
+                    <h6 class="text-muted" *ngIf="top.DESCUENTO > 0">
 
                         <small>
 
-                            <s>{{ top.precio | currency }}</s>
+                            <s>{{ top.PRECIO | currency }}</s>
                             
                         </small>
 
                     </h6>
 
-                    <h4 class="font-weight-bold text-danger">
+                    <h4 class="font-weight-bold text-danger" *ngIf="top.DESCUENTO > 0">
 
-                        {{ top.precio | currency }}
+                        {{ top.PRECIO | currency }}
 
                     </h4>
 
-                    <h3 *ngIf="">
+                    <h4 class="font-weight-bold text-danger" *ngIf="top.DESCUENTO === 0">
 
-                        <span class="badge badge-inverse">{{ (0 * 100) }}% de Descuento</span>
+                        {{ top.PRECIONETO | currency }}
+
+                    </h4>
+
+                    <h3 *ngIf="top.DESCUENTO > 0">
+
+                        <span class="badge badge-inverse">{{ top.DESCUENTO }}% de Descuento</span>
 
                     </h3>
 
@@ -56,7 +62,7 @@
 
                 <h3>
 
-                    <span class="badge badge-light">{{ 'marca' }}</span>
+                    <span class="badge badge-light">{{ top.MARCA }}</span>
 
                 </h3>
 

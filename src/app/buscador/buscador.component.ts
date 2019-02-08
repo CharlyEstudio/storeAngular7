@@ -57,72 +57,7 @@ export class BuscadorComponent implements OnInit, OnDestroy {
     this.encontrado = [];
     this._productosService.buscarProductos(buscar, this.precio).subscribe((encontrado: any) => {
       if (encontrado.status) {
-        for (let i = 0; i < encontrado.respuesta.length; i++) {
-          // this._productosService.obtenerImagenes(encontrado.respuesta[i].codigo).subscribe((imagenes: any) => {
-          //   let image;
-
-          //   if (imagenes.status) {
-          //     image = imagenes.respuesta[0].imagen;
-          //   } else {
-          //     image = 'product.png';
-          //   }
-
-            this._productosService.obtenerMarca(encontrado.respuesta[i].articuloid).subscribe((marca: any) => {
-              let datos: Producto;
-
-              if (marca.status) {
-
-                datos = {
-                  articuloid: encontrado.respuesta[i].articuloid,
-                  descripcion: encontrado.respuesta[i].descripcion,
-                  clave: encontrado.respuesta[i].clave,
-                  codigo: encontrado.respuesta[i].codigo,
-                  marca: marca.respuesta[0].marca,
-                  cantidad: 1,
-                  precioneto: encontrado.respuesta[i].precioneto,
-                  iva: encontrado.respuesta[i].iva,
-                  precio: (encontrado.respuesta[i].precio - (encontrado.respuesta[i].precio * encontrado.respuesta[i].descuento)),
-                  precioAumentado: encontrado.respuesta[i].precio * (1 + (encontrado.respuesta[i].descuento)),
-                  img: PATH_LINK + '/assets/img_products/' + encontrado.respuesta[i].clave + '.jpg',
-                  descuento: encontrado.respuesta[i].descuento,
-                  entregado: encontrado.respuesta[i].entregado,
-                };
-
-              } else {
-
-                datos = {
-                  articuloid: encontrado.respuesta[i].articuloid,
-                  descripcion: encontrado.respuesta[i].descripcion,
-                  clave: encontrado.respuesta[i].clave,
-                  codigo: encontrado.respuesta[i].codigo,
-                  marca: 'Sin Marca',
-                  cantidad: 1,
-                  precioneto: encontrado.respuesta[i].precioneto,
-                  iva: encontrado.respuesta[i].iva,
-                  precio: (encontrado.respuesta[i].precio - (encontrado.respuesta[i].precio * encontrado.respuesta[i].descuento)),
-                  precioAumentado: encontrado.respuesta[i].precio * (1 + (encontrado.respuesta[i].descuento)),
-                  img: PATH_LINK + '/assets/img_products/' + encontrado.respuesta[i].clave + '.jpg',
-                  descuento: encontrado.respuesta[i].descuento,
-                  entregado: encontrado.respuesta[i].entregado,
-                };
-
-              }
-
-              this.encontrado.push(datos);
-              this.encontrado.sort((a, b) => {
-                if (a.precio < b.precio) {
-                  return 1;
-                }
-
-                if (a.precio > b.precio) {
-                  return -1;
-                }
-
-                return 0;
-              });
-            });
-          // });
-        }
+        this.encontrado = encontrado.respuesta;
         this.buscandoBol = false;
         this.errorBol = false;
         this.encontradoBol = true;

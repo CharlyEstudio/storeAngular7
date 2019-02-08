@@ -83,7 +83,8 @@ export class RegistroComponent implements OnInit {
             cliente.respuesta[0].DIAVIS,
             cliente.respuesta[0].VENDEDORID,
             'DIST_ROLE',
-            cliente.respuesta[0].LISTA
+            cliente.respuesta[0].LISTA,
+            cliente.respuesta[0].RFC,
           );
         } else {
           usuario = new Usuario(

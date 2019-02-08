@@ -41,6 +41,7 @@ export class EdoCtaComponent implements OnInit {
   piezas: number = 0;
   error: boolean = false;
   sindato: boolean = false;
+  sindatoFacVig: boolean = false;
 
   // Primera Fecha de Movimiento Obtenido de la Primera Factura Vigente
   firstDate: string;
@@ -159,15 +160,100 @@ export class EdoCtaComponent implements OnInit {
 
             this.cargos = this.saldos + this.abonos;
             this.sindato = false;
+            this.sindatoFacVig = false;
+          } else {
+            this.saldo = [];
+            this.firstDate = this.fecha;
+            this.sindato = true;
+            this.sindatoFacVig = true;
+          }
+        });
+
+      } else {
+        this.sindatoFacVig = true;
+        const h = new Date();
+        let mes;
+
+        if (h.getMonth() < 10) {
+          mes = '0' + (h.getMonth() + 1);
+        } else {
+          mes = (h.getMonth() + 1);
+        }
+
+        const anio = h.getFullYear();
+
+        this.firstDate = anio + '-' + mes + '-01';
+        this.sindato = true;
+        this._datoService.obtenerFacturas(this._usuarioService.usuario.idFerrum, this.firstDate).subscribe( ( facturas: any ) => {
+
+          if (facturas.status) {
+            const edocta = facturas.respuesta;
+            for (let i = 0; i < edocta.length; i++) {
+              this.abonos += edocta[i].ABONO;
+
+              if (edocta[i].SALDOFINAL !== 0) {
+                this.saldos += edocta[i].SALDOFINAL;
+              }
+
+              const esFolio = (factura) => {
+                return factura.FOLIO === edocta[i].FOLIO;
+              };
+
+              if (this.edocta.find(esFolio)) {
+                let newSaldo;
+                let cargo;
+                if (edocta[i].TOTALGADO === edocta[i].TOTAL) {
+                  newSaldo = (edocta[i].TOTAL - edocta[i].ABONO) - edocta[i].SALDO;
+                } else {
+                  if (edocta[i].ABONO < 0) {
+                    newSaldo = edocta[i].SALDOFINAL + (-1 * edocta[i].ABONO);
+                  } else {
+                    newSaldo = edocta[i].SALDOFINAL;
+                  }
+                }
+
+                if (this.edocta.find(esFolio).SALDO !== 0) {
+                  cargo = this.edocta.find(esFolio).SALDO;
+                } else {
+                  if (edocta[i].ABONO < 0) {
+                    cargo = 0;
+                  } else {
+                    cargo = edocta[i].CARGO;
+                  }
+                }
+
+                const nuevo = [
+                  {
+                    'DOCID': edocta[i].DOCID,
+                    'FECHA': '',
+                    'FECHAPAG': edocta[i].FECHAPAG,
+                    'FOLIO': '',
+                    'SALDO': newSaldo,
+                    'CARGO': cargo,
+                    'ABONO': edocta[i].ABONO,
+                    'RECIBO': edocta[i].RECIBO,
+                    'TIPO': edocta[i].TIPO,
+                    'FP': edocta[i].FP,
+                    'NOTA': edocta[i].NOTA,
+                    'TOTAL': edocta[i].TOTAL,
+                    'TOTALPAGADO': edocta[i].TOTALPAGADO,
+                    'SALDOFINAL': edocta[i].SALDOFINAL
+                  }
+                ];
+                this.edocta.push(nuevo[0]);
+              } else {
+                this.edocta.push(edocta[i]);
+              }
+            }
+
+            this.cargos = this.saldos + this.abonos;
+            this.sindato = false;
           } else {
             this.saldo = [];
             this.firstDate = this.fecha;
             this.sindato = true;
           }
         });
-
-      } else {
-        this.firstDate = 'nada';
       }
     });
   }

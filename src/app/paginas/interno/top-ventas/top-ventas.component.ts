@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ɵConsole } from '@angular/core';
 import { Router } from '@angular/router';
 
 // Modelos
@@ -65,44 +65,7 @@ export class TopVentasComponent implements OnInit {
   obtenerTopTen() {
     this._productoService.obtenerTopTen(this.numero, this.inicio, this.final, this.precio).subscribe((top: any) => {
       if (top.status) {
-        for (let i = 0; i < top.respuesta.length; i++) {
-          this._productoService.obtenerImagenes(top.respuesta[i].CODIGO).subscribe((imagen: any) => {
-            if (imagen.status) {
-              let photo;
-
-              if (imagen.status) {
-                photo = imagen.respuesta[0].imagen;
-              } else {
-                photo = 'product.png';
-              }
-
-              let datos;
-
-              datos = {
-                articuloid: top.respuesta[i].DESARTID,
-                codigo: top.respuesta[i].CODIGO,
-                clave: top.respuesta[i].CLAVE,
-                nombre: top.respuesta[i].DESCRIPCIO,
-                entregado: top.respuesta[i].ENTREGADO,
-                precio: top.respuesta[i].PRECIO,
-                img: PATH_LINK + '/assets/img_products/' + photo
-              };
-
-              this.topTen.push(datos);
-            }
-          });
-        }
-        this.topTen.sort((a, b) => {
-          if (a.entregado < b.entregado) {
-            return 1;
-          }
-
-          if (a.entregado > b.entregado) {
-            return -1;
-          }
-
-          return 0;
-        });
+        this.topTen = top.respuesta;
         this.sindato = false;
       } else {
         this.sindato = true;

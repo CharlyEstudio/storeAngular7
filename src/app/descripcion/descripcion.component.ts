@@ -86,46 +86,29 @@ export class DescripcionComponent implements OnInit {
 
   obtenerProducto(id: any, precio: number) {
     this._productoServices.obtenerDescripcion(id, precio).subscribe((producto: any) => {
-      this.dato = producto.respuesta;
-      this.producto = producto.respuesta[0];
-      this.descripcion = producto.respuesta[0].descripcion;
-      this.clave = producto.respuesta[0].clave;
-      this.codigo = producto.respuesta[0].codigo;
-      this.articuloid = producto.respuesta[0].articuloid;
-      this.precio = producto.respuesta[0].precio;
-      this.precioNeto = producto.respuesta[0].precioneto;
-      this.desc = producto.respuesta[0].descuento;
+      if (producto.status) {
+        this.dato = producto.respuesta;
+        this.producto = producto.respuesta[0];
+        this.descripcion = producto.respuesta[0].descripcion;
+        this.clave = producto.respuesta[0].clave;
+        this.codigo = producto.respuesta[0].codigo;
+        this.articuloid = producto.respuesta[0].articuloid;
+        this.precio = producto.respuesta[0].precio;
+        this.precioNeto = producto.respuesta[0].precioneto;
+        this.desc = producto.respuesta[0].descuento;
+        this.marca = producto.respuesta[0].marca;
+        this.imagen = producto.respuesta[0].imagen;
+        this.precioAumentado = this.precioNeto;
 
-      this._productoServices.obtenerMarca(producto.respuesta[0].articuloid).subscribe((marca: any) => {
-        if (marca.status) {
-          this.marca = marca.respuesta[0].marca;
-        } else {
-          this.marca = 'Sin Marca';
+        if (producto.respuesta[0].descuento > 0) {
+          this.descuentoBol = true;
         }
-      });
 
-      this.precioAumentado = this.precioNeto;
-
-      if (producto.respuesta[0].descuento > 0) {
-        this.descuentoBol = true;
+        this._productoServices.obtenerUnidades(id).subscribe((unidades: any) => {
+          this.unidades = unidades.respuesta;
+          this.cantidad = unidades.respuesta[0].entero;
+        });
       }
-
-      this._productoServices.obtenerImagenes(this.codigo).subscribe((imagen: any) => {
-        let image;
-
-        if (imagen.status) {
-          image = imagen.respuesta[0].imagen;
-        } else {
-          image = 'product.png';
-        }
-
-        this.imagen = PATH_LINK + '/assets/img_products/' + image;
-      });
-
-      this._productoServices.obtenerUnidades(id).subscribe((unidades: any) => {
-        this.unidades = unidades.respuesta;
-        this.cantidad = unidades.respuesta[0].entero;
-      });
     });
   }
 

@@ -57,70 +57,7 @@ export class VentaDiaComponent implements OnInit {
   obtenerEstrellas() {
     this._productosServices.obtenerMejoresVentasDia(this.precio).subscribe( (mejores: any) => {
       if (mejores.status) {
-        for (let i = 0; i < mejores.respuesta.length; i++) {
-          this._productosServices.obtenerImagenes(mejores.respuesta[i].codigo).subscribe((imagenes: any) => {
-            let image;
-
-            if (imagenes.status) {
-              image = imagenes.respuesta[0].imagen;
-            } else {
-              image = 'product.png';
-            }
-
-            this._productosServices.obtenerMarca(mejores.respuesta[i].articuloid).subscribe((marca: any) => {
-              let datos: Producto;
-
-              if (marca.status) {
-
-                datos = {
-                  articuloid: mejores.respuesta[i].articuloid,
-                  descripcion: mejores.respuesta[i].descripcion,
-                  clave: mejores.respuesta[i].clave,
-                  codigo: mejores.respuesta[i].codigo,
-                  marca: marca.respuesta[0].marca,
-                  cantidad: 1,
-                  precioneto: mejores.respuesta[i].precioneto,
-                  iva: mejores.respuesta[i].iva,
-                  precio: (mejores.respuesta[i].precio - (mejores.respuesta[i].precio * mejores.respuesta[i].descuento)),
-                  precioAumentado: mejores.respuesta[i].precio,
-                  img: PATH_LINK + '/assets/img_products/' + image,
-                  descuento: mejores.respuesta[i].descuento,
-                  entregado: mejores.respuesta[i].entregado,
-                };
-              } else {
-                datos = {
-                  articuloid: mejores.respuesta[i].articuloid,
-                  descripcion: mejores.respuesta[i].descripcion,
-                  clave: mejores.respuesta[i].clave,
-                  codigo: mejores.respuesta[i].codigo,
-                  marca: 'Sin Marca',
-                  cantidad: 1,
-                  precioneto: mejores.respuesta[i].precioneto,
-                  iva: mejores.respuesta[i].iva,
-                  precio: (mejores.respuesta[i].precio - (mejores.respuesta[i].precio * mejores.respuesta[i].descuento)),
-                  precioAumentado: mejores.respuesta[i].precio,
-                  img: PATH_LINK + '/assets/img_products/' + image,
-                  descuento: mejores.respuesta[i].descuento,
-                  entregado: mejores.respuesta[i].entregado,
-                };
-              }
-
-              this.mejores.push(datos);
-
-                this.mejores.sort((a, b) => {
-                  if (a.precio < b.precio) {
-                    return 1;
-                  }
-
-                  if (a.precio > b.precio) {
-                    return -1;
-                  }
-
-                  return 0;
-                });
-            });
-          });
-        }
+        this.mejores = mejores.respuesta;
       }
     });
   }

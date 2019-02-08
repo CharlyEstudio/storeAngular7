@@ -11,6 +11,7 @@ export class Usuario {
         public perid?: string,
         public rol?: string,
         public precio?: number,
+        public rfc?: string,
         public img?: string,
         public activo?: string,
         public _id?: string
