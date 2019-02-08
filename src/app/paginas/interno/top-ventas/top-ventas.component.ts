@@ -21,6 +21,7 @@ export class TopVentasComponent implements OnInit {
   numero: string;
   inicio: string;
   final: string;
+  sindato: boolean = false;
 
   topTen: any[] = [];
 
@@ -91,18 +92,21 @@ export class TopVentasComponent implements OnInit {
             }
           });
         }
+        this.topTen.sort((a, b) => {
+          if (a.entregado < b.entregado) {
+            return 1;
+          }
+
+          if (a.entregado > b.entregado) {
+            return -1;
+          }
+
+          return 0;
+        });
+        this.sindato = false;
+      } else {
+        this.sindato = true;
       }
-      this.topTen.sort((a, b) => {
-        if (a.entregado < b.entregado) {
-          return 1;
-        }
-
-        if (a.entregado > b.entregado) {
-          return -1;
-        }
-
-        return 0;
-      });
     });
   }
 

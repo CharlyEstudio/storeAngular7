@@ -325,4 +325,10 @@ export class DatosService {
 
     return this.http.get(url);
   }
+
+  obtenerProductos(factura: any) {
+    const url = LINK + '/cobertura/productos/factura/' + factura;
+
+    return this.http.get(url);
+  }
 }

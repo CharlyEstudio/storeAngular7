@@ -23,6 +23,7 @@ export class FacturasComponent implements OnInit {
   serie: string;
   fechaFactura: string;
   importe: number;
+  sindato: boolean = false;
 
   doc: any;
   xml: any;
@@ -69,6 +70,9 @@ export class FacturasComponent implements OnInit {
     this._datoService.obtenerFacturasMes(this._usuarioService.usuario.idFerrum, this.fechaFinal, this.fecha).subscribe((saldo: any) => {
       if (saldo.status) {
         this.saldo = saldo.respuesta;
+        this.sindato = false;
+      } else {
+        this.sindato = true;
       }
     });
   }

@@ -1,4 +1,4 @@
-<div class="alert alert-success mt-5 animated fadeIn pt-5 pb-5" role="start" *ngIf="buscandoBol">
+<div class="alert alert-success mt-5 animated fadeIn pt-5 pb-5" role="start" *ngIf="encontrado.length === 0">
 
     <h4 class="alert-heading">Buscando <b>{{ buscando }}</b></h4>
 
@@ -18,7 +18,7 @@
 
 </div>
 
-<div class="alert alert-danger mt-5 animated fadeIn pt-5 pb-5" role="start" *ngIf="errorBol">
+<div class="alert alert-danger mt-5 animated fadeIn pt-5 pb-5" role="start" *ngIf="errorBol && encontrado.length === 0">
 
     <h4 class="alert-heading">No se encontro <b>{{ buscando }}</b></h4>
 
@@ -36,7 +36,7 @@
 
     <div class="col-lg-10 col-md-6 col-sm-12">
 
-        <nav class="breadcrumb bg-transparent" *ngIf="encontradoBol">
+        <nav class="breadcrumb bg-transparent" *ngIf="encontrado.length > 0">
 
             <a class="breadcrumb-item" routerLink="/inicio">Inicio</a>
 
@@ -68,7 +68,7 @@
 
 </div>
 
-<div class="row mas-vendidos pb-5" *ngIf="encontradoBol">
+<div class="row mas-vendidos pb-5" *ngIf="encontrado.length > 0">
 
     <div class="col-12 col-lg-3 col-md-6 col-sm-12 pt-2" *ngFor="let enc of encontrado">
 

@@ -1,4 +1,22 @@
-<div class="row mas-vendidos">
+<div class="row mas-vendidos" *ngIf="mejores.length === 0">
+
+    <div class="col-12 col-lg-3 col-md-6 col-sm-12 pt-2" *ngFor="let pre of precarga">
+
+        <div class="card">
+
+            <div class="card-body text-center">
+
+                <img src="assets/images/precarga/cart-loading.gif" class="img-fluig" width="250">
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="row mas-vendidos" *ngIf="mejores.length > 0">
 
     <div class="col-12 col-lg-3 col-md-6 col-sm-12 pt-2" *ngFor="let mejor of mejores">
 

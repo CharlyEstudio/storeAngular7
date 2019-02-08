@@ -27,13 +27,14 @@ export class DescripcionComponent implements OnInit {
   precioUser: number = 3;
 
   // Producto
+  dato: any[] = [];
   producto: Producto[] = [];
   descripcion: any;
   clave: any;
   codigo: any;
   marca: any;
   articuloid: any;
-  imagen = PATH_LINK + '/assets/img_products/product.png';
+  imagen = 'assets/images/precarga/product_loader.gif';
   precio: number;
   precioNeto: number;
   desc: number;
@@ -85,6 +86,7 @@ export class DescripcionComponent implements OnInit {
 
   obtenerProducto(id: any, precio: number) {
     this._productoServices.obtenerDescripcion(id, precio).subscribe((producto: any) => {
+      this.dato = producto.respuesta;
       this.producto = producto.respuesta[0];
       this.descripcion = producto.respuesta[0].descripcion;
       this.clave = producto.respuesta[0].clave;

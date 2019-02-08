@@ -26,7 +26,7 @@ export class AccesoComponent implements OnInit {
     public _usuarioService: UsuarioServicesService,
     private _datosService: DatosService
   ) {
-    this.email = localStorage.getItem('email') || '';
+    this.email = localStorage.getItem('emailStore') || '';
 
     if ( this.email.length > 1) {
       this.recuerdame = true;

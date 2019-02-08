@@ -68,7 +68,6 @@ export class UsuarioServicesService {
   }
 
   guardarStorage(id: string, token: string, usuario: Usuario, menu: any, rol: any, vigente: any) {
-    console.log(vigente);
     localStorage.setItem( 'id', id );
     localStorage.setItem( 'token', token );
     localStorage.setItem( 'usuario', JSON.stringify( usuario ));
@@ -127,9 +126,9 @@ export class UsuarioServicesService {
 
   login( usuario: Usuario, recordar: boolean = false ) {
     if ( recordar ) {
-      localStorage.setItem( 'email', usuario.email );
+      localStorage.setItem( 'emailStore', usuario.email );
     } else {
-      localStorage.removeItem( 'email' );
+      localStorage.removeItem( 'emailStore' );
     }
 
     const url = LINK + '/clientes/login';

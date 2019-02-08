@@ -21,6 +21,7 @@ export class BackOrderComponent implements OnInit {
   inicio: string;
   final: string;
   numero: string;
+  sindato: boolean = false;
 
   backOrder: any[] = [];
 
@@ -108,6 +109,9 @@ export class BackOrderComponent implements OnInit {
             });
           });
         }
+        this.sindato = false;
+      } else {
+        this.sindato = true;
       }
     });
   }

@@ -18,6 +18,7 @@ import { ProductosService, UsuarioServicesService, WebsocketService } from 'src/
 export class VentaDiaComponent implements OnInit {
 
   mejores: any[] = [];
+  precarga: any[] = [];
   public precio: number = 3;
 
   constructor(
@@ -26,6 +27,7 @@ export class VentaDiaComponent implements OnInit {
     private router: Router,
     private _webSocket: WebsocketService
   ) {
+    this.precarga = Array(8).fill(4);
     if (this._usuarioService.usuario !== null) {
       this.precio = this._usuarioService.usuario.precio;
     }

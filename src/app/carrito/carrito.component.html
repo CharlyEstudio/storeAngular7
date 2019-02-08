@@ -28,6 +28,122 @@
 
         <div class="table-responsive">
 
+            <table class="table table-borderless" *ngIf="carrito.length === 0">
+
+                <thead>
+
+                    <tr>
+
+                        <th scope="col" colspan="2" class="text-left">Descripción</th>
+
+                        <th scope="col" class="text-center">Cantidad</th>
+
+                        <th scope="col" class="text-center">Final</th>
+
+                        <th scope="col" class="text-center">Eliminar</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr>
+
+                        <td class="text-center">
+
+                            <img src="assets/images/precarga/product_loader.gif" class="img-fluig rounded" width="200">
+
+                        </td>
+
+                        <td class="text-left">
+
+                            <h4 class="font-weight-bold">Producto</h4>
+
+                            <h6>Clave: <b>000-00</b> Código: <b>00000</b></h6>
+
+                            <h3 class="text-muted">
+
+                                <span class="badge badge-danger">Sin Marca</span>
+
+                            </h3>
+
+                            <h6>
+
+                                <small>Artículo 00000/000-00-00000</small>
+
+                            </h6>
+
+                            <h3>{{ 00000 | currency }}</h3>
+
+                            <p>Este producto</p>
+
+                        </td>
+
+                        <td class="text-center">
+
+                            <input #input type="number" class="form-control text-center" min="1" name="cantidad" value="1" readonly="true">
+
+                        </td>
+
+                        <td class="text-center font-weight-bold">{{ 0000 | currency }}</td>
+
+                        <td class="text-center">
+
+                            <button class="btn btn-danger disabled" type="button">
+
+                                Eliminar
+            
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td colspan="2" rowspan="3" style="vertical-align: middle; text-align: center">
+
+                            <button type="button" class="btn btn-primary disabled">RELIZAR PEDIDO</button>
+
+                        </td>
+
+                        <td class="text-right font-weight-bold text-uppercase">Sub-Total</td>
+
+                        <td class="text-right font-weight-bold">{{ 0000 | currency }}</td>
+
+                        <td></td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td class="text-right font-weight-bold text-uppercase" style="border-top-color: transparent!important;">Iva</td>
+
+                        <td class="text-right font-weight-bold" style="border-top-color: transparent!important;">{{ 0000 | currency }}</td>
+
+                        <td style="border-top-color: transparent!important;"></td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td class="text-right font-weight-bold text-uppercase" style="border-top-color: transparent!important;">Total</td>
+
+                        <td class="text-right font-weight-bold" style="border-top-color: transparent!important;">{{ 0000 | currency }}</td>
+
+                        <td style="border-top-color: transparent!important;"></td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        <div class="table-responsive" *ngIf="carrito.length > 0">
+
             <table class="table table-borderless">
 
                 <thead>
@@ -134,8 +250,6 @@
 
                     <tr>
 
-                        <!-- <td colspan="2"></td> -->
-
                         <td class="text-right font-weight-bold text-uppercase" style="border-top-color: transparent!important;">Iva</td>
 
                         <td class="text-right font-weight-bold" style="border-top-color: transparent!important;">{{ impuesto | currency }}</td>
@@ -145,8 +259,6 @@
                     </tr>
 
                     <tr>
-
-                        <!-- <td colspan="2"></td> -->
 
                         <td class="text-right font-weight-bold text-uppercase" style="border-top-color: transparent!important;">Total</td>
 

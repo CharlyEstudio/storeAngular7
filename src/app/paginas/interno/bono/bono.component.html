@@ -140,7 +140,7 @@
 
                 <h2 class="text-uppercase">
 
-                    <span class="font-weight-bold" [ngClass]="{'text-success': compras >= 20000, 'text-danger': compras < 20000}">mxn {{compras | currency}}</span>
+                    <span class="font-weight-bold" [ngClass]="{'text-success': compras >= 15000, 'text-danger': compras < 15000}">mxn {{compras | currency}}</span>
 
                 </h2>
 
@@ -150,7 +150,7 @@
 
                 <blockquote class="blockquote" style="height: 100%!important;">
 
-                    <p class="mb-0">Sus compras trimestrales debe ser mayor o igual a <span class="font-weight-bold text-blue">$ 20,000.00</span> pesos.</p>
+                    <p class="mb-0">Sus compras trimestrales debe ser mayor o igual a <span class="font-weight-bold text-blue">$ 15,000.00</span> pesos.</p>
 
                     <footer class="blockquote-footer">No entran los códigos que inicien con <cite title="Source Title">8/5/6</cite>, excepto de la marca <b>Klintek</b>.</footer>
 
@@ -164,17 +164,19 @@
 
     <div class="col-lg-6 col-md-6 col-sm-12 text-center pt-3 pb-5 centro">
 
-        <div class="jumbotron" style="margin-bottom: 0px!important" [ngClass]="{'bg-danger': compras < 20000, 'bg-success': compras >= 20000}">
+        <div class="jumbotron" style="margin-bottom: 0px!important" [ngClass]="{'bg-danger': compras < 15000 && compras < 5000, 'bg-info': compras >= 7500, 'bg-success': compras >= 15000}">
 
             <h1 class="text-white">
 
-                <i class="fa fa-exclamation-circle " aria-hidden="true" *ngIf="compras < 20000"></i>
+                <i class="fa fa-exclamation-circle " aria-hidden="true" *ngIf="compras < 15000 || compras >= 7500"></i>
 
-                <span *ngIf="compras < 20000">No Pasa</span>
+                <span *ngIf="compras < 15000 && compras < 5000">No Pasa</span>
 
-                <i class="mdi mdi-check-circle" aria-hidden="true" *ngIf="compras >= 20000"></i>
+                <span *ngIf="compras >= 5000">Posible</span>
 
-                <span *ngIf="compras >= 20000">Correcto</span>
+                <i class="mdi mdi-check-circle" aria-hidden="true" *ngIf="compras >= 15000"></i>
+
+                <span *ngIf="compras >= 15000">Correcto</span>
 
             </h1>
 
@@ -318,15 +320,15 @@
 
         <div class="jumbotron" [ngClass]="{'bg-danger': pasaComision === false, 'bg-success': pasaComision === true}">
 
-            <h1 class="text-white text-center" *ngIf="pasaComision">
+            <h1 class="text-white text-center text-uppercase" *ngIf="pasaComision">
 
                 <span>!Felicidades está calificando para bono!</span>
 
             </h1>
 
-            <h1 class="text-white text-center" *ngIf="pasaComision === false">
+            <h1 class="text-white text-center text-uppercase" *ngIf="pasaComision === false">
 
-                <span>No está calificando para bono.</span>
+                <span>No califica para bono.</span>
 
             </h1>
 

@@ -21,12 +21,26 @@ export class EdoCtaComponent implements OnInit {
   edocta: any[] = [];
   saldoTotal: number = 0;
   saldoVencido: number = 0;
+  saldos: number = 0;
   proximoVenc: number;
   diasProximoVenc: number;
 
   preSaldo: number = 0;
   cargos: number = 0;
   abonos: number = 0;
+
+  // Datos Modal
+  factura: number = 0;
+  fechaCreada: any = '';
+  importeInicial: number = 0;
+  saldoFactura: number = 0;
+  pedido: any[] = [];
+  subtotal: number = 0;
+  iva: number = 0;
+  total: number = 0;
+  piezas: number = 0;
+  error: boolean = false;
+  sindato: boolean = false;
 
   // Primera Fecha de Movimiento Obtenido de la Primera Factura Vigente
   firstDate: string;
@@ -81,89 +95,138 @@ export class EdoCtaComponent implements OnInit {
           this.saldoTotal += saldo.respuesta[m].saldo;
         }
 
-        this._datoService.obtenerFacturas(this._usuarioService.usuario.idFerrum, this.firstDate)
-            .subscribe( ( edocta: any ) => {
+        this._datoService.obtenerFacturas(this._usuarioService.usuario.idFerrum, this.firstDate).subscribe( ( facturas: any ) => {
 
-              if (edocta.status) {
+          if (facturas.status) {
+            const edocta = facturas.respuesta;
+            for (let i = 0; i < edocta.length; i++) {
+              this.abonos += edocta[i].ABONO;
 
-                for (let i = 0; i < edocta.respuesta.length; i++) {
-
-                  this.cargos += edocta.respuesta[i].CARGO;
-
-                  this._datoService.obtenerMovimiento(edocta.respuesta[i].DOCID)
-                    .subscribe( ( resp: any ) => {
-
-                      if (resp.status) {
-
-                        if (edocta.respuesta[i].DOCID === resp.respuesta[0].DOCID) {
-
-                          for (let k = 0; k < resp.respuesta.length; k++) {
-
-                            if (edocta.respuesta[i].SALDOFINAL > 0) {
-
-                              if (this.preSaldo === 0) {
-                                this.preSaldo = edocta.respuesta[i].SALDO - resp.respuesta[k].PAGADO;
-                              } else {
-                                this.preSaldo = this.preSaldo - resp.respuesta[k].PAGADO;
-                              }
-
-                            }
-
-                            const nuevo = [
-                              {
-                                'DOCID': edocta.respuesta[i].DOCID,
-                                'FECHA': resp.respuesta[k].FECHAAPLICADA,
-                                'FOLIO': edocta.respuesta[i].FOLIO,
-                                'SALDOFINAL': edocta.respuesta[i].SALDOFINAL,
-                                'CARGO': '',
-                                'ABONO': resp.respuesta[k].PAGADO,
-                                'SALDO' : this.preSaldo,
-                                'RECIBO': resp.respuesta[k].RECIBO,
-                                'TIPO': resp.respuesta[k].FORMAPAGO,
-                                'FP': resp.respuesta[k].FP,
-                                'NOTA': resp.respuesta[k].NOTA,
-                                'TOTALPAGADO': edocta.respuesta[i].TOTALPAGADO
-                              }
-                            ];
-
-                            this.abonos += resp.respuesta[k].PAGADO;
-
-                            if (k === 0) {
-
-                              this.edocta.push(edocta.respuesta[i]);
-
-                            }
-
-                            this.edocta.push(nuevo[0]);
-
-                          }
-
-                          this.preSaldo = 0;
-
-                        }
-
-                      } else {
-
-                        this.edocta.push(edocta.respuesta[i]);
-
-                      }
-
-                    });
-
-                }
-
+              if (edocta[i].SALDOFINAL !== 0) {
+                this.saldos += edocta[i].SALDOFINAL;
               }
 
-            });
+              const esFolio = (factura) => {
+                return factura.FOLIO === edocta[i].FOLIO;
+              };
+
+              if (this.edocta.find(esFolio)) {
+                let newSaldo;
+                let cargo;
+                if (edocta[i].TOTALGADO === edocta[i].TOTAL) {
+                  newSaldo = (edocta[i].TOTAL - edocta[i].ABONO) - edocta[i].SALDO;
+                } else {
+                  if (edocta[i].ABONO < 0) {
+                    newSaldo = edocta[i].SALDOFINAL + (-1 * edocta[i].ABONO);
+                  } else {
+                    newSaldo = edocta[i].SALDOFINAL;
+                  }
+                }
+
+                if (this.edocta.find(esFolio).SALDO !== 0) {
+                  cargo = this.edocta.find(esFolio).SALDO;
+                } else {
+                  if (edocta[i].ABONO < 0) {
+                    cargo = 0;
+                  } else {
+                    cargo = edocta[i].CARGO;
+                  }
+                }
+
+                const nuevo = [
+                  {
+                    'DOCID': edocta[i].DOCID,
+                    'FECHA': '',
+                    'FECHAPAG': edocta[i].FECHAPAG,
+                    'FOLIO': '',
+                    'SALDO': newSaldo,
+                    'CARGO': cargo,
+                    'ABONO': edocta[i].ABONO,
+                    'RECIBO': edocta[i].RECIBO,
+                    'TIPO': edocta[i].TIPO,
+                    'FP': edocta[i].FP,
+                    'NOTA': edocta[i].NOTA,
+                    'TOTAL': edocta[i].TOTAL,
+                    'TOTALPAGADO': edocta[i].TOTALPAGADO,
+                    'SALDOFINAL': edocta[i].SALDOFINAL
+                  }
+                ];
+                this.edocta.push(nuevo[0]);
+              } else {
+                this.edocta.push(edocta[i]);
+              }
+            }
+
+            this.cargos = this.saldos + this.abonos;
+            this.sindato = false;
+          } else {
+            this.saldo = [];
+            this.firstDate = this.fecha;
+            this.sindato = true;
+          }
+        });
+
       } else {
-        this.saldo = [];
-        this.firstDate = '00-00-0000';
+        this.firstDate = 'nada';
       }
     });
   }
 
-  modalFolio(saldo: any, numero: any) {
-    console.log(saldo, numero);
+  modalFolio(factura: any, numero: any) {
+    this.factura = 0;
+    this.fechaCreada = '';
+    this.importeInicial = 0;
+    this.saldoFactura = 0;
+    this.subtotal = 0;
+    this.iva = 0;
+    this.total = 0;
+    this.piezas = 0;
+    this.pedido = [];
+
+    if (numero === 0) {
+      this.factura = factura.folio;
+      this.fechaCreada = factura.feccap;
+      this.importeInicial = factura.importe;
+      this.saldoFactura = factura.saldo;
+
+      this._datoService.obtenerProductos(this.factura).subscribe((pedido: any) => {
+        if (pedido.status) {
+          this.pedido = pedido.respuesta;
+          for (let i = 0; i < this.pedido.length; i++) {
+              this.subtotal += this.pedido[i].SUBTOTAL;
+              this.iva += this.pedido[i].IVA;
+              this.total += this.pedido[i].TOTAL;
+              this.piezas += this.pedido[i].UNIDAD;
+          }
+          this.error = false;
+        } else {
+          this.error = true;
+        }
+      });
+    } else if (numero === 1) {
+      this.error = true;
+      console.log(factura, numero);
+    } else if (numero === 2) {
+      this.factura = factura.FOLIO;
+      this.fechaCreada = factura.FECHA;
+      this.importeInicial = factura.TOTAL;
+      this.saldoFactura = factura.SALDO;
+
+      this._datoService.obtenerProductos(this.factura).subscribe((pedido: any) => {
+        if (pedido.status) {
+          this.pedido = pedido.respuesta;
+          for (let i = 0; i < this.pedido.length; i++) {
+              this.subtotal += this.pedido[i].SUBTOTAL;
+              this.iva += this.pedido[i].IVA;
+              this.total += this.pedido[i].TOTAL;
+              this.piezas += this.pedido[i].UNIDAD;
+          }
+          this.error = false;
+        } else {
+          this.error = true;
+        }
+      });
+    }
   }
 
 }
