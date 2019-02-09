@@ -1,4 +1,4 @@
-<div class="table-responsive" *ngIf="saldo.length > 0">
+<div class="table-responsive" *ngIf="saldo.length > 0" style="height: 500px!important">
 
     <h3>Facturas del Mes</h3>
 
@@ -67,13 +67,13 @@
 
 <div class="row">
 
-    <div class="col-lg-12 col-md-12 col-sm-12 alert alert-info" *ngIf="saldo.length === 0 && sindato">
+    <div class="col-lg-12 col-md-12 col-sm-12 alert alert-info" *ngIf="saldo.length === 0 && sindato" style="height: 500px!important">
 
         <span>Sin facturas a mostrar.</span>
 
     </div>
 
-    <div class="col-lg-12 col-md-12 col-sm-12 alert alert-success" *ngIf="saldo.length === 0 && !sindato">
+    <div class="col-lg-12 col-md-12 col-sm-12 alert alert-success" *ngIf="saldo.length === 0 && !sindato" style="height: 500px!important">
 
         <span>Obteniendo tus facturas del mes.</span>
 
@@ -109,7 +109,15 @@
 
             <div class="modal-footer">
 
-                <button class="btn btn-success" (click)="exportar(xml, serie, factura, 'xml')" *ngIf="ext === 'xml'">Descargar</button>
+                <input type="email" class="form-control" [(ngModel)]="email" name="email" placeholder="Enviar xml a email" *ngIf="ext === 'xml'">
+
+                <button class="btn btn-success" (click)="enviarEmail(xml, serie, factura)" *ngIf="ext === 'xml'">
+                    
+                    <i class="mdi mdi-send"></i> Enviar
+                
+                </button>
+
+                <button class="btn btn-success" (click)="exportar(email, xml, serie, factura, 'xml')" *ngIf="ext === 'xml'">Descargar</button>
 
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 

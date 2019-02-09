@@ -4,7 +4,10 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
 // Config
-import { LINK } from 'src/app/config/config';
+import { LINK, PATH_LINK } from 'src/app/config/config';
+
+// Modelos
+import { Usuario } from 'src/app/modelos/usuarios.model';
 
 @Injectable({
   providedIn: 'root'
@@ -328,6 +331,12 @@ export class DatosService {
 
   obtenerProductos(factura: any) {
     const url = LINK + '/cobertura/productos/factura/' + factura;
+
+    return this.http.get(url);
+  }
+
+  enviarEmailXml(email: any, xml: any, serie: any, factura: any, cliente: Usuario) {
+    const url = PATH_LINK + '/api/clientes.php?opcion=7&email=' + email + '&xml=' + xml + '&factura=' + serie + '-' + factura + '&cliente=' + JSON.stringify(cliente);
 
     return this.http.get(url);
   }

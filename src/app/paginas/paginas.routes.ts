@@ -48,7 +48,7 @@ const pageRoutes: Routes = [
         path: 'dist',
         canActivate: [LoginGuard],
         component: DistComponent,
-        data: { titulo: 'Inicio', name: 'description' }
+        data: { titulo: 'Mi Escritorio', name: 'description' }
     },
     {
         path: 'edo-cta',
@@ -60,13 +60,13 @@ const pageRoutes: Routes = [
         path: 'facturas',
         canActivate: [LoginGuard],
         component: FacturasComponent,
-        data: { titulo: 'Facturas', name: 'description' }
+        data: { titulo: 'Facturas del Mes', name: 'description' }
     },
     {
         path: 'bono',
         canActivate: [LoginGuard],
         component: BonoComponent,
-        data: { titulo: 'Bono', name: 'description' }
+        data: { titulo: 'Bono Trmiestral', name: 'description' }
     },
     {
         path: 'back-order',

@@ -2,7 +2,7 @@
 
 <p *ngIf="backOrder.length > 0">Solícita tus productos faltantes.</p>
 
-<div class="row mas-vendidos" *ngIf="backOrder.length > 0">
+<div class="row mas-vendidos" *ngIf="backOrder.length > 0" style="height: 500px!important">
 
     <div class="col-12 col-lg-3 col-md-6 col-sm-12 pt-2" *ngFor="let back of backOrder">
 
@@ -70,13 +70,13 @@
 
 <div class="row" *ngIf="backOrder.length === 0">
 
-    <div class="col-lg-12 col-md-12 col-sm-12 alert alert-info" *ngIf="backOrder.length === 0 && sindato">
+    <div class="col-lg-12 col-md-12 col-sm-12 alert alert-info" *ngIf="backOrder.length === 0 && sindato" style="height: 500px!important">
 
         <span>No tienes Back Order en este mes.</span>
 
     </div>
 
-    <div class="col-lg-12 col-md-12 col-sm-12 alert alert-success" *ngIf="backOrder.length === 0 && !sindato">
+    <div class="col-lg-12 col-md-12 col-sm-12 alert alert-success" *ngIf="backOrder.length === 0 && !sindato" style="height: 500px!important">
 
         <span>Obteniendo tu BackOrder del mes.</span>
 

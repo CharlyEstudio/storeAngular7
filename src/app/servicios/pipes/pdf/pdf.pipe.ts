@@ -15,7 +15,6 @@ export class PdfPipe implements PipeTransform {
 
   transform(pdf: string, tipo: string = 'pdf'): any {
     let url;
-    console.log(pdf);
 
     url = LINK + '/pdf';
 

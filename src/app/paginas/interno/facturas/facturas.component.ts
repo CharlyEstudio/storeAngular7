@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
+// Alertas
+import * as _swal from 'sweetalert';
+import { SweetAlert } from 'sweetalert/typings/core'; // Importante para que funcione el sweet alert
+const swal: SweetAlert = _swal as any;
+
 // Servicios
 import { UsuarioServicesService, DatosService, ExportarService } from 'src/app/servicios/servicios.index';
 
@@ -27,8 +32,10 @@ export class FacturasComponent implements OnInit {
 
   doc: any;
   xml: any;
+  xmlFile: any;
   pdf: any;
   ext: string;
+  email: string;
 
   constructor(
     public sanitizer: DomSanitizer,
@@ -87,13 +94,19 @@ export class FacturasComponent implements OnInit {
     this.fechaFactura = factura.FECHA;
     this.importe = factura.TOTAL;
 
+    let carpeta;
+    let file;
+
     switch (ext) {
       case 'pdf':
-        const carpeta = String(arregloFecha[0] + arregloFecha[1]);
-        const file = String(arregloFecha[0] + arregloFecha[1] + dia[0] + '-' + factura.SERIE.toLowerCase() + factura.FOLIO + '.' + ext);
+        carpeta = String(arregloFecha[0] + arregloFecha[1]);
+        file = String(arregloFecha[0] + arregloFecha[1] + dia[0] + '-' + factura.SERIE.toLowerCase() + factura.FOLIO + '.' + ext);
         this.pdf = carpeta + '/' + file;
       break;
       case 'xml':
+        carpeta = String(arregloFecha[0] + arregloFecha[1]);
+        file = String(arregloFecha[0] + arregloFecha[1] + dia[0] + '-' + factura.SERIE.toLowerCase() + factura.FOLIO + '.' + ext);
+        this.xmlFile = carpeta + '/' + file;
         this.xml = factura.XML;
       break;
     }
@@ -105,6 +118,27 @@ export class FacturasComponent implements OnInit {
       data: data
     });
     this._exportar.exportAsFile(file, fileName, tipo);
+  }
+
+  enviarEmail(xml: any, serie: any, factura: any) {
+    const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (this.email === undefined) {
+      swal('Error', 'Debe de ingresar un correo.', 'error');
+      return;
+    }
+
+    if (!re.test(this.email)) {
+      swal('Error', 'Debe de ingresar un correo valido.', 'error');
+      return;
+    }
+
+    this._datoService.enviarEmailXml(this.email, xml, serie, factura, this._usuarioService.usuario).subscribe((resp: any) => {
+      if (resp[0].status) {
+        swal('Enviado!', 'El correo fue enviado correctamente a ' + this.email, 'success');
+      } else {
+        swal('Error', 'No se pudo enviar el correo al destinatario ' + this.email, 'error');
+      }
+    });
   }
 
 }
