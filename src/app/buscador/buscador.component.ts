@@ -55,6 +55,8 @@ export class BuscadorComponent implements OnInit, OnDestroy {
 
   obtenerBusqueda(buscar: any) {
     this.encontrado = [];
+    this.errorBol = false;
+    this.buscandoBol = true;
     this._productosService.buscarProductos(buscar, this.precio).subscribe((encontrado: any) => {
       if (encontrado.status) {
         this.encontrado = encontrado.respuesta;
