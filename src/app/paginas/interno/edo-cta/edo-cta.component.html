@@ -1,455 +1,459 @@
-<div class="row">
+<div class="container">
 
-    <div class="col-lg-12 col-md-12">
+    <div class="row">
 
-        <h1>ESTADO DE CUENTA</h1>
+        <div class="col-lg-12 col-md-12">
 
-    </div>
-
-    <div class="col-lg-12 col-md-12 text-right">
-
-        <h5>FECHA DE REVISIÓN EN LIBROS:
-
-            <span class="font-weight-bold" *ngIf="firstDate === 'nada'">Sin Registro</span>
-
-            <span class="font-weight-bold" *ngIf="firstDate !== 'nada'">{{firstDate | date: 'dd-MM-yyyy'}} / {{fecha | date: 'dd-MM-yyyy'}}</span>
-
-        </h5>
-
-    </div>
-
-    <div class="col-lg-12 col-md-12 col-sm-12">
-
-        <div class="row">
-
-            <div class="col-lg-2 col-md-2 col-sm-6">
-
-                <h5 class="text-uppercase">No. de Cuenta:</h5>
-
-            </div>
-
-            <div class="col-lg-4 col-md-4 col-sm-6">
-
-                <h5 class="text-uppercase"><b>{{numero}} / {{idFerrum}}</b></h5>
-
-            </div>
-
-            <div class="col-lg-6 col-md-6"></div>
+            <h1>ESTADO DE CUENTA</h1>
 
         </div>
 
-        <div class="row">
+        <div class="col-lg-12 col-md-12 text-right">
 
-            <div class="col-lg-2 col-md-2 col-sm-6">
+            <h5>FECHA DE REVISIÓN EN LIBROS:
 
-                <h5 class="text-uppercase">Cliente:</h5>
+                <span class="font-weight-bold" *ngIf="firstDate === 'nada'">Sin Registro</span>
+
+                <span class="font-weight-bold" *ngIf="firstDate !== 'nada'">{{firstDate | date: 'dd-MM-yyyy'}} / {{fecha | date: 'dd-MM-yyyy'}}</span>
+
+            </h5>
+
+        </div>
+
+        <div class="col-lg-12 col-md-12 col-sm-12">
+
+            <div class="row">
+
+                <div class="col-lg-2 col-md-2 col-sm-6">
+
+                    <h5 class="text-uppercase">No. de Cuenta:</h5>
+
+                </div>
+
+                <div class="col-lg-4 col-md-4 col-sm-6">
+
+                    <h5 class="text-uppercase"><b>{{numero}} / {{idFerrum}}</b></h5>
+
+                </div>
+
+                <div class="col-lg-6 col-md-6"></div>
 
             </div>
 
-            <div class="col-lg-4 col-md-4 col-sm-6">
+            <div class="row">
 
-                <h5 class="text-uppercase"><b>{{nombre}}</b></h5>
+                <div class="col-lg-2 col-md-2 col-sm-6">
+
+                    <h5 class="text-uppercase">Cliente:</h5>
+
+                </div>
+
+                <div class="col-lg-4 col-md-4 col-sm-6">
+
+                    <h5 class="text-uppercase"><b>{{nombre}}</b></h5>
+
+                </div>
 
             </div>
 
         </div>
 
-    </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 text-center pt-4">
 
-    <div class="col-lg-12 col-md-12 col-sm-12 text-center pt-4">
+            <h3>INFORMACIÓN FINANCIERA</h3>
 
-        <h3>INFORMACIÓN FINANCIERA</h3>
-
-    </div>
-
-    <div class="clearfix"></div>
-
-    <hr>
-
-    <div class="col-lg-6 col-md-6 col-sm-12">
-
-        <h5>COMPORTAMIENTO</h5>
+        </div>
 
         <div class="clearfix"></div>
 
         <hr>
 
-        <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-12">
 
-            <div class="col-lg-4 col-md-4 col-sm-12">
+            <h5>COMPORTAMIENTO</h5>
 
-                <h5 class="text-uppercase">saldo actual</h5>
+            <div class="clearfix"></div>
 
-            </div>
+            <hr>
 
-            <div class="col-lg-8 col-md-8 col-sm-12 text-right">
+            <div class="row">
 
-                <h5 class="text-uppercase">
+                <div class="col-lg-4 col-md-4 col-sm-12">
 
-                    <span class="font-weight-bold">mx {{saldoTotal | currency}}</span>
-
-                </h5>
-
-            </div>
-
-            <div class="col-lg-4 col-md-4 col-sm-12">
-
-                <h5 class="text-uppercase">saldo vencido</h5>
-
-            </div>
-
-            <div class="col-lg-8 col-md-8 col-sm-12 text-right">
-
-                <h5 class="text-uppercase">
-
-                    <span class="font-weight-bold" [ngClass]="{'text-danger': saldoVencido > 0, 'text-success': saldoVencido === 0}">mxn {{saldoVencido | currency}}</span>
-
-                </h5>
-
-            </div>
-
-            <div class="col-lg-4 col-md-4 col-sm-12">
-
-                <h5 class="text-uppercase">depósitos/abonos</h5>
-
-            </div>
-
-            <div class="col-lg-8 col-md-8 col-sm-12 text-right">
-
-                <h5 class="text-uppercase">
-
-                    <span class="font-weight-bold">mxn {{abonos | currency}}</span>
-
-                </h5>
-
-            </div>
-
-            <div class="col-lg-6 col-md-6 col-sm-12">
-
-                <h5 class="text-uppercase">prox. venc./vencido</h5>
-
-            </div>
-
-            <div class="col-lg-6 col-md-6 col-sm-12 text-right">
-
-                <h5 class="text-uppercase" *ngIf="diasProximoVenc < 5">No. Fac <span class="font-weight-bold badge badge-danger">{{proximoVenc}}</span></h5>
-
-                <h5 class="text-uppercase" *ngIf="diasProximoVenc >= 5"><span class="font-weight-bold badge badge-success">Sin Vencimiento</span></h5>
-
-            </div>
-
-        </div>
-
-    </div>
-
-    <div class="col-lg-6 col-md-6 col-sm-12 centro">
-
-        <img src="http://www.ferremayoristas.com.mx/assets/img/logo-min.png" width="40%" class="img-responsive">
-
-    </div>
-
-    <div class="col-lg-12 col-md-12 col-sm-12 text-center pt-4">
-
-        <h3>DETALLE DE MOVIMIENTOS</h3>
-
-    </div>
-
-    <div class="clearfix"></div>
-
-    <hr>
-
-    <div class="alert alert-success" role="alert" *ngIf="saldo.length === 0 && !sindatoFacVig">Obteniendo Facturas Vigentes</div>
-
-    <div class="alert alert-info" role="alert" *ngIf="saldo.length === 0 && sindatoFacVig">Sin Facturas con Saldo Vigente</div>
-
-    <div class="table-responsive" *ngIf="saldo.length > 0">
-
-        <h4>FACTURAS VIGENTE</h4>
-
-        <div class="contenedorTabla">
-
-            <table class="table">
-
-                <thead>
-
-                    <tr>
-
-                        <th class="text-center">FECHA</th>
-
-                        <th class="text-center">FACTURA</th>
-
-                        <th class="text-center">IMPORTE</th>
-
-                        <th class="text-center">MOVIMIENTO</th>
-
-                        <th class="text-center">REEMBOLSO</th>
-
-                        <th class="text-center">SALDO</th>
-
-                        <th class="text-center">VENCE</th>
-
-                        <th class="text-center">DIAS POR VENCER</th>
-
-                        <th class="text-center">LIQUIDAR</th>
-
-                    </tr>
-
-                </thead>
-
-                <tbody>
-
-                    <tr *ngFor="let sal of saldo">
-
-                        <td class="text-center">{{sal.feccap | date: 'dd-MM-yyyy'}}</td>
-
-                        <td class="text-center text-w">
-
-                            <span class="mr-1" [ngClass]="{'badge badge-warning': sal.dias < 5, 'badge badge-danger': sal.dias < 0}">
-
-                              <i class="mdi mdi-information-outline text-white" style="padding: 1px 2px 1px 2px!important; font-size: 15px;" aria-hidden="true"></i>
-
-                            </span>
-
-                            <a href="#modalFolio" data-toggle="modal" (click)="modalFolio(sal , 0)">
-
-                                <b id="{{sal.folio}}">{{sal.folio}}</b>
-
-                            </a>
-
-                        </td>
-
-                        <td class="text-center">{{sal.importe | currency}}</td>
-
-                        <td class="text-center">{{sal.notacred}}</td>
-
-                        <td class="text-center">{{sal.reembolso | currency}}</td>
-
-                        <td class="text-center">{{sal.saldo | currency}}</td>
-
-                        <td class="text-center">{{sal.vence | date: 'dd-MM-yyyy'}}</td>
-
-                        <td class="text-center rod">
-
-                            <span [ngClass]="{'badge badge-warning': sal.dias < 5, 'badge badge-danger': sal.dias < 0}" style="padding: 4px!important; font-size: 15px;">{{sal.dias}}</span>
-
-                        </td>
-
-                        <td class="text-center">
-
-                            <a *ngIf="saldoVencido === 0" class="btn btn-success" href="#modalFolio" data-toggle="modal" (click)="modalFolio(sal, 1)">
-
-                                <i class="mdi mdi-credit-card-scan" aria-hidden="true"></i>
-
-                            </a>
-
-                            <a *ngIf="sal.dias < 0" class="btn btn-success" href="#modalFolio" data-toggle="modal" (click)="modalFolio(sal, 1)">
-
-                                <i class="mdi mdi-credit-card-scan" aria-hidden="true"></i>
-
-                            </a>
-
-                        </td>
-
-                    </tr>
-
-                </tbody>
-
-            </table>
-
-        </div>
-
-    </div>
-
-    <div class="clearfix"></div>
-
-    <hr>
-
-    <div class="alert alert-success" role="alert" *ngIf="edocta.length === 0 && !sindato">Obteniendo Movimientos de Facturas</div>
-
-    <div class="alert alert-info" role="alert" *ngIf="edocta.length === 0 && sindato">Sin Movimientos de Facturas</div>
-
-    <div class="table-responsive pt-3" *ngIf="edocta.length > 0">
-
-        <h4>MOVIMIENTOS DE FACTURAS VIGENTES</h4>
-
-        <div class="table-responsive">
-
-            <table class="table">
-
-                <thead>
-
-                    <tr>
-
-                        <th class="text-center">FECHAFAC</th>
-
-                        <th class="text-center">FACTURA</th>
-
-                        <th class="text-center">CARGO</th>
-
-                        <th class="text-center">FECHAMOV</th>
-
-                        <th class="text-center">ABONOS</th>
-
-                        <th class="text-center">SALDO</th>
-
-                        <th class="text-center">RECIBO</th>
-
-                        <th class="text-center">TIPO PAGO</th>
-
-                    </tr>
-
-                </thead>
-
-                <tbody>
-
-                    <tr *ngFor="let dato of edocta">
-
-                        <td class="text-center" style="font-weight: 500;">{{ dato.FECHA | date: 'dd-MM-yyyy' }}</td>
-
-                        <td class="text-center">
-
-                            <a href="#modalFolio" data-toggle="modal" (click)="modalFolio(dato , 2)">
-                                
-                                {{ dato.FOLIO }}
-
-                            </a>
-
-                        </td>
-
-                        <td class="text-center font-weight-bold" style="color: #f62d51;">{{ dato.CARGO | currency }}</td>
-
-                        <td class="text-center" style="font-weight: 500;">{{ dato.FECHAPAG | date: 'dd-MM-yyyy' }}</td>
-
-                        <td class="text-center" style="color: #06d79c; font-weight: 700;" *ngIf="dato.ABONO > 0 || dato.ABONO < 0">{{ dato.ABONO | currency }}</td>
-
-                        <td class="text-center" style="color: #06d79c; font-weight: 700;" *ngIf="dato.ABONO === 0"></td>
-
-                        <td class="text-center" style="color: #f62d51; font-weight: 700;" *ngIf="dato.SALDOFINAL === 0">{{ dato.SALDO | currency }}</td>
-
-                        <td class="text-center" style="color: #f62d51; font-weight: 700;" *ngIf="dato.SALDOFINAL > 0">{{ dato.SALDOFINAL | currency }}</td>
-
-                        <td class="text-center font-weight-bold" *ngIf="dato.RECIBO != 0">{{ dato.RECIBO }}</td>
-
-                        <td class="text-center font-weight-bold" *ngIf="dato.RECIBO == 0">{{ dato.NOTA }}</td>
-
-                        <td class="text-center">
-
-                            <span class="label" [ngClass]="{'label-info': dato.TIPO == 'C', 'label-primary': dato.TIPO == 'R', 'label-danger': dato.TIPO == 'E', 'label-inverse': dato.TIPO == 'T', 'label-inverse': dato.TIPO == 'D', 'label-warning': dato.TIPO == 'S'}">{{ dato.FP }}</span>
-
-                        </td>
-
-                    </tr>
-
-                    <tr style="background: #f4f6f9; font-weight: 700;">
-
-                        <th colspan="2" class="text-right">Totales</th>
-
-                        <th class="text-center">{{ cargos | currency }}</th>
-
-                        <th></th>
-
-                        <th class="text-center">{{ abonos | currency }}</th>
-
-                        <th class="text-center">{{ (cargos - abonos) | currency }}</th>
-
-                        <th colspan="3" class="text-center"></th>
-
-                    </tr>
-
-                </tbody>
-
-            </table>
-
-        </div>
-
-    </div>
-
-    <hr>
-
-</div>
-
-<div id="modalFolio" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="modalProductos" aria-hidden="true">
-
-    <div class="modal-dialog modal-lg modal-dialog-centered">
-
-        <div class="modal-content p-t-20 p-b-20 p-l-20 p-r-20">
-
-            <div class="modal-header">
-
-                <p class="lead">Productos Factura <b>{{ factura }}</b></p>
-
-                <p class="lead">Fecha <b>{{ fechaCreada | date: 'dd-MM-yyyy' }}</b></p>
-
-                <p class="lead">Importe <b>{{ importeInicial | currency }}</b></p>
-
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-
-                    <span aria-hidden="true">&times;</span>
-
-                </button>
-
-            </div>
-
-            <div class="modal-body">
-
-                <div class="alert alert-info" *ngIf="pedido.length === 0 && error === false">Obteniendo información</div>
-
-                <div class="alert alert-danger" *ngIf="error">No hay información</div>
-
-                <div class="table-responsive tabla-pedidos" *ngIf="pedido.length > 0">
-
-                    <table class="table table-sm">
-
-                        <thead>
-
-                            <tr>
-
-                                <th scope="col" class="text-center">Cantidad</th>
-
-                                <th scope="col" class="text-center">Tipo</th>
-
-                                <th scope="col" class="text-center">Descripción</th>
-
-                                <th scope="col" class="text-center">Importe</th>
-
-                            </tr>
-
-                        </thead>
-
-                        <tbody>
-
-                            <tr *ngFor="let ped of pedido">
-
-                                <td class="text-center">{{ ped.DESENTREGADO }}</td>
-
-                                <td class="text-center">{{ ped.UNIDAD }}</td>
-
-                                <td>{{ ped.DESCRIPCIO }}</td>
-
-                                <td class="text-right">{{ ped.TOTAL | currency }}</td>
-                            </tr>
-
-                        </tbody>
-
-                    </table>
+                    <h5 class="text-uppercase">saldo actual</h5>
 
                 </div>
 
-                <div class="text-right pt-3">
+                <div class="col-lg-8 col-md-8 col-sm-12 text-right">
 
-                    <p class="font-weight-bold">Sub Total {{ subtotal | currency }}</p>
+                    <h5 class="text-uppercase">
 
-                    <p class="font-weight-bold">IVA {{ iva | currency }}</p>
+                        <span class="font-weight-bold">mx {{saldoTotal | currency}}</span>
 
-                    <p class="font-weight-bold">Total {{ total | currency }}</p>
+                    </h5>
+
+                </div>
+
+                <div class="col-lg-4 col-md-4 col-sm-12">
+
+                    <h5 class="text-uppercase">saldo vencido</h5>
+
+                </div>
+
+                <div class="col-lg-8 col-md-8 col-sm-12 text-right">
+
+                    <h5 class="text-uppercase">
+
+                        <span class="font-weight-bold" [ngClass]="{'text-danger': saldoVencido > 0, 'text-success': saldoVencido === 0}">mxn {{saldoVencido | currency}}</span>
+
+                    </h5>
+
+                </div>
+
+                <div class="col-lg-4 col-md-4 col-sm-12">
+
+                    <h5 class="text-uppercase">depósitos/abonos</h5>
+
+                </div>
+
+                <div class="col-lg-8 col-md-8 col-sm-12 text-right">
+
+                    <h5 class="text-uppercase">
+
+                        <span class="font-weight-bold">mxn {{abonos | currency}}</span>
+
+                    </h5>
+
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-12">
+
+                    <h5 class="text-uppercase">prox. venc./vencido</h5>
+
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-12 text-right">
+
+                    <h5 class="text-uppercase" *ngIf="diasProximoVenc < 5">No. Fac <span class="font-weight-bold badge badge-danger">{{proximoVenc}}</span></h5>
+
+                    <h5 class="text-uppercase" *ngIf="diasProximoVenc >= 5"><span class="font-weight-bold badge badge-success">Sin Vencimiento</span></h5>
 
                 </div>
 
             </div>
 
-            <div class="modal-footer">
+        </div>
 
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <div class="col-lg-6 col-md-6 col-sm-12 centro">
+
+            <img src="http://www.ferremayoristas.com.mx/assets/img/logo-min.png" width="40%" class="img-responsive">
+
+        </div>
+
+        <div class="col-lg-12 col-md-12 col-sm-12 text-center pt-4">
+
+            <h3>DETALLE DE MOVIMIENTOS</h3>
+
+        </div>
+
+        <div class="clearfix"></div>
+
+        <hr>
+
+        <div class="alert alert-success" role="alert" *ngIf="saldo.length === 0 && !sindatoFacVig">Obteniendo Facturas Vigentes</div>
+
+        <div class="alert alert-info" role="alert" *ngIf="saldo.length === 0 && sindatoFacVig">Sin Facturas con Saldo Vigente</div>
+
+        <div class="table-responsive" *ngIf="saldo.length > 0">
+
+            <h4>FACTURAS VIGENTE</h4>
+
+            <div class="contenedorTabla">
+
+                <table class="table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th class="text-center">FECHA</th>
+
+                            <th class="text-center">FACTURA</th>
+
+                            <th class="text-center">IMPORTE</th>
+
+                            <th class="text-center">MOVIMIENTO</th>
+
+                            <th class="text-center">REEMBOLSO</th>
+
+                            <th class="text-center">SALDO</th>
+
+                            <th class="text-center">VENCE</th>
+
+                            <th class="text-center">DIAS POR VENCER</th>
+
+                            <th class="text-center">LIQUIDAR</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr *ngFor="let sal of saldo">
+
+                            <td class="text-center">{{sal.feccap | date: 'dd-MM-yyyy'}}</td>
+
+                            <td class="text-center text-w">
+
+                                <span class="mr-1" [ngClass]="{'badge badge-warning': sal.dias < 5, 'badge badge-danger': sal.dias < 0}">
+
+                                <i class="mdi mdi-information-outline text-white" style="padding: 1px 2px 1px 2px!important; font-size: 15px;" aria-hidden="true"></i>
+
+                                </span>
+
+                                <a href="#modalFolio" data-toggle="modal" (click)="modalFolio(sal , 0)">
+
+                                    <b id="{{sal.folio}}">{{sal.folio}}</b>
+
+                                </a>
+
+                            </td>
+
+                            <td class="text-center">{{sal.importe | currency}}</td>
+
+                            <td class="text-center">{{sal.notacred}}</td>
+
+                            <td class="text-center">{{sal.reembolso | currency}}</td>
+
+                            <td class="text-center">{{sal.saldo | currency}}</td>
+
+                            <td class="text-center">{{sal.vence | date: 'dd-MM-yyyy'}}</td>
+
+                            <td class="text-center rod">
+
+                                <span [ngClass]="{'badge badge-warning': sal.dias < 5, 'badge badge-danger': sal.dias < 0}" style="padding: 4px!important; font-size: 15px;">{{sal.dias}}</span>
+
+                            </td>
+
+                            <td class="text-center">
+
+                                <a *ngIf="saldoVencido === 0" class="btn btn-success" href="#modalFolio" data-toggle="modal" (click)="modalFolio(sal, 1)">
+
+                                    <i class="mdi mdi-credit-card-scan" aria-hidden="true"></i>
+
+                                </a>
+
+                                <a *ngIf="sal.dias < 0" class="btn btn-success" href="#modalFolio" data-toggle="modal" (click)="modalFolio(sal, 1)">
+
+                                    <i class="mdi mdi-credit-card-scan" aria-hidden="true"></i>
+
+                                </a>
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+        <div class="clearfix"></div>
+
+        <hr>
+
+        <div class="alert alert-success" role="alert" *ngIf="edocta.length === 0 && !sindato">Obteniendo Movimientos de Facturas</div>
+
+        <div class="alert alert-info" role="alert" *ngIf="edocta.length === 0 && sindato">Sin Movimientos de Facturas</div>
+
+        <div class="table-responsive pt-3" *ngIf="edocta.length > 0">
+
+            <h4>MOVIMIENTOS DE FACTURAS VIGENTES</h4>
+
+            <div class="table-responsive">
+
+                <table class="table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th class="text-center">FECHAFAC</th>
+
+                            <th class="text-center">FACTURA</th>
+
+                            <th class="text-center">CARGO</th>
+
+                            <th class="text-center">FECHAMOV</th>
+
+                            <th class="text-center">ABONOS</th>
+
+                            <th class="text-center">SALDO</th>
+
+                            <th class="text-center">RECIBO</th>
+
+                            <th class="text-center">TIPO PAGO</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr *ngFor="let dato of edocta">
+
+                            <td class="text-center" style="font-weight: 500;">{{ dato.FECHA | date: 'dd-MM-yyyy' }}</td>
+
+                            <td class="text-center">
+
+                                <a href="#modalFolio" data-toggle="modal" (click)="modalFolio(dato , 2)">
+                                    
+                                    {{ dato.FOLIO }}
+
+                                </a>
+
+                            </td>
+
+                            <td class="text-center font-weight-bold" style="color: #f62d51;">{{ dato.CARGO | currency }}</td>
+
+                            <td class="text-center" style="font-weight: 500;">{{ dato.FECHAPAG | date: 'dd-MM-yyyy' }}</td>
+
+                            <td class="text-center" style="color: #06d79c; font-weight: 700;" *ngIf="dato.ABONO > 0 || dato.ABONO < 0">{{ dato.ABONO | currency }}</td>
+
+                            <td class="text-center" style="color: #06d79c; font-weight: 700;" *ngIf="dato.ABONO === 0"></td>
+
+                            <td class="text-center" style="color: #f62d51; font-weight: 700;" *ngIf="dato.SALDOFINAL === 0">{{ dato.SALDO | currency }}</td>
+
+                            <td class="text-center" style="color: #f62d51; font-weight: 700;" *ngIf="dato.SALDOFINAL > 0">{{ dato.SALDOFINAL | currency }}</td>
+
+                            <td class="text-center font-weight-bold" *ngIf="dato.RECIBO != 0">{{ dato.RECIBO }}</td>
+
+                            <td class="text-center font-weight-bold" *ngIf="dato.RECIBO == 0">{{ dato.NOTA }}</td>
+
+                            <td class="text-center">
+
+                                <span class="label" [ngClass]="{'label-info': dato.TIPO == 'C', 'label-primary': dato.TIPO == 'R', 'label-danger': dato.TIPO == 'E', 'label-inverse': dato.TIPO == 'T', 'label-inverse': dato.TIPO == 'D', 'label-warning': dato.TIPO == 'S'}">{{ dato.FP }}</span>
+
+                            </td>
+
+                        </tr>
+
+                        <tr style="background: #f4f6f9; font-weight: 700;">
+
+                            <th colspan="2" class="text-right">Totales</th>
+
+                            <th class="text-center">{{ cargos | currency }}</th>
+
+                            <th></th>
+
+                            <th class="text-center">{{ abonos | currency }}</th>
+
+                            <th class="text-center">{{ (cargos - abonos) | currency }}</th>
+
+                            <th colspan="3" class="text-center"></th>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+        <hr>
+
+    </div>
+
+    <div id="modalFolio" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="modalProductos" aria-hidden="true">
+
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+
+            <div class="modal-content p-t-20 p-b-20 p-l-20 p-r-20">
+
+                <div class="modal-header">
+
+                    <p class="lead">Productos Factura <b>{{ factura }}</b></p>
+
+                    <p class="lead">Fecha <b>{{ fechaCreada | date: 'dd-MM-yyyy' }}</b></p>
+
+                    <p class="lead">Importe <b>{{ importeInicial | currency }}</b></p>
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+
+                        <span aria-hidden="true">&times;</span>
+
+                    </button>
+
+                </div>
+
+                <div class="modal-body">
+
+                    <div class="alert alert-info" *ngIf="pedido.length === 0 && error === false">Obteniendo información</div>
+
+                    <div class="alert alert-danger" *ngIf="error">No hay información</div>
+
+                    <div class="table-responsive tabla-pedidos" *ngIf="pedido.length > 0">
+
+                        <table class="table table-sm">
+
+                            <thead>
+
+                                <tr>
+
+                                    <th scope="col" class="text-center">Cantidad</th>
+
+                                    <th scope="col" class="text-center">Tipo</th>
+
+                                    <th scope="col" class="text-center">Descripción</th>
+
+                                    <th scope="col" class="text-center">Importe</th>
+
+                                </tr>
+
+                            </thead>
+
+                            <tbody>
+
+                                <tr *ngFor="let ped of pedido">
+
+                                    <td class="text-center">{{ ped.DESENTREGADO }}</td>
+
+                                    <td class="text-center">{{ ped.UNIDAD }}</td>
+
+                                    <td>{{ ped.DESCRIPCIO }}</td>
+
+                                    <td class="text-right">{{ ped.TOTAL | currency }}</td>
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                    <div class="text-right pt-3">
+
+                        <p class="font-weight-bold">Sub Total {{ subtotal | currency }}</p>
+
+                        <p class="font-weight-bold">IVA {{ iva | currency }}</p>
+
+                        <p class="font-weight-bold">Total {{ total | currency }}</p>
+
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+
+                </div>
 
             </div>
 

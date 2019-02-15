@@ -1,0 +1,179 @@
+<div class="container-fluid">
+
+    <h1>Realizar Pedido</h1>
+
+    <div class="row pb-5">
+
+        <div class="col-lg-6 col-md-6 col-sm-12 centro">
+
+            <div class="card bg-danger">
+
+                <div class="card-header">
+
+                    <h3 class="text-white">Buscar Producto</h3>
+
+                </div>
+
+                <div class="card-body">
+
+                    <form>
+
+                        <div class="form-group text-center">
+
+                            <label for="codigo" class="text-white">Buscar</label>
+
+                            <input #input (keyup.enter)="agregar(input.value)" type="text" name="codigo" id="encontrado" class="form-control text-center" placeholder="CLAVE/CÓDIGO">
+
+                            <small class="form-text text-white" *ngIf="!encontrado">
+
+                                Esta búsqueda no fue exitosa, favor de intentar con otro parámetro.
+
+                            </small>
+
+                            <div class="alert alert-dark" *ngIf="repetido">
+
+                                Este código ya esta en su lista.
+
+                            </div>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-6 col-md-6 col-sm-12 centro">
+
+            <div class="card">
+
+                <div class="card-body">
+
+                    <table class="table color-bordered-table danger-bordered-table">
+
+                        <tbody>
+
+                            <tr class="bg-light-danger">
+
+                                <td>Subtotal del Pedido</td>
+
+                                <td class="font-weight-bold">{{ subtotal | currency }}</td>
+
+                            </tr>
+
+                            <tr class="bg-light-danger">
+
+                                <td>I.V.A. 16%</td>
+
+                                <td class="font-weight-bold">{{ iva | currency }}</td>
+
+                            </tr>
+
+                            <tr class="bg-danger text-white">
+
+                                <td>Total MXN</td>
+
+                                <td class="font-weight-bold">{{ total | currency }}</td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-12 col-md-12 col-sm-12">
+
+            <div class="table-responsive" style="height: 500px;">
+
+                <table class="table color-table red-table">
+
+                    <thead class="thead-dark">
+
+                        <tr>
+
+                            <th scope="col" class="text-center">PRODUCTO</th>
+
+                            <th scope="col" class="text-center">CANTIDAD</th>
+
+                            <th scope="col" class="text-center">CAJA</th>
+
+                            <th scope="col" class="text-center">MASTER</th>
+
+                            <th scope="col" class="text-center">PRECIO DIST</th>
+
+                            <th scope="col" class="text-center">PRECIO DIST CON DESC</th>
+
+                            <th scope="col" class="text-center">SUBTOTAL C/IVA Y DESC</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr *ngFor="let prod of productos" width="100%">
+
+                            <td class="text-left" width="50%">
+
+                                <div class="row">
+
+                                    <div class="col-lg-1 col-md-1 col-sm-1 centrar">
+
+                                        <img [src]="prod.producto.imagen" class="img-fluid">
+
+                                    </div>
+
+                                    <div class=" col-lg-11 col-md-11 col-sm-11 ">
+
+                                        <h2>{{ prod.producto.descripcion }}</h2>
+
+                                        <h4>Código: {{ prod.producto.codigo }} Clave: {{ prod.producto.clave }}</h4>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+                            <td class="text-center" width="8.33%">
+
+                                <input #cantidad type="number" [value]="prod.cantidad" [min]="prod.producto.lote" class="form-control text-center" (change)="cambiarCantidad(prod, cantidad.value)">
+
+                            </td>
+
+                            <td class="text-center" width="8.33%" *ngIf="prod.unidades[1] !== undefined">{{ prod.unidades[1].entero }}</td>
+
+                            <td class="text-center" width="8.33%" *ngIf="prod.unidades[1] === undefined">1</td>
+
+                            <td class="text-center" width="8.33%" *ngIf="prod.unidades[1] !== undefined">{{ prod.unidades[2].entero }}</td>
+
+                            <td class="text-center" width="8.33%" *ngIf="prod.unidades[1] === undefined">1</td>
+
+                            <td class="text-center" width="8.33%">{{ prod.producto.precioneto | currency }}</td>
+
+                            <td class="text-center" width="8.33%">{{ prod.precioDesc | currency }}</td>
+
+                            <td class="text-center" width="8.33%">{{ prod.precioFinal | currency }}</td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

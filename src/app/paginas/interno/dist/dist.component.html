@@ -1,259 +1,263 @@
-<div class="row">
+<div class="container">
 
-    <div class="col-lg-12">
+    <div class="row">
 
-        <div class="jumbotron">
+        <div class="col-lg-12">
 
-            <app-compras></app-compras>
+            <div class="jumbotron">
+
+                <app-compras></app-compras>
+
+            </div>
 
         </div>
 
     </div>
 
-</div>
+    <div class="row pt-3">
 
-<div class="row pt-3">
+        <div class="col-lg-12 pb-2">
 
-    <div class="col-lg-12 pb-2">
+            <h1 class="text-uppercase">Información del Cliente</h1>
 
-        <h1 class="text-uppercase">Información del Cliente</h1>
+        </div>
+
+        <div class="col-md-2 col-sm-6 col-xs-12">
+
+            <h4 class="text-uppercase">Nombre</h4>
+
+        </div>
+
+        <div class="col-md-6 col-sm-6 col-xs-12">
+
+            <h4 class="font-weight-bold">{{nombre}}</h4>
+
+        </div>
+
+        <div class="col-md-1 col-sm-3 col-xs-12 text-center">
+
+            <h4><span class="badge badge-inverse">{{numero}}</span></h4>
+
+        </div>
+
+        <div class="col-md-1 col-sm-3 col-xs-12 text-center">
+
+            <h4>
+
+                <span class="badge badge-success" *ngIf="saldoVenc === 0">{{activo}}</span>
+
+                <span class="badge badge-danger" *ngIf="saldoVenc > 0">BLOQ</span>
+
+            </h4>
+
+        </div>
+
+        <div class="col-md-1 col-sm-3 col-xs-12 text-center">
+
+            <h4><span class="badge badge-inverse">ZONA {{zona}}</span></h4>
+
+        </div>
+
+        <div class="col-md-1 col-sm-3 col-xs-12 text-center">
+
+            <h4><span class="badge badge-inverse">{{lista}}</span></h4>
+
+        </div>
+
+        <div class="col-md-2 col-sm-6 col-xs-12">
+
+            <h4 class="text-uppercase">Empresa</h4>
+
+        </div>
+
+        <div class="col-md-7 col-sm-6 col-xs-12">
+
+            <h4 class="font-weight-bold">{{empresa}}</h4>
+
+        </div>
+
+        <div class="col-md-1 col-sm-6 col-xs-12">
+
+            <h4>R.F.C.</h4>
+
+        </div>
+
+        <div class="col-md-2 col-sm-6 col-xs-12">
+
+            <h4 class="font-weight-bold">{{rfc}}</h4>
+
+        </div>
+
+        <div class="col-md-12 col-sm-12 col-xs-12">
+
+            <h4 class="text-uppercase">Domicilio de Envio</h4>
+
+        </div>
+
+        <div class="col-md-12 col-sm-12 col-xs-12">
+
+            <h4 class="text-uppercase"><span class="font-weight-bold">{{domicilio}} {{colonia}}, {{ciudad}} {{cp}}</span></h4>
+
+        </div>
+
+        <hr>
+
+        <div class="col-md-4 col-sm-6 col-xs-12">
+
+            <h4 class="text-uppercase">Límite de crédito <span class="font-weight-bold text-success">{{limite | currency}}</span></h4>
+
+        </div>
+
+        <div class="col-md-4 col-sm-6 col-xs-12">
+
+            <h4 class="text-uppercase">Saldo <span class="font-weight-bold" [ngClass]="{'text-danger': saldo > 0, 'text-info': saldo === 0}">{{saldo | currency}}</span></h4>
+
+        </div>
+
+        <div class="col-md-4 col-sm-6 col-xs-12">
+
+            <h4 class="text-uppercase">Disponible <span class="font-weight-bold" [ngClass]="{'text-danger': saldoDispo < 0, 'text-info': saldoDispo >= 0}">{{saldoDispo | currency}}</span></h4>
+
+        </div>
+
+        <hr>
+
+        <div class="col-md-4 col-sm-6 col-xs-12">
+
+            <h4 class="text-uppercase">Vencido <span class="font-weight-bold" [ngClass]="{'text-danger': saldoVenc > 0, 'text-info': saldoVenc === 0}">{{saldoVenc | currency}}</span></h4>
+
+        </div>
+
+        <div class="col-md-4 col-sm-6 col-xs-12">
+
+            <h4 class="text-uppercase">Crédito <span class="font-weight-bold">{{diasCred}} Día(s)</span></h4>
+
+        </div>
+
+        <div class="col-md-4 col-sm-6 col-xs-12">
+
+            <h4 class="text-uppercase">
+
+                <span class="badge badge-success">Última Compra: {{ultimaCompra | date: 'dd-MM-yyyy'}}</span>
+
+            </h4>
+
+        </div>
+
+        <div class="clearfix"></div>
+
+        <hr>
 
     </div>
 
-    <div class="col-md-2 col-sm-6 col-xs-12">
+    <div style="height: 200px;" *ngIf="asesor === 'EMPLEADOS'"></div>
 
-        <h4 class="text-uppercase">Nombre</h4>
+    <div class="row pb-5" *ngIf="asesor !== 'EMPLEADOS'">
 
-    </div>
+        <div class="col-md-3 col-sm-4 col-xs-12">
 
-    <div class="col-md-6 col-sm-6 col-xs-12">
+            <figure id="imgPerfil">
 
-        <h4 class="font-weight-bold">{{nombre}}</h4>
+                <img [src]="imagenAsesor | imagen" class="img-thumbnail img-circle">
 
-    </div>
+            </figure>
 
-    <div class="col-md-1 col-sm-3 col-xs-12 text-center">
+        </div>
 
-        <h4><span class="badge badge-inverse">{{numero}}</span></h4>
+        <div class="col-md-4 col-sm-4 col-xs-12">
 
-    </div>
+            <br>
 
-    <div class="col-md-1 col-sm-3 col-xs-12 text-center">
+            <label class="control-label text-muted text-uppercase">Nombre</label>
 
-        <h4>
+            <div class="input-group">
 
-            <span class="badge badge-success" *ngIf="saldoVenc === 0">{{activo}}</span>
+                <span class="input-group-addon"><i class="mdi mdi-account-circle"></i></span>
 
-            <span class="badge badge-danger" *ngIf="saldoVenc > 0">BLOQ</span>
+                <input type="text" class="form-control" [value]="asesor" readonly>
 
-        </h4>
+            </div>
 
-    </div>
+            <br>
 
-    <div class="col-md-1 col-sm-3 col-xs-12 text-center">
+            <label class="control-label text-muted text-uppercase">Celular</label>
 
-        <h4><span class="badge badge-inverse">ZONA {{zona}}</span></h4>
+            <div class="input-group">
 
-    </div>
+                <span class="input-group-addon"><i class="mdi mdi-cellphone-android"></i></span>
 
-    <div class="col-md-1 col-sm-3 col-xs-12 text-center">
+                <input type="text" class="form-control" [value]="telAsesor" readonly>
 
-        <h4><span class="badge badge-inverse">{{lista}}</span></h4>
+            </div>
 
-    </div>
+            <br>
 
-    <div class="col-md-2 col-sm-6 col-xs-12">
+            <label class="control-label text-muted text-uppercase">Correo Electrónico</label>
 
-        <h4 class="text-uppercase">Empresa</h4>
+            <div class="input-group">
 
-    </div>
+                <span class="input-group-addon"><i class="mdi mdi-email-outline"></i></span>
 
-    <div class="col-md-7 col-sm-6 col-xs-12">
+                <input type="text" class="form-control" [value]="emailAsesor" readonly>
 
-        <h4 class="font-weight-bold">{{empresa}}</h4>
+            </div>
 
-    </div>
+        </div>
 
-    <div class="col-md-1 col-sm-6 col-xs-12">
+        <div class="col-md-4 col-sm-4 col-xs-12 text-center centro">
 
-        <h4>R.F.C.</h4>
+            <h4 class="text-uppercase" *ngIf="vigente">Próximo Vencimiento</h4>
 
-    </div>
+            <h4 class="text-uppercase" *ngIf="vencido">Folio Vencido</h4>
 
-    <div class="col-md-2 col-sm-6 col-xs-12">
+            <div class="row">
 
-        <h4 class="font-weight-bold">{{rfc}}</h4>
+                <div class="col-md-6 col-xs-12">
 
-    </div>
+                    <h5 class="text-uppercase">
 
-    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <span class="badge" [ngClass]="{'badge-danger': diasVen < 0, 'badge-warning': diasVen < 5, 'badge-dark': diasVen> 4}">Fol. {{folioVenc}}</span>
 
-        <h4 class="text-uppercase">Domicilio de Envio</h4>
+                    </h5>
 
-    </div>
+                </div>
 
-    <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="col-md-6 col-xs-12">
 
-        <h4 class="text-uppercase"><span class="font-weight-bold">{{domicilio}} {{colonia}}, {{ciudad}} {{cp}}</span></h4>
+                    <h5 class="text-uppercase">
 
-    </div>
+                        <span class="badge" [ngClass]="{'badge-danger': diasVen < 0, 'badge-warning': diasVen < 5, 'badge-dark': diasVen> 4}">Vence:  17/01/2019</span>
 
-    <hr>
+                    </h5>
 
-    <div class="col-md-4 col-sm-6 col-xs-12">
+                </div>
 
-        <h4 class="text-uppercase">Límite de crédito <span class="font-weight-bold text-success">{{limite | currency}}</span></h4>
+                <div class="col-md-6 col-xs-12">
 
-    </div>
+                    <h5 class="text-uppercase">
 
-    <div class="col-md-4 col-sm-6 col-xs-12">
+                        <span class="badge" [ngClass]="{'badge-danger': diasVen < 0, 'badge-warning': diasVen < 5, 'badge-dark': diasVen> 4}">{{impoVenc | currency}}</span>
 
-        <h4 class="text-uppercase">Saldo <span class="font-weight-bold" [ngClass]="{'text-danger': saldo > 0, 'text-info': saldo === 0}">{{saldo | currency}}</span></h4>
+                    </h5>
 
-    </div>
+                </div>
 
-    <div class="col-md-4 col-sm-6 col-xs-12">
+                <div class="col-md-6 col-xs-12">
 
-        <h4 class="text-uppercase">Disponible <span class="font-weight-bold" [ngClass]="{'text-danger': saldoDispo < 0, 'text-info': saldoDispo >= 0}">{{saldoDispo | currency}}</span></h4>
+                    <h5 class="text-uppercase">
 
-    </div>
+                        <span class="badge" [ngClass]="{'badge-danger': diasVen < 0, 'badge-warning': diasVen < 5, 'badge-dark': diasVen> 4}">Restan {{diasVen | number}} día(s)</span>
 
-    <hr>
+                    </h5>
 
-    <div class="col-md-4 col-sm-6 col-xs-12">
+                </div>
 
-        <h4 class="text-uppercase">Vencido <span class="font-weight-bold" [ngClass]="{'text-danger': saldoVenc > 0, 'text-info': saldoVenc === 0}">{{saldoVenc | currency}}</span></h4>
+            </div>
 
-    </div>
-
-    <div class="col-md-4 col-sm-6 col-xs-12">
-
-        <h4 class="text-uppercase">Crédito <span class="font-weight-bold">{{diasCred}} Día(s)</span></h4>
-
-    </div>
-
-    <div class="col-md-4 col-sm-6 col-xs-12">
-
-        <h4 class="text-uppercase">
-
-            <span class="badge badge-success">Última Compra: {{ultimaCompra | date: 'dd-MM-yyyy'}}</span>
-
-        </h4>
-
-    </div>
-
-    <div class="clearfix"></div>
-
-    <hr>
-
-</div>
-
-<div style="height: 200px;" *ngIf="asesor === 'EMPLEADOS'"></div>
-
-<div class="row pb-5" *ngIf="asesor !== 'EMPLEADOS'">
-
-    <div class="col-md-3 col-sm-4 col-xs-12">
-
-        <figure id="imgPerfil">
-
-            <img [src]="imagenAsesor | imagen" class="img-thumbnail img-circle">
-
-        </figure>
-
-    </div>
-
-    <div class="col-md-4 col-sm-4 col-xs-12">
+        </div>
 
         <br>
 
-        <label class="control-label text-muted text-uppercase">Nombre</label>
-
-        <div class="input-group">
-
-            <span class="input-group-addon"><i class="mdi mdi-account-circle"></i></span>
-
-            <input type="text" class="form-control" [value]="asesor" readonly>
-
-        </div>
-
-        <br>
-
-        <label class="control-label text-muted text-uppercase">Celular</label>
-
-        <div class="input-group">
-
-            <span class="input-group-addon"><i class="mdi mdi-cellphone-android"></i></span>
-
-            <input type="text" class="form-control" [value]="telAsesor" readonly>
-
-        </div>
-
-        <br>
-
-        <label class="control-label text-muted text-uppercase">Correo Electrónico</label>
-
-        <div class="input-group">
-
-            <span class="input-group-addon"><i class="mdi mdi-email-outline"></i></span>
-
-            <input type="text" class="form-control" [value]="emailAsesor" readonly>
-
-        </div>
-
     </div>
-
-    <div class="col-md-4 col-sm-4 col-xs-12 text-center centro">
-
-        <h4 class="text-uppercase" *ngIf="vigente">Próximo Vencimiento</h4>
-
-        <h4 class="text-uppercase" *ngIf="vencido">Folio Vencido</h4>
-
-        <div class="row">
-
-            <div class="col-md-6 col-xs-12">
-
-                <h5 class="text-uppercase">
-
-                    <span class="badge" [ngClass]="{'badge-danger': diasVen < 0, 'badge-warning': diasVen < 5, 'badge-dark': diasVen> 4}">Fol. {{folioVenc}}</span>
-
-                </h5>
-
-            </div>
-
-            <div class="col-md-6 col-xs-12">
-
-                <h5 class="text-uppercase">
-
-                    <span class="badge" [ngClass]="{'badge-danger': diasVen < 0, 'badge-warning': diasVen < 5, 'badge-dark': diasVen> 4}">Vence:  17/01/2019</span>
-
-                </h5>
-
-            </div>
-
-            <div class="col-md-6 col-xs-12">
-
-                <h5 class="text-uppercase">
-
-                    <span class="badge" [ngClass]="{'badge-danger': diasVen < 0, 'badge-warning': diasVen < 5, 'badge-dark': diasVen> 4}">{{impoVenc | currency}}</span>
-
-                </h5>
-
-            </div>
-
-            <div class="col-md-6 col-xs-12">
-
-                <h5 class="text-uppercase">
-
-                    <span class="badge" [ngClass]="{'badge-danger': diasVen < 0, 'badge-warning': diasVen < 5, 'badge-dark': diasVen> 4}">Restan {{diasVen | number}} día(s)</span>
-
-                </h5>
-
-            </div>
-
-        </div>
-
-    </div>
-
-    <br>
 
 </div>

@@ -56,16 +56,20 @@ export class AccesoComponent implements OnInit {
             }
 
             if (this.saldoVenc > 0) {
-              this.vigente = false;
+              this._usuarioService.superheros(resp.usuario.numero).subscribe((supers: any) => {
+                this.vigente = supers.status;
+                this._usuarioService.guardarStorage(resp.id, resp.token, resp.usuario, resp.menu, resp.usuario.rol, this.vigente);
+              });
             } else {
               this.vigente = true;
+              this._usuarioService.guardarStorage(resp.id, resp.token, resp.usuario, resp.menu, resp.usuario.rol, this.vigente);
             }
           } else {
             this.vigente = true;
+            this._usuarioService.guardarStorage(resp.id, resp.token, resp.usuario, resp.menu, resp.usuario.rol, this.vigente);
           }
 
           this._usuarioService.iniciar(usuario);
-          this._usuarioService.guardarStorage(resp.id, resp.token, resp.usuario, resp.menu, resp.usuario.rol, this.vigente);
           this.router.navigate(['/dist']);
           // this.wsService.login( 'web', forma.value.email, null, this._usuarioService.usuario.rol );
         });

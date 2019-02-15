@@ -1,64 +1,68 @@
-<div class="row pt-5 pb-5 pl-3 pr-3">
+<div class="container">
 
-    <div class="col-12 col-lg-12 col-md-12 banner"></div>
+    <div class="row pt-5 pb-5 pl-3 pr-3">
 
-    <div class="col-12 col-lg-4 col-md-12 pt-5 pb-5">
+        <div class="col-12 col-lg-12 col-md-12 banner"></div>
 
-        <h3>Inicia Sesión</h3>
+        <div class="col-12 col-lg-4 col-md-12 pt-5 pb-5">
 
-        <form ngNativeValidate #f="ngForm" (ngSubmit)="ingresar( f )">
+            <h3>Inicia Sesión</h3>
 
-            <div class="form-group">
+            <form ngNativeValidate #f="ngForm" (ngSubmit)="ingresar( f )">
 
-                <input type="email" name="email" [ngModel]="email" class="form-control" placeholder="*Correo Electrónico" required>
+                <div class="form-group">
 
-            </div>
-
-            <div class="form-group">
-
-                <input type="password" name="password" [ngModel]="password" class="form-control" placeholder="*Contraseña" required>
-
-            </div>
-
-            <div class="from-group">
-
-                <input type="checkbox" name="recuerdame" [ngModel]="recuerdame" class="form-check-input" id="recordar">
-
-                <label for="recordar" class="form-check-label">Recuérame</label>
-
-            </div>
-
-            <div class="form-group text-center m-t-20">
-
-                <div class="col-xs-12">
-
-                    <button type="submit" class="btn btn-danger btn-lg btn-block text-uppercase btn-rounded">INGRESAR</button>
+                    <input type="email" name="email" [ngModel]="email" class="form-control" placeholder="*Correo Electrónico" required>
 
                 </div>
 
-            </div>
+                <div class="form-group">
 
-            <div class="form-group m-b-0">
-
-                <div class="col-sm-12 text-center">
-
-                    No tienes una cuenta? <a routerLink="/registro" class="text-primary m-l-5"><b>Crear Cuenta</b></a>
+                    <input type="password" name="password" [ngModel]="password" class="form-control" placeholder="*Contraseña" required>
 
                 </div>
 
-            </div>
+                <div class="from-group">
 
-        </form>
+                    <input type="checkbox" name="recuerdame" [ngModel]="recuerdame" class="form-check-input" id="recordar">
 
-    </div>
+                    <label for="recordar" class="form-check-label">Recuérame</label>
 
-    <div class="col-12 col-lg-8 col-md-12 centrar pt-5 pb-5">
+                </div>
 
-        <p class="text-justify">Bienvenidos a <b class="text-danger">Ferremayoristas Olvera</b>, el cual ofrecemos una gran variedad de productos de ferretería para negocios y/o hogar. Somos líder en distribución en el Bajío-Zona Centro de la República.</p>
+                <div class="form-group text-center m-t-20">
 
-        <p class="text-justify"><b class="text-danger">ES MUY IMPORTANTE</b> que desde tu registro definas si necesitas facturar, ya que el registro pasa por un filtro de autorización y si no se específica que necesitas facturar, tus compras se generarám con un folio sin factura.
-            Es por ello que al ser activada tu cuenta, si necesitas facturar, ingreses en la sección de <b class="text-danger">"Facturación</b> de <b class="text-danger">"Mi Cuenta"</b> para llenar todos los campos que se necesita para poder facturar
-            tus compras cuando lo necesites.</p>
+                    <div class="col-xs-12">
+
+                        <button type="submit" class="btn btn-danger btn-lg btn-block text-uppercase btn-rounded">INGRESAR</button>
+
+                    </div>
+
+                </div>
+
+                <div class="form-group m-b-0">
+
+                    <div class="col-sm-12 text-center">
+
+                        No tienes una cuenta? <a routerLink="/registro" class="text-primary m-l-5"><b>Crear Cuenta</b></a>
+
+                    </div>
+
+                </div>
+
+            </form>
+
+        </div>
+
+        <div class="col-12 col-lg-8 col-md-12 centrar pt-5 pb-5">
+
+            <p class="text-justify">Bienvenidos a <b class="text-danger">Ferremayoristas Olvera</b>, el cual ofrecemos una gran variedad de productos de ferretería para negocios y/o hogar. Somos líder en distribución en el Bajío-Zona Centro de la República.</p>
+
+            <p class="text-justify"><b class="text-danger">ES MUY IMPORTANTE</b> que desde tu registro definas si necesitas facturar, ya que el registro pasa por un filtro de autorización y si no se específica que necesitas facturar, tus compras se generarám con un folio sin
+                factura. Es por ello que al ser activada tu cuenta, si necesitas facturar, ingreses en la sección de <b class="text-danger">"Facturación</b> de <b class="text-danger">"Mi Cuenta"</b> para llenar todos los campos que se necesita para poder
+                facturar tus compras cuando lo necesites.</p>
+
+        </div>
 
     </div>
 

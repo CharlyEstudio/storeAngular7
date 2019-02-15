@@ -152,6 +152,12 @@ export class UsuarioServicesService {
     return this.http.post( url, usuario );
   }
 
+  superheros(numero: any) {
+    const url = LINK + '/superhero/super/' + numero;
+
+    return this.http.get(url);
+  }
+
   actualizarUsusario( usuario: Usuario ) {
     let url = LINK + 'clientes/actualizar/' + usuario._id;
 

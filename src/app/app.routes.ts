@@ -16,6 +16,7 @@ import { CarritoComponent } from './carrito/carrito.component';
 import { BuscadorComponent } from './buscador/buscador.component';
 import { NopagefoundComponent } from './nopagefound/nopagefound.component';
 import { DescripcionComponent } from './descripcion/descripcion.component';
+import { OfertaComponent } from './oferta/oferta.component';
 
 const appRoutes: Routes = [
     { path: 'inicio', component: InicioComponent, data: { titulo: 'Sitio Oficial Ferremayoristas Olvera', name: 'description' } },
@@ -28,6 +29,7 @@ const appRoutes: Routes = [
     { path: 'carrito', component: CarritoComponent, data: { titulo: 'Carrito de Compras', name: 'description' } },
     { path: 'buscador/:buscando', component: BuscadorComponent, data: { titulo: 'Buscando...', name: 'description' } },
     { path: 'ver/:producto', component: DescripcionComponent, data: { titulo: 'Descripción', name: 'description' } },
+    { path: 'ofertas', component: OfertaComponent, data: { titulo: 'PROMOTRUPER DEL MES', name: 'description' } },
     { path: 'verBack', component: DescripcionComponent, data: { titulo: 'Descripción', name: 'description' } },
     {
         path: '',

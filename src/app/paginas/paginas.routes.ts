@@ -6,11 +6,13 @@ import { LoginGuard } from '../servicios/guards/login.guard';
 // Componentes Páginas Iternos
 // DIstribución
 import { DistComponent } from './interno/dist/dist.component';
+import { PedidoComponent } from './interno/pedido/pedido.component';
 import { EdoCtaComponent } from './interno/edo-cta/edo-cta.component';
 import { FacturasComponent } from './interno/facturas/facturas.component';
 import { BonoComponent } from './interno/bono/bono.component';
 import { BackOrderComponent } from './interno/back-order/back-order.component';
 import { TopVentasComponent } from './interno/top-ventas/top-ventas.component';
+
 // Tienda
 import { ComprasComponent } from './interno/compras/compras.component';
 import { FavoritosComponent } from './interno/favoritos/favoritos.component';
@@ -49,6 +51,12 @@ const pageRoutes: Routes = [
         canActivate: [LoginGuard],
         component: DistComponent,
         data: { titulo: 'Mi Escritorio', name: 'description' }
+    },
+    {
+        path: 'pedido',
+        canActivate: [LoginGuard],
+        component: PedidoComponent,
+        data: { titulo: 'Hacer Pedido', name: 'description' }
     },
     {
         path: 'edo-cta',

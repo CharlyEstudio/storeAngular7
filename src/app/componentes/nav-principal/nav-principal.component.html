@@ -1,22 +1,60 @@
-<header>
+<header class="bg-danger text-white">
 
     <div class="container">
 
         <div class="row">
 
-            <div class="col-12 buscador">
+            <div class="col-lg-6 col-md-6 col-sm-6 redes">
 
-                <app-buscar (actualizaValor)="obtener($event)"></app-buscar>
+                <ul class="list-inline">
+
+                    <li class="list-inline-item mt-3">
+
+                        <a href="https://www.facebook.com/FerremayoristasOlvera/" class="nav-link text-blanco" target="_blank">
+
+                            <i class="mdi mdi-facebook-box" style="font-size: 25px"></i>
+
+                        </a>
+
+                    </li>
+
+                    <li class="list-inline-item mt-3">
+
+                        <a href="https://www.twitter.com/" class="nav-link text-blanco" target="_blank">
+
+                            <i class="mdi mdi-twitter-box" style="font-size: 25px"></i>
+
+                        </a>
+
+                    </li>
+
+                    <li class="list-inline-item mt-3">
+
+                        <a href="https://www.linkedin.com/" class="nav-link text-blanco" target="_blank">
+
+                            <i class="mdi mdi-linkedin-box" style="font-size: 25px"></i>
+
+                        </a>
+
+                    </li>
+
+                </ul>
 
             </div>
 
-            <div class="col-12 submenu">
+            <!-- <div class="col-12 buscador">
+
+                <app-buscar (actualizaValor)="obtener($event)"></app-buscar>
+
+            </div> -->
+
+            <div class="col-lg-6 col-md-6 col-sm-6 submenu">
 
                 <ul class="list-inline">
 
                     <li class="list-inline-item font-weight-bold" *ngIf="logeado">
 
-                        <a routerLink="" class="nav-link text-grey">
+                        <a routerLink="" class="nav-link text-blanco">
 
                             <i class="mdi mdi-account-outline"></i> Mi Cuenta
 
@@ -26,7 +64,7 @@
 
                     <li class="list-inline-item font-weight-bold" *ngIf="!logeado">
 
-                        <a routerLink="/registro" class="nav-link text-grey">
+                        <a routerLink="/registro" class="nav-link text-blanco">
 
                             <i class="mdi mdi-human-greeting"></i> Registro
 
@@ -38,7 +76,7 @@
 
                     <li class="list-inline-item font-weight-bold" *ngIf="!logeado">
 
-                        <a routerLink="/acceso" class="nav-link  text-grey">
+                        <a routerLink="/acceso" class="nav-link  text-blanco">
 
                             <i class="mdi mdi-access-point"></i> Accesar
 
@@ -50,7 +88,7 @@
 
                     <li class="list-inline-item font-weight-bold" *ngIf="logeado">
 
-                        <a routerLink="" class="nav-link text-grey" (click)="logout()">
+                        <a routerLink="" class="nav-link text-blanco" (click)="logout()">
 
                             <i class="mdi mdi-logout"></i> Salir
 
@@ -74,15 +112,15 @@
 
                     <li class="list-inline-item font-weight-bold">
 
-                        <a routerLink="/carrito" class="nav-link text-grey" *ngIf="carrito">
+                        <a routerLink="/carrito" class="nav-link text-blanco" *ngIf="carrito">
 
-                            <span class="text-grey pr-1">
+                            <span class="text-blanco pr-1">
 
-                                <i class="mdi mdi-shopping font-20"></i>
+                                <i class="mdi mdi-cart-outline font-20"></i>
                                 
                             </span>
 
-                            <span class="badge badge-danger pl-2 pr-2">
+                            <span class="badge badge-inverse pl-2 pr-2">
 
                               {{ cantidad | number }}
 
@@ -92,7 +130,7 @@
 
                         <span *ngIf="!carrito">
 
-                          <span class="text-danger">
+                          <span class="text-blanco">
 
                             <i class="mdi mdi-basket"></i>
 
@@ -112,7 +150,71 @@
 
 </header>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-danger">
+<header>
+
+    <div class="container pt-4 pb-4">
+
+        <div class="row">
+
+            <div class="col-lg-4 col-md-4 col-sm-12">
+
+                <img src="assets/images/logo-min.png" alt="Ferremayoristas Olvera" class="img-flui" width="70%">
+
+            </div>
+
+            <div class="col-lg-4 col-md-4 col-sm-12 buscador">
+
+                <app-buscar (actualizaValor)="obtener($event)"></app-buscar>
+
+            </div>
+
+            <div class="col-lg-4 col-md-4 col-sm-12">
+
+                <nav class="navbar navbar-expand-lg mt-3">
+
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                    
+                        <span class="mdi mdi-home-outline"></span> Inicio
+            
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                        <ul class="navbar-nav ml-auto">
+
+                            <li class="nav-item">
+
+                                <a class="nav-link" routerLink="/inicio">Inicio <span class="sr-only">(current)</span></a>
+
+                            </li>
+
+                            <li class="nav-item">
+
+                                <a class="nav-link" routerLink="/nosotros">Nosotros</a>
+
+                            </li>
+
+                            <li class="nav-item">
+
+                                <a class="nav-link" routerLink="/cobertura">Cobertura</a>
+
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+                </nav>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</header>
+
+<!-- <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
 
     <div class="container">
 
@@ -134,7 +236,7 @@
 
                 </li>
 
-                <!-- <li class="nav-item dropdown">
+                <li class="nav-item dropdown">
 
                     <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         
@@ -150,7 +252,7 @@
 
                     </div>
 
-                </li> -->
+                </li>
 
                 <li class="nav-item">
 
@@ -170,4 +272,4 @@
 
     </div>
 
-</nav>
+</nav> -->

@@ -1,276 +1,280 @@
-<div class="row pb-5">
+<div class="container">
 
-    <div class="col-12 col-lg-12 col-md-6 col-sm-12 pt-5 pb-5">
+    <div class="row pb-5">
 
-        <div class="row">
+        <div class="col-12 col-lg-12 col-md-6 col-sm-12 pt-5 pb-5">
 
-            <div class="col-lg-10 col-md-6 col-sm-12 text-left">
+            <div class="row">
 
-                <h2>Su carrito contiene {{ items }} producto(s).</h2>
+                <div class="col-lg-10 col-md-6 col-sm-12 text-left">
 
-            </div>
+                    <h2>Su carrito contiene {{ items }} producto(s).</h2>
 
-            <div class="col-lg-2 col-md-6 col-sm-12 text-right">
+                </div>
 
-                <button class="btn btn-danger" type="button" (click)="eliminarTodo()">
+                <div class="col-lg-2 col-md-6 col-sm-12 text-right">
 
-                    Eliminar Todo
-        
-                </button>
+                    <button class="btn btn-danger" type="button" (click)="eliminarTodo()">
+
+                        Eliminar Todo
+            
+                    </button>
+
+                </div>
 
             </div>
 
         </div>
 
-    </div>
+        <div class="col-12 col-lg-12 col-md-6 col-sm-12">
 
-    <div class="col-12 col-lg-12 col-md-6 col-sm-12">
+            <div class="table-responsive">
 
-        <div class="table-responsive">
+                <table class="table table-borderless" *ngIf="carrito.length === 0">
 
-            <table class="table table-borderless" *ngIf="carrito.length === 0">
+                    <thead>
 
-                <thead>
+                        <tr>
 
-                    <tr>
+                            <th scope="col" colspan="2" class="text-left">Descripción</th>
 
-                        <th scope="col" colspan="2" class="text-left">Descripción</th>
+                            <th scope="col" class="text-center">Cantidad</th>
 
-                        <th scope="col" class="text-center">Cantidad</th>
+                            <th scope="col" class="text-center">Final</th>
 
-                        <th scope="col" class="text-center">Final</th>
+                            <th scope="col" class="text-center">Eliminar</th>
 
-                        <th scope="col" class="text-center">Eliminar</th>
+                        </tr>
 
-                    </tr>
+                    </thead>
 
-                </thead>
+                    <tbody>
 
-                <tbody>
+                        <tr>
 
-                    <tr>
+                            <td class="text-center">
 
-                        <td class="text-center">
+                                <img src="assets/images/precarga/product_loader.gif" class="img-fluig rounded" width="200">
 
-                            <img src="assets/images/precarga/product_loader.gif" class="img-fluig rounded" width="200">
+                            </td>
 
-                        </td>
+                            <td class="text-left">
 
-                        <td class="text-left">
+                                <h4 class="font-weight-bold">Producto</h4>
 
-                            <h4 class="font-weight-bold">Producto</h4>
+                                <h6>Clave: <b>000-00</b> Código: <b>00000</b></h6>
 
-                            <h6>Clave: <b>000-00</b> Código: <b>00000</b></h6>
+                                <h3 class="text-muted">
 
-                            <h3 class="text-muted">
+                                    <span class="badge badge-danger">Sin Marca</span>
 
-                                <span class="badge badge-danger">Sin Marca</span>
+                                </h3>
 
-                            </h3>
+                                <h6>
 
-                            <h6>
+                                    <small>Artículo 00000/000-00-00000</small>
 
-                                <small>Artículo 00000/000-00-00000</small>
+                                </h6>
 
-                            </h6>
+                                <h3>{{ 00000 | currency }}</h3>
 
-                            <h3>{{ 00000 | currency }}</h3>
+                                <p>Este producto</p>
 
-                            <p>Este producto</p>
+                            </td>
 
-                        </td>
+                            <td class="text-center">
 
-                        <td class="text-center">
+                                <input #input type="number" class="form-control text-center" min="1" name="cantidad" value="1" readonly="true">
 
-                            <input #input type="number" class="form-control text-center" min="1" name="cantidad" value="1" readonly="true">
+                            </td>
 
-                        </td>
+                            <td class="text-center font-weight-bold">{{ 0000 | currency }}</td>
 
-                        <td class="text-center font-weight-bold">{{ 0000 | currency }}</td>
+                            <td class="text-center">
 
-                        <td class="text-center">
+                                <button class="btn btn-danger disabled" type="button">
 
-                            <button class="btn btn-danger disabled" type="button">
+                                    Eliminar
+                
+                                </button>
 
-                                Eliminar
-            
-                            </button>
+                            </td>
 
-                        </td>
+                        </tr>
 
-                    </tr>
+                        <tr>
 
-                    <tr>
+                            <td colspan="2" rowspan="3" style="vertical-align: middle; text-align: center">
 
-                        <td colspan="2" rowspan="3" style="vertical-align: middle; text-align: center">
+                                <button type="button" class="btn btn-primary disabled">RELIZAR PEDIDO</button>
 
-                            <button type="button" class="btn btn-primary disabled">RELIZAR PEDIDO</button>
+                            </td>
 
-                        </td>
+                            <td class="text-right font-weight-bold text-uppercase">Sub-Total</td>
 
-                        <td class="text-right font-weight-bold text-uppercase">Sub-Total</td>
+                            <td class="text-right font-weight-bold">{{ 0000 | currency }}</td>
 
-                        <td class="text-right font-weight-bold">{{ 0000 | currency }}</td>
+                            <td></td>
 
-                        <td></td>
+                        </tr>
 
-                    </tr>
+                        <tr>
 
-                    <tr>
+                            <td class="text-right font-weight-bold text-uppercase" style="border-top-color: transparent!important;">Iva</td>
 
-                        <td class="text-right font-weight-bold text-uppercase" style="border-top-color: transparent!important;">Iva</td>
+                            <td class="text-right font-weight-bold" style="border-top-color: transparent!important;">{{ 0000 | currency }}</td>
 
-                        <td class="text-right font-weight-bold" style="border-top-color: transparent!important;">{{ 0000 | currency }}</td>
+                            <td style="border-top-color: transparent!important;"></td>
 
-                        <td style="border-top-color: transparent!important;"></td>
+                        </tr>
 
-                    </tr>
+                        <tr>
 
-                    <tr>
+                            <td class="text-right font-weight-bold text-uppercase" style="border-top-color: transparent!important;">Total</td>
 
-                        <td class="text-right font-weight-bold text-uppercase" style="border-top-color: transparent!important;">Total</td>
+                            <td class="text-right font-weight-bold" style="border-top-color: transparent!important;">{{ 0000 | currency }}</td>
 
-                        <td class="text-right font-weight-bold" style="border-top-color: transparent!important;">{{ 0000 | currency }}</td>
+                            <td style="border-top-color: transparent!important;"></td>
 
-                        <td style="border-top-color: transparent!important;"></td>
+                        </tr>
 
-                    </tr>
+                    </tbody>
 
-                </tbody>
+                </table>
 
-            </table>
+            </div>
 
-        </div>
+            <div class="table-responsive" *ngIf="carrito.length > 0">
 
-        <div class="table-responsive" *ngIf="carrito.length > 0">
+                <table class="table table-borderless">
 
-            <table class="table table-borderless">
+                    <thead>
 
-                <thead>
+                        <tr>
 
-                    <tr>
+                            <th scope="col" colspan="2" class="text-left">Descripción</th>
 
-                        <th scope="col" colspan="2" class="text-left">Descripción</th>
+                            <th scope="col" class="text-center">Cantidad</th>
 
-                        <th scope="col" class="text-center">Cantidad</th>
+                            <th scope="col" class="text-center">Final</th>
 
-                        <th scope="col" class="text-center">Final</th>
+                            <th scope="col" class="text-center">Eliminar</th>
 
-                        <th scope="col" class="text-center">Eliminar</th>
+                        </tr>
 
-                    </tr>
+                    </thead>
 
-                </thead>
+                    <tbody>
 
-                <tbody>
+                        <tr *ngFor="let car of carrito; let i = index">
 
-                    <tr *ngFor="let car of carrito; let i = index">
+                            <td class="text-center">
 
-                        <td class="text-center">
+                                <img [src]="car.img" class="img-fluig rounded" width="200">
 
-                            <img [src]="car.img" class="img-fluig rounded" width="200">
+                            </td>
 
-                        </td>
+                            <td class="text-left">
 
-                        <td class="text-left">
+                                <h4 class="font-weight-bold">{{ car.descripcion }}</h4>
 
-                            <h4 class="font-weight-bold">{{ car.descripcion }}</h4>
+                                <h6>Clave: <b>{{ car.clave }}</b> Código: <b>{{ car.codigo }}</b></h6>
 
-                            <h6>Clave: <b>{{ car.clave }}</b> Código: <b>{{ car.codigo }}</b></h6>
+                                <h3 class="text-muted">
 
-                            <h3 class="text-muted">
+                                    <span class="badge badge-danger">{{ car.marca }}</span>
 
-                                <span class="badge badge-danger">{{ car.marca }}</span>
+                                </h3>
 
-                            </h3>
+                                <h6>
 
-                            <h6>
+                                    <small>Artículo {{ car.articuloid }}/{{car.clave}}-{{car.codigo}}</small>
 
-                                <small>Artículo {{ car.articuloid }}/{{car.clave}}-{{car.codigo}}</small>
+                                </h6>
 
-                            </h6>
+                                <h6 class="text-muted" *ngIf="car.descuento > 0">
 
-                            <h6 class="text-muted" *ngIf="car.descuento > 0">
+                                    <s>{{ car.precioAumentado | currency }}</s>
 
-                                <s>{{ car.precioAumentado | currency }}</s>
+                                </h6>
 
-                            </h6>
+                                <h5 *ngIf="car.descuento > 0">
 
-                            <h5 *ngIf="car.descuento > 0">
+                                    <span class="badge badge-danger" style="font-size: 1rem;">{{ (car.descuento * 100) }}% de Descuento</span>
 
-                                <span class="badge badge-danger" style="font-size: 1rem;">{{ (car.descuento * 100) }}% de Descuento</span>
+                                </h5>
 
-                            </h5>
+                                <h3 *ngIf="car.descuento > 0" class="font-weight-bold">Oferta: {{ car.precio | currency }}</h3>
 
-                            <h3 *ngIf="car.descuento > 0" class="font-weight-bold">Oferta: {{ car.precio | currency }}</h3>
+                                <h3 *ngIf="car.descuento === 0">{{ car.precio | currency }}</h3>
 
-                            <h3 *ngIf="car.descuento === 0">{{ car.precio | currency }}</h3>
+                                <p>{{ car.msg }}</p>
 
-                            <p>{{ car.msg }}</p>
+                            </td>
 
-                        </td>
+                            <td class="text-center">
 
-                        <td class="text-center">
+                                <input #input type="number" class="form-control text-center" min="1" name="cantidad" [value]="car.cantidad" (change)="cambiarCantidad(car, input.value)">
 
-                            <input #input type="number" class="form-control text-center" min="1" name="cantidad" [value]="car.cantidad" (change)="cambiarCantidad(car, input.value)">
+                            </td>
 
-                        </td>
+                            <td class="text-center font-weight-bold">{{ car.precioFinal | currency }}</td>
 
-                        <td class="text-center font-weight-bold">{{ car.precioFinal | currency }}</td>
+                            <td class="text-center">
 
-                        <td class="text-center">
+                                <button class="btn btn-danger" type="button" (click)="eliminarProducto(i)">
 
-                            <button class="btn btn-danger" type="button" (click)="eliminarProducto(i)">
+                                    Eliminar
+                
+                                </button>
 
-                                Eliminar
-            
-                            </button>
+                            </td>
 
-                        </td>
+                        </tr>
 
-                    </tr>
+                        <tr>
 
-                    <tr>
+                            <td colspan="2" rowspan="3" style="vertical-align: middle; text-align: center">
 
-                        <td colspan="2" rowspan="3" style="vertical-align: middle; text-align: center">
+                                <button type="button" class="btn btn-primary" (click)="enviarPedido(carrito)" *ngIf="vigente">RELIZAR PEDIDO</button>
 
-                            <button type="button" class="btn btn-primary" (click)="enviarPedido(carrito)" *ngIf="vigente">RELIZAR PEDIDO</button>
+                                <div class="alert alert-danger" role="alert" *ngIf="!vigente">En este momento no puedes realizar tu pedido, solo es una cotización.</div>
 
-                            <div class="alert alert-danger" role="alert" *ngIf="!vigente">En este momento no puedes realizar tu pedido, solo es una cotización.</div>
+                            </td>
 
-                        </td>
+                            <td class="text-right font-weight-bold text-uppercase">Sub-Total</td>
 
-                        <td class="text-right font-weight-bold text-uppercase">Sub-Total</td>
+                            <td class="text-right font-weight-bold">{{ subtotal | currency }}</td>
 
-                        <td class="text-right font-weight-bold">{{ subtotal | currency }}</td>
+                            <td></td>
 
-                        <td></td>
+                        </tr>
 
-                    </tr>
+                        <tr>
 
-                    <tr>
+                            <td class="text-right font-weight-bold text-uppercase" style="border-top-color: transparent!important;">Iva</td>
 
-                        <td class="text-right font-weight-bold text-uppercase" style="border-top-color: transparent!important;">Iva</td>
+                            <td class="text-right font-weight-bold" style="border-top-color: transparent!important;">{{ impuesto | currency }}</td>
 
-                        <td class="text-right font-weight-bold" style="border-top-color: transparent!important;">{{ impuesto | currency }}</td>
+                            <td style="border-top-color: transparent!important;"></td>
 
-                        <td style="border-top-color: transparent!important;"></td>
+                        </tr>
 
-                    </tr>
+                        <tr>
 
-                    <tr>
+                            <td class="text-right font-weight-bold text-uppercase" style="border-top-color: transparent!important;">Total</td>
 
-                        <td class="text-right font-weight-bold text-uppercase" style="border-top-color: transparent!important;">Total</td>
+                            <td class="text-right font-weight-bold" style="border-top-color: transparent!important;">{{ total | currency }}</td>
 
-                        <td class="text-right font-weight-bold" style="border-top-color: transparent!important;">{{ total | currency }}</td>
+                            <td style="border-top-color: transparent!important;"></td>
 
-                        <td style="border-top-color: transparent!important;"></td>
+                        </tr>
 
-                    </tr>
+                    </tbody>
 
-                </tbody>
+                </table>
 
-            </table>
+            </div>
 
         </div>
 

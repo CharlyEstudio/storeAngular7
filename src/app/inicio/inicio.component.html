@@ -16,13 +16,49 @@
 
 </div> -->
 
-<div class="row pt-3 pb-5">
+<div class="container">
 
-    <div class="col-12 ml-3 mr-3">
+    <div class="row pt-3 pb-5">
 
-        <h3>Promoción del Día</h3>
+        <div class="col-12">
 
-        <app-venta-dia></app-venta-dia>
+            <div class="row">
+
+                <div class="col-6">
+
+                    <h1 class="text-uppercase">
+
+                        <small>Las ofertas del mes</small>
+
+                    </h1>
+
+                </div>
+
+                <div class="col-6 btn-vermas">
+
+                    <button type="button" class="btn btn-default pull-right mt-1" (click)="irOfertas()">
+                        
+                        VEN MAS <span class="fa fa-chevron-right"></span>
+                    
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-12">
+
+            <hr>
+
+        </div>
+
+        <div class="col-12">
+
+            <app-venta-dia></app-venta-dia>
+
+        </div>
 
     </div>
 

@@ -13,6 +13,7 @@ import { ChartsModule } from 'ng2-charts';
 
 // Componentes - Páginas Internas
 import { DistComponent } from './interno/dist/dist.component';
+import { PedidoComponent } from './interno/pedido/pedido.component';
 import { ComprasComponent } from './interno/compras/compras.component';
 import { EdoCtaComponent } from './interno/edo-cta/edo-cta.component';
 import { FacturasComponent } from './interno/facturas/facturas.component';
@@ -36,7 +37,8 @@ import { GraficaLinealComponent } from '../componentes/grafica-lineal/grafica-li
         FavoritosComponent,
         OfertasComponent,
         PerfilComponent,
-        GraficaLinealComponent
+        GraficaLinealComponent,
+        PedidoComponent
     ],
     exports: [
         ComprasComponent

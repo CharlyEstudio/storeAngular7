@@ -1,336 +1,346 @@
-<div class="row">
+<div class="container">
 
-    <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+    <div class="row">
 
-        <h1>EJERCICIO DEL BONO DEL MES ACTUAL</h1>
+        <div class="col-lg-12 col-md-12 col-sm-12 text-center">
 
-    </div>
+            <h1>EJERCICIO DEL BONO DEL MES ACTUAL</h1>
 
-    <div class="col-lg-12 col-md-12 col-sm-12 text-right">
+        </div>
 
-        <h5>FECHA DE REVISIÓN EN LIBROS:
+        <div class="col-lg-12 col-md-12 col-sm-12 text-right">
 
-            <b>
+            <h5>FECHA DE REVISIÓN EN LIBROS:
 
-                <span>{{firstDate | date: 'dd-MM-yyyy'}} / {{fecha | date: 'dd-MM-yyyy'}}</span>
+                <b>
 
-            </b>
+                    <span>{{firstDate | date: 'dd-MM-yyyy'}} / {{fecha | date: 'dd-MM-yyyy'}}</span>
 
-        </h5>
+                </b>
 
-    </div>
+            </h5>
 
-    <div class="col-lg-6 col-md-6 col-sm-12">
+        </div>
 
-        <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-12">
 
-            <div class="col-lg-4 col-md-4 col-sm-12">
+            <div class="row">
 
-                <h5 class="text-uppercase">No. de Cuenta:</h5>
+                <div class="col-lg-4 col-md-4 col-sm-12">
 
-            </div>
+                    <h5 class="text-uppercase">No. de Cuenta:</h5>
 
-            <div class="col-lg-8 col-md-8 col-sm-12">
+                </div>
 
-                <h5 class="text-uppercase"><b>{{numero}}/{{idFerrum}}</b></h5>
+                <div class="col-lg-8 col-md-8 col-sm-12">
 
-            </div>
+                    <h5 class="text-uppercase"><b>{{numero}}/{{idFerrum}}</b></h5>
 
-            <div class="col-lg-4 col-md-4 col-sm-12">
+                </div>
 
-                <h5 class="text-uppercase">Cliente:</h5>
+                <div class="col-lg-4 col-md-4 col-sm-12">
 
-            </div>
+                    <h5 class="text-uppercase">Cliente:</h5>
 
-            <div class="col-lg-8 col-md-8 col-sm-12">
+                </div>
 
-                <h5 class="text-uppercase"><b>{{nombre}}</b></h5>
+                <div class="col-lg-8 col-md-8 col-sm-12">
+
+                    <h5 class="text-uppercase"><b>{{nombre}}</b></h5>
+
+                </div>
 
             </div>
 
         </div>
 
-    </div>
+        <div class="col-lg-6 col-md-6 col-sm-12"></div>
 
-    <div class="col-lg-6 col-md-6 col-sm-12"></div>
+        <div class="col-lg-12 col-md-12 col-sm-12 text-center">
 
-    <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+            <h3 class="font-weight-bold">INFORMACIÓN FINANCIERA</h3>
 
-        <h3 class="font-weight-bold">INFORMACIÓN FINANCIERA</h3>
-
-    </div>
-
-    <div class="clearfix"></div>
-
-    <hr>
-
-    <div class="col-lg-6 col-md-6 col-sm-12">
-
-        <h5 class="font-weight-bold">COMPORTAMIENTO</h5>
+        </div>
 
         <div class="clearfix"></div>
 
         <hr>
 
-        <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-12">
 
-            <div class="col-lg-4 col-md-4 col-sm-12">
+            <h5 class="font-weight-bold">COMPORTAMIENTO</h5>
 
-                <h5 class="text-uppercase">saldo actual</h5>
+            <div class="clearfix"></div>
 
-            </div>
+            <hr>
 
-            <div class="col-lg-8 col-md-8 col-sm-12 text-right">
+            <div class="row">
 
-                <h5 class="text-uppercase">
+                <div class="col-lg-4 col-md-4 col-sm-12">
 
-                    <span class="font-weight-bold" [ngClass]="{'text-success': saldoTotal === 0, 'text-danger': saldoTotal > 0}">mxn {{saldoTotal | currency}}</span>
+                    <h5 class="text-uppercase">saldo actual</h5>
 
-                </h5>
+                </div>
 
-            </div>
+                <div class="col-lg-8 col-md-8 col-sm-12 text-right">
 
-            <div class="col-lg-4 col-md-4 col-sm-12">
+                    <h5 class="text-uppercase">
 
-                <h5 class="text-uppercase">saldo vencido</h5>
+                        <span class="font-weight-bold" [ngClass]="{'text-success': saldoTotal === 0, 'text-danger': saldoTotal > 0}">mxn {{saldoTotal | currency}}</span>
 
-            </div>
+                    </h5>
 
-            <div class="col-lg-8 col-md-8 col-sm-12 text-right">
+                </div>
 
-                <h5 class="text-uppercase">
+                <div class="col-lg-4 col-md-4 col-sm-12">
 
-                    <span class="font-weight-bold" [ngClass]="{'text-danger': saldoVencido > 0, 'text-success': saldoVencido === 0}">mxn {{saldoVencido | currency}}</span>
+                    <h5 class="text-uppercase">saldo vencido</h5>
 
-                </h5>
+                </div>
+
+                <div class="col-lg-8 col-md-8 col-sm-12 text-right">
+
+                    <h5 class="text-uppercase">
+
+                        <span class="font-weight-bold" [ngClass]="{'text-danger': saldoVencido > 0, 'text-success': saldoVencido === 0}">mxn {{saldoVencido | currency}}</span>
+
+                    </h5>
+
+                </div>
 
             </div>
 
         </div>
 
-    </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 text-center pt-5">
 
-    <div class="col-lg-12 col-md-12 col-sm-12 text-center pt-5">
+            <h3 class="font-weight-bold">COMPORTAMIENTO ACTUAL</h3>
 
-        <h3 class="font-weight-bold">COMPORTAMIENTO ACTUAL</h3>
-
-    </div>
-
-    <div class="clearfix"></div>
-
-    <hr>
-
-    <div class="col-lg-6 col-md-6 col-sm-12 pt-3 pb-5">
-
-        <h5 class="font-weight-bold">COMPRAS</h5>
+        </div>
 
         <div class="clearfix"></div>
 
         <hr>
 
-        <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-12 pt-3 pb-5">
 
-            <div class="col-lg-4 col-md-4 col-sm-12">
+            <h5 class="font-weight-bold">COMPRAS</h5>
 
-                <h5 class="text-uppercase">saldo actual</h5>
+            <div class="clearfix"></div>
 
-            </div>
+            <hr>
 
-            <div class="col-lg-8 col-md-8 col-sm-12 text-right">
+            <div class="row">
 
-                <h2 class="text-uppercase">
+                <div class="col-lg-4 col-md-4 col-sm-12">
 
-                    <span class="font-weight-bold" [ngClass]="{'text-success': compras >= 15000, 'text-danger': compras < 15000}">mxn {{compras | currency}}</span>
+                    <h5 class="text-uppercase">saldo actual</h5>
 
-                </h2>
+                </div>
 
-            </div>
+                <div class="col-lg-8 col-md-8 col-sm-12 text-right">
 
-            <div class="col-lg-12 col-md-12 col-sm-12">
+                    <h2 class="text-uppercase">
 
-                <blockquote class="blockquote" style="height: 100%!important;">
+                        <span class="font-weight-bold" [ngClass]="{'text-success': compras >= 15000, 'text-danger': compras < 15000}">mxn {{compras | currency}}</span>
 
-                    <p class="mb-0">Sus compras trimestrales debe ser mayor o igual a <span class="font-weight-bold text-blue">$ 15,000.00</span> pesos.</p>
+                    </h2>
 
-                    <footer class="blockquote-footer">No entran los códigos que inicien con <cite title="Source Title">8/5/6</cite>, excepto de la marca <b>Klintek</b>.</footer>
+                </div>
 
-                </blockquote>
+                <div class="col-lg-12 col-md-12 col-sm-12">
 
-            </div>
+                    <blockquote class="blockquote" style="height: 100%!important;">
 
-        </div>
+                        <p class="mb-0">Sus compras trimestrales debe ser mayor o igual a <span class="font-weight-bold text-blue">$ 15,000.00</span> pesos.</p>
 
-    </div>
+                        <footer class="blockquote-footer">No entran los códigos que inicien con <cite title="Source Title">8/5/6</cite>, excepto de la marca <b>Klintek</b>.</footer>
 
-    <div class="col-lg-6 col-md-6 col-sm-12 text-center pt-3 pb-5 centro">
+                    </blockquote>
 
-        <div class="jumbotron" style="margin-bottom: 0px!important" [ngClass]="{'bg-danger': compras < 15000 && compras < 5000, 'bg-info': compras >= 7500, 'bg-success': compras >= 15000}">
-
-            <h1 class="text-white">
-
-                <i class="fa fa-exclamation-circle " aria-hidden="true" *ngIf="compras < 15000 || compras >= 7500"></i>
-
-                <span *ngIf="compras < 15000 && compras < 5000">No Pasa</span>
-
-                <span *ngIf="compras >= 5000">Posible</span>
-
-                <i class="mdi mdi-check-circle" aria-hidden="true" *ngIf="compras >= 15000"></i>
-
-                <span *ngIf="compras >= 15000">Correcto</span>
-
-            </h1>
-
-        </div>
-
-    </div>
-
-    <div class="clearfix"></div>
-
-    <hr>
-
-    <div class="col-lg-6 col-md-6 col-sm-12  pt-3 pb-5">
-
-        <h5 class="font-weight-bold">FACTURAS VENCIDAS</h5>
-
-        <div class="clearfix"></div>
-
-        <hr>
-
-        <div class="row">
-
-            <div class="col-lg-6 col-md-6 col-sm-12">
-
-                <h5 class="text-uppercase">numero de documentos</h5>
-
-            </div>
-
-            <div class="col-lg-6 col-md-6 col-sm-12 text-right">
-
-                <h2 class="text-uppercase">
-
-                    <span class="font-weight-bold" [ngClass]="{'text-success': numVenc === 0, 'text-danger': numVenc > 0}">{{numVenc | number}}</span>
-
-                </h2>
-
-            </div>
-
-            <div class="col-lg-12 col-md-12 col-sm-12">
-
-                <blockquote class="blockquote" style="height: 100%!important;">
-
-                    <p class="mb-0">No debe tener ninguna factura vencida antes de que termine el trimestre.</p>
-
-                    <footer class="blockquote-footer">Excepto si el último día de pago cae en <cite title="Source Title"><b>Domingo</b></cite>, se pasa al día siguiente.</footer>
-
-                </blockquote>
+                </div>
 
             </div>
 
         </div>
 
-    </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 text-center pt-3 pb-5 centro">
 
-    <div class="col-lg-6 col-md-6 col-sm-12 text-center pt-3 pb-5 centro">
+            <div class="jumbotron" style="margin-bottom: 0px!important" [ngClass]="{'bg-danger': compras < 15000 && compras < 5000, 'bg-info': compras >= 7500, 'bg-success': compras >= 15000}">
 
-        <div class="jumbotron" style="margin-bottom: 0px!important" [ngClass]="{'bg-danger': numVenc > 0, 'bg-success': numVenc === 0}">
+                <h1 class="text-white">
 
-            <h1 class="text-white">
+                    <i class="fa fa-exclamation-circle " aria-hidden="true" *ngIf="compras < 15000 || compras >= 7500"></i>
 
-                <i class="fa fa-exclamation-circle" aria-hidden="true" *ngIf="numVenc > 0"></i>
+                    <span *ngIf="compras < 15000 && compras < 5000">No Pasa</span>
 
-                <span *ngIf="numVenc > 0">No pasa</span>
+                    <span *ngIf="compras >= 5000">Posible</span>
 
-                <i class="mdi mdi-check-circle" aria-hidden="true" *ngIf="numVenc === 0"></i>
+                    <i class="mdi mdi-check-circle" aria-hidden="true" *ngIf="compras >= 15000"></i>
 
-                <span *ngIf="numVenc === 0">Correcto</span>
+                    <span *ngIf="compras >= 15000">Correcto</span>
 
-            </h1>
-
-        </div>
-
-    </div>
-
-    <div class="clearfix"></div>
-
-    <hr>
-
-    <div class="col-lg-6 col-md-6 col-sm-12  pt-3 pb-5">
-
-        <h5>COMPRAS SEMANALES EN EL TRIMESTRE</h5>
-
-        <div class="clearfix"></div>
-
-        <hr>
-
-        <div class="row">
-
-            <div class="col-lg-12 col-md-12 col-sm-12 text-center">
-
-                <h4 class="font-weight-bold">Año {{fec | date: 'yyyy'}}</h4>
-
-            </div>
-
-            <div class="col-lg-12 col-md-12 col-sm-12">
-
-                <app-grafica-lineal [lineChartColors]="lineChartColors" [lineChartLabels]="lineChartLabels" [lineChartOptions]="lineChartOptions" [lineChartData]="lineChartData"></app-grafica-lineal>
-
-            </div>
-
-            <div class="col-lg-12 col-md-12 col-sm-12">
-
-                <blockquote class="blockquote" style="height: 100%!important;">
-
-                    <p class="mb-0">Debe de tener registrado por lo menos 1 compra por semana distinta.</p>
-
-                    <footer class="blockquote-footer">No se puede registrar <cite title="Source Title"><b>4 compras al principio o final del mes</b></cite>.</footer>
-
-                </blockquote>
+                </h1>
 
             </div>
 
         </div>
 
-    </div>
+        <div class="col-lg-12 col-md-12 col-sm-12">
 
-    <div class="col-lg-6 col-md-6 col-sm-12 text-center  pt-3 pb-5 centro">
-
-        <div class="jumbotron" style="margin-bottom: 0px!important" [ngClass]="{'bg-danger': pasaCompras === false, 'bg-success': pasaCompras === true}">
-
-            <h1 class="text-white">
-
-                <i class="fa fa-exclamation-circle" aria-hidden="true" *ngIf="pasaCompras === false"></i>
-
-                <span class="text-white" *ngIf="pasaCompras === false">No Pasa</span>
-
-                <i class="mdi mdi-check-circle" aria-hidden="true" *ngIf="pasaCompras"></i>
-
-                <span class="text-white" *ngIf="pasaCompras">Correcto</span>
-
-            </h1>
+            <hr>
 
         </div>
 
-    </div>
+        <div class="col-lg-6 col-md-6 col-sm-12  pt-3 pb-5">
 
-    <div class="clearfix"></div>
+            <h5 class="font-weight-bold">FACTURAS VENCIDAS</h5>
 
-    <hr>
+            <div class="clearfix"></div>
 
-    <div class="col-lg-12 col-md-12 col-sm-12 pt-5">
+            <hr>
 
-        <div class="jumbotron" [ngClass]="{'bg-danger': pasaComision === false, 'bg-success': pasaComision === true}">
+            <div class="row">
 
-            <h1 class="text-white text-center text-uppercase" *ngIf="pasaComision">
+                <div class="col-lg-6 col-md-6 col-sm-12">
 
-                <span>!Felicidades está calificando para bono!</span>
+                    <h5 class="text-uppercase">numero de documentos</h5>
 
-            </h1>
+                </div>
 
-            <h1 class="text-white text-center text-uppercase" *ngIf="pasaComision === false">
+                <div class="col-lg-6 col-md-6 col-sm-12 text-right">
 
-                <span>No califica para bono.</span>
+                    <h2 class="text-uppercase">
 
-            </h1>
+                        <span class="font-weight-bold" [ngClass]="{'text-success': numVenc === 0, 'text-danger': numVenc > 0}">{{numVenc | number}}</span>
+
+                    </h2>
+
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-sm-12">
+
+                    <blockquote class="blockquote" style="height: 100%!important;">
+
+                        <p class="mb-0">No debe tener ninguna factura vencida antes de que termine el trimestre.</p>
+
+                        <footer class="blockquote-footer">Excepto si el último día de pago cae en <cite title="Source Title"><b>Domingo</b></cite>, se pasa al día siguiente.</footer>
+
+                    </blockquote>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-6 col-md-6 col-sm-12 text-center pt-3 pb-5 centro">
+
+            <div class="jumbotron" style="margin-bottom: 0px!important" [ngClass]="{'bg-danger': numVenc > 0, 'bg-success': numVenc === 0}">
+
+                <h1 class="text-white">
+
+                    <i class="fa fa-exclamation-circle" aria-hidden="true" *ngIf="numVenc > 0"></i>
+
+                    <span *ngIf="numVenc > 0">No pasa</span>
+
+                    <i class="mdi mdi-check-circle" aria-hidden="true" *ngIf="numVenc === 0"></i>
+
+                    <span *ngIf="numVenc === 0">Correcto</span>
+
+                </h1>
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-12 col-md-12 col-sm-12">
+
+            <hr>
+
+        </div>
+
+        <div class="col-lg-6 col-md-6 col-sm-12  pt-3 pb-5">
+
+            <h5>COMPRAS SEMANALES EN EL TRIMESTRE</h5>
+
+            <div class="clearfix"></div>
+
+            <hr>
+
+            <div class="row">
+
+                <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+
+                    <h4 class="font-weight-bold">Año {{fec | date: 'yyyy'}}</h4>
+
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-sm-12">
+
+                    <app-grafica-lineal [lineChartColors]="lineChartColors" [lineChartLabels]="lineChartLabels" [lineChartOptions]="lineChartOptions" [lineChartData]="lineChartData"></app-grafica-lineal>
+
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-sm-12">
+
+                    <blockquote class="blockquote" style="height: 100%!important;">
+
+                        <p class="mb-0">Debe de tener registrado por lo menos 1 compra por semana distinta.</p>
+
+                        <footer class="blockquote-footer">No se puede registrar <cite title="Source Title"><b>4 compras al principio o final del mes</b></cite>.</footer>
+
+                    </blockquote>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-6 col-md-6 col-sm-12 text-center  pt-3 pb-5 centro">
+
+            <div class="jumbotron" style="margin-bottom: 0px!important" [ngClass]="{'bg-danger': pasaCompras === false, 'bg-success': pasaCompras === true}">
+
+                <h1 class="text-white">
+
+                    <i class="fa fa-exclamation-circle" aria-hidden="true" *ngIf="pasaCompras === false"></i>
+
+                    <span class="text-white" *ngIf="pasaCompras === false">No Pasa</span>
+
+                    <i class="mdi mdi-check-circle" aria-hidden="true" *ngIf="pasaCompras"></i>
+
+                    <span class="text-white" *ngIf="pasaCompras">Correcto</span>
+
+                </h1>
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-12 col-md-12 col-sm-12">
+
+            <hr>
+
+        </div>
+
+        <div class="col-lg-12 col-md-12 col-sm-12 pt-5">
+
+            <div class="jumbotron" [ngClass]="{'bg-danger': pasaComision === false, 'bg-success': pasaComision === true}">
+
+                <h1 class="text-white text-center text-uppercase" *ngIf="pasaComision">
+
+                    <span>!Felicidades está calificando para bono!</span>
+
+                </h1>
+
+                <h1 class="text-white text-center text-uppercase" *ngIf="pasaComision === false">
+
+                    <span>No califica para bono.</span>
+
+                </h1>
+
+            </div>
 
         </div>
 

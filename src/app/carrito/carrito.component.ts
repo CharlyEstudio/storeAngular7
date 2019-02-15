@@ -173,14 +173,16 @@ export class CarritoComponent implements OnInit {
     let xml;
 
     xml = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' +
-          '<cfdi:Comprobante Version="3.3" Serie="W"></cfdi:Comprobante><cfdi:Receptor rfc="' +
-          this.cliente.rfc + '" clinumero="' + this.cliente.numero + '" /><cfdi:Conceptos>';
+          '<cfdi:Comprobante Version="3.3" Serie="W">' +
+            '<cfdi:Receptor Rfc="' + this.cliente.rfc + '" CliNumero="' + this.cliente.numero + '" />' +
+            '<cfdi:Conceptos>';
 
     for (let i = 0; i < pedido.length; i++) {
-      xml += '<cfdi:Concepto NoIdentificacion="' + pedido[i].articuloid + '" cantidad="' + pedido[i].cantidad + '"></cfdi:Concepto>';
+      xml += '<cfdi:Concepto NoIdentificacion="' + pedido[i].articuloid + '" cantidad="' + pedido[i].cantidad + '"/>';
     }
 
-    xml += '</cfdi:Conceptos></cfdi:Comprobante>';
+    xml +=  '</cfdi:Conceptos>' +
+          '</cfdi:Comprobante>';
 
     swal({
       title: 'Su pedido será procesado, ¿Seguro que desea enviar su pedido?',

@@ -1,76 +1,80 @@
-<div class="row mas-vendidos pb-5" *ngIf="topTen.length > 0" style="height: 500px!important">
+<div class="container">
 
-    <div class="col-lg-12 col-md-12 col-sm-12">
+    <div class="row mas-vendidos pb-5" *ngIf="topTen.length > 0">
 
-        <h1 class="text-uppercase">Productos mas comprados</h1>
+        <div class="col-lg-12 col-md-12 col-sm-12">
 
-    </div>
+            <h1 class="text-uppercase">Productos mas comprados</h1>
 
-    <div class="col-12 col-lg-3 col-md-6 col-sm-12 pt-2" *ngFor="let top of topTen">
+        </div>
 
-        <div class="card">
+        <div class="col-12 col-lg-3 col-md-6 col-sm-12 pt-2" *ngFor="let top of topTen">
 
-            <div class="card-body text-center">
+            <div class="card">
 
-                <img [src]="top.IMAGEN" class="img-fluig" width="200">
+                <div class="card-body text-center">
 
-                <h5 class="pt-2">{{top.NOMBRE}}</h5>
+                    <img [src]="top.IMAGEN" class="img-fluig" width="200">
 
-                <h5 class="text-muted">
+                    <h5 class="pt-2">{{top.NOMBRE}}</h5>
 
-                    <small>
-                    
-                      {{top.CLAVE}} | {{top.CODIGO}}
-                    
-                    </small>
-
-                </h5>
-
-                <h3>{{top.ENTREGADO | number}} piezas</h3>
-
-                <div class="centro" style="height: 95px; min-height: 95px; max-height: 95px;">
-
-                    <h6 class="text-muted" *ngIf="top.DESCUENTO > 0">
+                    <h5 class="text-muted">
 
                         <small>
-
-                            <s>{{ top.PRECIO | currency }}</s>
-                            
+                        
+                        {{top.CLAVE}} | {{top.CODIGO}}
+                        
                         </small>
 
-                    </h6>
+                    </h5>
 
-                    <h4 class="font-weight-bold text-danger" *ngIf="top.DESCUENTO > 0">
+                    <h3>{{top.ENTREGADO | number}} piezas</h3>
 
-                        {{ top.PRECIO | currency }}
+                    <div class="centro" style="height: 95px; min-height: 95px; max-height: 95px;">
 
-                    </h4>
+                        <h6 class="text-muted" *ngIf="top.DESCUENTO > 0">
 
-                    <h4 class="font-weight-bold text-danger" *ngIf="top.DESCUENTO === 0">
+                            <small>
 
-                        {{ top.PRECIONETO | currency }}
+                                <s>{{ top.PRECIO | currency }}</s>
+                                
+                            </small>
 
-                    </h4>
+                        </h6>
 
-                    <h3 *ngIf="top.DESCUENTO > 0">
+                        <h4 class="font-weight-bold text-danger" *ngIf="top.DESCUENTO > 0">
 
-                        <span class="badge badge-inverse">{{ top.DESCUENTO }}% de Descuento</span>
+                            {{ top.PRECIO | currency }}
+
+                        </h4>
+
+                        <h4 class="font-weight-bold text-danger" *ngIf="top.DESCUENTO === 0">
+
+                            {{ top.PRECIONETO | currency }}
+
+                        </h4>
+
+                        <h3 *ngIf="top.DESCUENTO > 0">
+
+                            <span class="badge badge-inverse">{{ top.DESCUENTO }}% de Descuento</span>
+
+                        </h3>
+
+                    </div>
+
+                    <h3>
+
+                        <span class="badge badge-light">{{ top.MARCA }}</span>
 
                     </h3>
 
+                    <button class="btn btn-danger" type="button" (click)="irA(top)">
+
+                        Pedir
+
+                    </button>
+
                 </div>
-
-                <h3>
-
-                    <span class="badge badge-light">{{ top.MARCA }}</span>
-
-                </h3>
-
-                <button class="btn btn-danger" type="button" (click)="irA(top)">
-
-                    Pedir
-
-                </button>
 
             </div>
 
@@ -78,19 +82,19 @@
 
     </div>
 
-</div>
+    <div class="row">
 
-<div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 alert alert-info" *ngIf="topTen.length === 0 && sindato">
 
-    <div class="col-lg-12 col-md-12 col-sm-12 alert alert-info" *ngIf="topTen.length === 0 && sindato" style="height: 500px!important">
+            <span>No tiene compras en este mes.</span>
 
-        <span>No tiene compras en este mes.</span>
+        </div>
 
-    </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 alert alert-success" *ngIf="topTen.length === 0 && !sindato">
 
-    <div class="col-lg-12 col-md-12 col-sm-12 alert alert-success" *ngIf="topTen.length === 0 && !sindato" style="height: 500px!important">
+            <span>Obteniendo tus compras del mes.</span>
 
-        <span>Obteniendo tus compras del mes.</span>
+        </div>
 
     </div>
 

@@ -99,4 +99,10 @@ export class ShoppingService {
 
     return this.http.post(url, xml);
   }
+
+  descPromotruper() {
+    const url = 'http://177.244.55.122:3001/cobertura/promotruper/desc';
+
+    return this.http.get(url);
+  }
 }

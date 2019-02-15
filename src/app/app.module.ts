@@ -43,6 +43,7 @@ import { VentaDiaComponent } from './componentes/venta-dia/venta-dia.component';
 import { DescripcionComponent } from './descripcion/descripcion.component';
 import { BuscarComponent } from './componentes/buscar/buscar.component';
 import { GraficaBarrasComponent } from './componentes/grafica-barras/grafica-barras.component';
+import { OfertaComponent } from './oferta/oferta.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,8 @@ import { GraficaBarrasComponent } from './componentes/grafica-barras/grafica-bar
     VentaDiaComponent,
     DescripcionComponent,
     BuscarComponent,
-    GraficaBarrasComponent
+    GraficaBarrasComponent,
+    OfertaComponent
   ],
   imports: [
     BrowserModule,
