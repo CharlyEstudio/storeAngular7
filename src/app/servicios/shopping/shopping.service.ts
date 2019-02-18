@@ -8,6 +8,9 @@ import { BehaviorSubject } from 'rxjs';
 import { Producto } from 'src/app/modelos/productos.model';
 import { XmlString } from 'src/app/modelos/xml.model';
 
+// Servicios
+import { UsuarioServicesService } from '../usuario-servicios/usuario-services.service';
+
 @Injectable()
 export class ShoppingService {
 
@@ -15,11 +18,14 @@ export class ShoppingService {
   private itemsCarrito: Producto[] = [];
 
   dato: any[] = [];
+  token: string;
 
   constructor(
     private router: Router,
-    private http: HttpClient
+    private http: HttpClient,
+    private _usuarioService: UsuarioServicesService
   ) {
+    this.token = this._usuarioService.token;
     this.subject.subscribe((data) => {
       let num;
       if (data) {
@@ -95,13 +101,47 @@ export class ShoppingService {
   }
 
   enviarPedido(xml: XmlString) {
-    const url = 'http://177.244.55.122:3001/ferrum/subir/pedido';
+    let url = 'http://177.244.55.122:3001/ferrum/subir/pedido';
+
+    url += '?token=' + this.token;
 
     return this.http.post(url, xml);
   }
 
   descPromotruper() {
     const url = 'http://177.244.55.122:3001/cobertura/promotruper/desc';
+
+    return this.http.get(url);
+  }
+
+  porBajar(usuario: any, fecha: any) {
+    const url = 'http://177.244.55.122:3001/bigdata/obtener/porbajar/' + usuario.idFerrum + '/' + fecha;
+
+    url += '?token=' + this.token;
+
+    return this.http.get(url);
+  }
+
+  porSurtir(usuario: any, fecha: any) {
+    const url = 'http://177.244.55.122:3001/bigdata/obtener/porsurtir/' + usuario.idFerrum + '/' + fecha;
+
+    url += '?token=' + this.token;
+
+    return this.http.get(url);
+  }
+
+  facturado(usuario: any, fecha: any) {
+    const url = 'http://177.244.55.122:3001/bigdata/obtener/facturados/' + usuario.idFerrum + '/' + fecha;
+
+    url += '?token=' + this.token;
+
+    return this.http.get(url);
+  }
+
+  partidas(docid: any) {
+    const url = 'http://177.244.55.122:3001/bigdata/obtener/partidas/' + docid ;
+
+    url += '?token=' + this.token;
 
     return this.http.get(url);
   }

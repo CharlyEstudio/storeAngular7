@@ -4,7 +4,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { UsuarioServicesService, ProductosService } from 'src/app/servicios/servicios.index';
 
 // Modelos
-import { Producto } from 'src/app/modelos/productos.model';
+import { Usuario } from 'src/app/modelos/usuarios.model';
 
 @Component({
   selector: 'app-pedido',
@@ -14,6 +14,8 @@ import { Producto } from 'src/app/modelos/productos.model';
 export class PedidoComponent implements OnInit {
 
   @ViewChild('input')  input: ElementRef;
+
+  cliente: Usuario;
 
   precio: number = 3;
   productos: any[] = [];
@@ -27,12 +29,14 @@ export class PedidoComponent implements OnInit {
   // Booleanos
   encontrado: boolean = true;
   repetido: boolean = false;
+  vigente: boolean = false;
 
   constructor(
     private _usuarioService: UsuarioServicesService,
     private _productoService: ProductosService
   ) {
     this.precio = this._usuarioService.usuario.precio;
+    this.cliente = this._usuarioService.usuario;
     if (localStorage.getItem('pedidoDist') !== null) {
       this.productos = JSON.parse(localStorage.getItem('pedidoDist'));
       this.subtotal = Number(localStorage.getItem('subtotalPed'));
@@ -42,6 +46,17 @@ export class PedidoComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (this._usuarioService.usuario !== null) {
+      this.cliente = this._usuarioService.usuario;
+      if (localStorage.getItem('vigente') === 'true') {
+        this.vigente = true;
+      } else {
+        this.vigente = false;
+      }
+    } else {
+      this.vigente = false;
+      console.log('Aquí va el código si es cliente público.');
+    }
   }
 
   agregar(valor: any) {
@@ -125,6 +140,82 @@ export class PedidoComponent implements OnInit {
     localStorage.setItem('subtotalPed', String(this.subtotal));
     localStorage.setItem('ivaPed', String(this.iva));
     localStorage.setItem('totalPed', String(this.total));
+  }
+
+  eliminarTodo() {
+    this.subtotal = 0;
+    this.iva = 0;
+    this.total = 0;
+    this.productos = [];
+    localStorage.removeItem('pedidoDist');
+    localStorage.removeItem('subtotalPed');
+    localStorage.removeItem('ivaPed');
+    localStorage.removeItem('totalPed');
+  }
+
+  eliminarProd(index: any) {
+    this.productos.splice(index, 1);
+    this.subtotal = 0;
+    this.iva = 0;
+    this.total = 0;
+
+    localStorage.removeItem('pedidoDist');
+    localStorage.removeItem('subtotalPed');
+    localStorage.removeItem('ivaPed');
+    localStorage.removeItem('totalPed');
+
+    for (let i = 0; i < this.productos.length; i++) {
+      this.subtotal += this.productos[i].precioFinal;
+      this.total += this.productos[i].precioTot;
+
+      if (this.productos[i].producto.iva > 0) {
+        this.iva += this.productos[i].precioTot - this.productos[i].precioFinal;
+      }
+    }
+
+    localStorage.setItem('pedidoDist', JSON.stringify(this.productos));
+    localStorage.setItem('subtotalPed', String(this.subtotal));
+    localStorage.setItem('ivaPed', String(this.iva));
+    localStorage.setItem('totalPed', String(this.total));
+  }
+
+  procesar() {
+    let xml;
+
+    xml = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' +
+          '<cfdi:Comprobante Version="3.3" Serie="W">' +
+            '<cfdi:Receptor Rfc="' + this.cliente.rfc + '" CliNumero="' + this.cliente.numero + '" />' +
+            '<cfdi:Conceptos>';
+
+    for (let i = 0; i < this.productos.length; i++) {
+      xml += '<cfdi:Concepto NoIdentificacion="' + this.productos[i].articuloid + '" cantidad="' + this.productos[i].cantidad + '"/>';
+    }
+
+    xml +=  '</cfdi:Conceptos>' +
+          '</cfdi:Comprobante>';
+
+    swal({
+      title: 'Su pedido será procesado, ¿Seguro que desea enviar su pedido?',
+      icon: 'warning',
+      buttons: {
+        cancel: true,
+        confirm: true
+      }
+    })
+    .then(( status ) => {
+      if (!status) { return null; }
+
+      const enviarXml: XmlString = {
+        texto: xml
+      };
+
+      this._shoppingCar.enviarPedido(enviarXml).subscribe((info: any) => {
+        this.carrito = [];
+        localStorage.removeItem('carrito');
+        this._shoppingCar.clearCarrito();
+        this.router.navigate(['/inicio']);
+      });
+    });
   }
 
 }

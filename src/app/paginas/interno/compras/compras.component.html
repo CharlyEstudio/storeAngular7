@@ -2,7 +2,7 @@
 
     <div class="col-lg-12 col-md-12 col-sm-12 pb-4">
 
-        <h1>MIS COMPRAS</h1>
+        <h1>MIS PEDIDOS</h1>
 
     </div>
 
@@ -18,7 +18,7 @@
 
                     <p class="text-white">Pedido</p>
 
-                    <h3 class="text-white font-light">Tienes <span class="font-bold">#</span> pedido(s)<br> en espera.</h3>
+                    <h3 class="text-white font-light">Tienes <span class="font-bold">{{ porBajarCant | number }}</span> pedido(s)<br> en espera.</h3>
 
                 </div>
 
@@ -40,7 +40,7 @@
 
                     <p class="text-white">Surtido</p>
 
-                    <h3 class="text-white font-light">Hay <span class="font-bold">#</span> pedido<br> en proceso.</h3>
+                    <h3 class="text-white font-light">Hay <span class="font-bold">{{ porSurtirCant | number }}</span> pedido(s)<br> en proceso.</h3>
 
                 </div>
 
@@ -62,7 +62,7 @@
 
                     <p class="text-white">Guía</p>
 
-                    <h3 class="text-white font-light">Hay <span class="font-bold">#</span> pedido<br> empaquetándose.</h3>
+                    <h3 class="text-white font-light">Hay <span class="font-bold">{{ facturadoCant | number }}</span> pedido(s)<br> empaquetándose.</h3>
 
                 </div>
 
@@ -84,7 +84,7 @@
 
                     <p class="text-white">Entrega</p>
 
-                    <h3 class="text-white font-light">Hay <span class="font-bold">#</span> pedido<br> en ruta.</h3>
+                    <h3 class="text-white font-light">Hay <span class="font-bold">#</span> pedido<br> en ruta. <span class="badge badge-danger">offline</span></h3>
 
                 </div>
 
@@ -108,7 +108,7 @@
 
         <div class="table-responsive">
 
-            <table class="table">
+            <table class="table table-sm">
 
                 <thead>
 
@@ -116,7 +116,19 @@
 
                         <th>Pedido</th>
 
-                        <th>Situación</th>
+                        <th>Captura</th>
+
+                        <th>Hora</th>
+
+                        <th>Vence</th>
+
+                        <th>Subtotal</th>
+
+                        <th>Impuestos</th>
+
+                        <th>Total</th>
+
+                        <th>Estado</th>
 
                     </tr>
 
@@ -124,17 +136,197 @@
 
                 <tbody>
 
-                    <tr>
+                    <tr *ngFor="let pb of porBajar; let i = index">
 
-                        <td>#</td>
+                        <td>
 
-                        <td>Situación actual del pedido.</td>
+                            <button type="button" class="btn btn-success btn-block font-weight-bold" data-toggle="modal" data-target="#modalPartidas" (click)="openModal(pb, 'EN ESPERA')">{{ pb.NUMERO | number }}</button>
+
+                        </td>
+
+                        <td>{{ pb.FECCAP | date: 'dd-MM-yyyy' }}</td>
+
+                        <td>{{ pb.HORA }}</td>
+
+                        <td>{{ pb.VENCE | date: 'dd-MM-yyyy' }}</td>
+
+                        <td>{{ (pb.SUBTOTAL1 + pb.SUBTOTAL2 ) | currency }}</td>
+
+                        <td>{{ pb.IMPUESTO | currency }}</td>
+
+                        <td>{{ pb.TOTAL | currency }}</td>
+
+                        <td>
+
+                            <span class="badge badge-info">EN ESPERA</span>
+
+                        </td>
+
+                    </tr>
+
+                    <tr *ngFor="let ps of porSurtir; let i = index">
+
+                        <td>
+
+                            <button type="button" class="btn btn-success btn-block font-weight-bold" data-toggle="modal" data-target="#modalPartidas" (click)="openModal(ps, 'EN PROCESO')">{{ ps.NUMERO | number }}</button>
+
+                        </td>
+
+                        <td>{{ ps.FECCAP | date: 'dd-MM-yyyy' }}</td>
+
+                        <td>{{ ps.HORA }}</td>
+
+                        <td>{{ ps.VENCE | date: 'dd-MM-yyyy' }}</td>
+
+                        <td>{{ (ps.SUBTOTAL1 + ps.SUBTOTAL2 ) | currency }}</td>
+
+                        <td>{{ ps.IMPUESTO | currency }}</td>
+
+                        <td>{{ ps.TOTAL | currency }}</td>
+
+                        <td>
+
+                            <span class="badge badge-primary">EN PROCESO</span>
+
+                        </td>
+
+                    </tr>
+
+                    <tr *ngFor="let fac of facturado; let i = index">
+
+                        <td>
+
+                            <button type="button" class="btn btn-success btn-block font-weight-bold" data-toggle="modal" data-target="#modalPartidas" (click)="openModal(fac, 'EMBARCANDO')">{{ fac.NUMERO | number }}</button>
+
+                        </td>
+
+                        <td>{{ fac.FECCAP | date: 'dd-MM-yyyy' }}</td>
+
+                        <td>{{ fac.HORA }}</td>
+
+                        <td>{{ fac.VENCE | date: 'dd-MM-yyyy' }}</td>
+
+                        <td>{{ (fac.SUBTOTAL1 + fac.SUBTOTAL2 ) | currency }}</td>
+
+                        <td>{{ fac.IMPUESTO | currency }}</td>
+
+                        <td>{{ fac.TOTAL | currency }}</td>
+
+                        <td>
+
+                            <span class="badge badge-danger">EMBARCANDO</span>
+
+                        </td>
 
                     </tr>
 
                 </tbody>
 
             </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div id="modalPartidas" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="modalPartidas" aria-hidden="true">
+
+    <div class="modal-dialog modal-lg" style="max-width: 95%!important;">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <h5 class="modal-title" id="exampleModalLabel">Partidas de la Factura {{ factura | number }}</h5>
+
+                <h1>
+
+                    <span class="badge" [ngClass]="{'badge-info': estatus === 'EN ESPERA', 'badge-primary': estatus === 'EN PROCESO', 'badge-danger': estatus === 'EMBARCANDO'}">{{ estatus }}</span>
+
+                </h1>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+
+                    <span aria-hidden="true">&times;</span>
+
+                </button>
+
+            </div>
+
+            <div class="modal-body">
+
+                <table class="table table-sm">
+
+                    <thead>
+
+                        <tr>
+
+                            <th class="text-center">Imagen</th>
+
+                            <th class="text-center">Código</th>
+
+                            <th>Producto</th>
+
+                            <th class="text-center">Solicitado</th>
+
+                            <th class="text-center">Entregado</th>
+
+                            <th class="text-right">Precio</th>
+
+                            <th class="text-center">Descuento</th>
+
+                            <th class="text-right">Subtotal</th>
+
+                            <th class="text-right">Impuesto</th>
+
+                            <th class="text-right">Total</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr *ngFor="let par of partidas">
+
+                            <td width="5%" class="text-center">
+
+                                <img [src]="par.imagen" class="img-fluid" width="100%">
+
+                            </td>
+
+                            <td class="text-center">{{ par.codigo }}</td>
+
+                            <td class="text-left">{{ par.producto }}</td>
+
+                            <td class="text-center">{{ par.solicitado }}</td>
+
+                            <td class="text-center">{{ par.entregado }}</td>
+
+                            <td class="text-right">{{ par.precio }}</td>
+
+                            <td class="text-center">{{ (par.descuento / 100) | percent }}</td>
+
+                            <td class="text-right">{{ par.subtotal }}</td>
+
+                            <td class="text-right">{{ par.impuesto }}</td>
+
+                            <td class="text-right">{{ par.total }}</td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">cerrar</button>
+
+            </div>
 
         </div>
 
