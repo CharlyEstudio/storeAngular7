@@ -115,7 +115,7 @@ export class ShoppingService {
   }
 
   porBajar(usuario: any, fecha: any) {
-    const url = 'http://177.244.55.122:3001/bigdata/obtener/porbajar/' + usuario.idFerrum + '/' + fecha;
+    let url = 'http://177.244.55.122:3001/bigdata/obtener/porbajar/' + usuario.idFerrum + '/' + fecha;
 
     url += '?token=' + this.token;
 
@@ -123,7 +123,7 @@ export class ShoppingService {
   }
 
   porSurtir(usuario: any, fecha: any) {
-    const url = 'http://177.244.55.122:3001/bigdata/obtener/porsurtir/' + usuario.idFerrum + '/' + fecha;
+    let url = 'http://177.244.55.122:3001/bigdata/obtener/porsurtir/' + usuario.idFerrum + '/' + fecha;
 
     url += '?token=' + this.token;
 
@@ -131,7 +131,7 @@ export class ShoppingService {
   }
 
   facturado(usuario: any, fecha: any) {
-    const url = 'http://177.244.55.122:3001/bigdata/obtener/facturados/' + usuario.idFerrum + '/' + fecha;
+    let url = 'http://177.244.55.122:3001/bigdata/obtener/facturados/' + usuario.idFerrum + '/' + fecha;
 
     url += '?token=' + this.token;
 
@@ -139,7 +139,7 @@ export class ShoppingService {
   }
 
   partidas(docid: any) {
-    const url = 'http://177.244.55.122:3001/bigdata/obtener/partidas/' + docid ;
+    let url = 'http://177.244.55.122:3001/bigdata/obtener/partidas/' + docid ;
 
     url += '?token=' + this.token;
 

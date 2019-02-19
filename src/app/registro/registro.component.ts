@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { Usuario } from '../modelos/usuarios.model';
 
 // Servicios
-import { UsuarioServicesService, DatosService } from '../servicios/servicios.index';
+import { UsuarioServicesService, DatosService, WebsocketService } from '../servicios/servicios.index';
 
 @Component({
   selector: 'app-registro',
@@ -19,6 +19,7 @@ export class RegistroComponent implements OnInit {
   constructor(
     public router: Router,
     public _usuarioService: UsuarioServicesService,
+    private _webSocket: WebsocketService,
     public _datosService: DatosService
   ) { }
 
@@ -85,6 +86,7 @@ export class RegistroComponent implements OnInit {
             'DIST_ROLE',
             cliente.respuesta[0].LISTA,
             cliente.respuesta[0].RFC,
+            'NOT',
           );
         } else {
           usuario = new Usuario(
@@ -98,6 +100,7 @@ export class RegistroComponent implements OnInit {
         this._usuarioService.crearCliente( usuario )
         .subscribe( (resp: any) => {
           if (resp.status) {
+            this._webSocket.acciones('registro-watch', usuario);
             swal ('Usuario creado', usuario.email + '. El administrador activará su cuenta.', 'success');
           } else {
             swal('Error al Crear Usuario' , resp.msg, 'error');
@@ -115,6 +118,7 @@ export class RegistroComponent implements OnInit {
       this._usuarioService.crearCliente( usuario )
       .subscribe( (resp: any) => {
         if (resp.status) {
+          this._webSocket.acciones('registro-watch', resp.respuesta);
           swal ('Usuario creado', usuario.email + '. El administrador activará su cuenta.', 'success');
         } else {
           swal('Error al Crear Usuario' , resp.msg, 'error');

@@ -174,13 +174,29 @@
 
                             </td>
 
-                            <td class="text-center" width="7.14%" *ngIf="prod.unidades[1] !== undefined">{{ prod.unidades[1].entero }}</td>
+                            <td class="text-center" width="7.14%" *ngIf="prod.unidades[1] !== undefined">
 
-                            <td class="text-center" width="7.14%" *ngIf="prod.unidades[1] === undefined">1</td>
+                                <button type="button" class="btn btn-info" (click)="cambiarCantidad(prod, prod.unidades[1].entero)">{{ prod.unidades[1].entero }}</button>
 
-                            <td class="text-center" width="7.14%" *ngIf="prod.unidades[1] !== undefined">{{ prod.unidades[2].entero }}</td>
+                            </td>
 
-                            <td class="text-center" width="7.14%" *ngIf="prod.unidades[1] === undefined">1</td>
+                            <td class="text-center" width="7.14%" *ngIf="prod.unidades[1] === undefined">
+
+                                <button type="button" class="btn btn-info" (click)="cambiarCantidad(prod, 1)">1</button>
+
+                            </td>
+
+                            <td class="text-center" width="7.14%" *ngIf="prod.unidades[1] !== undefined">
+
+                                <button type="button" class="btn btn-info" (click)="cambiarCantidad(prod, prod.unidades[2].entero)">{{ prod.unidades[2].entero }}</button>
+
+                            </td>
+
+                            <td class="text-center" width="7.14%" *ngIf="prod.unidades[1] === undefined">
+
+                                <button type="button" class="btn btn-info" (click)="cambiarCantidad(prod, 1)">1</button>
+
+                            </td>
 
                             <td class="text-center" width="7.14%">{{ prod.producto.precioneto | currency }}</td>
 

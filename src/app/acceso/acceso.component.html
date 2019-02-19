@@ -22,6 +22,16 @@
 
                 </div>
 
+                <div class="form-group" *ngIf="iniciar">
+
+                    <div class="alert alert-warning">
+
+                        <i class="fa fa-spinner fa-spin fa-2x"></i> Obteniendo Datos
+
+                    </div>
+
+                </div>
+
                 <div class="from-group">
 
                     <input type="checkbox" name="recuerdame" [ngModel]="recuerdame" class="form-check-input" id="recordar">

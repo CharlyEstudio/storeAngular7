@@ -20,6 +20,7 @@ export class AccesoComponent implements OnInit {
   saldoVenc: number = 0;
   vigente: boolean = false;
   recuerdame: boolean = false;
+  iniciar: boolean = false;
 
   constructor(
     public router: Router,
@@ -41,6 +42,8 @@ export class AccesoComponent implements OnInit {
       return;
     }
 
+    this.iniciar = true;
+
     const usuario = new Usuario( null, forma.value.email, forma.value.password, null );
 
     this._usuarioService.login(usuario, forma.value.recuerdame).subscribe((resp: any) => {
@@ -48,7 +51,6 @@ export class AccesoComponent implements OnInit {
         const fecha = this._usuarioService.fechaActual();
         this._datosService.obtenerSaldo(fecha, resp.usuario.numero).subscribe((saldo: any) => {
           if (saldo.respuesta) {
-
             for (let m = 0; m < saldo.respuesta.length; m++) {
               if (saldo.respuesta[m].vence < fecha) {
                 this.saldoVenc += saldo.respuesta[m].saldo;
@@ -70,10 +72,12 @@ export class AccesoComponent implements OnInit {
           }
 
           this._usuarioService.iniciar(usuario);
+          this.iniciar = false;
           this.router.navigate(['/dist']);
           // this.wsService.login( 'web', forma.value.email, null, this._usuarioService.usuario.rol );
         });
       } else {
+        this.iniciar = false;
         swal('Error de Login', resp.mensaje, 'error');
       }
     });

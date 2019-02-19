@@ -1,10 +1,11 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 
 // Servicios
-import { UsuarioServicesService, ProductosService } from 'src/app/servicios/servicios.index';
+import { UsuarioServicesService, ProductosService, ShoppingService } from 'src/app/servicios/servicios.index';
 
 // Modelos
 import { Usuario } from 'src/app/modelos/usuarios.model';
+import { XmlString } from 'src/app/modelos/xml.model';
 
 @Component({
   selector: 'app-pedido',
@@ -33,7 +34,8 @@ export class PedidoComponent implements OnInit {
 
   constructor(
     private _usuarioService: UsuarioServicesService,
-    private _productoService: ProductosService
+    private _productoService: ProductosService,
+    private _shoppingCar: ShoppingService
   ) {
     this.precio = this._usuarioService.usuario.precio;
     this.cliente = this._usuarioService.usuario;
@@ -188,7 +190,7 @@ export class PedidoComponent implements OnInit {
             '<cfdi:Conceptos>';
 
     for (let i = 0; i < this.productos.length; i++) {
-      xml += '<cfdi:Concepto NoIdentificacion="' + this.productos[i].articuloid + '" cantidad="' + this.productos[i].cantidad + '"/>';
+      xml += '<cfdi:Concepto NoIdentificacion="' + this.productos[i].producto.articuloid + '" cantidad="' + this.productos[i].cantidad + '"/>';
     }
 
     xml +=  '</cfdi:Conceptos>' +
@@ -210,10 +212,7 @@ export class PedidoComponent implements OnInit {
       };
 
       this._shoppingCar.enviarPedido(enviarXml).subscribe((info: any) => {
-        this.carrito = [];
-        localStorage.removeItem('carrito');
-        this._shoppingCar.clearCarrito();
-        this.router.navigate(['/inicio']);
+        this.eliminarTodo();
       });
     });
   }

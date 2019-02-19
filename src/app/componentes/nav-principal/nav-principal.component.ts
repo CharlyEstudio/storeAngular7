@@ -12,8 +12,6 @@ import { UsuarioServicesService, ShoppingService } from 'src/app/servicios/servi
 export class NavPrincipalComponent implements OnInit {
 
   cantidad: number = 0;
-  imagen: string = '';
-  nombre: string = '';
 
   // Booleanos
   logeado = false;
@@ -23,12 +21,7 @@ export class NavPrincipalComponent implements OnInit {
     private route: Router,
     private _usuarioService: UsuarioServicesService,
     private _shoppingCar: ShoppingService
-  ) {
-    if (this._usuarioService.usuario !== null) {
-      this.imagen = this._usuarioService.usuario.img;
-      this.nombre = this._usuarioService.usuario.nombre;
-    }
-  }
+  ) {}
 
   ngOnInit() {
     this._usuarioService.isSession().subscribe(login => {

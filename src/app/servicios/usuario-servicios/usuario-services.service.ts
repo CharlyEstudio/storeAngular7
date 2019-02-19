@@ -26,6 +26,7 @@ export class UsuarioServicesService {
     public router: Router,
     private http: HttpClient
   ) {
+    this.cargarStorage();
     this.session.subscribe(login => {
       let status;
       if (login) {
@@ -39,8 +40,6 @@ export class UsuarioServicesService {
       }
       return this.user = status;
     });
-
-    this.cargarStorage();
   }
 
   isSession() {
