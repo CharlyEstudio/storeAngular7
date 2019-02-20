@@ -15,7 +15,6 @@ export class LoginGuard implements CanActivate {
   ) {}
 
   canActivate() {
-    this._usuarioService.cargarStorage();
     if ( this._usuarioService.estaLogueado() ) {
       return true;
     } else {

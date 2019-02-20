@@ -73,7 +73,7 @@ export class AccesoComponent implements OnInit {
 
           this._usuarioService.iniciar(usuario);
           this.iniciar = false;
-          this.router.navigate(['/dist']);
+          this.router.navigate(['/inicio']);
           // this.wsService.login( 'web', forma.value.email, null, this._usuarioService.usuario.rol );
         });
       } else {

@@ -84,7 +84,9 @@ export class PedidoComponent implements OnInit {
               precioFinal: (producto.respuesta[0].precioneto * producto.respuesta[0].lote),
               precioDesc: producto.respuesta[0].precioneto,
               precioTot: producto.respuesta[0].precio,
-              cantidad: producto.respuesta[0].lote
+              cantidad: producto.respuesta[0].lote,
+              claveUnidad: producto.respuesta[0].claveUnidad,
+              claveProdServ: producto.respuesta[0].claveProdServ
             };
             this.productos.push(agregar);
             this.productos.reverse();
@@ -186,35 +188,38 @@ export class PedidoComponent implements OnInit {
 
     xml = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' +
           '<cfdi:Comprobante Version="3.3" Serie="W">' +
-            '<cfdi:Receptor Rfc="' + this.cliente.rfc + '" CliNumero="' + this.cliente.numero + '" />' +
+            '<cfdi:Receptor Rfc="' + this.cliente.rfc + '" CliNumero="' + this.cliente.numero + '"/>' +
             '<cfdi:Conceptos>';
 
     for (let i = 0; i < this.productos.length; i++) {
-      xml += '<cfdi:Concepto NoIdentificacion="' + this.productos[i].producto.articuloid + '" cantidad="' + this.productos[i].cantidad + '"/>';
+      // console.log(this.productos[i]);
+      xml += '<cfdi:Concepto ClaveProdServ="' + this.productos[i].producto.claveProdServ + '" NoIdentificacion="' + this.productos[i].producto.clave + '" Cantidad="' + this.productos[i].cantidad + '.000" ClaveUnidad="' + this.productos[i].producto.claveUnidad + '" Unidad="PZ"/>';
     }
 
     xml +=  '</cfdi:Conceptos>' +
           '</cfdi:Comprobante>';
 
-    swal({
-      title: 'Su pedido será procesado, ¿Seguro que desea enviar su pedido?',
-      icon: 'warning',
-      buttons: {
-        cancel: true,
-        confirm: true
-      }
-    })
-    .then(( status ) => {
-      if (!status) { return null; }
+    console.log(xml);
 
-      const enviarXml: XmlString = {
-        texto: xml
-      };
+    // swal({
+    //   title: 'Su pedido será procesado, ¿Seguro que desea enviar su pedido?',
+    //   icon: 'warning',
+    //   buttons: {
+    //     cancel: true,
+    //     confirm: true
+    //   }
+    // })
+    // .then(( status ) => {
+    //   if (!status) { return null; }
 
-      this._shoppingCar.enviarPedido(enviarXml).subscribe((info: any) => {
-        this.eliminarTodo();
-      });
-    });
+    //   const enviarXml: XmlString = {
+    //     texto: xml
+    //   };
+
+    //   this._shoppingCar.enviarPedido(enviarXml).subscribe((info: any) => {
+    //     // this.eliminarTodo();
+    //   });
+    // });
   }
 
 }

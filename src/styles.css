@@ -65,6 +65,8 @@ header .submenu ul {
     background: #fff;
     padding-left: 0px!important;
     padding-right: 0px!important;
+    margin-left: 0px!important;
+    margin-right: 0px!important;
 }
 
 .buscador form {
@@ -122,11 +124,15 @@ header .submenu ul {
 .cobertura-conteo .dato {
     /* background: rgba(0, 0, 0, 0.898);
     border-radius: 5px; */
-    max-width: 200px!important;
+    max-width: 300px!important;
 }
 
 .marcas {
     height: 300px;
+}
+
+ul.list-inline li {
+    padding: 0px!important;
 }
 
 footer {
@@ -233,6 +239,10 @@ nav a.nav-link {
 
 nav a.nav-link:hover {
     color: black!important;
+}
+
+.paginas nav ul li a {
+    color: white!important;
 }
 
 .promotruper_barra {

@@ -1,56 +1,60 @@
-<div class="row pt-1 pt-2 pb-4">
+<div class="row pt-1 pb-4 cuerpo paginas">
 
     <div class="col-md-12">
 
-        <nav class="navbar navbar-expand-lg navbar-dark bg-light">
+        <div class="container">
 
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navBarSubmenu" aria-controls="navBarSubmenu" aria-expanded="false" aria-label="Toggle navigation">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
-                        <span class="navbar-toggler-icon"></span>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navBarSubmenu" aria-controls="navBarSubmenu" aria-expanded="false" aria-label="Toggle navigation">
 
-                    </button>
+                    <span class="navbar-toggler-icon"></span>
 
-            <div class="collapse navbar-collapse" id="navBarSubmenu">
+                </button>
 
-                <ul class="navbar-nav m-auto">
+                <div class="collapse navbar-collapse" id="navBarSubmenu">
 
-                    <li class="nav-item" *ngFor="let menu of menus; let i = index">
+                    <ul class="navbar-nav m-auto">
 
-                        <ul class="navbar-nav m-auto">
+                        <li class="nav-item" *ngFor="let menu of menus; let i = index">
 
-                            <li class="nav-item pl-2 pr-2" *ngFor="let submenu of menu.submenu">
+                            <ul class="navbar-nav m-auto">
 
-                                <a [routerLink]="[ submenu.url ]" class="nav-link text-dark">
+                                <li class="nav-item pl-2 pr-2" *ngFor="let submenu of menu.submenu">
 
-                                    <i [class]="submenu.icono"></i> {{ submenu.titulo}}
+                                    <a [routerLink]="[ submenu.url ]" class="nav-link text-dark">
 
-                                </a>
+                                        <i [class]="submenu.icono"></i> {{ submenu.titulo}}
 
-                            </li>
+                                    </a>
 
-                        </ul>
+                                </li>
 
-
-                        <!-- <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-
-                            <i [class]="menu.icono"></i> {{ menu.titulo }}
-
-                        </a>
-
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-
-                            <a class="dropdown-item" [routerLink]="[ submenu.url ]" *ngFor="let submenu of menu.submenu"><i [class]="submenu.icono"></i> {{ submenu.titulo}} </a>
-
-                        </div> -->
+                            </ul>
 
 
-                    </li>
+                            <!-- <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
-                </ul>
+                                <i [class]="menu.icono"></i> {{ menu.titulo }}
 
-            </div>
+                            </a>
 
-        </nav>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                                <a class="dropdown-item" [routerLink]="[ submenu.url ]" *ngFor="let submenu of menu.submenu"><i [class]="submenu.icono"></i> {{ submenu.titulo}} </a>
+
+                            </div> -->
+
+
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </nav>
+
+        </div>
 
     </div>
 
