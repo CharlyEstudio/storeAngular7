@@ -147,9 +147,7 @@ export class ShoppingService {
   }
 
   allPedidos(usuario: any, fecha: any) {
-    let url = 'http://177.244.55.122:3001/bigdata/obtener/allpedido/' + usuario.idFerrum + '/' + fecha;
-
-    url += '?token=' + this.token;
+    const url = 'http://177.244.55.122:3001/bigdata/obtener/allpedido/' + usuario.idFerrum + '/' + fecha;
 
     return this.http.get(url);
   }

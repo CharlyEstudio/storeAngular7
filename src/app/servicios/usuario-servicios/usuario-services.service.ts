@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 import { BehaviorSubject } from 'rxjs';
+import { map } from 'rxjs/operators';
 import 'rxjs';
 
 // URL PRINCIPAL
@@ -10,6 +11,9 @@ import { LINK } from 'src/app/config/config';
 
 // Modelos
 import { Usuario } from 'src/app/modelos/usuarios.model';
+
+// Servicios
+import { DatosService } from '../datos/datos.service';
 
 @Injectable()
 export class UsuarioServicesService {
@@ -24,7 +28,8 @@ export class UsuarioServicesService {
 
   constructor(
     public router: Router,
-    private http: HttpClient
+    private http: HttpClient,
+    private _datosService: DatosService
   ) {
     this.cargarStorage();
     this.session.subscribe(login => {
@@ -132,17 +137,54 @@ export class UsuarioServicesService {
 
     const url = LINK + '/clientes/login';
 
-    return this.http.post( url, usuario );
-      // .map( ( resp: any ) => {
+    return this.http.post( url, usuario )
+      .pipe(map((data: any) => {
+        if (data.status) {
+          const fecha = this.fechaActual();
+          this._datosService.obtenerSaldo(fecha, data.usuario.numero).subscribe((saldo: any) => {
+            if (saldo.status) {
+              let saldoVenc: number = 0;
+              for (let i = 0; i < saldo.respuesta.length; i++) {
+                if (saldo.respuesta[i].vence < fecha) {
+                  saldoVenc += saldo.respuesta[i].saldo;
+                }
+              }
 
-      //   this.guardarStorage(resp.id, resp.token, resp.usuario, resp.menu, resp.usuario.rol);
+              if (saldoVenc > 0) {
+                this.superheros(data.usuario.numero).subscribe((supers: any) => {
+                  if (supers.status) {
+                    this.guardarStorage(data.usuario._id, data.token, data.usuario, data.menu, data.usuario.rol, true);
+                  } else {
+                    this.guardarStorage(data.usuario._id, data.token, data.usuario, data.menu, data.usuario.rol, false);
+                  }
+                });
+              } else {
+                this.guardarStorage(data.usuario._id, data.token, data.usuario, data.menu, data.usuario.rol, true);
+              }
+              this.iniciar(usuario);
+            }
+          });
+          this.cargarStorage();
+          return data;
+        } else {
+          return data;
+        }
+      }));
+  }
 
-      //   return true;
-      // })
-      // .catch( ( err ) => {
-      //   swal('Error en el login', err.error.errors.message, 'error');
-      //   return Observable.throw( err.error.ok );
-      // });
+  renuevaToken() {
+    let url = LINK + '/login/renuevatoken';
+
+    url += '?token=' + this.token;
+
+    return this.http.get( url )
+      .pipe(map( ( resp: any ) => {
+
+        this.token = resp.token;
+        localStorage.setItem('token', this.token);
+
+        return true;
+      }));
   }
 
   crearCliente(usuario: Usuario) {

@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import { CanActivate } from '@angular/router';
 
 // Servicios
-import { UsuarioServicesService } from '../servicios.index';
+import { UsuarioServicesService } from '../usuario-servicios/usuario-services.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class DistGuardGuard implements CanActivate {
+export class AdminGuard implements CanActivate {
 
   constructor (
     private _usuarioService: UsuarioServicesService

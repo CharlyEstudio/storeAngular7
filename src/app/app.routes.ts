@@ -30,7 +30,6 @@ const appRoutes: Routes = [
     { path: 'buscador/:buscando', component: BuscadorComponent, data: { titulo: 'Buscando...', name: 'description' } },
     { path: 'ver/:producto', component: DescripcionComponent, data: { titulo: 'Descripción', name: 'description' } },
     { path: 'ofertas', component: OfertaComponent, data: { titulo: 'PROMOTRUPER DEL MES', name: 'description' } },
-    { path: 'verBack', component: DescripcionComponent, data: { titulo: 'Descripción', name: 'description' } },
     {
         path: '',
         component: PaginasComponent,

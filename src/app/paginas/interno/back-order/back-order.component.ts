@@ -75,7 +75,7 @@ export class BackOrderComponent implements OnInit {
   }
 
   irA(producto: any) {
-    this.route.navigate(['/verBack', {id: producto.articuloid, cantidad: producto.back}]);
+    this.route.navigate(['/ver/', producto.ARTICULOID]);
     // this.route.navigate(['/ver/', producto.articuloid]);
   }
 

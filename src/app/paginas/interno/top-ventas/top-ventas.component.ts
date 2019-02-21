@@ -1,14 +1,8 @@
 import { Component, OnInit, ɵConsole } from '@angular/core';
 import { Router } from '@angular/router';
 
-// Modelos
-import { Producto } from 'src/app/modelos/productos.model';
-
-// Links
-import { PATH_LINK } from 'src/app/config/config';
-
 // Servicios
-import { UsuarioServicesService, DatosService, ShoppingService, ProductosService } from 'src/app/servicios/servicios.index';
+import { UsuarioServicesService, ProductosService } from 'src/app/servicios/servicios.index';
 
 @Component({
   selector: 'app-top-ventas',
@@ -73,8 +67,8 @@ export class TopVentasComponent implements OnInit {
     });
   }
 
-  irA(producto: Producto) {
-    this.route.navigate(['/ver/', producto.articuloid]);
+  irA(producto: any) {
+    this.route.navigate(['/ver/', producto.DESARTID]);
   }
 
 }

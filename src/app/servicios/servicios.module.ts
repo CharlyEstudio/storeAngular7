@@ -3,7 +3,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 // Servicios & Guardias
-import { LoginGuard,
+import {
+    LoginGuard,
+    AdminGuard,
+    VerificaTokenGuard,
     UsuarioServicesService,
     ProductosService,
     DatosService,
@@ -21,6 +24,8 @@ import { LoginGuard,
     providers: [
         // Guardias
         LoginGuard,
+        AdminGuard,
+        VerificaTokenGuard,
         // Servicios
         UsuarioServicesService,
         ProductosService,
