@@ -41,6 +41,22 @@ export class ComprasComponent implements OnInit {
     // this._socketServide.escuchar('').subscribe();
     this.usuario = this._usuarioService.usuario;
     this.fecha = this._usuarioService.fechaActual();
+    this.actualizar();
+  }
+
+  ngOnInit() {}
+
+  openModal(data: any, estado: any) {
+    this.factura = data.NUMERO;
+    this.estatus = estado;
+    this._shoppingService.partidas(data.DOCID).subscribe((partidas: any) => {
+      if (partidas.status) {
+        this.partidas = partidas.respuesta;
+      }
+    });
+  }
+
+  actualizar() {
     this._shoppingService.porBajar(this.usuario, this.fecha).subscribe((porBajar: any) => {
       if (porBajar.status) {
         this.porBajar = porBajar.respuesta;
@@ -57,18 +73,6 @@ export class ComprasComponent implements OnInit {
       if (facturado.status) {
         this.facturado = facturado.respuesta;
         this.facturadoCant = facturado.respuesta.length;
-      }
-    });
-  }
-
-  ngOnInit() {}
-
-  openModal(data: any, estado: any) {
-    this.factura = data.NUMERO;
-    this.estatus = estado;
-    this._shoppingService.partidas(data.DOCID).subscribe((partidas: any) => {
-      if (partidas.status) {
-        this.partidas = partidas.respuesta;
       }
     });
   }
