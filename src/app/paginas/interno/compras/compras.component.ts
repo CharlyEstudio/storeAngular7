@@ -44,9 +44,10 @@ export class ComprasComponent implements OnInit {
   ngOnInit() {}
 
   openModal(data: any, estado: any) {
-    this.factura = data.NUMERO;
+    this.partidas = [];
+    this.factura = data.numero;
     this.estatus = estado;
-    this._shoppingService.partidas(data.DOCID).subscribe((partidas: any) => {
+    this._shoppingService.partidas(data.docid).subscribe((partidas: any) => {
       if (partidas.status) {
         this.partidas = partidas.respuesta;
       }
@@ -56,18 +57,21 @@ export class ComprasComponent implements OnInit {
   actualizar() {
     this.pedidosBol = false;
     this.allPed = [];
+    this.porBajarCant = 0;
+    this.porSurtirCant = 0;
+    this.facturadoCant = 0;
     this._shoppingService.allPedidos(this.usuario, this.fecha).subscribe((allPed: any) => {
       if (allPed.status) {
         this.allPed = allPed.respuesta;
         for (let i = 0; i < allPed.respuesta.length; i++) {
           if (allPed.respuesta[i].tipo === 'POR BAJAR') {
-            this.porBajarCant += allPed.respuesta[i].cantidad;
+            this.porBajarCant += Number(allPed.respuesta[i].cantidad);
           }
           if (allPed.respuesta[i].tipo === 'POR SURTIR') {
-            this.porSurtirCant += allPed.respuesta[i].cantidad;
+            this.porSurtirCant += Number(allPed.respuesta[i].cantidad);
           }
           if (allPed.respuesta[i].tipo === 'FACTURADO') {
-            this.facturadoCant += allPed.respuesta[i].cantidad;
+            this.facturadoCant += Number(allPed.respuesta[i].cantidad);
           }
         }
         this.pedidosBol = true;

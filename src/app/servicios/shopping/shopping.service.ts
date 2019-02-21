@@ -139,9 +139,7 @@ export class ShoppingService {
   }
 
   partidas(docid: any) {
-    let url = 'http://177.244.55.122:3001/bigdata/obtener/partidas/' + docid ;
-
-    url += '?token=' + this.token;
+    const url = 'http://177.244.55.122:3001/bigdata/obtener/partidas/' + docid ;
 
     return this.http.get(url);
   }
