@@ -1,5 +1,39 @@
 <div class="container">
 
+    <div class="d-flex justify-content-around">
+
+        <div class="d-flex flex-row bd-highlight">
+
+            <div class="p-2 bd-highlight">
+
+                <h3>Facturas Liquidadas</h3>
+
+            </div>
+
+        </div>
+
+        <div class="d-flex flex-row-reverse bd-highlight">
+
+            <div class="p-2 bd-highlight">
+
+                <div class="form-group">
+
+                    <select #selMes name="mes" id="mes" class="form-control" (change)="obtenerFacturas(selMes.value)">
+
+                        <option value="0">Mes</option>
+
+                        <option *ngFor="let mes of selectMes" [value]="mes.mes">{{ mes.mes | date: 'MM-yyyy' }}</option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
     <div class="table-responsive" *ngIf="saldo.length > 0">
 
         <h3>Facturas del Mes</h3>

@@ -170,11 +170,11 @@
 
                 <h1 class="text-white">
 
-                    <i class="fa fa-exclamation-circle " aria-hidden="true" *ngIf="compras < 15000 || compras >= 7500"></i>
+                    <i class="fa fa-exclamation-circle " aria-hidden="true" *ngIf="compras < 15000 && compras <= 14999"></i>
 
                     <span *ngIf="compras < 15000 && compras < 5000">No Pasa</span>
 
-                    <span *ngIf="compras >= 5000">Posible</span>
+                    <span *ngIf="compras >= 5000 && compras <= 14999">Posible</span>
 
                     <i class="mdi mdi-check-circle" aria-hidden="true" *ngIf="compras >= 15000"></i>
 
@@ -300,13 +300,13 @@
 
         <div class="col-lg-6 col-md-6 col-sm-12 text-center  pt-3 pb-5 centro">
 
-            <div class="jumbotron" style="margin-bottom: 0px!important" [ngClass]="{'bg-danger': pasaCompras === false, 'bg-success': pasaCompras === true}">
+            <div class="jumbotron" style="margin-bottom: 0px!important" [ngClass]="{'bg-warning': pasaCompras === false, 'bg-success': pasaCompras === true}">
 
                 <h1 class="text-white">
 
                     <i class="fa fa-exclamation-circle" aria-hidden="true" *ngIf="pasaCompras === false"></i>
 
-                    <span class="text-white" *ngIf="pasaCompras === false">No Pasa</span>
+                    <span class="text-white" *ngIf="pasaCompras === false">En Proceso</span>
 
                     <i class="mdi mdi-check-circle" aria-hidden="true" *ngIf="pasaCompras"></i>
 

@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 // Servicios
 import { UsuarioServicesService, ProductosService, ShoppingService } from 'src/app/servicios/servicios.index';
@@ -33,6 +34,7 @@ export class PedidoComponent implements OnInit {
   vigente: boolean = false;
 
   constructor(
+    public router: ActivatedRoute,
     private _usuarioService: UsuarioServicesService,
     private _productoService: ProductosService,
     private _shoppingCar: ShoppingService
@@ -45,6 +47,18 @@ export class PedidoComponent implements OnInit {
       this.iva = Number(localStorage.getItem('ivaPed'));
       this.total = Number(localStorage.getItem('totalPed'));
     }
+
+    this.router.queryParams.subscribe((params: any) => {
+      if (params.dato) {
+        this.eliminarTodo();
+        const data = JSON.parse(params.dato);
+        if (data.length > 0) {
+          for (let i = 0; i < data.length; i++) {
+            this.producto(data[i].CODIGO, this.precio);
+          }
+        }
+      }
+    });
   }
 
   ngOnInit() {
@@ -70,53 +84,57 @@ export class PedidoComponent implements OnInit {
 
     if (!this.productos.find(esProducto)) {
 
-      this._productoService.buscarProductos(valor, this.precio).subscribe((producto: any) => {
-        if (producto.status) {
-          this.subtotal += producto.respuesta[0].precioneto;
-          this.total += producto.respuesta[0].precio;
-          if (producto.respuesta[0].iva > 0) {
-            this.iva += producto.respuesta[0].precio - producto.respuesta[0].precioneto;
-          }
-          this._productoService.obtenerUnidades(producto.respuesta[0].articuloid).subscribe((unidades: any) => {
-            const agregar = {
-              producto: producto.respuesta[0],
-              unidades: unidades.respuesta,
-              precioFinal: (producto.respuesta[0].precioneto * producto.respuesta[0].lote),
-              precioDesc: producto.respuesta[0].precioneto,
-              precioTot: producto.respuesta[0].precio,
-              cantidad: producto.respuesta[0].lote,
-              claveUnidad: producto.respuesta[0].claveUnidad,
-              claveProdServ: producto.respuesta[0].claveProdServ
-            };
-            this.productos.push(agregar);
-            this.productos.reverse();
-            if (localStorage.getItem('pedidoDist') !== null) {
-              localStorage.removeItem('pedidoDist');
-              localStorage.removeItem('subtotalPed');
-              localStorage.removeItem('ivaPed');
-              localStorage.removeItem('totalPed');
-              localStorage.setItem('pedidoDist', JSON.stringify(this.productos));
-              localStorage.setItem('subtotalPed', String(this.subtotal));
-              localStorage.setItem('ivaPed', String(this.iva));
-              localStorage.setItem('totalPed', String(this.total));
-            } else {
-              localStorage.setItem('pedidoDist', JSON.stringify(this.productos));
-              localStorage.setItem('subtotalPed', String(this.subtotal));
-              localStorage.setItem('ivaPed', String(this.iva));
-              localStorage.setItem('totalPed', String(this.total));
-            }
-          });
-          this.input.nativeElement.value = '';
-          this.input.nativeElement.focus();
-          this.encontrado = true;
-        } else {
-          this.encontrado = false;
-        }
-      });
+      this.producto(valor, this.precio);
 
     } else {
       this.repetido = true;
     }
+  }
+
+  producto(valor: any, precio) {
+    this._productoService.buscarProductos(valor, precio).subscribe((producto: any) => {
+      if (producto.status) {
+        this.subtotal += producto.respuesta[0].precioneto;
+        this.total += producto.respuesta[0].precio;
+        if (producto.respuesta[0].iva > 0) {
+          this.iva += producto.respuesta[0].precio - producto.respuesta[0].precioneto;
+        }
+        this._productoService.obtenerUnidades(producto.respuesta[0].articuloid).subscribe((unidades: any) => {
+          const agregar = {
+            producto: producto.respuesta[0],
+            unidades: unidades.respuesta,
+            precioFinal: (producto.respuesta[0].precioneto * producto.respuesta[0].lote),
+            precioDesc: producto.respuesta[0].precioneto,
+            precioTot: producto.respuesta[0].precio,
+            cantidad: producto.respuesta[0].lote,
+            claveUnidad: producto.respuesta[0].claveUnidad,
+            claveProdServ: producto.respuesta[0].claveProdServ
+          };
+          this.productos.push(agregar);
+          this.productos.reverse();
+          if (localStorage.getItem('pedidoDist') !== null) {
+            localStorage.removeItem('pedidoDist');
+            localStorage.removeItem('subtotalPed');
+            localStorage.removeItem('ivaPed');
+            localStorage.removeItem('totalPed');
+            localStorage.setItem('pedidoDist', JSON.stringify(this.productos));
+            localStorage.setItem('subtotalPed', String(this.subtotal));
+            localStorage.setItem('ivaPed', String(this.iva));
+            localStorage.setItem('totalPed', String(this.total));
+          } else {
+            localStorage.setItem('pedidoDist', JSON.stringify(this.productos));
+            localStorage.setItem('subtotalPed', String(this.subtotal));
+            localStorage.setItem('ivaPed', String(this.iva));
+            localStorage.setItem('totalPed', String(this.total));
+          }
+        });
+        this.input.nativeElement.value = '';
+        this.input.nativeElement.focus();
+        this.encontrado = true;
+      } else {
+        this.encontrado = false;
+      }
+    });
   }
 
   cambiarCantidad(producto: any, valor: any) {
@@ -201,25 +219,25 @@ export class PedidoComponent implements OnInit {
 
     console.log(xml);
 
-    // swal({
-    //   title: 'Su pedido será procesado, ¿Seguro que desea enviar su pedido?',
-    //   icon: 'warning',
-    //   buttons: {
-    //     cancel: true,
-    //     confirm: true
-    //   }
-    // })
-    // .then(( status ) => {
-    //   if (!status) { return null; }
+    swal({
+      title: 'Su pedido será procesado, ¿Seguro que desea enviar su pedido?',
+      icon: 'warning',
+      buttons: {
+        cancel: true,
+        confirm: true
+      }
+    })
+    .then(( status ) => {
+      if (!status) { return null; }
 
-    //   const enviarXml: XmlString = {
-    //     texto: xml
-    //   };
+      const enviarXml: XmlString = {
+        texto: xml
+      };
 
-    //   this._shoppingCar.enviarPedido(enviarXml).subscribe((info: any) => {
-    //     // this.eliminarTodo();
-    //   });
-    // });
+      this._shoppingCar.enviarPedido(enviarXml).subscribe((info: any) => {
+        // this.eliminarTodo();
+      });
+    });
   }
 
 }

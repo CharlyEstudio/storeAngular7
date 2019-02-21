@@ -34,7 +34,7 @@ const appRoutes: Routes = [
     {
         path: '',
         component: PaginasComponent,
-        canActivate: [LoginGuard],
+        canActivate: [ LoginGuard ],
         loadChildren: './paginas/paginas.module#PaginasModule'
     },
     { path: '**', component: NopagefoundComponent }

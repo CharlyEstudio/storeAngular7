@@ -145,4 +145,12 @@ export class ShoppingService {
 
     return this.http.get(url);
   }
+
+  allPedidos(usuario: any, fecha: any) {
+    let url = 'http://177.244.55.122:3001/bigdata/obtener/allpedido/' + usuario.idFerrum + '/' + fecha;
+
+    url += '?token=' + this.token;
+
+    return this.http.get(url);
+  }
 }

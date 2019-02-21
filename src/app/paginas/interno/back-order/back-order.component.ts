@@ -79,4 +79,8 @@ export class BackOrderComponent implements OnInit {
     // this.route.navigate(['/ver/', producto.articuloid]);
   }
 
+  enviarPedido(backOrder: any) {
+    this.route.navigate(['/pedido'], { queryParams:  { dato: JSON.stringify(backOrder) } });
+  }
+
 }

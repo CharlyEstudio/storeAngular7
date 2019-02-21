@@ -61,19 +61,24 @@ export class AccesoComponent implements OnInit {
               this._usuarioService.superheros(resp.usuario.numero).subscribe((supers: any) => {
                 this.vigente = supers.status;
                 this._usuarioService.guardarStorage(resp.id, resp.token, resp.usuario, resp.menu, resp.usuario.rol, this.vigente);
+                this._usuarioService.iniciar(usuario);
+                this.iniciar = false;
+                this.router.navigate(['/dist']);
               });
             } else {
               this.vigente = true;
               this._usuarioService.guardarStorage(resp.id, resp.token, resp.usuario, resp.menu, resp.usuario.rol, this.vigente);
+              this._usuarioService.iniciar(usuario);
+              this.iniciar = false;
+              this.router.navigate(['/dist']);
             }
           } else {
             this.vigente = true;
             this._usuarioService.guardarStorage(resp.id, resp.token, resp.usuario, resp.menu, resp.usuario.rol, this.vigente);
+            this._usuarioService.iniciar(usuario);
+            this.iniciar = false;
+            this.router.navigate(['/dist']);
           }
-
-          this._usuarioService.iniciar(usuario);
-          this.iniciar = false;
-          this.router.navigate(['/inicio']);
           // this.wsService.login( 'web', forma.value.email, null, this._usuarioService.usuario.rol );
         });
       } else {

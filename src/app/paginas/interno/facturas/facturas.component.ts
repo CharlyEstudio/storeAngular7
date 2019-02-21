@@ -17,6 +17,7 @@ import { UsuarioServicesService, DatosService, ExportarService } from 'src/app/s
 export class FacturasComponent implements OnInit {
 
   saldo: any[] = [];
+  selectMes: any[] = [];
 
   fecha: any;
   fechaFinal: any;
@@ -55,7 +56,7 @@ export class FacturasComponent implements OnInit {
 
     let mes;
 
-    if (h.getMonth() < 10) {
+    if ((h.getMonth() + 1) < 10) {
       mes = '0' + (h.getMonth() + 1);
     } else {
       mes = (h.getMonth() + 1);
@@ -64,16 +65,36 @@ export class FacturasComponent implements OnInit {
     this.dia = dia;
     this.mes = mes;
     this.year = h.getFullYear();
-
     this.fecha = this.year + '-' + mes + '-' + dia;
+    const fechaAnt = (this.year - 1) + '-' + mes + '-' + dia;
     this.fechaFinal = this.year + '-' + mes + '-01';
+
+    for (let i = 13; i > 0; i--) {
+      const m = new Date(fechaAnt);
+      m.setMonth(i);
+      const agregarMes = {
+        indice: i,
+        mes: m
+      };
+      this.selectMes.push(agregarMes);
+    }
   }
 
   ngOnInit() {
     this.obtenerFacturas();
   }
 
-  obtenerFacturas() {
+  obtenerFacturas(valor: any = '') {
+    this.saldo = [];
+    this.sindato = false;
+    if (valor !== '') {
+      const seccion = new Date(valor);
+      const mes = (seccion.getMonth() + 1);
+      const anio = seccion.getFullYear();
+      const diaFinal = new Date(seccion.getFullYear(), seccion.getMonth() + 1, 0).getDate();
+      this.fecha = anio + '-' + mes + '-' + diaFinal;
+      this.fechaFinal = anio + '-' + mes + '-01';
+    }
     this._datoService.obtenerFacturasMes(this._usuarioService.usuario.idFerrum, this.fechaFinal, this.fecha).subscribe((saldo: any) => {
       if (saldo.status) {
         this.saldo = saldo.respuesta;

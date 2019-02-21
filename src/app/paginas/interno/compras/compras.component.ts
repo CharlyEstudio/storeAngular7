@@ -17,17 +17,14 @@ export class ComprasComponent implements OnInit {
   usuario: Usuario;
   fecha: any;
 
-  porBajar: any[] = [];
-  porSurtir: any[] = [];
-  facturado: any[] = [];
+  allPed: any[] = [];
   partidas: any[] = [];
 
   porBajarCant: number = 0;
-  porBajarImpo: number = 0;
   porSurtirCant: number = 0;
-  porSurtirImpo: number = 0;
   facturadoCant: number = 0;
-  facturadoImpo: number = 0;
+
+  pedidosBol: boolean = false;
 
   // Modal
   estatus: any;
@@ -57,24 +54,26 @@ export class ComprasComponent implements OnInit {
   }
 
   actualizar() {
-    this._shoppingService.porBajar(this.usuario, this.fecha).subscribe((porBajar: any) => {
-      if (porBajar.status) {
-        this.porBajar = porBajar.respuesta;
-        this.porBajarCant = porBajar.respuesta.length;
+    this.pedidosBol = false;
+    this.allPed = [];
+    this._shoppingService.allPedidos(this.usuario, this.fecha).subscribe((allPed: any) => {
+      if (allPed.status) {
+        this.allPed = allPed.respuesta;
+        for (let i = 0; i < allPed.respuesta.length; i++) {
+          if (allPed.respuesta[i].tipo === 'POR BAJAR') {
+            this.porBajarCant += allPed.respuesta[i].cantidad;
+          }
+          if (allPed.respuesta[i].tipo === 'POR SURTIR') {
+            this.porSurtirCant += allPed.respuesta[i].cantidad;
+          }
+          if (allPed.respuesta[i].tipo === 'FACTURADO') {
+            this.facturadoCant += allPed.respuesta[i].cantidad;
+          }
+        }
+        this.pedidosBol = true;
       }
     });
-    this._shoppingService.porSurtir(this.usuario, this.fecha).subscribe((porSurtir: any) => {
-      if (porSurtir.status) {
-        this.porSurtir = porSurtir.respuesta;
-        this.porSurtirCant = porSurtir.respuesta.length;
-      }
-    });
-    this._shoppingService.facturado(this.usuario, this.fecha).subscribe((facturado: any) => {
-      if (facturado.status) {
-        this.facturado = facturado.respuesta;
-        this.facturadoCant = facturado.respuesta.length;
-      }
-    });
+    this.pedidosBol = true;
   }
 
 }

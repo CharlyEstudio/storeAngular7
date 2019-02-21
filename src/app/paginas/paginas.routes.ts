@@ -2,6 +2,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 // Guardias
 import { LoginGuard } from '../servicios/guards/login.guard';
+import { DistGuardGuard } from '../servicios/guards/dist-guard.guard';
 
 // Componentes Páginas Iternos
 // DIstribución
@@ -23,74 +24,74 @@ const pageRoutes: Routes = [
     // Tienda
     {
         path: 'compras',
-        canActivate: [LoginGuard],
+        canActivate: [ DistGuardGuard ],
         component: ComprasComponent,
         data: { titulo: 'Mis Compras', name: 'description' }
     },
     {
         path: 'favoritos',
-        canActivate: [LoginGuard],
+        canActivate: [ DistGuardGuard ],
         component: FavoritosComponent,
         data: { titulo: 'Mis Favoritos', name: 'description' }
     },
     {
         path: 'ofertas',
-        canActivate: [LoginGuard],
+        canActivate: [ DistGuardGuard ],
         component: OfertasComponent,
         data: { titulo: 'Ofertas', name: 'description' }
     },
     {
         path: 'perfil',
-        canActivate: [LoginGuard],
+        canActivate: [ DistGuardGuard ],
         component: PerfilComponent,
         data: { titulo: 'Perfil', name: 'description' }
     },
     // Distribución
     {
         path: 'dist',
-        canActivate: [LoginGuard],
+        canActivate: [ DistGuardGuard ],
         component: DistComponent,
         data: { titulo: 'Mi Escritorio', name: 'description' }
     },
     {
         path: 'pedido',
-        canActivate: [LoginGuard],
+        canActivate: [ DistGuardGuard ],
         component: PedidoComponent,
         data: { titulo: 'Hacer Pedido', name: 'description' }
     },
     {
         path: 'edo-cta',
-        canActivate: [LoginGuard],
+        canActivate: [ DistGuardGuard ],
         component: EdoCtaComponent,
         data: { titulo: 'Estado de Cuenta', name: 'description' }
     },
     {
         path: 'facturas',
-        canActivate: [LoginGuard],
+        canActivate: [ DistGuardGuard ],
         component: FacturasComponent,
         data: { titulo: 'Facturas del Mes', name: 'description' }
     },
     {
         path: 'bono',
-        canActivate: [LoginGuard],
+        canActivate: [ DistGuardGuard ],
         component: BonoComponent,
         data: { titulo: 'Bono Trmiestral', name: 'description' }
     },
     {
         path: 'back-order',
-        canActivate: [LoginGuard],
+        canActivate: [ DistGuardGuard ],
         component: BackOrderComponent,
         data: { titulo: 'Back Order', name: 'description' }
     },
     {
         path: 'top-ventas',
-        canActivate: [LoginGuard],
+        canActivate: [ DistGuardGuard ],
         component: TopVentasComponent,
         data: { titulo: 'Top Ventas', name: 'description' }
     },
     {
         path: '',
-        canActivate: [LoginGuard],
+        canActivate: [ DistGuardGuard ],
         redirectTo: '/dist',
         pathMatch: 'full'
     }
