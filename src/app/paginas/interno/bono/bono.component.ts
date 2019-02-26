@@ -12,7 +12,8 @@ export class BonoComponent implements OnInit {
   lineChartData: Array<any> = [
     {data: [0, 0, 0, 0], label: 'Mes 1'},
     {data: [0, 0, 0, 0], label: 'Mes 2'},
-    {data: [0, 0, 0, 0], label: 'Mes 3'}
+    {data: [0, 0, 0, 0], label: 'Mes 3'},
+    {data: [2, 2, 2, 2], label: 'Mínimo'}
   ];
 
   mes1: any;
@@ -30,7 +31,18 @@ export class BonoComponent implements OnInit {
 
   lineChartLabels: Array<any> = ['Semana 1', 'Semana 2', 'Semana 3', 'Semana 4'];
   lineChartOptions: any = {
-    responsive: true
+    responsive: true,
+    scales: {
+      yAxes: [
+        {
+          ticks: {
+              min: 0,
+              max: 4,
+              stepSize: 1
+          }
+        }
+      ]
+    }
   };
 
   lineChartColors: Array<any> = [
@@ -57,6 +69,14 @@ export class BonoComponent implements OnInit {
       pointBorderColor: '#fff',
       pointHoverBackgroundColor: '#fff',
       pointHoverBorderColor: 'rgba(101, 106, 102,0.8)'
+    },
+    { // success
+      backgroundColor: 'rgba(6, 215, 156, 0.2)', // fondo
+      borderColor: '#06d79c', // puntos
+      pointBackgroundColor: '#06d79c',
+      pointBorderColor: '#fff', // bordes
+      pointHoverBackgroundColor: '#fff', // bordes
+      pointHoverBorderColor: 'rgba(6, 215, 156, 0.8)' // línea
     }
   ];
 
@@ -264,10 +284,13 @@ export class BonoComponent implements OnInit {
           this.pasaCompras = false;
         }
 
+        // console.log(this.trimestreBono);
+
         this.lineChartData = [
           {data: [fecMes1Sem1, fecMes1Sem2, fecMes1Sem3, fecMes1Sem4], label: this.mes1},
           {data: [fecMes2Sem1, fecMes2Sem2, fecMes2Sem3, fecMes2Sem4], label: this.mes2},
-          {data: [fecMes3Sem1, fecMes3Sem2, fecMes3Sem3, fecMes3Sem4], label: this.mes3}
+          {data: [fecMes3Sem1, fecMes3Sem2, fecMes3Sem3, fecMes3Sem4], label: this.mes3},
+          {data: [2, 2, 2, 2], label: 'Mínimo'}
         ];
 
         if (this.compras >= 20000 && this.numVenc === 0 && this.pasaCompras) {

@@ -46,6 +46,7 @@ export class PedidoComponent implements OnInit {
       this.subtotal = Number(localStorage.getItem('subtotalPed'));
       this.iva = Number(localStorage.getItem('ivaPed'));
       this.total = Number(localStorage.getItem('totalPed'));
+      // console.log(this.productos);
     }
 
     this.router.queryParams.subscribe((params: any) => {
@@ -217,7 +218,7 @@ export class PedidoComponent implements OnInit {
     xml +=  '</cfdi:Conceptos>' +
           '</cfdi:Comprobante>';
 
-    console.log(xml);
+    // console.log(xml);
 
     swal({
       title: 'Su pedido será procesado, ¿Seguro que desea enviar su pedido?',
@@ -235,7 +236,7 @@ export class PedidoComponent implements OnInit {
       };
 
       this._shoppingCar.enviarPedido(enviarXml).subscribe((info: any) => {
-        // this.eliminarTodo();
+        this.eliminarTodo();
       });
     });
   }

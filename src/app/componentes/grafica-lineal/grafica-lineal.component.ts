@@ -14,6 +14,17 @@ export class GraficaLinealComponent implements OnInit {
 
   public lineChartLegend: boolean = true;
   public lineChartType: string = 'line';
+  public options = {
+    yAxes: [
+      {
+        ticks: {
+            min: 0,
+            max: 2,
+            stepSize: 1
+        }
+      }
+    ]
+  };
 
   constructor() { }
 

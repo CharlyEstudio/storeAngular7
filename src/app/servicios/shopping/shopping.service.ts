@@ -18,14 +18,15 @@ export class ShoppingService {
   private itemsCarrito: Producto[] = [];
 
   dato: any[] = [];
-  token: string;
+  token: string = this._usuarioService.token;
 
   constructor(
     private router: Router,
     private http: HttpClient,
     private _usuarioService: UsuarioServicesService
   ) {
-    this.token = this._usuarioService.token;
+    // this.token = this._usuarioService.token;
+    // this.token = localStorage.getItem('token');
     this.subject.subscribe((data) => {
       let num;
       if (data) {

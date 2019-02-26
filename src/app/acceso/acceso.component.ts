@@ -47,7 +47,7 @@ export class AccesoComponent implements OnInit {
 
     this._usuarioService.login(usuario, forma.value.recuerdame).subscribe((resp: any) => {
       if (resp.status) {
-        this.router.navigate(['/inicio']);
+        this.router.navigate(['/dist']);
       } else {
         swal('Error de Login', resp.mensaje, 'error');
       }

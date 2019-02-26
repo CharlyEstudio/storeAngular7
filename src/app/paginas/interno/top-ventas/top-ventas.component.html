@@ -4,11 +4,123 @@
 
         <div class="col-lg-12 col-md-12 col-sm-12">
 
-            <h1 class="text-uppercase">Productos mas comprados</h1>
+            <div class="d-flex justify-content-between">
+
+                <div class="p-2 bd-highlight">
+
+                    <h1 class="text-uppercase">Productos mas comprados</h1>
+
+                </div>
+
+                <div class="p-2 bd-highlight">
+
+                    <select #selecOrden class="form-control" name="ordenar" id="ordenar" (change)="ordernarTipo(selecOrden.value)">
+
+                        <option value="0">Ordenar...</option>
+
+                        <option value="1">Por Piezas</option>
+
+                        <option value="2">Por Importe</option>
+
+                    </select>
+
+                </div>
+
+            </div>
 
         </div>
 
-        <div class="col-12 col-lg-3 col-md-6 col-sm-12 pt-2" *ngFor="let top of topTen">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+
+            <div class="table-responsive pt-3">
+
+                <table class="table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th scope="col" class="text-center">#</th>
+
+                            <th scope="col" class="text-center">Descripción</th>
+
+                            <th scope="col" class="text-center">Piezas</th>
+
+                            <th scope="col" class="text-center">Precio</th>
+
+                            <th scope="col" class="text-center">Desc</th>
+
+                            <th scope="col" class="text-center">Marca</th>
+
+                            <th scope="col" class="text-center">Ver</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr *ngFor="let top of topTen, let i = index">
+
+                            <td style="vertical-align: middle;" class="text-center">{{(i + 1)}}</td>
+
+                            <td style="vertical-align: middle;" class="text-left">
+
+                                <img [src]="top.IMAGEN" class="img-fluig" width="10%"> {{top.NOMBRE}}
+
+                                <small class="text-muted ml-2">
+                                    
+                                    CLAVE: {{top.CLAVE}} | CODIGO: {{top.CODIGO}}
+                                
+                                </small>
+
+                            </td>
+
+                            <td style="vertical-align: middle;" class="text-center">{{top.ENTREGADO | number}}</td>
+
+                            <td style="vertical-align: middle;" class="text-center">
+
+                                <h4 class="font-weight-bold text-danger">
+
+                                    {{ top.PRECIO | currency }}
+
+                                </h4>
+
+                            </td>
+
+                            <td style="vertical-align: middle;" class="text-center">
+
+                                <span class="badge" [ngClass]="{'badge-danger': top.DESCUENTO > 0, 'badge-light': top.DESCUENTO === 0}">{{ top.DESCUENTO | percent }}</span>
+
+                            </td>
+
+                            <td style="vertical-align: middle;" class="text-center">
+
+                                <span class="badge badge-light">{{ top.MARCA }}</span>
+
+                            </td>
+
+                            <td style="vertical-align: middle;" class="text-center">
+
+                                <button class="btn btn-danger" type="button" (click)="irA(top)">
+
+                                    VER
+            
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+        <!-- <div class="col-12 col-lg-3 col-md-6 col-sm-12 pt-2" *ngFor="let top of topTen">
 
             <div class="card">
 
@@ -78,7 +190,7 @@
 
             </div>
 
-        </div>
+        </div> -->
 
     </div>
 

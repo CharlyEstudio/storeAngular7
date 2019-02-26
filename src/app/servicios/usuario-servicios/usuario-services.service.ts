@@ -141,6 +141,10 @@ export class UsuarioServicesService {
       .pipe(map((data: any) => {
         if (data.status) {
           const fecha = this.fechaActual();
+          this.token = data.token;
+          this.usuario = data.usuario;
+          this.menu = data.menu;
+          this.rol = data.usuario.rol;
           this._datosService.obtenerSaldo(fecha, data.usuario.numero).subscribe((saldo: any) => {
             if (saldo.status) {
               let saldoVenc: number = 0;
@@ -162,9 +166,10 @@ export class UsuarioServicesService {
                 this.guardarStorage(data.usuario._id, data.token, data.usuario, data.menu, data.usuario.rol, true);
               }
               this.iniciar(usuario);
+              this.cargarStorage();
+
             }
           });
-          this.cargarStorage();
           return data;
         } else {
           return data;

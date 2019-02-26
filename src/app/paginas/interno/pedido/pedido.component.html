@@ -132,6 +132,8 @@
 
                             <th scope="col" class="text-center">PRECIO DIST</th>
 
+                            <th scope="col" class="text-center">DESC</th>
+
                             <th scope="col" class="text-center">PRECIO DIST CON DESC</th>
 
                             <th scope="col" class="text-center">SUBTOTAL C/IVA Y DESC</th>
@@ -158,9 +160,18 @@
 
                                     <div class=" col-lg-11 col-md-11 col-sm-11 ">
 
-                                        <h2>{{ prod.producto.descripcion }}</h2>
+                                        <h2>
 
-                                        <h4>Código: {{ prod.producto.codigo }} Clave: {{ prod.producto.clave }}</h4>
+                                            {{ prod.producto.descripcion }}
+
+                                        </h2>
+
+                                        <h4>
+
+                                            <i class="mdi mdi-checkbox-blank-circle shadow-sm" [ngClass]="{'text-success': prod.producto.existencia > 0, 'text-danger': prod.producto.existencia === 0}"></i> Código: {{ prod.producto.codigo }} Clave: {{
+                                            prod.producto.clave }}
+
+                                        </h4>
 
                                     </div>
 
@@ -200,6 +211,8 @@
 
                             <td class="text-center" width="7.14%">{{ prod.producto.precioneto | currency }}</td>
 
+                            <td class="text-center" width="7.14%">{{ (prod.producto.descuento / 100) | percent }}</td>
+
                             <td class="text-center" width="7.14%">{{ prod.precioDesc | currency }}</td>
 
                             <td class="text-center" width="7.14%">{{ prod.precioFinal | currency }}</td>
@@ -222,7 +235,7 @@
 
                         <tr class="text-center">
 
-                            <td colspan="9">Desplegando {{ productos.length }} productos</td>
+                            <td colspan="9">Desplegando {{ productos.length }} producto(s)</td>
 
                         </tr>
 

@@ -67,6 +67,35 @@ export class TopVentasComponent implements OnInit {
     });
   }
 
+  ordernarTipo(ordenar: any) {
+    const orden = Number(ordenar);
+    if (orden !== 2) {
+      this.topTen.sort((a, b) => {
+        if (a.ENTREGADO < b.ENTREGADO) {
+          return 1;
+        }
+
+        if (a.ENTREGADO > b.ENTREGADO) {
+          return -1;
+        }
+
+        return 0;
+      });
+    } else {
+      this.topTen.sort((a, b) => {
+        if (a.PRECIO < b.PRECIO) {
+          return 1;
+        }
+
+        if (a.PRECIO > b.PRECIO) {
+          return -1;
+        }
+
+        return 0;
+      });
+    }
+  }
+
   irA(producto: any) {
     this.route.navigate(['/ver/', producto.DESARTID]);
   }
