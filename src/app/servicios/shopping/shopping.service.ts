@@ -102,9 +102,7 @@ export class ShoppingService {
   }
 
   enviarPedido(xml: XmlString) {
-    let url = 'http://177.244.55.122:3001/ferrum/subir/pedido';
-
-    url += '?token=' + this.token;
+    const url = 'http://177.244.55.122:3001/ferrum/subir/pedido/7854956231457643';
 
     return this.http.post(url, xml);
   }
