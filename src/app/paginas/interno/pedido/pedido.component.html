@@ -22,13 +22,19 @@
 
                             <label for="codigo" class="text-white">Buscar</label>
 
-                            <input #input (keyup.enter)="agregar(input.value)" type="text" name="codigo" id="encontrado" class="form-control text-center" placeholder="CLAVE/CÓDIGO">
+                            <input #input (keyup.enter)="agregar(input.value)" *ngIf="productos.length < 30" type="text" name="codigo" id="encontrado" class="form-control text-center" placeholder="CLAVE/CÓDIGO">
 
                             <small class="form-text text-white" *ngIf="!encontrado">
 
                                 Esta búsqueda no fue exitosa, favor de intentar con otro parámetro.
 
                             </small>
+
+                            <h3 class="form-text text-white" *ngIf="productos.length >= 30">
+
+                                Termine este pedido y realice otro.
+
+                            </h3>
 
                             <div class="alert alert-dark" *ngIf="repetido">
 

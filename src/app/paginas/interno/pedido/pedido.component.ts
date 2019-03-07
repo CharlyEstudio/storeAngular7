@@ -203,42 +203,46 @@ export class PedidoComponent implements OnInit {
   }
 
   procesar() {
-    let xml;
+    if (this.productos.length > 0) {
+      let xml;
 
-    xml = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' +
-          '<cfdi:Comprobante Version="3.3" Serie="W">' +
-            '<cfdi:Receptor Rfc="' + this.cliente.rfc + '" CliNumero="' + this.cliente.numero + '"/>' +
-            '<cfdi:Conceptos>';
+      xml = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' +
+            '<cfdi:Comprobante Version="3.3" Serie="W">' +
+              '<cfdi:Receptor Rfc="' + this.cliente.rfc + '" CliNumero="' + this.cliente.numero + '"/>' +
+              '<cfdi:Conceptos>';
 
-    for (let i = 0; i < this.productos.length; i++) {
-      // console.log(this.productos[i]);
-      xml += '<cfdi:Concepto ClaveProdServ="' + this.productos[i].producto.claveProdServ + '" NoIdentificacion="' + this.productos[i].producto.clave + '" Cantidad="' + this.productos[i].cantidad + '.000" ClaveUnidad="' + this.productos[i].producto.claveUnidad + '" Unidad="PZ"/>';
-    }
-
-    xml +=  '</cfdi:Conceptos>' +
-          '</cfdi:Comprobante>';
-
-    // console.log(xml);
-
-    swal({
-      title: 'Su pedido será procesado, ¿Seguro que desea enviar su pedido?',
-      icon: 'warning',
-      buttons: {
-        cancel: true,
-        confirm: true
+      for (let i = 0; i < this.productos.length; i++) {
+        // console.log(this.productos[i]);
+        xml += '<cfdi:Concepto ClaveProdServ="' + this.productos[i].producto.claveProdServ + '" NoIdentificacion="' + this.productos[i].producto.codigo + '" Cantidad="' + this.productos[i].cantidad + '.000" ClaveUnidad="' + this.productos[i].producto.claveUnidad + '" Unidad="PZ"/>';
       }
-    })
-    .then(( status ) => {
-      if (!status) { return null; }
 
-      const enviarXml: XmlString = {
-        texto: xml
-      };
+      xml +=  '</cfdi:Conceptos>' +
+            '</cfdi:Comprobante>';
 
-      this._shoppingCar.enviarPedido(enviarXml).subscribe((info: any) => {
-        this.eliminarTodo();
+      // console.log(xml);
+
+      swal({
+        title: 'Su pedido será procesado, ¿Seguro que desea enviar su pedido?',
+        icon: 'warning',
+        buttons: {
+          cancel: true,
+          confirm: true
+        }
+      })
+      .then(( status ) => {
+        if (!status) { return null; }
+
+        const enviarXml: XmlString = {
+          texto: xml
+        };
+
+        this._shoppingCar.enviarPedido(enviarXml).subscribe((info: any) => {
+          this.eliminarTodo();
+        });
       });
-    });
+    } else {
+      swal('No hay Productos', 'No se ha ingresado ningún a su pedido.', 'warning');
+    }
   }
 
 }
