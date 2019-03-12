@@ -167,7 +167,10 @@ export class UsuarioServicesService {
               }
               this.iniciar(usuario);
               this.cargarStorage();
-
+            } else {
+              this.guardarStorage(data.usuario._id, data.token, data.usuario, data.menu, data.usuario.rol, true);
+              this.iniciar(usuario);
+              this.cargarStorage();
             }
           });
           return data;

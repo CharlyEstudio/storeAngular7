@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 // Servicios
-import { UsuarioServicesService, ProductosService, ShoppingService } from 'src/app/servicios/servicios.index';
+import { UsuarioServicesService, ProductosService, ShoppingService, WebsocketService } from 'src/app/servicios/servicios.index';
 
 // Modelos
 import { Usuario } from 'src/app/modelos/usuarios.model';
@@ -18,6 +18,7 @@ export class PedidoComponent implements OnInit {
   @ViewChild('input')  input: ElementRef;
 
   cliente: Usuario;
+  rol: any;
 
   precio: number = 3;
   productos: any[] = [];
@@ -37,10 +38,12 @@ export class PedidoComponent implements OnInit {
     public router: ActivatedRoute,
     private _usuarioService: UsuarioServicesService,
     private _productoService: ProductosService,
-    private _shoppingCar: ShoppingService
+    private _shoppingCar: ShoppingService,
+    private _webSocket: WebsocketService
   ) {
     this.precio = this._usuarioService.usuario.precio;
     this.cliente = this._usuarioService.usuario;
+    this.rol = this.cliente.rol;
     if (localStorage.getItem('pedidoDist') !== null) {
       this.productos = JSON.parse(localStorage.getItem('pedidoDist'));
       this.subtotal = Number(localStorage.getItem('subtotalPed'));
@@ -93,7 +96,7 @@ export class PedidoComponent implements OnInit {
   }
 
   producto(valor: any, precio) {
-    this._productoService.buscarProductos(valor, precio).subscribe((producto: any) => {
+    this._productoService.buscarProductoCodigo(valor, precio).subscribe((producto: any) => {
       if (producto.status) {
         this.subtotal += producto.respuesta[0].precioneto;
         this.total += producto.respuesta[0].precio;
@@ -235,9 +238,14 @@ export class PedidoComponent implements OnInit {
         const enviarXml: XmlString = {
           texto: xml
         };
-
+        
         this._shoppingCar.enviarPedido(enviarXml).subscribe((info: any) => {
           this.eliminarTodo();
+          const envio = {
+            cliente: this.cliente,
+            pedido: this.productos
+          }
+          this._webSocket.acciones('aviso-asesor', envio);
         });
       });
     } else {

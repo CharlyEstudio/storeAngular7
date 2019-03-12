@@ -16,7 +16,7 @@
 
             <div class="p-2 bd-highlight">
 
-                <button type="button" class="btn btn-info" (click)="enviarPedido(backOrder)">Ingresar todo a Pedido</button>
+                <button type="button" class="btn btn-info" (click)="enviarPedido(backOrder)" *ngIf="backOrder.length > 0">Ingresar todo a Pedido</button>
 
             </div>
 

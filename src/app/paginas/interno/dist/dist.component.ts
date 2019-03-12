@@ -125,8 +125,8 @@ export class DistComponent implements OnInit {
 
       this._datosService.obtenerAsesor(data.VENDEDORID).subscribe((asesor: any) => {
         if (asesor.ok) {
-          this.emailAsesor = asesor.usuario[0].email;
-          this.imagenAsesor = asesor.usuario[0].img;
+          this.emailAsesor = asesor.usuario.email;
+          this.imagenAsesor = asesor.usuario.img;
           this.telAsesor = '';
         } else {
           this.emailAsesor = 'Sin asesor';

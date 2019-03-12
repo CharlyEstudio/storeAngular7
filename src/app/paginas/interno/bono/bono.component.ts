@@ -279,6 +279,7 @@ export class BonoComponent implements OnInit {
         }
 
         if (this.promMes1 >= 2 && this.promMes2 >= 2 && this.promMes3 >= 2) {
+          console.log(this.promMes1, this.promMes2, this.promMes3);
           this.pasaCompras = true;
         } else {
           this.pasaCompras = false;

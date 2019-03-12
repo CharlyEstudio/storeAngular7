@@ -47,6 +47,12 @@ export class ProductosService {
     return this.http.get(url);
   }
 
+  buscarProductoCodigo(termino: any, precio: number = 3) {
+    const url = LINK + '/productos/buscar/codigo/' + termino + '/' + precio;
+
+    return this.http.get(url);
+  }
+
   obtenerUnidades(id: any) {
     const url = LINK + '/productos/unidades/' + id;
 

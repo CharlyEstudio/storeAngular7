@@ -190,7 +190,7 @@
 
                         <td>
 
-                            <button type="button" class="btn btn-success btn-block font-weight-bold" data-toggle="modal" data-target="#modalPartidas" (click)="openModal(pb, 'EN ESPERA')">{{ pb.numero | number }}</button>
+                            <button type="button" class="btn btn-success btn-block font-weight-bold" data-toggle="modal" data-target="#modalPartidas" (click)="openModal(pb)">{{ pb.numero | number }}</button>
 
                         </td>
 
@@ -200,7 +200,7 @@
 
                         <td>{{ pb.vence | date: 'dd-MM-yyyy' }}</td>
 
-                        <td>{{ (pb.subtotal1 + pb.subtotal2 ) | currency }}</td>
+                        <td>{{ pb.subtotal | currency }}</td>
 
                         <td>{{ pb.impuesto | currency }}</td>
 
@@ -236,7 +236,7 @@
 
                 <h1>
 
-                    <span class="badge" [ngClass]="{'badge-info': estatus === 'EN ESPERA', 'badge-primary': estatus === 'EN PROCESO', 'badge-danger': estatus === 'EMBARCANDO'}">{{ estatus }}</span>
+                    <span class="badge" [ngClass]="{'badge-info': estatus === 'EN ESPERA', 'badge-primary': estatus === 'EN PROCESO', 'badge-danger': estatus === 'TERMINADO'}">{{ estatus }}</span>
 
                 </h1>
 

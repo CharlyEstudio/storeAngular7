@@ -53,6 +53,7 @@ export class AccesoComponent implements OnInit {
       }
       this.iniciar = false;
     }, err => {
+      swal('Error', 'Error.', 'error');
       console.log(err);
     });
   }

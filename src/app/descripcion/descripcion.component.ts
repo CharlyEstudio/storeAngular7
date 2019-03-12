@@ -67,18 +67,24 @@ export class DescripcionComponent implements OnInit {
       this.backO = false;
     }
 
-    this._usuarioService.isSession().subscribe(login => {
-      if (login.length === 0) {
-        if (this._usuarioService.usuario !== null) {
-          this.precioUser = this._usuarioService.usuario.precio;
-        } else {
-          this.precioUser = 3;
-        }
-        this.obtenerProducto(this.id, this.precioUser);
-      } else {
-        this.obtenerProducto(this.id, this.precioUser);
-      }
-    });
+    // this._usuarioService.isSession().subscribe(login => {
+    //   if (login.length === 0) {
+    //     if (this._usuarioService.usuario !== null) {
+    //       this.precioUser = this._usuarioService.usuario.precio;
+    //     } else {
+    //       this.precioUser = 3;
+    //     }
+    //     this.obtenerProducto(this.id, this.precioUser);
+    //   } else {
+    //     this.obtenerProducto(this.id, this.precioUser);
+    //   }
+    // });
+
+    if (this._usuarioService.usuario !== null) {
+      this.precioUser = this._usuarioService.usuario.precio;
+    }
+
+    this.obtenerProducto(this.id, this.precioUser);
   }
 
   ngOnInit() {

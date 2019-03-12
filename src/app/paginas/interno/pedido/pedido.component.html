@@ -22,7 +22,7 @@
 
                             <label for="codigo" class="text-white">Buscar</label>
 
-                            <input #input (keyup.enter)="agregar(input.value)" *ngIf="productos.length < 30" type="text" name="codigo" id="encontrado" class="form-control text-center" placeholder="CLAVE/CÓDIGO">
+                            <input #input (keyup.enter)="agregar(input.value)" autocomplete="off" *ngIf="productos.length < 30" type="text" name="codigo" id="encontrado" class="form-control text-center" placeholder="CÓDIGO">
 
                             <small class="form-text text-white" *ngIf="!encontrado">
 
@@ -108,9 +108,15 @@
 
                 </div>
 
-                <div class="btn-group" role="group" aria-label="Second group">
+                <div class="btn-group mr-2" role="group" aria-label="Second group">
 
                     <button type="button" class="btn btn-danger" (click)="eliminarTodo()">Eliminar Todo</button>
+
+                </div>
+
+                <div class="btn-group" role="group" aria-label="tercer group" *ngIf="rol === 'DIST_ROLE'">
+
+                    <a href="assets/pdf/promo.pdf" target="_blank" class="btn btn-success">VER PROMOTRUPER</a>
 
                 </div>
 
@@ -141,8 +147,6 @@
                             <th scope="col" class="text-center">DESC</th>
 
                             <th scope="col" class="text-center">PRECIO DIST CON DESC</th>
-
-                            <th scope="col" class="text-center">SUBTOTAL C/IVA Y DESC</th>
 
                             <th scope="col" class="text-center">Eliminar</th>
 
@@ -187,7 +191,9 @@
 
                             <td class="text-center" width="7.14%">
 
-                                <input #cantidad type="number" [value]="prod.cantidad" [min]="prod.producto.lote" class="form-control text-center" (change)="cambiarCantidad(prod, cantidad.value)">
+                                <input #cantidad type="number" *ngIf="prod.cantidad > 0" [value]="prod.cantidad" [min]="prod.producto.lote" class="form-control text-center" (change)="cambiarCantidad(prod, cantidad.value)">
+
+                                <input #cantidad type="number" *ngIf="prod.cantidad === 0" [value]="1" [min]="prod.producto.lote" class="form-control text-center" (change)="cambiarCantidad(prod, cantidad.value)">
 
                             </td>
 
@@ -220,8 +226,6 @@
                             <td class="text-center" width="7.14%">{{ (prod.producto.descuento / 100) | percent }}</td>
 
                             <td class="text-center" width="7.14%">{{ prod.precioDesc | currency }}</td>
-
-                            <td class="text-center" width="7.14%">{{ prod.precioFinal | currency }}</td>
 
                             <td class="text-center" width="5%">
 

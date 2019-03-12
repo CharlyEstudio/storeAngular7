@@ -51,7 +51,7 @@ export class VentaDiaComponent implements OnInit {
 
   irA(producto: Producto) {
     // this._webSocket.acciones('producto-visto', producto);
-    // this.router.navigate(['/ver/', producto.articuloid]);
+    this.router.navigate(['/ver/', producto.articuloid]);
   }
 
   obtenerEstrellas() {

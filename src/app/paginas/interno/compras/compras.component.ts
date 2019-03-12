@@ -43,10 +43,10 @@ export class ComprasComponent implements OnInit {
 
   ngOnInit() {}
 
-  openModal(data: any, estado: any) {
+  openModal(data: any) {
     this.partidas = [];
     this.factura = data.numero;
-    this.estatus = estado;
+    this.estatus = data.estado;
     this._shoppingService.partidas(data.docid).subscribe((partidas: any) => {
       if (partidas.status) {
         this.partidas = partidas.respuesta;
