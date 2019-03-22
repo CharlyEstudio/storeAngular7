@@ -40,9 +40,21 @@
 
                 <tbody>
 
-                    <tr *ngFor="let unidad of unidades">
+                    <tr>
 
-                        <td>{{ unidad.equivale2 }}</td>
+                        <td>Por pieza {{ cant_pz }} {{unidad}}</td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>Por Inner {{ cant_in }} {{unidad}}</td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>Por Master {{ cant_ma }} {{unidad}}</td>
 
                     </tr>
 
@@ -78,21 +90,21 @@
                 <div class="form-group">
 
 
-                    <input type="number" [ngModel]="cantidad" id="cantidad" min="1" name="cantidad" class="form-control text-center" placeholder="1" style="width: 100px;">
+                    <input type="number" #input [ngModel]="cant_pz" id="cantidad" [min]="cant_pz" [step]="lote" name="cantidad" class="form-control text-center" placeholder="1" style="width: 100px;" (change)="cambiarCantidad(f)">
 
                 </div>
 
                 <div class="form-group">
 
-                    <button type="button" class="btn btn-outline-danger" (click)="agregarCarrito(producto, unidades, f, marca)">Agregar al Carrito</button>
+                    <button type="button" class="btn btn-outline-danger" (click)="agregarCarrito(producto, f)">Agregar al Carrito</button>
 
                 </div>
 
-                <div class="form-group">
+                <!-- <div class="form-group">
 
                     <button type="button" class="btn btn-outline-success" (click)="agregarFavoritos(producto, f)">Agregar a Favoritos</button>
 
-                </div>
+                </div> -->
 
             </form>
 

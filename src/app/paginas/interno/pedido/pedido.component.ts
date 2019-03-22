@@ -7,6 +7,7 @@ import { UsuarioServicesService, ProductosService, ShoppingService, WebsocketSer
 // Modelos
 import { Usuario } from 'src/app/modelos/usuarios.model';
 import { XmlString } from 'src/app/modelos/xml.model';
+import swal from 'sweetalert';
 
 @Component({
   selector: 'app-pedido',
@@ -86,6 +87,8 @@ export class PedidoComponent implements OnInit {
       return producto.producto.codigo === valor;
     };
 
+    // console.log(this.productos.find(esProducto));
+
     if (!this.productos.find(esProducto)) {
 
       this.producto(valor, this.precio);
@@ -96,42 +99,41 @@ export class PedidoComponent implements OnInit {
   }
 
   producto(valor: any, precio) {
+    this.productos.reverse();
     this._productoService.buscarProductoCodigo(valor, precio).subscribe((producto: any) => {
       if (producto.status) {
-        this.subtotal += producto.respuesta[0].precioneto;
-        this.total += producto.respuesta[0].precio;
+        this.subtotal += (producto.respuesta[0].precioneto * producto.respuesta[0].lote);
+        this.total += (producto.respuesta[0].precio * producto.respuesta[0].lote);
         if (producto.respuesta[0].iva > 0) {
-          this.iva += producto.respuesta[0].precio - producto.respuesta[0].precioneto;
+          this.iva += (producto.respuesta[0].precio - producto.respuesta[0].precioneto) * producto.respuesta[0].lote;
         }
-        this._productoService.obtenerUnidades(producto.respuesta[0].articuloid).subscribe((unidades: any) => {
-          const agregar = {
-            producto: producto.respuesta[0],
-            unidades: unidades.respuesta,
-            precioFinal: (producto.respuesta[0].precioneto * producto.respuesta[0].lote),
-            precioDesc: producto.respuesta[0].precioneto,
-            precioTot: producto.respuesta[0].precio,
-            cantidad: producto.respuesta[0].lote,
-            claveUnidad: producto.respuesta[0].claveUnidad,
-            claveProdServ: producto.respuesta[0].claveProdServ
-          };
-          this.productos.push(agregar);
-          this.productos.reverse();
-          if (localStorage.getItem('pedidoDist') !== null) {
-            localStorage.removeItem('pedidoDist');
-            localStorage.removeItem('subtotalPed');
-            localStorage.removeItem('ivaPed');
-            localStorage.removeItem('totalPed');
-            localStorage.setItem('pedidoDist', JSON.stringify(this.productos));
-            localStorage.setItem('subtotalPed', String(this.subtotal));
-            localStorage.setItem('ivaPed', String(this.iva));
-            localStorage.setItem('totalPed', String(this.total));
-          } else {
-            localStorage.setItem('pedidoDist', JSON.stringify(this.productos));
-            localStorage.setItem('subtotalPed', String(this.subtotal));
-            localStorage.setItem('ivaPed', String(this.iva));
-            localStorage.setItem('totalPed', String(this.total));
-          }
-        });
+        const agregar = {
+          producto: producto.respuesta[0],
+          precioFinal: (producto.respuesta[0].precioneto * producto.respuesta[0].lote),
+          precioDesc: (producto.respuesta[0].precioneto * producto.respuesta[0].lote),
+          precioTot: producto.respuesta[0].precio,
+          cantidad: producto.respuesta[0].lote,
+          claveUnidad: producto.respuesta[0].claveUnidad,
+          claveProdServ: producto.respuesta[0].claveProdServ
+        };
+        this.productos.push(agregar);
+        this.productos.reverse();
+        console.log(this.productos);
+        if (localStorage.getItem('pedidoDist') !== null) {
+          localStorage.removeItem('pedidoDist');
+          localStorage.removeItem('subtotalPed');
+          localStorage.removeItem('ivaPed');
+          localStorage.removeItem('totalPed');
+          localStorage.setItem('pedidoDist', JSON.stringify(this.productos));
+          localStorage.setItem('subtotalPed', String(this.subtotal));
+          localStorage.setItem('ivaPed', String(this.iva));
+          localStorage.setItem('totalPed', String(this.total));
+        } else {
+          localStorage.setItem('pedidoDist', JSON.stringify(this.productos));
+          localStorage.setItem('subtotalPed', String(this.subtotal));
+          localStorage.setItem('ivaPed', String(this.iva));
+          localStorage.setItem('totalPed', String(this.total));
+        }
         this.input.nativeElement.value = '';
         this.input.nativeElement.focus();
         this.encontrado = true;
@@ -141,31 +143,56 @@ export class PedidoComponent implements OnInit {
     });
   }
 
-  cambiarCantidad(producto: any, valor: any) {
+  cambiarCantidad(producto: any, input: any) {
     this.subtotal = 0;
     this.iva = 0;
     this.total = 0;
-    producto.precioFinal = (producto.precioDesc * Number(valor));
-    producto.precioTot = (producto.producto.precio * Number(valor));
-    producto.cantidad = Number(valor);
+    const cantidadAnt = producto.cantidad;
+    const division = Number(input) % producto.producto.lote;
+    if (division === 0) {
+      producto.precioFinal = (producto.producto.precioneto * Number(input));
+      producto.precioTot = (producto.producto.precio * Number(input));
+      producto.cantidad = Number(input);
 
-    for (let i = 0; i < this.productos.length; i++) {
-      this.subtotal += this.productos[i].precioFinal;
-      this.total += this.productos[i].precioTot;
+      for (let i = 0; i < this.productos.length; i++) {
+        this.subtotal += this.productos[i].precioFinal;
+        this.total += this.productos[i].precioTot;
 
-      if (this.productos[i].producto.iva > 0) {
-        this.iva += this.productos[i].precioTot - this.productos[i].precioFinal;
+        if (this.productos[i].producto.iva > 0) {
+          this.iva += this.productos[i].precioTot - this.productos[i].precioFinal;
+        }
       }
-    }
 
-    localStorage.removeItem('pedidoDist');
-    localStorage.removeItem('subtotalPed');
-    localStorage.removeItem('ivaPed');
-    localStorage.removeItem('totalPed');
-    localStorage.setItem('pedidoDist', JSON.stringify(this.productos));
-    localStorage.setItem('subtotalPed', String(this.subtotal));
-    localStorage.setItem('ivaPed', String(this.iva));
-    localStorage.setItem('totalPed', String(this.total));
+      localStorage.removeItem('pedidoDist');
+      localStorage.removeItem('subtotalPed');
+      localStorage.removeItem('ivaPed');
+      localStorage.removeItem('totalPed');
+      localStorage.setItem('pedidoDist', JSON.stringify(this.productos));
+      localStorage.setItem('subtotalPed', String(this.subtotal));
+      localStorage.setItem('ivaPed', String(this.iva));
+      localStorage.setItem('totalPed', String(this.total));
+    } else {
+      const elem = <HTMLInputElement>(document.getElementById('input' + producto.producto.codigo));
+      elem.value = cantidadAnt;
+      for (let i = 0; i < this.productos.length; i++) {
+        this.subtotal += this.productos[i].precioFinal;
+        this.total += this.productos[i].precioTot;
+
+        if (this.productos[i].producto.iva > 0) {
+          this.iva += this.productos[i].precioTot - this.productos[i].precioFinal;
+        }
+      }
+
+      localStorage.removeItem('pedidoDist');
+      localStorage.removeItem('subtotalPed');
+      localStorage.removeItem('ivaPed');
+      localStorage.removeItem('totalPed');
+      localStorage.setItem('pedidoDist', JSON.stringify(this.productos));
+      localStorage.setItem('subtotalPed', String(this.subtotal));
+      localStorage.setItem('ivaPed', String(this.iva));
+      localStorage.setItem('totalPed', String(this.total));
+      swal('Cantidad Incorrecta', 'Solo se pueden ingresar cantidades multiplos de: ' + producto.producto.lote, 'error');
+    }
   }
 
   eliminarTodo() {
@@ -238,13 +265,13 @@ export class PedidoComponent implements OnInit {
         const enviarXml: XmlString = {
           texto: xml
         };
-        
+
         this._shoppingCar.enviarPedido(enviarXml).subscribe((info: any) => {
           this.eliminarTodo();
           const envio = {
             cliente: this.cliente,
             pedido: this.productos
-          }
+          };
           this._webSocket.acciones('aviso-asesor', envio);
         });
       });

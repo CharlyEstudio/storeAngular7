@@ -1,4 +1,4 @@
-import { Component, OnInit, ɵConsole } from '@angular/core';
+import { Component, OnInit, ɵConsole, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
 
@@ -23,6 +23,8 @@ import { ProductosService, ShoppingService, UsuarioServicesService } from '../se
 })
 export class DescripcionComponent implements OnInit {
 
+  @ViewChild('input') input: ElementRef;
+
   id: any;
   precioUser: number = 3;
 
@@ -35,15 +37,15 @@ export class DescripcionComponent implements OnInit {
   marca: any;
   articuloid: any;
   imagen = 'assets/images/precarga/product_loader.gif';
-  precio: number;
-  precioNeto: number;
-  desc: number;
-  unidades: any[] = [];
+  precio: number = 0;
+  precioNeto: number = 0;
+  desc: number = 0;
+  lote: number = 0;
   cantidadBack: number = 0;
-
-  // Form
-  unidad = 0;
-  cantidad: number;
+  cant_pz: number = 0;
+  cant_in: number = 0;
+  cant_ma: number = 0;
+  unidad: any;
 
   // Para subir el precio si trae descuento
   precioAumentado: number;
@@ -66,19 +68,6 @@ export class DescripcionComponent implements OnInit {
       this.id = Number(this.route.snapshot.paramMap.get('producto'));
       this.backO = false;
     }
-
-    // this._usuarioService.isSession().subscribe(login => {
-    //   if (login.length === 0) {
-    //     if (this._usuarioService.usuario !== null) {
-    //       this.precioUser = this._usuarioService.usuario.precio;
-    //     } else {
-    //       this.precioUser = 3;
-    //     }
-    //     this.obtenerProducto(this.id, this.precioUser);
-    //   } else {
-    //     this.obtenerProducto(this.id, this.precioUser);
-    //   }
-    // });
 
     if (this._usuarioService.usuario !== null) {
       this.precioUser = this._usuarioService.usuario.precio;
@@ -105,93 +94,32 @@ export class DescripcionComponent implements OnInit {
         this.marca = producto.respuesta[0].marca;
         this.imagen = producto.respuesta[0].imagen;
         this.precioAumentado = this.precioNeto;
+        this.lote = producto.respuesta[0].lote;
+        this.cant_pz = producto.respuesta[0].cant_pz;
+        this.cant_in = producto.respuesta[0].cant_in;
+        this.cant_ma = producto.respuesta[0].cant_ma;
+        this.unidad = producto.respuesta[0].unidad;
 
         if (producto.respuesta[0].descuento > 0) {
           this.descuentoBol = true;
         }
-
-        this._productoServices.obtenerUnidades(id).subscribe((unidades: any) => {
-          this.unidades = unidades.respuesta;
-          this.cantidad = unidades.respuesta[0].entero;
-        });
       }
     });
   }
 
-  agregarCarrito(producto: any, unidades: any, forma: NgForm, marca: any) {
-    const cantidad =  Number(forma.value.cantidad);
-    let pzs;
-    let inner;
-    let ma;
-    let transMaster;
-
-    if (unidades.length > 2) {
-      pzs = unidades[0].entero;
-      inner = unidades[1].entero;
-      ma = unidades[2].entero;
-      transMaster = ma * inner;
-
-      if (cantidad >= pzs && cantidad < inner) {
-        producto.divide = 1;
-        producto.tipoSurtido = 'PZ';
-        producto.msg = 'Este producto será surtido como Pieza.';
-      } else if (cantidad >= inner && cantidad < transMaster) {
-        producto.divide = inner;
-        producto.tipoSurtido = 'IN';
-        producto.msg = 'Este producto será surtido como Inner.';
-      } else {
-        producto.divide = transMaster;
-        producto.tipoSurtido = 'MA';
-        producto.msg = 'Este producto será surtido como Master.';
-      }
-
-      producto.inner = inner;
-    } else if (unidades.length > 1) {
-      pzs = unidades[0].entero;
-
-      if (unidades[0].unidad === 'IN') {
-        inner = unidades[0].entero;
-        producto.inner = inner;
-      } else if (unidades[0].unidad === 'MA') {
-        inner = unidades[0].entero;
-        producto.inner = inner;
-      } else {
-        inner = unidades[1].entero - 1;
-        // Esto lo coloqué aqrí por que hay productos que no tiene inner y lo mando con 0
-        producto.inner = 0;
-      }
-
-      if (unidades[1].unidad === 'IN') {
-        ma = unidades[1].entero;
-      } else if (unidades[1].unidad === 'MA') {
-        ma = unidades[1].entero;
-      }
-
-      transMaster = ma * inner;
-
-      if (cantidad >= pzs && cantidad < inner) {
-        producto.divide = 1;
-        producto.tipoSurtido = 'PZ';
-        producto.msg = 'Este producto será surtido como Pieza.';
-      } else if (cantidad >= inner && cantidad < transMaster) {
-        producto.divide = inner;
-        producto.tipoSurtido = 'IN';
-        producto.msg = 'Este producto será surtido como Inner.';
-      } else {
-        producto.divide = transMaster;
-        producto.tipoSurtido = 'MA';
-        producto.msg = 'Este producto será surtido como Master.';
-      }
+  cambiarCantidad(forma: NgForm) {
+    const division = forma.value.cantidad % this.lote;
+    if (division !== 0) {
+      this.input.nativeElement.value = this.lote;
+      swal('Cantidad Incorrecta', 'Solo se puede colocar cantidades en multiplos de ' + this.lote, 'error');
     }
+  }
 
-    producto.pz = pzs;
-    producto.ma = ma;
-
-    // Agrego la marca
-    producto.marca = marca;
+  agregarCarrito(producto: any, forma: NgForm) {
+    const cantidad =  Number(forma.value.cantidad);
 
     producto.cantidad = cantidad;
-    producto.precioFinal = producto.precio * cantidad;
+    producto.precioFinal = producto.precioneto * cantidad;
 
     this._shoppingService.guardarCarrito(producto);
     this._shoppingService.addCarrito(producto);

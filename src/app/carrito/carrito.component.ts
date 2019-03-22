@@ -56,39 +56,7 @@ export class CarritoComponent implements OnInit {
         }
 
         this.total += carro[i].precioFinal;
-
-        this._productosServices.obtenerImagenes(carro[i].codigo).subscribe((imagenes: any) => {
-          let image;
-
-          if (imagenes.status) {
-            image = imagenes.respuesta[0].imagen;
-          } else {
-            image = 'product.png';
-          }
-
-          const data: Producto = {
-            articuloid: carro[i].articuloid,
-            descripcion: carro[i].descripcion,
-            clave: carro[i].clave,
-            codigo: carro[i].codigo,
-            marca: carro[i].marca,
-            cantidad: carro[i].cantidad,
-            precioneto: carro[i].precioneto,
-            iva: carro[i].iva,
-            precio: carro[i].precio,
-            precioAumentado: carro[i].precioneto,
-            img: PATH_LINK + '/assets/img_products/' + image,
-            descuento: carro[i].descuento,
-            precioFinal: carro[i].precioFinal,
-            entregado: carro[i].entregado,
-            msg: carro[i].msg,
-            pz: carro[i].pz,
-            inner: carro[i].inner,
-            ma: carro[i].ma
-          };
-
-          this.carrito.push(data);
-        });
+        this.carrito.push(carro[i]);
       }
 
       this.impuesto = this.total - this.subtotal;
@@ -136,23 +104,44 @@ export class CarritoComponent implements OnInit {
     });
   }
 
-  cambiarCantidad(producto: Producto, valor: any) {
-    producto.precioFinal = (producto.precio * valor);
-    producto.cantidad = Number(valor);
+  cambiarCantidad(producto: any, valor: any) {
+    this.subtotal = 0;
+    this.impuesto = 0;
+    this.total = 0;
+    const cantidadAnt = producto.cantidad;
+    const division = Number(valor) % producto.lote;
 
-    if (valor >= producto.pz && valor < producto.inner) {
-      producto.tipoSurtido = 'PZ';
-      producto.msg = 'Este producto será surtido como Pieza.';
-    } else if (producto.inner !== 0 && valor >= producto.inner && valor < producto.ma) {
-      producto.tipoSurtido = 'IN';
-      producto.msg = 'Este producto será surtido como Inner.';
-    } else if (valor >= producto.ma) {
-      producto.tipoSurtido = 'MA';
-      producto.msg = 'Este producto será surtido como Master.';
+    if (division === 0) {
+      producto.precioFinal = (producto.precioneto * Number(valor));
+      producto.cantidad = Number(valor);
+      producto.precioTot = (producto.precioneto * Number(valor));
+      for (let i = 0; i < this.carrito.length; i++) {
+        this.subtotal += (this.carrito[i].precioFinal / (1 + this.carrito[i].iva));
+        this.total += this.carrito[i].precioTot;
+
+        if (this.carrito[i].iva > 0) {
+          this.impuesto += this.carrito[i].precioTot - (this.carrito[i].precioFinal / (1 + this.carrito[i].iva));
+        }
+      }
+
+      localStorage.removeItem('carrito');
+      localStorage.setItem('carrito', JSON.stringify(this.carrito));
+    } else {
+      const elem = <HTMLInputElement>(document.getElementById('input' + producto.codigo));
+      elem.value = cantidadAnt;
+      for (let i = 0; i < this.carrito.length; i++) {
+        this.subtotal += (this.carrito[i].precioFinal / (1 + this.carrito[i].iva));
+        this.total += this.carrito[i].precioTot;
+
+        if (this.carrito[i].iva > 0) {
+          this.impuesto += this.carrito[i].precioTot - (this.carrito[i].precioFinal / (1 + this.carrito[i].iva));
+        }
+      }
+
+      localStorage.removeItem('carrito');
+      localStorage.setItem('carrito', JSON.stringify(this.carrito));
+      swal('Cantidad Incorrecta', 'Solo se pueden ingresar cantidades multiplos de: ' + producto.lote, 'error');
     }
-
-    localStorage.removeItem('carrito');
-    localStorage.setItem('carrito', JSON.stringify(this.carrito));
   }
 
   ngOnInit() {

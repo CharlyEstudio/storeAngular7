@@ -208,13 +208,11 @@
 
                                 <h3 *ngIf="car.descuento === 0">{{ car.precio | currency }}</h3>
 
-                                <p>{{ car.msg }}</p>
-
                             </td>
 
                             <td class="text-center">
 
-                                <input #input type="number" class="form-control text-center" min="1" name="cantidad" [value]="car.cantidad" (change)="cambiarCantidad(car, input.value)">
+                                <input #input type="number" [id]="'input' + car.codigo" class="form-control text-center" [min]="car.lote" [step]="car.lote" name="cantidad" [value]="car.cantidad" (change)="cambiarCantidad(car, input.value)">
 
                             </td>
 
