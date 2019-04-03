@@ -118,7 +118,6 @@ export class PedidoComponent implements OnInit {
         };
         this.productos.push(agregar);
         this.productos.reverse();
-        console.log(this.productos);
         if (localStorage.getItem('pedidoDist') !== null) {
           localStorage.removeItem('pedidoDist');
           localStorage.removeItem('subtotalPed');
@@ -149,7 +148,7 @@ export class PedidoComponent implements OnInit {
     this.total = 0;
     const cantidadAnt = producto.cantidad;
     const division = Number(input) % producto.producto.lote;
-    if (division === 0) {
+    if (division === 0 && input !== '0') {
       producto.precioFinal = (producto.producto.precioneto * Number(input));
       producto.precioTot = (producto.producto.precio * Number(input));
       producto.cantidad = Number(input);

@@ -111,7 +111,7 @@ export class CarritoComponent implements OnInit {
     const cantidadAnt = producto.cantidad;
     const division = Number(valor) % producto.lote;
 
-    if (division === 0) {
+    if (division === 0  && valor !== '0') {
       producto.precioFinal = (producto.precioneto * Number(valor));
       producto.cantidad = Number(valor);
       producto.precioTot = (producto.precioneto * Number(valor));

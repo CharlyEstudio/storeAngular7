@@ -109,7 +109,7 @@ export class DescripcionComponent implements OnInit {
 
   cambiarCantidad(forma: NgForm) {
     const division = forma.value.cantidad % this.lote;
-    if (division !== 0) {
+    if (division !== 0 && forma.value.cantidad !== '0') {
       this.input.nativeElement.value = this.lote;
       swal('Cantidad Incorrecta', 'Solo se puede colocar cantidades en multiplos de ' + this.lote, 'error');
     }
