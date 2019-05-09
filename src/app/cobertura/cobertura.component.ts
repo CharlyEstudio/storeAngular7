@@ -13,12 +13,17 @@ export class CoberturaComponent implements OnInit {
   fecha = Date.now();
 
   clientes = 0;
+  estados = 0;
   municipios = 0;
   pedidos = 0;
 
   constructor(
     private _datosServices: DatosService
   ) {
+    this._datosServices.obtenerEstados().subscribe((estados: any) => {
+      this.estados = estados.respuesta.length;
+    });
+
     this._datosServices.obtenerMunicipios().subscribe((municipios: any) => {
       this.municipios = municipios.respuesta.length;
     });

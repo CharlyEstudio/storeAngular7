@@ -2,9 +2,17 @@
 
     <div class="form-group">
 
-        Buscar
+        <span style="border-radius: 40px 0px 0px 40px; background: #2C3A47; color: white; padding: 5px 15px;margin-right: -4px">Buscar</span>
 
-        <input #input type="text" (keyup.enter)="buscar(input.value)" class="form-control inputBuscar"> <a class="pl-2 srh-btn"><i class="ti-search"></i></a>
+        <input #input type="text" list="search" (keyup)="search(input.value)" class="form-control inputBuscar" style="border-radius: 0px 40px 40px 0px!important; color: #D10024" aria-label="Buscar en el contenido del sitio"> <a class="pl-2 srh-btn"></a>
+
+        <select #selRes *ngIf="datos.length" multiple class="form-control inputBuscar" id="search" style="position: relative;left: 76px; width: 500px!important; height: 200px!important; color: #D10024" (change)="buscar(selRes.value)">
+
+            <option *ngFor="let dato of datos" [value]="dato.codigo">{{dato.descripcion}}</option>
+
+        </select>
+
+        <!-- <input #input type="search" (keyup.enter)="buscar(input.value)" class="form-control inputBuscar" style="border-radius: 0px 40px 40px 0px!important; color: #D10024"> <a class="pl-2 srh-btn"></a> -->
 
     </div>
 

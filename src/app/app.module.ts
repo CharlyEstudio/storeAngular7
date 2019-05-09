@@ -44,6 +44,8 @@ import { DescripcionComponent } from './descripcion/descripcion.component';
 import { BuscarComponent } from './componentes/buscar/buscar.component';
 import { GraficaBarrasComponent } from './componentes/grafica-barras/grafica-barras.component';
 import { OfertaComponent } from './oferta/oferta.component';
+import { DescuentosComponent } from './descuentos/descuentos.component';
+import { PormarcasComponent } from './pormarcas/pormarcas.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +70,9 @@ import { OfertaComponent } from './oferta/oferta.component';
     DescripcionComponent,
     BuscarComponent,
     GraficaBarrasComponent,
-    OfertaComponent
+    OfertaComponent,
+    DescuentosComponent,
+    PormarcasComponent
   ],
   imports: [
     BrowserModule,

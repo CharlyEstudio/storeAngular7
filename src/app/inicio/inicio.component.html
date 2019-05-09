@@ -16,6 +16,32 @@
 
 </div> -->
 
+<div class="row">
+
+    <div class="pl-5 pr-5 text-center" *ngFor="let descuento of descuentos; let i = index" [ngClass]="{'col-lg-4 col-md-4 col-sm-12 col-12': desc === 3, 'col-lg-6 col-md-6 col-sm-12 col-12': desc === 2, 'col-lg-12 col-md-12 col-sm-12 col-12': desc === 1}">
+
+        <a class="cuadro-princ" (click)="irDesc(descuento)">
+
+            <span style="position: relative; bottom: -150px; left: -120px; color: white; font-weight: 700; font-size: 7em;z-index: 9999;">{{descuento.DESCU | percent}}</span>
+
+            <img [src]="'assets/images/cuadros/cuadro-prin-' + i + '.png'" class="img-fluid rounded">
+
+        </a>
+    
+    </div>
+
+    <!-- <div class="col-sm-12 col-12 p-5 text-center" [ngClass]="{'col-lg-4 col-md-4': desc.length === 3, 'col-lg-6 col-md-6': desc.length === 2, 'col-lg-12 col-md-12': desc.length === 1}">
+
+        <a class="cuadro-princ" routerLink="/">
+
+            <img src="assets/images/cuadros/cuadro-prin-10.png" class="img-fluid rounded">
+
+        </a>
+
+    </div> -->
+
+</div>
+
 <div class="container">
 
     <div class="row pt-3 pb-5">
@@ -26,7 +52,7 @@
 
                 <div class="col-6">
 
-                    <h1 class="text-uppercase">
+                    <h1 class="text-uppercase ofertas-mes">
 
                         <small>Las ofertas del mes</small>
 

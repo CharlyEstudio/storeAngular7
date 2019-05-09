@@ -257,6 +257,12 @@ export class DatosService {
     return fecha;
   }
 
+  obtenerEstados() {
+    const url = LINK + '/cobertura/estados';
+
+    return this.http.get(url);
+  }
+
   obtenerMunicipios() {
     const url = LINK + '/cobertura/municipios';
 

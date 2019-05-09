@@ -29,6 +29,24 @@ export class ProductosService {
     return this.http.get(url);
   }
 
+  obtenerMarcasTruper () {
+    const url = LINK + '/productos/marcas/truper';
+
+    return this.http.get(url);
+  }
+
+  obtenerMarcasFMO () {
+    const url = LINK + '/productos/marcas/fmo';
+
+    return this.http.get(url);
+  }
+
+  obtenerProductosPorMarca(marca: any, precio: number) {
+    const url = LINK + '/productos/productos/marca/' + marca + '/' + precio;
+
+    return this.http.get(url);
+  }
+
   obtenerImagenes (codigo: any) {
     const url = LINK + '/productos/imagen/' + codigo;
 
@@ -37,6 +55,12 @@ export class ProductosService {
 
   obtenerDescripcion(id: any, precio: number) {
     const url = LINK + '/productos/descripcion/' + id + '/' + precio;
+
+    return this.http.get(url);
+  }
+
+  buscarProductosID(id: any, precio: number = 3) {
+    const url = LINK + '/productos/buscar/id/' + id + '/' + precio;
 
     return this.http.get(url);
   }

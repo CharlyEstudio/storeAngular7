@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 
 // Servicios
-import { UsuarioServicesService, ShoppingService } from 'src/app/servicios/servicios.index';
+import { UsuarioServicesService, ShoppingService, ProductosService } from 'src/app/servicios/servicios.index';
 
 @Component({
   selector: 'app-nav-principal',
@@ -11,7 +11,12 @@ import { UsuarioServicesService, ShoppingService } from 'src/app/servicios/servi
 })
 export class NavPrincipalComponent implements OnInit {
 
+  @Output('actualizaValor') cambioValor: EventEmitter<any> = new EventEmitter();
+
   cantidad: number = 0;
+
+  marcasFmo: any[] = [];
+  marcasTru: any[] = [];
 
   // Booleanos
   logeado = false;
@@ -20,8 +25,16 @@ export class NavPrincipalComponent implements OnInit {
   constructor(
     private route: Router,
     private _usuarioService: UsuarioServicesService,
-    private _shoppingCar: ShoppingService
-  ) {}
+    private _shoppingCar: ShoppingService,
+    private _productoService: ProductosService
+  ) {
+    this._productoService.obtenerMarcasTruper().subscribe((truper: any) => {
+      this.marcasTru = truper.respuesta;
+    });
+    this._productoService.obtenerMarcasFMO().subscribe((fmo: any) => {
+      this.marcasFmo = fmo.respuesta;
+    });
+  }
 
   ngOnInit() {
     this._usuarioService.isSession().subscribe(login => {
@@ -58,6 +71,11 @@ export class NavPrincipalComponent implements OnInit {
 
   logout() {
     this._usuarioService.logout();
+  }
+
+  irPorMarcas(marca: any) {
+    this.cambioValor.emit(marca);
+    this.route.navigate(['/pormarcas', marca]);
   }
 
 }

@@ -1,0 +1,73 @@
+<div class="container my-5">
+
+  <nav class="breadcrumb bg-transparent">
+
+    <a class="breadcrumb-item" routerLink="/inicio">Inicio</a>
+
+    <span class="breadcrumb-item active">Producto con Descuento del {{descPercent | percent}}</span>
+
+  </nav>
+
+  <div class="row">
+
+    <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+
+      <h2>PRODUCTOS CON EL {{descPercent | percent}} DE DESCUENTO</h2>
+
+    </div>
+
+    <div class="col-lg-4 col-md-4 col-sm-12 col-12" *ngFor="let producto of productos">
+
+      <div class="card">
+
+        <div class="card-body text-center">
+
+          <img [src]="producto.imagen" class="img-fluig" width="200">
+
+          <h5 class="pt-2 pb-4 text-truncate">{{producto.descripcion}}</h5>
+
+          <h3>
+
+            <span class="badge badge-danger">{{ (producto.descuento * 100) }}% de Descuento</span>
+
+          </h3>
+
+          <h6 class="text-muted">
+
+            <small>
+
+              <s>{{ producto.precioNormal | currency }}</s>
+                
+            </small>
+
+          </h6>
+
+          <h4 class="font-weight-bold text-danger">
+
+            {{ producto.precio | currency }}
+
+          </h4>
+
+          <h3>{{ producto.marca }}</h3>
+
+          <h3>
+
+            <span class="badge badge-pill badge-dark">Código: {{ producto.codigo }} | Clave: {{ producto.clave }}</span>
+
+          </h3>
+
+          <button class="btn btn-linkedin" type="button" (click)="irA(producto)">
+
+            Comprar
+
+          </button>
+
+        </div>
+
+      </div>
+  
+    </div>
+
+  </div>
+
+</div>

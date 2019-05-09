@@ -113,6 +113,12 @@ export class ShoppingService {
     return this.http.get(url);
   }
 
+  productosDesc(desc: any, precio: any) {
+    const url = 'http://177.244.55.122:3001/cobertura/promotruper/desc/num/' + desc + '/' + precio;
+
+    return this.http.get(url);
+  }
+
   porBajar(usuario: any, fecha: any) {
     let url = 'http://177.244.55.122:3001/bigdata/obtener/porbajar/' + usuario.idFerrum + '/' + fecha;
 

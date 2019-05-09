@@ -1,6 +1,6 @@
 <div id="carouselPrincipal" class="carousel slide" data-ride="carousel">
 
-    <ol class="carousel-indicators">
+    <!-- <ol class="carousel-indicators">
 
         <li data-target="#carouselPrincipal" data-slide-to="0" class="active"></li>
 
@@ -10,11 +10,45 @@
 
         <li data-target="#carouselPrincipal" data-slide-to="3"></li>
 
-    </ol>
+    </ol> -->
 
     <div class="carousel-inner">
 
-        <div class="carousel-item active">
+        <div class="carousel-item active" id="video">
+
+            <!-- <img src="assets/images/carrusel/fondo_pre_1.jpg" class="d-block w-100"> -->
+
+            <!-- <video id="video" poster="assets/images/carrusel/fondo_pre_1.jpg" preload autoplay muted loop class="img-responsive" width="100%">
+
+                <source src="http://ferremayoristas.com.mx/movie/truper3.mp4" type="video/mp4">
+
+            </video> -->
+
+            <video id="truper" autoplay="autoplay" loop="loop" class="img-responsive" width="100%">
+
+                <source [src]="movie" type="video/mp4">
+
+            </video>
+
+            <div class="carousel-caption texto-video">
+
+                <h1 class="font-weight-bold text-white display-1">HACEMOS QUE TU NEGOCIO</h1>
+
+                <h1 class="font-weight-bold display-2 text-blanco text-uppercase">
+
+                    <span class="badge badge-fmo">
+        
+                        AVANCE
+        
+                    </span>
+        
+                </h1>
+                
+            </div>
+
+        </div>
+
+        <!-- <div class="carousel-item active">
 
             <img src="assets/images/carrusel/fondo_dis_a.jpg" class="d-block w-100">
 
@@ -36,11 +70,11 @@
 
             <img src="assets/images/carrusel/fondo_dis_c.jpg" class="d-block w-100">
 
-        </div>
+        </div> -->
 
     </div>
 
-    <a class="carousel-control-prev" href="#carouselPrincipal" role="button" data-slide="prev">
+    <!-- <a class="carousel-control-prev" href="#carouselPrincipal" role="button" data-slide="prev">
 
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
 
@@ -54,33 +88,11 @@
 
         <span class="sr-only">Next</span>
 
-    </a>
+    </a> -->
 
 </div>
 
-<div class="barra"></div>
-
-<div class="promotruper_barra">
-
-    <img src="assets/images/banners/ferre3.jpg" class="img-responsive" width="100%" style="margin-top: -167.667px">
-
-    <div class="textoBanner textoDer">
-
-        <h1 class="font-weight-bold text-blanco">PROMOTRUPER DEL MES</h1>
-
-        <h1 class="font-weight-bold text-blanco text-uppercase">
-
-            <span class="badge badge-primary">
-
-                {{ desc | percent }} Descuento
-
-            </span>
-
-        </h1>
-
-    </div>
-
-</div>
+<!-- <div class="barra"></div> -->
 
 <!-- <div class="row pb-3">
 

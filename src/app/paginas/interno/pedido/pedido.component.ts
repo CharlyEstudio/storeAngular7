@@ -98,9 +98,10 @@ export class PedidoComponent implements OnInit {
     }
   }
 
-  producto(valor: any, precio) {
+  producto(valor: any, precio: any) {
     this.productos.reverse();
     this._productoService.buscarProductoCodigo(valor, precio).subscribe((producto: any) => {
+      console.log(producto.respuesta);
       if (producto.status) {
         this.subtotal += (producto.respuesta[0].precioneto * producto.respuesta[0].lote);
         this.total += (producto.respuesta[0].precio * producto.respuesta[0].lote);

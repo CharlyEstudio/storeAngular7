@@ -1,3 +1,9 @@
+<div class="row">
+
+    <div class="col-12 fondo-cobertura"></div>
+    
+</div>
+
 <div class="container">
 
     <div class="row pt-5 pb-5 ml-3 mr-3">
@@ -21,7 +27,15 @@
 
     <div class="row cobertura-conteo bg-danger text-white p-5 mb-5">
 
-        <div class="col-12 col-lg-4 col-md-12 dato pl-5 pr-5 text-center">
+        <div class="col-12 col-lg-3 col-md-12 dato pl-1 pr-1 text-center">
+
+            <h3 class="display-4 text-white">{{ estados | number }}</h3>
+
+            <p class="lead">Estados</p>
+
+        </div>
+
+        <div class="col-12 col-lg-3 col-md-12 dato pl-1 pr-1 text-center">
 
             <h3 class="display-4 text-white">{{ municipios | number }}</h3>
 
@@ -29,7 +43,7 @@
 
         </div>
 
-        <div class="col-12 col-lg-4 col-md-12 dato pl-5 pr-5 text-center">
+        <div class="col-12 col-lg-3 col-md-12 dato pl-1 pr-1 text-center">
 
             <h3 class="display-4 text-white">{{ clientes | number }}</h3>
 
@@ -37,7 +51,7 @@
 
         </div>
 
-        <div class="col-12 col-lg-4 col-md-12 dato pl-5 pr-5 text-center">
+        <div class="col-12 col-lg-3 col-md-12 dato pl-1 pr-1 text-center">
 
             <h3 class="display-4 text-white">{{ pedidos | number }}</h3>
 
