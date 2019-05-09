@@ -15,6 +15,7 @@ export class EdoCtaComponent implements OnInit {
   numero: string;
   nombre: string;
   idFerrum: number = 0;
+  vencidos: any[] = [];
 
   // Estado de Cuenta
   saldo: any[] = [];
@@ -81,6 +82,15 @@ export class EdoCtaComponent implements OnInit {
     this.obtenerSaldo();
   }
 
+  mostrarVencidos() {
+    const fecha = this._datoService.obtenerFechaActual();
+    this._datoService.obtenerVencidos(this.idFerrum, fecha).subscribe((resp: any) => {
+      if (resp.status) {
+        this.vencidos = resp.respuesta;
+      }
+    });
+  }
+
   obtenerSaldo() {
     this._datoService.obtenerSaldo(this.fecha, this._usuarioService.usuario.numero).subscribe((saldo: any) => {
       if (saldo.status) {
@@ -101,60 +111,62 @@ export class EdoCtaComponent implements OnInit {
           if (facturas.status) {
             const edocta = facturas.respuesta;
             for (let i = 0; i < edocta.length; i++) {
-              this.abonos += edocta[i].ABONO;
+              if (edocta[i].SALDOFINAL > 0) {
+                this.abonos += edocta[i].ABONO;
 
-              if (edocta[i].SALDOFINAL !== 0) {
-                this.saldos += edocta[i].SALDOFINAL;
-              }
-
-              const esFolio = (factura) => {
-                return factura.FOLIO === edocta[i].FOLIO;
-              };
-
-              if (this.edocta.find(esFolio)) {
-                let newSaldo;
-                let cargo;
-                if (edocta[i].TOTALGADO === edocta[i].TOTAL) {
-                  newSaldo = (edocta[i].TOTAL - edocta[i].ABONO) - edocta[i].SALDO;
-                } else {
-                  if (edocta[i].ABONO < 0) {
-                    newSaldo = edocta[i].SALDOFINAL + (-1 * edocta[i].ABONO);
-                  } else {
-                    newSaldo = edocta[i].SALDOFINAL;
-                  }
+                if (edocta[i].SALDOFINAL !== 0) {
+                  this.saldos += edocta[i].SALDOFINAL;
                 }
 
-                if (this.edocta.find(esFolio).SALDO !== 0) {
-                  cargo = this.edocta.find(esFolio).SALDO;
-                } else {
-                  if (edocta[i].ABONO < 0) {
-                    cargo = 0;
-                  } else {
-                    cargo = edocta[i].CARGO;
-                  }
-                }
+                const esFolio = (factura) => {
+                  return factura.FOLIO === edocta[i].FOLIO;
+                };
 
-                const nuevo = [
-                  {
-                    'DOCID': edocta[i].DOCID,
-                    'FECHA': '',
-                    'FECHAPAG': edocta[i].FECHAPAG,
-                    'FOLIO': '',
-                    'SALDO': newSaldo,
-                    'CARGO': cargo,
-                    'ABONO': edocta[i].ABONO,
-                    'RECIBO': edocta[i].RECIBO,
-                    'TIPO': edocta[i].TIPO,
-                    'FP': edocta[i].FP,
-                    'NOTA': edocta[i].NOTA,
-                    'TOTAL': edocta[i].TOTAL,
-                    'TOTALPAGADO': edocta[i].TOTALPAGADO,
-                    'SALDOFINAL': edocta[i].SALDOFINAL
+                if (this.edocta.find(esFolio)) {
+                  let newSaldo;
+                  let cargo;
+                  if (edocta[i].TOTALGADO === edocta[i].TOTAL) {
+                    newSaldo = (edocta[i].TOTAL - edocta[i].ABONO) - edocta[i].SALDO;
+                  } else {
+                    if (edocta[i].ABONO < 0) {
+                      newSaldo = edocta[i].SALDOFINAL + (-1 * edocta[i].ABONO);
+                    } else {
+                      newSaldo = edocta[i].SALDOFINAL;
+                    }
                   }
-                ];
-                this.edocta.push(nuevo[0]);
-              } else {
-                this.edocta.push(edocta[i]);
+
+                  if (this.edocta.find(esFolio).SALDO !== 0) {
+                    cargo = this.edocta.find(esFolio).SALDO;
+                  } else {
+                    if (edocta[i].ABONO < 0) {
+                      cargo = 0;
+                    } else {
+                      cargo = edocta[i].CARGO;
+                    }
+                  }
+
+                  const nuevo = [
+                    {
+                      'DOCID': edocta[i].DOCID,
+                      'FECHA': '',
+                      'FECHAPAG': edocta[i].FECHAPAG,
+                      'FOLIO': '',
+                      'SALDO': newSaldo,
+                      'CARGO': cargo,
+                      'ABONO': edocta[i].ABONO,
+                      'RECIBO': edocta[i].RECIBO,
+                      'TIPO': edocta[i].TIPO,
+                      'FP': edocta[i].FP,
+                      'NOTA': edocta[i].NOTA,
+                      'TOTAL': edocta[i].TOTAL,
+                      'TOTALPAGADO': edocta[i].TOTALPAGADO,
+                      'SALDOFINAL': edocta[i].SALDOFINAL
+                    }
+                  ];
+                  this.edocta.push(nuevo[0]);
+                } else {
+                  this.edocta.push(edocta[i]);
+                }
               }
             }
 

@@ -257,6 +257,32 @@ export class DatosService {
     return fecha;
   }
 
+  obtenerFechaActual() {
+    const h = new Date();
+
+    let dia;
+
+    if (h.getDate() < 10) {
+      dia = '0' + h.getDate();
+    } else {
+      dia = h.getDate();
+    }
+
+    let mes;
+
+    if (h.getMonth() < 10) {
+      mes = '0' + (h.getMonth() + 1);
+    } else {
+      mes = (h.getMonth() + 1);
+    }
+
+    const anio = h.getFullYear();
+
+    const fecha = anio + '-' + mes + '-' + dia;
+
+    return fecha;
+  }
+
   obtenerEstados() {
     const url = LINK + '/cobertura/estados';
 
@@ -307,6 +333,12 @@ export class DatosService {
 
   obtenerFacturas(cliente: any, inicio: any) {
     const url = LINK + '/cobertura/facturas/' + cliente + '/' + inicio;
+
+    return this.http.get(url);
+  }
+
+  obtenerVencidos(id: any, fecha: any) {
+    const url = LINK + '/cobertura/facturas/vencidas/' + id + '/' + fecha;
 
     return this.http.get(url);
   }

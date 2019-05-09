@@ -18,11 +18,11 @@
 
                 <div class="form-group">
 
-                    <select #selMes name="mes" id="mes" class="form-control" (change)="obtenerFacturas(selMes.value)">
+                    <select #selMes [(ngModel)]="seleccionarMes" name="mes" id="mes" class="form-control" (change)="obtenerFacturas()">
 
                         <option value="0">Mes</option>
 
-                        <option *ngFor="let mes of selectMes" [value]="mes.mes">{{ mes.mes | date: 'MM-yyyy' }}</option>
+                        <option *ngFor="let mes of selectMes" [ngValue]="mes">{{ mes.mes }}-{{mes.year}}</option>
 
                     </select>
 

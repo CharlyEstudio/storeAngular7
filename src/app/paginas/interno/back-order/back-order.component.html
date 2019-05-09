@@ -2,11 +2,11 @@
 
     <div class="d-flex justify-content-around">
 
-        <div class="d-flex flex-row bd-highlight mb-3">
+        <div class="d-flex flex-row bd-highlight">
 
             <div class="p-2 bd-highlight">
 
-                <h1>Back Order</h1>
+                <h3>Back Order</h3>
 
             </div>
 
@@ -22,8 +22,27 @@
 
         </div>
 
-    </div>
+        <div class="d-flex flex-row-reverse bd-highlight">
 
+            <div class="p-2 bd-highlight">
+
+                <div class="form-group">
+
+                    <select #selMes [(ngModel)]="seleccionarMes" name="mes" id="mes" class="form-control" (change)="obtenerBackOrder()">
+
+                        <option value="0">Mes</option>
+
+                        <option *ngFor="let mes of selectMes" [ngValue]="mes">{{ mes.mes }}-{{mes.year}}</option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
 
     <p *ngIf="backOrder.length > 0">Solícita tus productos faltantes.</p>
 

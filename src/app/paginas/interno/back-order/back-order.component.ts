@@ -23,6 +23,9 @@ export class BackOrderComponent implements OnInit {
   numero: string;
   sindato: boolean = false;
 
+  selectMes: any[] = [];
+  seleccionarMes: any = '0';
+
   backOrder: any[] = [];
 
   constructor(
@@ -31,32 +34,42 @@ export class BackOrderComponent implements OnInit {
     private _productoService: ProductosService,
     private _shoppingService: ShoppingService
   ) {
-    const h = new Date();
-
-    let dia;
-
-    if (h.getDate() < 10) {
-      dia = '0' + h.getDate();
-    } else {
-      dia = h.getDate();
-    }
-
-    let mes;
-
-    if (h.getMonth() < 10) {
-      mes = '0' + (h.getMonth() + 1);
-    } else {
-      mes = (h.getMonth() + 1);
-    }
-
-    const anio = h.getFullYear();
-
     if (this._usuarioService.usuario !== null) {
       this.precio = this._usuarioService.usuario.precio;
     }
     this.numero = this._usuarioService.usuario.numero;
-    this.inicio = anio + '-' + mes + '-01';
-    this.final = anio + '-' + mes + '-' + dia;
+
+    const h = new Date();
+    const mesInt = h.getMonth() + 1;
+
+    let indiceMes = 12;
+    for (let i = 0; i < 13; i++) {
+      let agregarMes;
+      if (i === 0) {
+        agregarMes = {
+          indice: i,
+          mes: mesInt,
+          year: h.getFullYear()
+        };
+      } else {
+        if ((mesInt - i) > 0) {
+          agregarMes = {
+            indice: i,
+            mes: (mesInt - i),
+            year: h.getFullYear()
+          };
+        } else {
+          agregarMes = {
+            indice: i,
+            mes: indiceMes,
+            year: h.getFullYear() - 1
+          };
+          indiceMes--;
+        }
+      }
+      this.selectMes.push(agregarMes);
+      this.seleccionarMes = agregarMes;
+    }
   }
 
   ngOnInit() {
@@ -64,6 +77,15 @@ export class BackOrderComponent implements OnInit {
   }
 
   obtenerBackOrder() {
+    let mes;
+    if (this.seleccionarMes.mes < 10) {
+      mes = '0' + this.seleccionarMes.mes;
+    } else {
+      mes = this.seleccionarMes.mes;
+    }
+    const diaFinal = new Date(this.seleccionarMes.year, this.seleccionarMes.mes, 0).getDate();
+    this.inicio = this.seleccionarMes.year + '-' + mes + '-' + diaFinal;
+    this.final = this.seleccionarMes.year + '-' + mes + '-01';
     this._productoService.obtenerBackOrder(this.numero, this.inicio, this.final, this.precio).subscribe((back: any) => {
       if (back.status) {
         this.backOrder = back.respuesta;

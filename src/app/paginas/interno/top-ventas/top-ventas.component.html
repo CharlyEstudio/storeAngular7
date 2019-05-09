@@ -48,6 +48,8 @@
 
                             <th scope="col" class="text-center">Precio</th>
 
+                            <th scope="col" class="text-center">Total</th>
+
                             <th scope="col" class="text-center">Desc</th>
 
                             <th scope="col" class="text-center">Marca</th>
@@ -83,6 +85,16 @@
                                 <h4 class="font-weight-bold text-danger">
 
                                     {{ top.PRECIO | currency }}
+
+                                </h4>
+
+                            </td>
+
+                            <td style="vertical-align: middle;" class="text-center">
+
+                                <h4 class="font-weight-bold text-danger">
+
+                                    {{ (top.PRECIO * top.ENTREGADO ) | currency }}
 
                                 </h4>
 

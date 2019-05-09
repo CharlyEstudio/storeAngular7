@@ -20,6 +20,7 @@ export class PedidoComponent implements OnInit {
 
   cliente: Usuario;
   rol: any;
+  fecha: number = Date.now();
 
   precio: number = 3;
   productos: any[] = [];

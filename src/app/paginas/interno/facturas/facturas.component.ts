@@ -18,6 +18,7 @@ export class FacturasComponent implements OnInit {
 
   saldo: any[] = [];
   selectMes: any[] = [];
+  seleccionarMes: any = '0';
 
   fecha: any;
   fechaFinal: any;
@@ -45,38 +46,35 @@ export class FacturasComponent implements OnInit {
     private _exportar: ExportarService
   ) {
     const h = new Date();
+    const mesInt = h.getMonth() + 1;
 
-    let dia;
-
-    if (h.getDate() < 10) {
-      dia = '0' + h.getDate();
-    } else {
-      dia = h.getDate();
-    }
-
-    let mes;
-
-    if ((h.getMonth() + 1) < 10) {
-      mes = '0' + (h.getMonth() + 1);
-    } else {
-      mes = (h.getMonth() + 1);
-    }
-
-    this.dia = dia;
-    this.mes = mes;
-    this.year = h.getFullYear();
-    this.fecha = this.year + '-' + mes + '-' + dia;
-    const fechaAnt = (this.year - 1) + '-' + mes + '-' + dia;
-    this.fechaFinal = this.year + '-' + mes + '-01';
-
-    for (let i = 13; i > 0; i--) {
-      const m = new Date(fechaAnt);
-      m.setMonth(i);
-      const agregarMes = {
-        indice: i,
-        mes: m
-      };
+    let indiceMes = 12;
+    for (let i = 0; i < 13; i++) {
+      let agregarMes;
+      if (i === 0) {
+        agregarMes = {
+          indice: i,
+          mes: mesInt,
+          year: h.getFullYear()
+        };
+      } else {
+        if ((mesInt - i) > 0) {
+          agregarMes = {
+            indice: i,
+            mes: (mesInt - i),
+            year: h.getFullYear()
+          };
+        } else {
+          agregarMes = {
+            indice: i,
+            mes: indiceMes,
+            year: h.getFullYear() - 1
+          };
+          indiceMes--;
+        }
+      }
       this.selectMes.push(agregarMes);
+      this.seleccionarMes = agregarMes;
     }
   }
 
@@ -87,14 +85,15 @@ export class FacturasComponent implements OnInit {
   obtenerFacturas(valor: any = '') {
     this.saldo = [];
     this.sindato = false;
-    if (valor !== '') {
-      const seccion = new Date(valor);
-      const mes = (seccion.getMonth() + 1);
-      const anio = seccion.getFullYear();
-      const diaFinal = new Date(seccion.getFullYear(), seccion.getMonth() + 1, 0).getDate();
-      this.fecha = anio + '-' + mes + '-' + diaFinal;
-      this.fechaFinal = anio + '-' + mes + '-01';
+    let mes;
+    if (this.seleccionarMes.mes < 10) {
+      mes = '0' + this.seleccionarMes.mes;
+    } else {
+      mes = this.seleccionarMes.mes;
     }
+    const diaFinal = new Date(this.seleccionarMes.year, this.seleccionarMes.mes, 0).getDate();
+    this.fecha = this.seleccionarMes.year + '-' + mes + '-' + diaFinal;
+    this.fechaFinal = this.seleccionarMes.year + '-' + mes + '-01';
     this._datoService.obtenerFacturasMes(this._usuarioService.usuario.idFerrum, this.fechaFinal, this.fecha).subscribe((saldo: any) => {
       if (saldo.status) {
         this.saldo = saldo.respuesta;

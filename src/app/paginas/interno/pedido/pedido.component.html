@@ -116,7 +116,11 @@
 
                 <div class="btn-group" role="group" aria-label="tercer group" *ngIf="rol === 'DIST_ROLE'">
 
-                    <a href="assets/pdf/promo.pdf" target="_blank" class="btn btn-success">VER PROMOTRUPER</a>
+                    <a href="assets/pdf/promo.pdf" target="_blank" class="btn btn-outline-light">
+                        
+                        <span class="disenoPromo">PROMO</span><span class="disenoTruper">TRUPER</span><span class="text-dark"> DEL MES {{ fecha | date: 'MM' | uppercase}}-{{ fecha | date: 'yyyy' }}</span>
+                    
+                    </a>
 
                 </div>
 

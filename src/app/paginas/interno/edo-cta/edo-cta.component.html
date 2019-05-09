@@ -8,7 +8,7 @@
 
         </div>
 
-        <div class="col-lg-12 col-md-12 text-right">
+        <!-- <div class="col-lg-12 col-md-12 text-right">
 
             <h5>FECHA DE REVISIÓN EN LIBROS:
 
@@ -18,7 +18,7 @@
 
             </h5>
 
-        </div>
+        </div> -->
 
         <div class="col-lg-12 col-md-12 col-sm-12">
 
@@ -32,7 +32,8 @@
 
                 <div class="col-lg-4 col-md-4 col-sm-6">
 
-                    <h5 class="text-uppercase"><b>{{numero}} / {{idFerrum}}</b></h5>
+                    <!-- <h5 class="text-uppercase"><b>{{numero}} / {{idFerrum}}</b></h5> -->
+                    <h5 class="text-uppercase"><b>{{numero}}</b></h5>
 
                 </div>
 
@@ -102,15 +103,21 @@
 
                 <div class="col-lg-8 col-md-8 col-sm-12 text-right">
 
-                    <h5 class="text-uppercase">
+                    <h3 class="text-uppercase dir-tel" (click)="mostrarVencidos()" *ngIf="saldoVencido > 0" data-toggle="modal" data-target="#modalVencidas">
 
-                        <span class="font-weight-bold" [ngClass]="{'text-danger': saldoVencido > 0, 'text-success': saldoVencido === 0}">mxn {{saldoVencido | currency}}</span>
+                        <span class="badge badge-danger font-weight-bold">mxn {{saldoVencido | currency}}</span>
 
-                    </h5>
+                    </h3>
+
+                    <h3 class="text-uppercase" *ngIf="saldoVencido === 0">
+
+                        <span class="badge badge-success font-weight-bold">mxn {{saldoVencido | currency}}</span>
+
+                    </h3>
 
                 </div>
 
-                <div class="col-lg-4 col-md-4 col-sm-12">
+                <!-- <div class="col-lg-4 col-md-4 col-sm-12">
 
                     <h5 class="text-uppercase">depósitos/abonos</h5>
 
@@ -138,7 +145,7 @@
 
                     <h5 class="text-uppercase" *ngIf="diasProximoVenc >= 5"><span class="font-weight-bold badge badge-success">Sin Vencimiento</span></h5>
 
-                </div>
+                </div> -->
 
             </div>
 
@@ -166,7 +173,7 @@
 
         <div class="table-responsive" *ngIf="saldo.length > 0">
 
-            <h4>FACTURAS VIGENTE</h4>
+            <h4>FACTURAS</h4>
 
             <div class="contenedorTabla">
 
@@ -454,6 +461,80 @@
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
 
                 </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div id="modalVencidas" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="modalVencidas" aria-hidden="true">
+
+    <div class="modal-dialog modal-lg">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <h5 class="modal-title" id="exampleModalLabel">Facturas Vencidas</h5>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+
+                    <span aria-hidden="true">&times;</span>
+
+                </button>
+
+            </div>
+
+            <div class="modal-body">
+
+                <table class="table table-sm">
+
+                    <thead>
+
+                        <tr>
+
+                            <th class="text-center">Fecha</th>
+
+                            <th class="text-center">Vencimiento</th>
+
+                            <th class="text-center">Número</th>
+
+                            <th class="text-right">Saldo</th>
+
+                            <th class="text-center">Días Vencidos</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr *ngFor="let ven of vencidos">
+
+                            <td class="text-center">{{ ven.FECHA | date: 'dd-MM-yyyy' }}</td>
+
+                            <td class="text-center">{{ ven.VENCE | date: 'dd-MM-yyyy' }}</td>
+
+                            <td class="text-center">{{ ven.NUMERO }}</td>
+
+                            <td class="text-right">{{ ven.SALDO | currency }}</td>
+
+                            <td class="text-center">{{ ven.DIASVENCIDO }}</td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">cerrar</button>
 
             </div>
 

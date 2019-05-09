@@ -808,6 +808,17 @@ nav a.nav-link:hover {
     background: #e32526!important;
 }
 
+/* DISEÑO DE PROMOTRUPER BOTON */
+.disenoPromo {
+    color: #3f515a!important;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+.disenoTruper {
+    color: #f26921!important;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
 /**
  * ESCRITORIO GRANDE
  */
