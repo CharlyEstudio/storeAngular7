@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 
 // Servicios
 import { UsuarioServicesService } from '../servicios/servicios.index';
+import { AccesoService } from './acceso.service';
 
 // Modelos
 import { Usuario } from '../modelos/usuarios.model';
@@ -24,7 +25,8 @@ export class AccesoComponent implements OnInit {
 
   constructor(
     public router: Router,
-    public _usuarioService: UsuarioServicesService
+    public _usuarioService: UsuarioServicesService,
+    private _accesoService: AccesoService
   ) {
     this.email = localStorage.getItem('emailStore') || '';
 
@@ -47,12 +49,15 @@ export class AccesoComponent implements OnInit {
 
     this._usuarioService.login(usuario, forma.value.recuerdame).subscribe((resp: any) => {
       if (resp.status) {
+        this._accesoService.notificacion.emit(true);
         this.router.navigate(['/dist']);
       } else {
+        this._accesoService.notificacion.emit(false);
         swal('Error de Login', resp.mensaje, 'error');
       }
       this.iniciar = false;
     }, err => {
+      this._accesoService.notificacion.emit(false);
       swal('Error', 'Error.', 'error');
       console.log(err);
     });

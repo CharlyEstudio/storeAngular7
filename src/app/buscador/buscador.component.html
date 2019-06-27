@@ -42,9 +42,7 @@
 
                 <a class="breadcrumb-item" routerLink="/inicio">Inicio</a>
 
-                <span class="breadcrumb-item active">Productos Encontrados</span>
-
-                <span class="breadcrumb-item active">{{ buscando }}</span>
+                <span class="breadcrumb-item active">Buscar: {{ buscando }}</span>
 
             </nav>
 
@@ -114,9 +112,9 @@
 
                     </h3>
 
-                    <button class="btn btn-danger" type="button" (click)="irA(enc)">
+                    <button class="btn-cart" type="button" (click)="irA(enc)">
 
-                        Comprar
+                        <span>Comprar</span>
 
                     </button>
 

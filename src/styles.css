@@ -49,7 +49,7 @@ header .buscador {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-top: 12px;
+    padding-top: 0px;
 }
 
 header .submenu {
@@ -87,10 +87,12 @@ header .submenu ul {
 
 .buscador form .inputBuscar {
     border-radius: 0px!important;
-    width: 250px!important;
-    height: 28px!important;
+    width: 150px!important;
+    height: 24px!important;
     padding: 0px 5px 0px 5px!important;
-    min-height: 25px!important;
+    min-height: 15px!important;
+    position: relative;
+    top: 1px;
 }
 
 .buscador form button {
@@ -237,19 +239,42 @@ footer .redes ul li a:hover {
     color: white!important;
 }
 
+.text-truper {
+    color: #ff6600!important;
+}
+
 .text-blanco:hover {
     /* color: rgb(94, 63, 63)!important; */
     color: #D10024!important;
 }
 
-nav a.nav-link {
-    /* color: #B71C1C!important; */
-    color: white!important;
+a.link-red i {
+    font-size: 15px;
 }
 
-nav a.nav-link:hover {
+nav a.nav-link, ul.list-inline li a.nav-link, a.link-red {
+    /* color: #B71C1C!important; */
+    /* color: white!important; */
+    color: rgb(129, 129, 129)!important;
+}
+
+nav a.nav-link:hover, ul.list-inline li a.nav-link:hover {
     /* color: black!important; */
-    color: #D10024!important;
+    /* color: #D10024!important; */
+    background: #ff6600!important;
+    color: #fff!important;
+}
+
+a.link-red:hover {
+    color: #ff6600!important;
+}
+
+a.link-cart {
+    color: #ff6600!important;
+}
+
+a.link-cart:hover {
+    color: rgb(129, 129, 129)!important;
 }
 
 .paginas nav ul li a {
@@ -300,19 +325,23 @@ nav a.nav-link:hover {
 
 .nav-top-oscuro {
     /* background: #1E1F29!important; */
-    background: #2C3A47!important;
+    /* background: #2C3A47!important; */
+    background: #fff!important;
 }
 
 .nav-top-oscuro-dark {
     /* background: #15161D!important; */
-    background: #2C3A47!important;
+    /* background: #2C3A47!important; */
+    background: #fff!important;
     border-bottom: 4px solid #D10024;
 }
 
 .nav-bottom-oscuro-dark {
     /* background: #15161D!important; */
-    background: #dcdde1!important;
-    border-top: 4px solid #D10024;
+    /* background: #dcdde1!important; */
+    /* background: #2E2E2E!important; */
+    background: #40515b!important;
+    /* border-top: 4px solid #D10024; */
 }
 
 .navegar-link {
@@ -365,7 +394,8 @@ nav a.nav-link:hover {
 }
 
 .fondo-cobertura {
-    background-image: url('assets/images/background/fondo_2.jpg');
+    /* background-image: url('assets/images/background/fondo_2.jpg'); */
+    background-image: url('assets/images/background/fondo_4.jpg');
     background-repeat: no-repeat;
     background-position: center;
     background-size: 100%;
@@ -819,6 +849,217 @@ nav a.nav-link:hover {
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
+.oferta-1 {
+    background-image: url('assets/images/background/llaves.jpg');
+    height: 220px;
+    background-repeat: no-repeat;
+    background-position: 40% 41%;
+    border: 2px solid #fff;
+}
+
+.oferta-1 h3, .oferta-2 h3, .oferta-3 h3 {
+    box-shadow: 2px 2px 2px #000004;
+    padding: 1.5rem;
+    border-radius: 5px;
+    background: rgba(218, 14, 14, 0.4);
+}
+
+.oferta-2 {
+    background-image: url('assets/images/background/fondo_1.jpg');
+    height: 220px;
+    background-repeat: no-repeat;
+    background-position: 80% 46%;
+    border: 2px solid #fff;
+}
+
+.oferta-3 {
+    background-image: url('assets/images/background/carretillas.jpg');
+    height: 220px;
+    background-repeat: no-repeat;
+    background-position: 40% 40%;
+    border: 2px solid #fff;
+}
+
+@keyframes acercar1 {
+    to {
+        background-size: 300%;
+    }
+}
+
+@keyframes acercar2 {
+    to {
+        background-size: 200%;
+    }
+}
+
+@keyframes acercar3 {
+    to {
+        background-size: 100%;
+    }
+}
+
+.oferta-3:hover {
+    animation-name: acercar1;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    background-size: 300%;
+}
+
+.oferta-2:hover {
+    animation-name: acercar2;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    background-size: 200%;
+}
+
+.oferta-1:hover {
+    animation-name: acercar3;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    background-size: 100%;
+}
+
+.font1 {
+    font-family: 'Playfair Display', serif;
+}
+
+.font2 {
+    font-family: 'Abril Fatface', cursive;
+}
+
+.font3 {
+    font-family: 'Play', sans-serif;
+}
+
+.efectoGris {
+    filter: grayscale(100%);
+    opacity: .5;
+    cursor: pointer;
+}
+
+.efectoGris:hover {
+    filter: grayscale(0%);
+    opacity: 1;
+}
+
+.quitarEfectoGris {
+    filter: grayscale(0%);
+    opacity: 1;
+}
+
+.bg-gris {
+    background: #f8f8f8;
+}
+
+.fuente-medio-bold {
+    font-weight: bold;
+}
+
+.card-gris {
+    padding: .5rem 1.5rem;
+    color: #b0b0b0;
+    font-size: 10px;
+}
+
+.card-gris p {
+    margin-bottom: 0px!important;
+}
+
+.text-truper {
+    color: #FF6600;
+}
+
+.btn-cart {
+    transform: skewX(-30deg);
+    background-color: #ff6600;
+    border: none;
+    color: #fff;
+    white-space: normal;
+    padding: .5rem;
+    width: 100px;
+    cursor: pointer;
+}
+
+.btn-cart:hover {
+    box-shadow: 2px 2px 2px #000004;
+}
+
+.btn-cart span {
+    transform: skewX(30deg)!important;
+    display: block;
+    font-size: 12px;
+}
+
+.btn-avance {
+    transform: skewX(-30deg);
+    background-color: #ff6600;
+    border: none;
+    color: #fff;
+    white-space: normal;
+    padding: .5rem;
+    width: 500px;
+    margin-left: 400px;
+}
+
+.footer-grids h3:before {
+    position: absolute;
+    bottom: 0%;
+    left: 0%;
+    width: 30%;
+    height: 1px;
+    background: #828282;
+    content: '';
+}
+
+.footer-grids ul li {
+    font-size: 12px;
+}
+
+.nav-footer {
+    color: white;
+}
+
+.nav-footer:hover {
+    color: #ff6600;
+}
+
+.factura h1::before, .pol-venta h1::before, .devolucion h1::before, .garantia h1::before, .contacto h1::before {
+    position: absolute;
+    bottom: 0%;
+    left: 0%;
+    width: 40%;
+    height: 1px;
+    background: #828282;
+    content: '';
+}
+
+.imagen-select {
+    background-repeat: no-repeat!important;
+    background-position: center left!important;
+    background-size: 60px!important;
+    padding: 25px 80px 25px 10px!important;
+    margin: 7px!important;
+    padding-left: 80px!important;
+}
+
+.selector-buscador {
+    top: 40px;
+    z-index: 20;
+    position: fixed;
+    left: 100vh;
+    width: 500px!important;
+    height: 200px!important;
+    color: black;
+    background: white!important;
+    appearance: listitem;
+    -moz-appearance: listitem;
+    -webkit-appearance: listitem;
+}
+
+.ver-option {
+    display: none;
+}
+
 /**
  * ESCRITORIO GRANDE
  */
@@ -846,6 +1087,13 @@ nav a.nav-link:hover {
     }
     .texto-video h1 {
         font-size: 5rem!important;
+    }
+    .btn-avance {
+        margin-left: 200px!important;
+    }
+    #search {
+        left: 90vh!important;
+        top: 40px!important;
     }
 }
 
@@ -876,6 +1124,10 @@ nav a.nav-link:hover {
 
     .dividir-columnas {
         left: -550px!important;
+    }
+
+    .btn-avance {
+        margin-left: 200px!important;
     }
 }
 
@@ -921,6 +1173,20 @@ nav a.nav-link:hover {
         float: left;
         width: 20%;
         list-style: none;
+    }
+
+    .info-nav {
+        text-align: center!important;
+    }
+
+    .info-nav .float-right {
+        float: none!important;
+    }
+
+    .selector-buscador {
+        top: 40px!important;
+        left: 40px!important;
+        width: 90%!important;
     }
 }
 
@@ -995,5 +1261,31 @@ nav a.nav-link:hover {
     
     .dividir-columnas ul li {
         width: 45%!important;
+    }
+
+    .info-nav {
+        text-align: center!important;
+    }
+
+    .info-nav .float-right {
+        float: none!important;
+    }
+
+    .selector-buscador {
+        top: 140px!important;
+        left: 20px!important;
+        width: 90%!important;
+    }
+
+    .ver-option {
+        display: inline;
+    }
+
+    .breadcrumb {
+        font-size: 11px!important;
+    }
+
+    .marcas-logo {
+        display: none;
     }
 }

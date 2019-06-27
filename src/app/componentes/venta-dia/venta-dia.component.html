@@ -26,39 +26,28 @@
 
                 <img [src]="mejor.imagen" class="img-fluig" width="200">
 
-                <h5 class="pt-2 pb-4 text-truncate">{{mejor.descripcion}}</h5>
+                <!-- <h5 class="pt-2 text-truncate">{{mejor.descripcion}}</h5> -->
+                <h6 class="pt-2" style="height: 45px; font-size: 12px;">{{mejor.descripcion}}</h6>
 
-                <h3>
+                <small>
 
-                    <span class="badge badge-danger">{{ (mejor.descuento * 100) }}% de Descuento</span>
+                    <span class="badge badge-danger">-{{ (mejor.descuento * 100) }}%</span>
 
-                </h3>
+                </small>
 
-                <h6 class="text-muted">
+                <br>
 
-                    <small>
+                <small class="text-muted"><del>{{ mejor.preciooriginal| currency }}</del></small>
 
-                        <s>{{ mejor.precioAumentado | currency }}</s>
-                        
-                    </small>
-
-                </h6>
-
-                <h4 class="font-weight-bold text-danger">
+                <h4 class="font-weight-bold text-truper">
 
                     {{ mejor.precio | currency }}
 
                 </h4>
 
-                <h3>
+                <button class="btn-cart" type="button" (click)="irA(mejor)">
 
-                    <span class="badge badge-pill badge-dark">{{ mejor.marca }}</span>
-
-                </h3>
-
-                <button class="btn btn-linkedin" type="button" (click)="irA(mejor)">
-
-                    Comprar
+                    <span class="text-uppercase">Comprar</span>
 
                 </button>
 

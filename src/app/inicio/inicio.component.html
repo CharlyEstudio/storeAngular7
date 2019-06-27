@@ -16,7 +16,7 @@
 
 </div> -->
 
-<div class="row">
+<!-- <div class="row">
 
     <div class="pl-5 pr-5 text-center" *ngFor="let descuento of descuentos; let i = index" [ngClass]="{'col-lg-4 col-md-4 col-sm-12 col-12': desc === 3, 'col-lg-6 col-md-6 col-sm-12 col-12': desc === 2, 'col-lg-12 col-md-12 col-sm-12 col-12': desc === 1}">
 
@@ -30,19 +30,65 @@
     
     </div>
 
-    <!-- <div class="col-sm-12 col-12 p-5 text-center" [ngClass]="{'col-lg-4 col-md-4': desc.length === 3, 'col-lg-6 col-md-6': desc.length === 2, 'col-lg-12 col-md-12': desc.length === 1}">
+</div> -->
 
-        <a class="cuadro-princ" routerLink="/">
+<!-- <div class="row p-4">
 
-            <img src="assets/images/cuadros/cuadro-prin-10.png" class="img-fluid rounded">
+    <div class="col-12 text-center pb-2">
 
-        </a>
+        <h3 class="display-6 font1">- Promociones -</h3>
 
-    </div> -->
+    </div>
 
-</div>
+    <div class="col-12 oferta-1 centro" (mouseover)="entraMouse($event)" (mouseout)="saleMouse($event)">
+
+        <h3 class="font3 text-white font-weight-bold display-6 text-uppercase shadow-lg">Mas del 15%</h3>
+
+    </div>
+
+    <div class="col-4 oferta-2 centro">
+
+        <h3 class="font3 text-white font-weight-bold display-6 text-uppercase shadow-lg">Menos del 10%</h3>
+        
+    </div>
+    
+    <div class="col-8 oferta-3 centro">
+        
+        <h3 class="font3 text-white font-weight-bold display-6 text-uppercase shadow-lg">Entre 10% al 15%</h3>
+
+    </div>
+
+</div> -->
 
 <div class="container">
+
+    <!-- <div class="row p-4">
+
+        <div class="col-12 text-center pb-2">
+
+            <h3 class="display-6 font1">- Promociones -</h3>
+
+        </div>
+
+        <div class="col-12 oferta-1 centro" (mouseover)="entraMouse($event)" (mouseout)="saleMouse($event)">
+
+            <h3 class="font3 text-white font-weight-bold display-6 text-uppercase shadow-lg">Mas del 15%</h3>
+
+        </div>
+
+        <div class="col-4 oferta-2 centro">
+
+            <h3 class="font3 text-white font-weight-bold display-6 text-uppercase shadow-lg">Menos del 10%</h3>
+            
+        </div>
+        
+        <div class="col-8 oferta-3 centro">
+            
+            <h3 class="font3 text-white font-weight-bold display-6 text-uppercase shadow-lg">Entre 10% al 15%</h3>
+
+        </div>
+
+    </div> -->
 
     <div class="row pt-3 pb-5">
 
@@ -54,7 +100,7 @@
 
                     <h1 class="text-uppercase ofertas-mes">
 
-                        <small>Las ofertas del mes</small>
+                        <small>Destacados</small>
 
                     </h1>
 
@@ -62,9 +108,11 @@
 
                 <div class="col-6 btn-vermas">
 
-                    <button type="button" class="btn btn-default pull-right mt-1" (click)="irOfertas()">
+                    <button type="button" class="btn-cart pull-right mt-1" (click)="irOfertas()">
+
+                        <span>VER MAS</span>
                         
-                        VEN MAS <span class="fa fa-chevron-right"></span>
+                        <!-- VEN MAS <span class="fa fa-chevron-right"></span> -->
                     
                     </button>
 
@@ -85,6 +133,378 @@
             <app-venta-dia></app-venta-dia>
 
         </div>
+
+    </div>
+
+    <div class="row my-3 pb-5 marcas-logo">
+
+        <div class="col-12 text-center">
+
+            <ul class="list-inline">
+
+                <li class="list-inline-item" style="padding: 0px 20px 0px 0px!important">
+
+                    <img class="efectoGris" [ngClass]="{'efectogris': !verTruper, 'quitarEfectoGris': verTruper}" src="assets/images/marcas/truper.png" width="110" (click)="cambiarVista('truper')">
+
+                </li>
+
+                <li class="list-inline-item" style="padding: 0px 10px 0px 10px!important">
+
+                    <img class="efectoGris" [ngClass]="{'efectogris': !verPretul, 'quitarEfectoGris': verPretul}" src="assets/images/marcas/pretul.png" width="110" (click)="cambiarVista('pretul')">
+
+                </li>
+
+                <li class="list-inline-item" style="padding: 0px 10px 0px 10px!important">
+
+                    <img class="efectoGris" [ngClass]="{'efectogris': !verVolteck, 'quitarEfectoGris': verVolteck}" src="assets/images/marcas/volteck.png" width="110" (click)="cambiarVista('volteck')">
+
+                </li>
+
+                <li class="list-inline-item" style="padding: 0px 10px 0px 10px!important">
+
+                    <img class="efectoGris" [ngClass]="{'efectogris': !verFoset, 'quitarEfectoGris': verFoset}" src="assets/images/marcas/foset.png" width="110" (click)="cambiarVista('foset')">
+
+                </li>
+
+                <li class="list-inline-item" style="padding: 0px 10px 0px 10px!important">
+
+                    <img class="efectoGris" [ngClass]="{'efectogris': !verFiero, 'quitarEfectoGris': verFiero}" src="assets/images/marcas/fiero.png" width="110" (click)="cambiarVista('fiero')">
+
+                </li>
+
+                <li class="list-inline-item" style="padding: 0px 10px 0px 10px!important">
+
+                    <img class="efectoGris" [ngClass]="{'efectogris': !verKlintek, 'quitarEfectoGris': verKlintek}" src="assets/images/marcas/klintek.png" width="110" (click)="cambiarVista('klintek')">
+
+                </li>
+
+                <li class="list-inline-item" style="padding: 0px 10px 0px 10px!important">
+
+                    <img class="efectoGris" [ngClass]="{'efectogris': !verHermex, 'quitarEfectoGris': verHermex}" src="assets/images/marcas/hermex.png" width="110" (click)="cambiarVista('hermex')">
+
+                </li>
+
+                <li class="list-inline-item" style="padding: 0px 0px 0px 10px!important">
+
+                    <img class="efectoGris" [ngClass]="{'efectogris': !verFMO, 'quitarEfectoGris': verFMO}" src="assets/images/marcas/fmo.png" width="110" (click)="cambiarVista('fmo')">
+
+                </li>
+
+            </ul>
+
+        </div>
+
+        <div class="col-12">
+
+            <div class="row" *ngIf="verTruper">
+
+                <div class="col-sm-6">
+
+                    <a class="dir-tel" (click)="buscar('esmeriladora')">
+
+                        <img src="assets/images/designe/truper01.png" width="98%" class="img-fluid">
+
+                    </a>
+
+                </div>
+
+                <div class="col-sm-3">
+
+                    <a class="dir-tel" (click)="buscar('sierra caladora')">
+
+                        <img src="assets/images/designe/truper02.png" class="img-fluid">
+
+                    </a>
+
+                </div>
+
+                <div class="col-sm-3">
+
+                    <a class="dir-tel" (click)="buscar('taladro')">
+
+                        <img src="assets/images/designe/truper03.png" class="img-fluid">
+                    
+                    </a>
+
+                </div>
+
+            </div>
+
+            <div class="row" *ngIf="verPretul">
+
+                <div class="col-sm-6">
+
+                    <!-- <a class="dir-tel" (click)="buscar('pretul')"> -->
+
+                        <img src="assets/images/designe/pretul01.png" width="98%" class="img-fluid">
+
+                    <!-- </a> -->
+
+                </div>
+
+                <div class="col-sm-3">
+
+                    <a class="dir-tel" (click)="buscar('rotomartillo')">
+
+                        <img src="assets/images/designe/pretul02.png" class="img-fluid">
+
+                    </a>
+
+                </div>
+
+                <div class="col-sm-3">
+
+                    <a class="dir-tel" (click)="buscar('pulidora')">
+
+                        <img src="assets/images/designe/pretul03.png" class="img-fluid">
+
+                    </a>
+
+                </div>
+
+            </div>
+
+            <div class="row" *ngIf="verVolteck">
+
+                <div class="col-sm-6">
+
+                    <!-- <a class="dir-tel" (click)="buscar('taladro')"> -->
+
+                        <img src="assets/images/designe/volteck01.png" width="98%" class="img-fluid">
+
+                    <!-- </a> -->
+
+                </div>
+
+                <div class="col-sm-3">
+
+                    <a class="dir-tel" (click)="buscar('foco')">
+
+                        <img src="assets/images/designe/volteck02.png" class="img-fluid">
+
+                    </a>
+
+                </div>
+
+                <div class="col-sm-3">
+
+                    <!-- <a class="dir-tel" (click)="buscar('taladro')"> -->
+
+                        <img src="assets/images/designe/volteck03.png" class="img-fluid">
+
+                    <!-- </a> -->
+
+                </div>
+
+            </div>
+
+            <div class="row" *ngIf="verFoset">
+
+                <div class="col-sm-6">
+
+                    <a class="dir-tel" (click)="buscar('grifo')">
+
+                        <img src="assets/images/designe/foset01.png" width="98%" class="img-fluid">
+
+                    </a>
+
+                </div>
+
+                <div class="col-sm-3">
+
+                    <a class="dir-tel" (click)="buscar('regadera')">
+
+                        <img src="assets/images/designe/foset02.png" class="img-fluid">
+
+                    </a>
+
+                </div>
+
+                <div class="col-sm-3">
+
+                    <a class="dir-tel" (click)="buscar('cocina')">
+
+                        <img src="assets/images/designe/foset03.png" class="img-fluid">
+
+                    </a>
+
+                </div>
+
+            </div>
+
+            <div class="row" *ngIf="verFiero">
+
+                <div class="col-sm-6">
+
+                    <a class="dir-tel" (click)="buscar('tornillo')">
+
+                        <img src="assets/images/designe/fiero01_1.jpg" width="98%" class="img-fluid">
+
+                    </a>
+
+                </div>
+
+                <div class="col-sm-3">
+
+                    <a class="dir-tel" (click)="buscar('remache')">
+
+                        <img src="assets/images/designe/fiero02_1.jpg" class="img-fluid">
+
+                    </a>
+
+                </div>
+
+                <div class="col-sm-3">
+
+                    <a class="dir-tel" (click)="buscar('clavo')">
+
+                        <img src="assets/images/designe/fiero03.png" class="img-fluid">
+
+                    </a>
+
+                </div>
+
+            </div>
+
+            <div class="row" *ngIf="verKlintek">
+
+                <div class="col-sm-12">
+
+                    <!-- <a class="dir-tel" (click)="buscar('taladro')"> -->
+
+                        <img src="assets/images/designe/klintek01.png" width="98%" class="img-fluid">
+
+                    <!-- </a> -->
+
+                </div>
+
+            </div>
+
+            <div class="row" *ngIf="verHermex">
+
+                <div class="col-sm-12">
+
+                    <a class="dir-tel" (click)="buscar('taladro')">
+
+                        <img src="assets/images/designe/hermex01.png" width="98%" class="img-fluid">
+
+                    </a>
+
+                </div>
+
+            </div>
+
+            <div class="row" *ngIf="verFMO">
+
+                <div class="col-sm-12">
+
+                    <img src="assets/images/designe/fmo01.jpg" width="98%" class="img-fluid">
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-12 pt-3">
+
+            <div class="bg-gris card-gris">
+
+                <div class="row">
+
+                    <div class="col-6">
+
+                        <p class="text-justify">Trabajamos con todas las marcas de la empresa <span class="fuente-medio-bold">Truper</span>.</p>
+        
+                        <p class="text-justify"><span class="fuente-medio-bold">Truper</span>: Marca líder en la fabricación y comercialización de productos para la industria ferretera en México, sus productos compiten exitosamente alrededor del mundo en más de 30 mercados, incluido el más exigente de todos: el estadounidense. Con productos como carretillas, palas, zapapicos, escaleras, desarmadores, taladros, compresores, esmeriladora y muchos más.</p>
+
+                        <p class="text-justify"><span class="fuente-medio-bold">Pretul</span>: Marca de herramientas diseñada para uso ligero y labores en el hogar.</p>
+
+                        <p class="text-justify"><span class="fuente-medio-bold">Volteck y Volteck Lite</span>: Enfocadas en productos eléctricos y de iluminación como extensiones, focos, luminarios, cables, artefactos eléctricos, entre otros.</p>
+
+                        <p class="text-justify"><span class="fuente-medio-bold">Foset</span>: Marca líder en productos de plomería desde cromados como mezcladoras o regaderas y sus accesorios hasta accesorios para instalación como mangueras flexibles, conexiones o tubería.</p>
+
+                    </div>
+                
+                    <div class="col-6">
+
+                        <p class="text-justify"><span class="fuente-medio-bold">Foset</span>: Marca líder en productos de plomería desde cromados como mezcladoras o regaderas y sus accesorios hasta accesorios para instalación como mangueras flexibles, conexiones o tubería.</p>
+                        
+                        <p class="text-justify"><span class="fuente-medio-bold">Hermex</span>: Marca especializada en productos de cerrajería como cerraduras, bisagras, accesorios para puerta o candados.</p>
+                        
+                        <p class="text-justify"><span class="fuente-medio-bold">Fiero</span>:  En ésta marca encontrarás productos trefilados como tornillos, clavos, tuercas, mallas, alambres, diablos de carga y más.</p>
+                        
+                        <p class="text-justify"><span class="fuente-medio-bold">Klintek</span>: Especializada en artículos de limpieza como escobas, jergas, recogedores, franelas y más.</p>
+                        
+                        <p class="text-justify">Envíos gratis a todo el país en pedidos de más de $1,00, Siempre contamos con existencia del 99% de los productos anunciados, Contamos con más del 95% de los productos del catálogo de Truper.</p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="mt-5 marcas-logo" style="background: #677d89">
+
+    <div class="container text-center">
+
+        <ul class="list-inline" style="margin-bottom: 0px!important;">
+
+            <li class="list-inline-item" style="padding: 0px 10px 0px 10px!important">
+
+                <img src="assets/images/marcas/truper_w.png" width="80">
+
+            </li>
+
+            <li class="list-inline-item" style="padding: 0px 10px 0px 10px!important">
+
+                <img src="assets/images/marcas/pretul_w.png" width="80">
+
+            </li>
+
+            <li class="list-inline-item" style="padding: 0px 10px 0px 10px!important">
+
+                <img src="assets/images/marcas/volteck_w.png" width="80">
+
+            </li>
+
+            <li class="list-inline-item" style="padding: 0px 10px 0px 10px!important">
+
+                <img src="assets/images/marcas/foset_w.png" width="80">
+
+            </li>
+
+            <li class="list-inline-item" style="padding: 0px 10px 0px 10px!important">
+
+                <img src="assets/images/marcas/fiero_w.png" width="80">
+
+            </li>
+
+            <li class="list-inline-item" style="padding: 0px 10px 0px 10px!important">
+
+                <img src="assets/images/marcas/klintek_w.png" width="80">
+
+            </li>
+
+            <li class="list-inline-item" style="padding: 0px 10px 0px 10px!important">
+
+                <img src="assets/images/marcas/hermex_w.png" width="80">
+
+            </li>
+
+            <li class="list-inline-item" style="padding: 0px 10px 0px 10px!important">
+
+                <img src="assets/images/marcas/fmo_w.png" width="80">
+
+            </li>
+
+        </ul>
 
     </div>
 

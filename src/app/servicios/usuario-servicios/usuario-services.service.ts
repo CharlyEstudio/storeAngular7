@@ -195,6 +195,11 @@ export class UsuarioServicesService {
       }));
   }
 
+  enviarConsulta(info: any) {
+    const url = `http://177.244.55.122/api/clientes.php?opcion=12`;
+    return this.http.post(url, {data: info}, { headers: { 'content-Type': 'application/x-www-form-urlencoded' } });
+  }
+
   crearCliente(usuario: Usuario) {
     const url = LINK + '/clientes';
 

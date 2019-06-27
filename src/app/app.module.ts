@@ -46,6 +46,13 @@ import { GraficaBarrasComponent } from './componentes/grafica-barras/grafica-bar
 import { OfertaComponent } from './oferta/oferta.component';
 import { DescuentosComponent } from './descuentos/descuentos.component';
 import { PormarcasComponent } from './pormarcas/pormarcas.component';
+import { SopFacturaComponent } from './sop-factura/sop-factura.component';
+import { PolVentaComponent } from './pol-venta/pol-venta.component';
+import { PolDevolucionComponent } from './pol-devolucion/pol-devolucion.component';
+import { PolGarantiaComponent } from './pol-garantia/pol-garantia.component';
+import { ContactoComponent } from './contacto/contacto.component';
+import { BolsaTrabajoComponent } from './bolsa-trabajo/bolsa-trabajo.component';
+import { SeccionesComponent } from './secciones/secciones.component';
 
 @NgModule({
   declarations: [
@@ -72,7 +79,14 @@ import { PormarcasComponent } from './pormarcas/pormarcas.component';
     GraficaBarrasComponent,
     OfertaComponent,
     DescuentosComponent,
-    PormarcasComponent
+    PormarcasComponent,
+    SopFacturaComponent,
+    PolVentaComponent,
+    PolDevolucionComponent,
+    PolGarantiaComponent,
+    ContactoComponent,
+    BolsaTrabajoComponent,
+    SeccionesComponent
   ],
   imports: [
     BrowserModule,

@@ -30,17 +30,9 @@ export class CarruselComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    // this.intervalo = setInterval(() => {
-    //   if (document.getElementById('truper').addEventListener) {
-    //     document.getElementById('truper').addEventListener('play', (video: any) => console.log(video.srcElement.duration));
-    //     clearInterval(this.intervalo);
-    //   } else {
-    //     const elem = <HTMLVideoElement>(document.getElementById('truper'));
-    //     elem.play();
-    //   }
-    // }, 1000);
-    const elem = <HTMLVideoElement>(document.getElementById('truper'));
-    elem.muted = true;
+    // Para funcione correctamente el vídeo
+    // const elem = <HTMLVideoElement>(document.getElementById('truper'));
+    // elem.muted = true;
   }
 
   ngOnDestroy() {

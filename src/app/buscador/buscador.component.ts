@@ -57,7 +57,24 @@ export class BuscadorComponent implements OnInit, OnDestroy {
     this.encontrado = [];
     this.errorBol = false;
     this.buscandoBol = true;
-    this._productosService.buscarProductosID(buscar, this.precio).subscribe((encontrado: any) => {
+    // Buscar producto por select
+    // this._productosService.buscarProductosID(buscar, this.precio).subscribe((encontrado: any) => {
+    //   if (encontrado.status) {
+    //     this.encontrado = encontrado.respuesta;
+    //     this.buscandoBol = false;
+    //     this.errorBol = false;
+    //     this.encontradoBol = true;
+    //   } else {
+    //     this.msg = encontrado.msg;
+    //     this.encontrado = [];
+    //     this.buscandoBol = false;
+    //     this.errorBol = true;
+    //     this.encontradoBol = false;
+    //   }
+    // });
+
+    // Buscar producto por input
+    this._productosService.buscarProductos(buscar, this.precio).subscribe((encontrado: any) => {
       if (encontrado.status) {
         this.encontrado = encontrado.respuesta;
         this.buscandoBol = false;

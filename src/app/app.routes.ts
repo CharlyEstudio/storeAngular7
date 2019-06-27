@@ -19,6 +19,13 @@ import { DescripcionComponent } from './descripcion/descripcion.component';
 import { OfertaComponent } from './oferta/oferta.component';
 import { DescuentosComponent } from './descuentos/descuentos.component';
 import { PormarcasComponent } from './pormarcas/pormarcas.component';
+import { SopFacturaComponent } from './sop-factura/sop-factura.component';
+import { PolVentaComponent } from './pol-venta/pol-venta.component';
+import { PolDevolucionComponent } from './pol-devolucion/pol-devolucion.component';
+import { PolGarantiaComponent } from './pol-garantia/pol-garantia.component';
+import { ContactoComponent } from './contacto/contacto.component';
+import { BolsaTrabajoComponent } from './bolsa-trabajo/bolsa-trabajo.component';
+import { SeccionesComponent } from './secciones/secciones.component';
 
 const appRoutes: Routes = [
     { path: 'inicio', component: InicioComponent, data: { titulo: 'Sitio Oficial Ferremayoristas Olvera', name: 'description' } },
@@ -34,6 +41,13 @@ const appRoutes: Routes = [
     { path: 'ofertas', component: OfertaComponent, data: { titulo: 'PROMOTRUPER DEL MES', name: 'description' } },
     { path: 'descuentos/:desc', component: DescuentosComponent, data: { titulo: 'DESCUENTO DEL MES', name: 'description' } },
     { path: 'pormarcas/:prod', component: PormarcasComponent, data: { titulo: 'PRODCUTO POR MARCA', name: 'description' } },
+    { path: 'sop-factura', component: SopFacturaComponent, data: { titulo: 'Soporte al cliente - Facturación', name: 'description' } },
+    { path: 'pol-venta', component: PolVentaComponent, data: { titulo: 'Políticas - Ventas', name: 'description' } },
+    { path: 'pol-devolucion', component: PolDevolucionComponent, data: { titulo: 'Políticas - Devoluciones', name: 'description' } },
+    { path: 'pol-garantia', component: PolGarantiaComponent, data: { titulo: 'Políticas - Garantías', name: 'description' } },
+    { path: 'contacto', component: ContactoComponent, data: { titulo: 'Contáctanos', name: 'description' } },
+    { path: 'bolsa-trabajo', component: BolsaTrabajoComponent, data: { titulo: 'Bolsa de Trabajo', name: 'description' } },
+    { path: 'secciones/:seccion', component: SeccionesComponent, data: { titulo: 'Sección', name: 'description' } },
     {
         path: '',
         component: PaginasComponent,

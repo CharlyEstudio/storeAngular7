@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 // Servicios
 import { UsuarioServicesService, ShoppingService, ProductosService } from 'src/app/servicios/servicios.index';
+import { SalirService } from './salir.service';
 
 @Component({
   selector: 'app-nav-principal',
@@ -26,7 +27,8 @@ export class NavPrincipalComponent implements OnInit {
     private route: Router,
     private _usuarioService: UsuarioServicesService,
     private _shoppingCar: ShoppingService,
-    private _productoService: ProductosService
+    private _productoService: ProductosService,
+    private _salirService: SalirService
   ) {
     this._productoService.obtenerMarcasTruper().subscribe((truper: any) => {
       this.marcasTru = truper.respuesta;
@@ -71,6 +73,7 @@ export class NavPrincipalComponent implements OnInit {
 
   logout() {
     this._usuarioService.logout();
+    this._salirService.notificacion.emit(true);
   }
 
   irPorMarcas(marca: any) {

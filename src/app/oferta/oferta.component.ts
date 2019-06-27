@@ -18,6 +18,11 @@ export class OfertaComponent implements OnInit {
   precarga: any[] = [];
   public precio: number = 3;
 
+  desde: number = 0;
+
+  disabledAnt: boolean = true;
+  disabledSig: boolean = false;
+
   constructor(
     private _productosServices: ProductosService,
     private _usuarioService: UsuarioServicesService,
@@ -50,6 +55,30 @@ export class OfertaComponent implements OnInit {
     this._productosServices.promotruper(this.precio).subscribe( (mejores: any) => {
       if (mejores.status) {
         this.mejores = mejores.respuesta;
+      }
+    });
+  }
+
+  cambiar(desde: number) {
+    this.desde = this.desde + desde;
+
+    if ( this.desde < 0 ) {
+      this.disabledAnt = true;
+      this.disabledSig = false;
+      return;
+    } else {
+      this.disabledAnt = false;
+      this.disabledSig = false;
+    }
+    this._productosServices.promotruper(this.precio, this.desde).subscribe( (mejores: any) => {
+      this.mejores = [];
+      this.precarga = Array(8).fill(4);
+      if (mejores.status) {
+        this.mejores = mejores.respuesta;
+        if (this.desde === 0) {
+          this.disabledAnt = true;
+          this.disabledSig = false;
+        }
       }
     });
   }

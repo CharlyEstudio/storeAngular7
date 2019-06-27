@@ -17,8 +17,8 @@ export class ProductosService {
     return this.http.get(url);
   }
 
-  promotruper(precio: number = 3) {
-    const url = LINK + '/productos/promotruper/' + precio;
+  promotruper(precio: number = 3, desde: number = 0, hasta: number = 12) {
+    const url = LINK + '/productos/promotruper/' + precio + '/' + desde + '/' + hasta;
 
     return this.http.get(url);
   }

@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
+import * as _swal from 'sweetalert';
+import { SweetAlert } from 'sweetalert/typings/core'; // Importante para que funcione el sweet alert
+const swal: SweetAlert = _swal as any;
+
 // Modelos
 import { Usuario } from '../modelos/usuarios.model';
 
@@ -15,6 +19,9 @@ import { UsuarioServicesService, DatosService, WebsocketService } from '../servi
 })
 export class RegistroComponent implements OnInit {
   forma: FormGroup;
+  contacto: FormGroup;
+
+  esperando: boolean = false;
 
   constructor(
     public router: Router,
@@ -46,6 +53,14 @@ export class RegistroComponent implements OnInit {
       condiciones: new FormControl(null, Validators.required),
       factura: new FormControl(null, Validators.nullValidator)
     }, { validators: this.sonIguales('pass', 'passVal') });
+
+    this.contacto = new FormGroup({
+      nom_contacto: new FormControl(null, Validators.required),
+      email_contacto: new FormControl(null, Validators.required),
+      telefono_contacto: new FormControl(null, Validators.required),
+      comentario: new FormControl(null, Validators.required),
+      direccion: new FormControl(null, Validators.required)
+    });
 
     // this.forma.setValue({
     //   nombre: 'Carlos',
@@ -127,6 +142,24 @@ export class RegistroComponent implements OnInit {
     }
 
     this.router.navigate(['/acceso']);
+  }
+
+  comentar() {
+    this.esperando = true;
+    if ( this.contacto.invalid ) {
+      swal('Hay campos sin llenar', 'Debe de ingresar todos los campos', 'error');
+      return;
+    }
+    this._usuarioService.enviarConsulta(this.contacto.value).subscribe((resp: any) => {
+      if (resp.length > 0) {
+        this.esperando = false;
+        this.contacto.reset();
+        swal('Envío Correcto', 'Su solicitud fue enviada, nos pondremos en contacto lo más pronto posible.', 'success');
+      } else {
+        this.esperando = false;
+        swal('Error de Envío', 'No pudimos realizar el envío de su solicitud.', 'error');
+      }
+    });
   }
 
 }

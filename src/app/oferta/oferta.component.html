@@ -1,5 +1,3 @@
-<div style="margin-top: 55px;"></div>
-
 <nav aria-label="breadcrumb">
 
     <ol class="breadcrumb">
@@ -12,9 +10,29 @@
 
 </nav>
 
-<div class="container">
+<div class="container my-5">
 
     <h1>PROMOTRUPER</h1>
+
+    <div class="col-12 py-3">
+
+        <div class="d-flex justify-content-between">
+
+            <div class="p-2 bd-highlight">
+
+                <button type="button" class="btn btn-secondary" (click)="cambiar(-13)" [disabled]="disabledAnt">Anterior</button>
+                
+            </div>
+
+            <div class="p-2 bd-highlight">
+
+                <button type="button" class="btn btn-success" (click)="cambiar(13)" [disabled]="disabledSig">Siguiente</button>
+
+            </div>
+
+        </div>
+
+    </div>
 
     <div class="row mas-vendidos" *ngIf="mejores.length === 0">
 
@@ -81,6 +99,26 @@
                     </button>
 
                 </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-12 py-3">
+
+        <div class="d-flex justify-content-between">
+
+            <div class="p-2 bd-highlight">
+
+                <button type="button" class="btn btn-secondary" (click)="cambiar(-13)" [disabled]="disabledAnt">Anterior</button>
+                
+            </div>
+
+            <div class="p-2 bd-highlight">
+
+                <button type="button" class="btn btn-success" (click)="cambiar(13)" [disabled]="disabledSig">Siguiente</button>
 
             </div>
 

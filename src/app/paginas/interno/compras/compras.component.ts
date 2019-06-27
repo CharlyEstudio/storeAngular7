@@ -70,7 +70,7 @@ export class ComprasComponent implements OnInit {
           if (allPed.respuesta[i].tipo === 'POR SURTIR') {
             this.porSurtirCant += Number(allPed.respuesta[i].cantidad);
           }
-          if (allPed.respuesta[i].tipo === 'FACTURADO') {
+          if (allPed.respuesta[i].tipo === 'REMISIONADO') {
             this.facturadoCant += Number(allPed.respuesta[i].cantidad);
           }
         }

@@ -1,48 +1,20 @@
-<header class="text-white">
+<!-- <header class="text-white"> -->
+<header>
 
-    <div class="nav-top-oscuro">
+    <!-- <div class="nav-top-oscuro"> -->
 
         <div class="container">
 
-            <div class="row">
+            <!-- <div class="row p-4" style="border-bottom: 1px solid #DEDEDE"> -->
+            <div class="row pt-2 pb-2">
 
-                <div class="col-lg-8 col-md-8 col-sm-12 col-12">
+                <div class="col-lg-5 col-md-12 col-sm-12 col-12 info-nav">
         
                     <ul class="list-inline" style="margin-bottom: 0px!important;">
 
-                        <!-- <li class="list-inline-item">
-    
-                            <a href="https://www.facebook.com/FerremayoristasOlvera/" class="nav-link text-blanco" target="_blank">
-    
-                                <i class="mdi mdi-facebook-box" style="font-size: 13px"></i>
-    
-                            </a>
-    
-                        </li> -->
-    
-                        <!-- <li class="list-inline-item">
-    
-                            <a href="https://www.twitter.com/" class="nav-link text-blanco" target="_blank">
-    
-                                <i class="mdi mdi-twitter-box" style="font-size: 13px"></i>
-    
-                            </a>
-    
-                        </li> -->
-    
-                        <!-- <li class="list-inline-item">
-    
-                            <a href="https://www.linkedin.com/" class="nav-link text-blanco" target="_blank">
-    
-                                <i class="mdi mdi-linkedin-box" style="font-size: 13px"></i>
-    
-                            </a>
-    
-                        </li> -->
-
                         <li class="list-inline-item">
     
-                            <a class="nav-link text-blanco dir-tel" style="font-size: 12px">
+                            <a class="nav-link dir-tel" style="font-size: 12px">
     
                                 <i class="mdi mdi-map-marker-radius"></i> Prol. Constituyentes 1905-2
     
@@ -52,7 +24,7 @@
 
                         <li class="list-inline-item">
     
-                            <a class="nav-link text-blanco dir-tel" style="font-size: 12px">
+                            <a class="nav-link dir-tel" style="font-size: 12px">
     
                                 <i class="mdi mdi-cellphone-iphone"></i> (01 442) 196 8555 / 196 6846
     
@@ -64,13 +36,13 @@
         
                 </div>
 
-                <div class="col-lg-4 col-md-4 col-sm-12 col-12">
-
-                    <ul class="list-inline float-right" style="margin-bottom: 0px!important;">
+                <div class="col-lg-3 col-md-12 col-sm-12 col-12 info-nav">
+        
+                    <ul class="list-inline" style="margin-bottom: 0px!important;">
 
                         <li class="list-inline-item font-weight-bold" *ngIf="logeado">
     
-                            <a routerLink="" class="nav-link text-blanco" style="font-size: 12px; font-weight: 500;">
+                            <a routerLink="" class="nav-link" style="font-size: 12px; font-weight: 500;">
     
                                 <i class="mdi mdi-account-outline"></i> Mi Cuenta
     
@@ -80,7 +52,7 @@
     
                         <li class="list-inline-item font-weight-bold" *ngIf="!logeado">
     
-                            <a routerLink="/registro" class="nav-link text-blanco" style="font-size: 12px; font-weight: 500;">
+                            <a routerLink="/registro" class="nav-link" style="font-size: 12px; font-weight: 500;">
     
                                 <i class="mdi mdi-human-greeting"></i> Registro
     
@@ -88,11 +60,9 @@
     
                         </li>
     
-                        <li class="list-inline-item font-weight-bold" *ngIf="!logeado">|</li>
-    
                         <li class="list-inline-item font-weight-bold" *ngIf="!logeado">
     
-                            <a routerLink="/acceso" class="nav-link  text-blanco" style="font-size: 12px; font-weight: 500;">
+                            <a routerLink="/acceso" class="nav-link " style="font-size: 12px; font-weight: 500;">
     
                                 <i class="mdi mdi-access-point"></i> Accesar
     
@@ -100,11 +70,9 @@
     
                         </li>
     
-                        <li class="list-inline-item font-weight-bold" *ngIf="logeado">|</li>
-    
                         <li class="list-inline-item font-weight-bold" *ngIf="logeado">
     
-                            <a routerLink="" class="nav-link text-blanco" (click)="logout()" style="font-size: 12px; font-weight: 500;">
+                            <a routerLink="" class="nav-link" (click)="logout()" style="font-size: 12px; font-weight: 500;">
     
                                 <i class="mdi mdi-logout"></i> Salir
     
@@ -112,37 +80,51 @@
     
                         </li>
     
-                        <!-- <li class="list-inline-item font-weight-bold">|</li>
+                    </ul>
+        
+                </div>
+
+                <div class="col-lg-3 col-md-12 col-sm-12 col-12 info-nav">
+
+                    <ul class="list-inline float-right" style="margin-bottom: 0px!important;">
+
+                        <li class="list-inline-item">
     
-                        <li class="list-inline-item font-weight-bold">
+                            <div class="buscador">
+
+                                <app-buscar (actualizaValor)="obtener($event)"></app-buscar>
+                
+                            </div>
     
-                            <a routerLink="/carrito" class="nav-link text-blanco" *ngIf="carrito">
+                        </li>
     
-                                <span class="text-blanco pr-1">
+                    </ul>
+
+                </div>
+
+                <div class="col-lg-1 col-md-12 col-sm-12 col-12 info-nav">
+
+                    <ul class="list-inline float-right" style="margin-bottom: 0px!important;">
+
+                        <li class="list-inline-item">
     
-                                    <i class="mdi mdi-cart-outline font-20"></i>
-                                    
-                                </span>
+                            <a href="https://www.facebook.com/FerremayoristasOlvera/" class="link-red" style="padding: 0px!important; margin-right: 10px;" target="_blank">
     
-                                <span class="badge badge-inverse pl-2 pr-2">
-    
-                                    {{ cantidad | number }}
-    
-                                </span>
+                                <i class="mdi mdi-facebook-box"></i>
     
                             </a>
     
-                            <span *ngIf="!carrito">
+                        </li>
     
-                                <span class="text-blanco">
+                        <li class="list-inline-item">
     
-                                <i class="mdi mdi-basket"></i>
+                            <a href="https://www.linkedin.com/" class="link-red" style="padding: 0px!important;" target="_blank">
     
-                                </span> {{ 'no items' }}
+                                <i class="mdi mdi-linkedin-box"></i>
     
-                            </span>
+                            </a>
     
-                        </li> -->
+                        </li>
     
                     </ul>
 
@@ -152,251 +134,196 @@
 
         </div>
 
-    </div>
-    
-    <!-- <div class="container">
-
-        <div class="row">
-
-            <div class="col-lg-6 col-md-6 col-sm-6 redes">
-
-                <ul class="list-inline">
-
-                    <li class="list-inline-item">
-
-                        <a href="https://www.facebook.com/FerremayoristasOlvera/" class="nav-link text-blanco" target="_blank">
-
-                            <i class="mdi mdi-facebook-box" style="font-size: 25px"></i>
-
-                        </a>
-
-                    </li>
-
-                    <li class="list-inline-item">
-
-                        <a href="https://www.twitter.com/" class="nav-link text-blanco" target="_blank">
-
-                            <i class="mdi mdi-twitter-box" style="font-size: 25px"></i>
-
-                        </a>
-
-                    </li>
-
-                    <li class="list-inline-item">
-
-                        <a href="https://www.linkedin.com/" class="nav-link text-blanco" target="_blank">
-
-                            <i class="mdi mdi-linkedin-box" style="font-size: 25px"></i>
-
-                        </a>
-
-                    </li>
-
-                </ul>
-
-            </div>
-
-            <div class="col-12 buscador">
-
-                <app-buscar (actualizaValor)="obtener($event)"></app-buscar>
-
-            </div>
-
-            <div class="col-lg-6 col-md-6 col-sm-6 submenu">
-
-                <ul class="list-inline">
-
-                    <li class="list-inline-item font-weight-bold" *ngIf="logeado">
-
-                        <a routerLink="" class="nav-link text-blanco">
-
-                            <i class="mdi mdi-account-outline"></i> Mi Cuenta
-
-                        </a>
-
-                    </li>
-
-                    <li class="list-inline-item font-weight-bold" *ngIf="!logeado">
-
-                        <a routerLink="/registro" class="nav-link text-blanco">
-
-                            <i class="mdi mdi-human-greeting"></i> Registro
-
-                        </a>
-
-                    </li>
-
-                    <li class="list-inline-item font-weight-bold" *ngIf="!logeado">|</li>
-
-                    <li class="list-inline-item font-weight-bold" *ngIf="!logeado">
-
-                        <a routerLink="/acceso" class="nav-link  text-blanco">
-
-                            <i class="mdi mdi-access-point"></i> Accesar
-
-                        </a>
-
-                    </li>
-
-                    <li class="list-inline-item font-weight-bold" *ngIf="logeado">|</li>
-
-                    <li class="list-inline-item font-weight-bold" *ngIf="logeado">
-
-                        <a routerLink="" class="nav-link text-blanco" (click)="logout()">
-
-                            <i class="mdi mdi-logout"></i> Salir
-
-                        </a>
-
-                    </li>
-
-                    <li class="list-inline-item font-weight-bold" *ngIf="!logeado">|</li>
-
-                    <li class="list-inline-item font-weight-bold" *ngIf="!logeado">
-
-                        <a routerLink="/favoritos" class="nav-link text-grey">
-
-                            <i class="mdi mdi-star-outline"></i> Favoritos
-
-                        </a>
-
-                    </li>
-
-                    <li class="list-inline-item font-weight-bold">|</li>
-
-                    <li class="list-inline-item font-weight-bold">
-
-                        <a routerLink="/carrito" class="nav-link text-blanco" *ngIf="carrito">
-
-                            <span class="text-blanco pr-1">
-
-                                <i class="mdi mdi-cart-outline font-20"></i>
-                                
-                            </span>
-
-                            <span class="badge badge-inverse pl-2 pr-2">
-
-                              {{ cantidad | number }}
-
-                            </span>
-
-                        </a>
-
-                        <span *ngIf="!carrito">
-
-                          <span class="text-blanco">
-
-                            <i class="mdi mdi-basket"></i>
-
-                          </span> {{ 'no items' }}
-
-                        </span>
-
-                    </li>
-
-                </ul>
-
-            </div>
-
-        </div>
-
-    </div> -->
+    <!-- </div> -->
 
 </header>
 
-<header class="nav-bottom-oscuro-dark">
+<!-- <header class="nav-bottom-oscuro-dark"> -->
+<header>
 
-    <div class="container pt-4 pb-4">
+    <div class="container pb-4">
 
         <div class="row">
 
-            <div class="col-lg-4 col-md-4 col-sm-12 logo_nav">
+            <div class="col-lg-2 col-md-2 col-sm-12 logo_nav centro text-center" style="padding: 0px!important;">
 
-                <img src="assets/images/logo-min.png" alt="Ferremayoristas Olvera" class="img-fluid" width="70%">
+                <img routerLink="/inicio" src="assets/images/logo-min.png" alt="Ferremayoristas Olvera" class="img-fluid dir-tel" width="70%">
 
             </div>
 
-            <div class="col-lg-4 col-md-4 col-sm-12 buscador">
+            <div class="col-lg-9 col-md-9 col-sm-12 navegador centro" style="padding: 0px!important;">
+                
+                <nav class="navbar navbar-expand-lg">
+    
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        
+                        <span class="mdi mdi-menu"></span>
+        
+                    </button>
+                    
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        
+                        <ul class="navbar-nav m-auto text-center">
+        
+                            <li class="nav-item centro">
+        
+                                <a class="nav-link text-uppercase font-weight-bold" style="font-size: 11px;" routerLink="/inicio">Inicio</a>
+        
+                            </li>
+
+                            <li class="nav-item centro">
+        
+                                <a class="nav-link text-uppercase font-weight-bold" style="font-size: 11px;" routerLink="/nosotros">Nosotros</a>
+        
+                            </li>
+
+                            <li class="nav-item centro">
+        
+                                <a class="nav-link text-uppercase font-weight-bold" style="font-size: 11px;" routerLink="/cobertura">Cobertura</a>
+        
+                            </li>
+
+                            <!-- <li class="nav-item centro">
+        
+                                <a class="nav-link text-uppercase font-weight-bold" style="font-size: 11px;" routerLink="/">Herramientas</a>
+        
+                            </li>
+        
+                            <li class="nav-item centro">
+                                
+                                <a class="nav-link text-uppercase font-weight-bold" style="font-size: 11px;" routerLink="/">Material Eléctrico</a>
+        
+                            </li>
+
+                            <li class="nav-item centro">
+                                
+                                <a class="nav-link text-uppercase font-weight-bold" style="font-size: 11px;" routerLink="/">Iluminación</a>
+        
+                            </li>
+
+                            <li class="nav-item centro">
+                                
+                                <a class="nav-link text-uppercase font-weight-bold" style="font-size: 11px;" routerLink="/">Plomeria y Grifería</a>
+        
+                            </li>
+
+                            <li class="nav-item centro">
+                                
+                                <a class="nav-link text-uppercase font-weight-bold" style="font-size: 11px;" routerLink="/">Cerrajería</a>
+        
+                            </li>
+
+                            <li class="nav-item centro">
+                                
+                                <a class="nav-link text-uppercase font-weight-bold" style="font-size: 11px;" routerLink="/">Automotríz</a>
+        
+                            </li>
+
+                            <li class="nav-item centro">
+                                
+                                <a class="nav-link text-uppercase font-weight-bold" style="font-size: 11px;" routerLink="/">Ferretería</a>
+        
+                            </li>
+
+                            <li class="nav-item centro">
+                                
+                                <a class="nav-link text-uppercase font-weight-bold" style="font-size: 11px;" routerLink="/">Limpieza y Hogar</a>
+        
+                            </li> -->
+        
+                            <li class="nav-item dropdown centro">
+        
+                                <a class="dropdown-toggle nav-link text-uppercase font-weight-bold" style="font-size: 11px;" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Marcas Truper
+                                </a>
+        
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        
+                                    <a class="pormarcas" (click)="irPorMarcas(truper.marca)" *ngFor="let truper of marcasTru">
+                                        
+                                        <!-- <span class="pormarcas-span" [ngClass]="{'truper': truper.marca === 'Truper', 'fiero': truper.marca === 'Fiero', 'volteck': truper.marca === 'Volteck' || truper.marca === 'Voltech', 'foset': truper.marca === 'Foset', 'hermex': truper.marca === 'Hermex', 'klintek': truper.marca === 'Klintek', 'pretul': truper.marca === 'Pretul', 'ultracraft': truper.marca === 'Ultracraft'}">{{ truper.marca }}</span> -->
+                                        <span class="pormarcas-span">{{ truper.marca }}</span>
+                                    
+                                    </a>
+        
+                                </div>
+        
+                            </li>
+        
+                            <li class="nav-item dropdown">
+        
+                                <a class="dropdown-toggle nav-link text-uppercase font-weight-bold" style="font-size: 11px;" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Marcas FMO
+                                </a>
+        
+                                <div class="dropdown-menu dividir-columnas" aria-labelledby="navbarDropdown">
+        
+                                    <ul>
+        
+                                        <li *ngFor="let fmo of marcasFmo" class="pormarcasli">
+        
+                                            <a (click)="irPorMarcas(fmo.marca)" class="pormarcas">
+                                                
+                                                <!-- <span class="pormarcas-span" [ngClass]="{'akatex': fmo.marca === 'Akatex', 'brasso': fmo.marca === 'Brasso', 'cazafacil': fmo.marca === 'CazaFacil', 'cytsa': fmo.marca === 'Cytsa', 'devcon': fmo.marca === 'Devcon', 'dixon': fmo.marca === 'Dixon', 'easy-off': fmo.marca === 'Easy-Off', 'el-oso': fmo.marca === 'El Oso', 'fester': fmo.marca === 'Fester', 'flamineta': fmo.marca === 'Flamineta', 'fmo': fmo.marca === 'Fmo', 'h24': fmo.marca === 'H24', 'ipesa': fmo.marca === 'Ipesa', 'kola-loka': fmo.marca === 'Kola Loka', 'little-trees': fmo.marca === 'Little Trees', 'marvil': fmo.marca === 'Marvil', 'mendoza': fmo.marca === 'Mendoza', 'mustad': fmo.marca === 'Mustad', 'nacobre': fmo.marca === 'Nacobre', 'oster': fmo.marca === 'Oster', 'pennsylvania': fmo.marca === 'Pennsylvania', 'permatex': fmo.marca === 'Permatex', 'presto': fmo.marca === 'Presto', 'prisa': fmo.marca === 'Prisa', 'raid': fmo.marca === 'Raid', 'ratimor': fmo.marca === 'Ratimor', 'resanacreto': fmo.marca === 'Resanacreto', 'resistol': fmo.marca === 'Resistol', 'rosan': fmo.marca === 'Rosan', 'rotoplas': fmo.marca === 'Rotoplas', 'sc-johnson': fmo.marca === 'Sc Johnson', 'siemens': fmo.marca === 'Siemens', 'tendal': fmo.marca === 'Tendal', 'turtlewax': fmo.marca === 'TurtleWax', 'vermar': fmo.marca === 'Vermar', 'windex': fmo.marca === 'Windex'}">{{ fmo.marca }}</span> -->
+                                                <span class="pormarcas-span">{{ fmo.marca }}</span>
+                                            
+                                            </a>
+                                            
+                                        </li>
+        
+                                    </ul>
+        
+                                </div>
+        
+                            </li>
+        
+                        </ul>
+        
+                    </div>
+        
+                </nav>
+
+            </div>
+
+            <!-- <div class="col-lg-4 col-md-4 col-sm-12 buscador">
 
                 <app-buscar (actualizaValor)="obtener($event)"></app-buscar>
 
-            </div>
+            </div> -->
 
-            <div class="col-lg-4 col-md-4 col-sm-12 centro">
+            <div class="col-lg-1 col-md-1 col-sm-12 centro" style="padding: 0px!important;">
 
                 <ul class="list-inline" style="margin-bottom: 0px!important;">
 
                     <li class="list-inline-item font-weight-bold text-center">
 
-                        <a routerLink="/carrito" class="nav-link text-dark" *ngIf="carrito">
+                        <a routerLink="/carrito" class="link-cart" *ngIf="carrito">
 
-                            <span class="text-dark" style="position: relative;left: 12px;">
+                            <span style="position: relative;left: 12px;">
 
-                                <i class="mdi mdi-cart" style="font-size: 1.5em;"></i>
-
-                                <span class="badge-rojo-fmo">
-
-                                    {{ cantidad | number }}
-    
-                                </span>
-
-                                <br>
+                                <small>{{ cantidad | number }} </small>
                                 
-                            </span> {{ 'Mi Carrito' }}
+                                <i class="mdi mdi-cart"></i>
+                                
+                            </span>
 
                         </a>
 
                         <span class="text-dark" *ngIf="!carrito">
 
-                            <span class="text-dark" style="font-size: 1.5em;">
+                            <span class="text-dark">
+
+                                <small class="text-danger">0.00 </small>
 
                                 <i class="mdi mdi-cart-outline text-danger"></i>
 
-                                <br>
-
-                            </span> {{ 'Mi Carrito' }}
+                            </span>
 
                         </span>
 
                     </li>
 
                 </ul>
-
-                <!-- <nav class="navbar navbar-expand-lg mt-3">
-
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                                    
-                        <span class="mdi mdi-home-outline"></span> Inicio
-            
-                    </button>
-
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
-                        <ul class="navbar-nav ml-auto">
-
-                            <li class="nav-item">
-
-                                <a class="nav-link" routerLink="/inicio">Inicio <span class="sr-only">(current)</span></a>
-
-                            </li>
-
-                            <li class="nav-item">
-
-                                <a class="nav-link" routerLink="/nosotros">Nosotros</a>
-
-                            </li>
-
-                            <li class="nav-item">
-
-                                <a class="nav-link" routerLink="/cobertura">Cobertura</a>
-
-                            </li>
-
-                        </ul>
-
-                    </div>
-
-                </nav> -->
 
             </div>
 
@@ -407,160 +334,16 @@
 </header>
 
 <!-- <header style="background: #f8f9fa; border-bottom: 2px solid #E4E7ED; position: absolute; z-index: 99; width: 100%;"> -->
-<header class="menu-principal">
+<!-- <header class="menu-principal">
 
     <div class="container">
 
-        <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background: transparent!important">
+        <div class="pt-3 pb-1 text-center">
 
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-
-                <span class="navbar-toggler-icon"></span>
-
-            </button>
-            
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
-                <ul class="navbar-nav m-auto">
-
-                    <li class="nav-item active">
-
-                        <a class="navegar-link" routerLink="/inicio">Inicio <span class="sr-only">(current)</span></a>
-
-                    </li>
-
-                    <li class="nav-item">
-
-                        <a class="navegar-link" routerLink="/nosotros">Nosotros</a>
-
-                    </li>
-
-                    <li class="nav-item">
-                        
-                        <a class="navegar-link" routerLink="/cobertura">Cobertura</a>
-
-                    </li>
-
-                    <li class="nav-item dropdown">
-
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Truper
-                        </a>
-
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-
-                            <h5 class="mx-3">Truper</h5>
-
-                            <div class="dropdown-divider"></div>
-
-                            <a class="pormarcas" (click)="irPorMarcas(truper.marca)" *ngFor="let truper of marcasTru">
-                                
-                                <span class="pormarcas-span" [ngClass]="{'truper': truper.marca === 'Truper', 'fiero': truper.marca === 'Fiero', 'volteck': truper.marca === 'Volteck' || truper.marca === 'Voltech', 'foset': truper.marca === 'Foset', 'hermex': truper.marca === 'Hermex', 'klintek': truper.marca === 'Klintek', 'pretul': truper.marca === 'Pretul', 'ultracraft': truper.marca === 'Ultracraft'}">{{ truper.marca }}</span>
-                            
-                            </a>
-
-                        </div>
-
-                    </li>
-
-                    <li class="nav-item dropdown">
-
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            FMO
-                        </a>
-
-                        <div class="dropdown-menu dividir-columnas" aria-labelledby="navbarDropdown">
-
-                            <h5 class="mx-3">FMO</h5>
-
-                            <div class="dropdown-divider"></div>
-
-                            <ul>
-
-                                <li *ngFor="let fmo of marcasFmo" class="pormarcasli">
-
-                                    <a (click)="irPorMarcas(fmo.marca)" class="pormarcas">
-                                        
-                                        <span class="pormarcas-span" [ngClass]="{'akatex': fmo.marca === 'Akatex', 'brasso': fmo.marca === 'Brasso', 'cazafacil': fmo.marca === 'CazaFacil', 'cytsa': fmo.marca === 'Cytsa', 'devcon': fmo.marca === 'Devcon', 'dixon': fmo.marca === 'Dixon', 'easy-off': fmo.marca === 'Easy-Off', 'el-oso': fmo.marca === 'El Oso', 'fester': fmo.marca === 'Fester', 'flamineta': fmo.marca === 'Flamineta', 'fmo': fmo.marca === 'Fmo', 'h24': fmo.marca === 'H24', 'ipesa': fmo.marca === 'Ipesa', 'kola-loka': fmo.marca === 'Kola Loka', 'little-trees': fmo.marca === 'Little Trees', 'marvil': fmo.marca === 'Marvil', 'mendoza': fmo.marca === 'Mendoza', 'mustad': fmo.marca === 'Mustad', 'nacobre': fmo.marca === 'Nacobre', 'oster': fmo.marca === 'Oster', 'pennsylvania': fmo.marca === 'Pennsylvania', 'permatex': fmo.marca === 'Permatex', 'presto': fmo.marca === 'Presto', 'prisa': fmo.marca === 'Prisa', 'raid': fmo.marca === 'Raid', 'ratimor': fmo.marca === 'Ratimor', 'resanacreto': fmo.marca === 'Resanacreto', 'resistol': fmo.marca === 'Resistol', 'rosan': fmo.marca === 'Rosan', 'rotoplas': fmo.marca === 'Rotoplas', 'sc-johnson': fmo.marca === 'Sc Johnson', 'siemens': fmo.marca === 'Siemens', 'tendal': fmo.marca === 'Tendal', 'turtlewax': fmo.marca === 'TurtleWax', 'vermar': fmo.marca === 'Vermar', 'windex': fmo.marca === 'Windex'}">{{ fmo.marca }}</span>
-                                    
-                                    </a>
-                                    
-                                </li>
-
-                            </ul>
-
-                            <!-- <a class="dropdown-item" href="#" *ngFor="let fmo of marcasFmo">{{ fmo.marca }}</a> -->
-
-                        </div>
-
-                    </li>
-
-                </ul>
-
-            </div>
-
-        </nav>
-
-    </div>
-
-</header>
-
-<!-- <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
-
-    <div class="container">
-
-        <a class="navbar-brand" href="#">Ferremayoristas</a>
-
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            
-            <span class="navbar-toggler-icon"></span>
-
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
-            <ul class="navbar-nav ml-auto">
-
-                <li class="nav-item">
-
-                    <a class="nav-link" routerLink="/inicio">Inicio <span class="sr-only">(current)</span></a>
-
-                </li>
-
-                <li class="nav-item dropdown">
-
-                    <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        
-                        Marcas
-
-                    </a>
-
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-
-                        <a class="dropdown-item" routerLink="/marcaTruper">Truper</a>
-
-                        <a class="dropdown-item" routerLink="/marcaFmo">FMO</a>
-
-                    </div>
-
-                </li>
-
-                <li class="nav-item">
-
-                    <a class="nav-link" routerLink="/nosotros">Nosotros</a>
-
-                </li>
-
-                <li class="nav-item">
-
-                    <a class="nav-link" routerLink="/cobertura">Cobertura</a>
-
-                </li>
-
-            </ul>
+            <h4 class="text-white text-uppercase">Soluciones para el hogar y los negocios.</h4>
 
         </div>
 
     </div>
 
-</nav> -->
+</header> -->

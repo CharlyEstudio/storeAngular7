@@ -35,6 +35,7 @@ export class DescripcionComponent implements OnInit {
   clave: any;
   codigo: any;
   marca: any;
+  marca_imagen: any;
   articuloid: any;
   imagen = 'assets/images/precarga/product_loader.gif';
   precio: number = 0;
@@ -92,6 +93,7 @@ export class DescripcionComponent implements OnInit {
         this.precioNeto = producto.respuesta[0].precioneto;
         this.desc = producto.respuesta[0].descuento;
         this.marca = producto.respuesta[0].marca;
+        this.marca_imagen = producto.respuesta[0].imagen_marca;
         this.imagen = producto.respuesta[0].imagen;
         this.precioAumentado = this.precioNeto;
         this.lote = producto.respuesta[0].lote;

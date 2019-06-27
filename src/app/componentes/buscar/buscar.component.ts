@@ -23,22 +23,30 @@ export class BuscarComponent implements OnInit {
   ngOnInit() {
   }
 
-  buscar(id: any) {
-    this.datos = [];
-    this.selRes.nativeElement.value = id;
 
-    this.cambioValor.emit( id );
-  }
+  // Con el buscador select
+  // buscar(id: any) {
+  //   this.datos = [];
+  //   this.selRes.nativeElement.value = id;
 
-  search(termino: any) {
+  //   this.cambioValor.emit( id );
+  // }
+
+  // search(termino: any) {
+  //   this.datos = [];
+  //   if (termino.length >= 3) {
+  //     this._productoService.buscarProductos(termino).subscribe((resp: any) => {
+  //       if (resp.status) {
+  //         this.datos = resp.respuesta;
+  //       }
+  //     });
+  //   }
+  // }
+
+  // Con el buscador input
+  buscar(dato: any) {
     this.datos = [];
-    if (termino.length >= 3) {
-      this._productoService.buscarProductos(termino).subscribe((resp: any) => {
-        if (resp.status) {
-          this.datos = resp.respuesta;
-        }
-      });
-    }
+    this.cambioValor.emit( dato );
   }
 
 }
