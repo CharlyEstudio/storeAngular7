@@ -984,7 +984,36 @@ a.link-cart:hover {
     box-shadow: 2px 2px 2px #000004;
 }
 
+.btn-cart:disabled {
+    color: #3f515a!important;
+}
+
 .btn-cart span {
+    transform: skewX(30deg)!important;
+    display: block;
+    font-size: 12px;
+}
+
+.btn-anterior {
+    transform: skewX(-30deg);
+    background-color: #b1b6bb;
+    border: none;
+    color: #fff;
+    white-space: normal;
+    padding: .5rem;
+    width: 100px;
+    cursor: pointer;
+}
+
+.btn-anterior:hover {
+    box-shadow: 2px 2px 2px #000004;
+}
+
+.btn-anterior:disabled {
+    color: #3f515a!important;
+}
+
+.btn-anterior span {
     transform: skewX(30deg)!important;
     display: block;
     font-size: 12px;

@@ -151,9 +151,10 @@ export class RegistroComponent implements OnInit {
       return;
     }
     this._usuarioService.enviarConsulta(this.contacto.value).subscribe((resp: any) => {
-      if (resp.length > 0) {
+      if (resp.length === 0) {
         this.esperando = false;
         this.contacto.reset();
+        this._webSocket.acciones('registro-watch', this.contacto.value);
         swal('Envío Correcto', 'Su solicitud fue enviada, nos pondremos en contacto lo más pronto posible.', 'success');
       } else {
         this.esperando = false;

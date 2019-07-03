@@ -20,13 +20,25 @@
 
             <div class="p-2 bd-highlight">
 
-                <button type="button" class="btn btn-secondary" (click)="cambiar(-13)" [disabled]="disabledAnt">Anterior</button>
+                <!-- <button type="button" class="btn btn-secondary" (click)="cambiar(-13)" [disabled]="disabledAnt">Anterior</button> -->
+
+                <button class="btn-anterior" type="button" (click)="cambiar(-13)" [disabled]="disabledAnt">
+
+                    <span class="text-uppercase">Anterior</span>
+
+                </button>
                 
             </div>
 
             <div class="p-2 bd-highlight">
 
-                <button type="button" class="btn btn-success" (click)="cambiar(13)" [disabled]="disabledSig">Siguiente</button>
+                <button class="btn-cart" type="button" (click)="cambiar(13)" [disabled]="disabledSig">
+
+                    <span class="text-uppercase">Siguiente</span>
+
+                </button>
+
+                <!-- <button type="button" class="btn btn-success" (click)="cambiar(13)" [disabled]="disabledSig">Siguiente</button> -->
 
             </div>
 
@@ -64,21 +76,19 @@
 
                     <h5 class="pt-2 pb-4 text-truncate">{{mejor.descripcion}}</h5>
 
-                    <h3>
+                    <small>
 
-                        <span class="badge badge-danger">{{ (mejor.descuento * 100) }}% de Descuento</span>
+                        <span class="badge badge-danger">-{{ (mejor.descuento * 100) }}%</span>
 
-                    </h3>
+                    </small>
 
-                    <h6 class="text-muted">
+                    <br>
 
-                        <small>
-    
-                            <s>{{ mejor.precioAumentado | currency }}</s>
-                            
-                        </small>
+                    <small class="text-muted">
 
-                    </h6>
+                        <del>{{ mejor.preciooriginal | currency }}</del>
+                        
+                    </small>
 
                     <h4 class="font-weight-bold text-danger">
 
@@ -86,15 +96,19 @@
 
                     </h4>
 
-                    <h3>
+                    <!-- <h3>
 
                         <span class="badge badge-pill badge-dark">{{ mejor.marca }}</span>
 
-                    </h3>
+                    </h3> -->
 
-                    <button class="btn btn-linkedin" type="button" (click)="irA(mejor)">
+                    <!-- <img [src]="'http://www.ferremayoristas.com.mx/assets/images/marcas/' + mejor.marca_img" [alt]="mejor.marca" width="30%">
+
+                    <br> -->
+
+                    <button class="btn-cart" type="button" (click)="irA(mejor)">
     
-                        Comprar
+                        <span class="text-uppercase">Comprar</span>
     
                     </button>
 
@@ -112,13 +126,23 @@
 
             <div class="p-2 bd-highlight">
 
-                <button type="button" class="btn btn-secondary" (click)="cambiar(-13)" [disabled]="disabledAnt">Anterior</button>
+                <!-- <button type="button" class="btn btn-secondary" (click)="cambiar(-13)" [disabled]="disabledAnt">Anterior</button> -->
+
+                <button class="btn-anterior" type="button" (click)="cambiar(-13)" [disabled]="disabledAnt">
+
+                    <span class="text-uppercase">Anterior</span>
+
+                </button>
                 
             </div>
 
             <div class="p-2 bd-highlight">
 
-                <button type="button" class="btn btn-success" (click)="cambiar(13)" [disabled]="disabledSig">Siguiente</button>
+                <button class="btn-cart" type="button" (click)="cambiar(13)" [disabled]="disabledSig">
+
+                    <span class="text-uppercase">Siguiente</span>
+
+                </button>
 
             </div>
 
