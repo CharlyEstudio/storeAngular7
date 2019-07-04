@@ -19,6 +19,10 @@ export class BuscadorComponent implements OnInit, OnDestroy {
 
   precio: number = 3;
 
+  desde: number = 0;
+  disabledAnt: boolean = true;
+  disabledSig: boolean = false;
+
   buscando: any;
   buscandoBol = true;
   errorBol = false;
@@ -74,18 +78,58 @@ export class BuscadorComponent implements OnInit, OnDestroy {
     // });
 
     // Buscar producto por input
-    this._productosService.buscarProductos(buscar, this.precio).subscribe((encontrado: any) => {
+    this._productosService.buscarProductos(buscar, this.precio, this.desde).subscribe((encontrado: any) => {
       if (encontrado.status) {
         this.encontrado = encontrado.respuesta;
         this.buscandoBol = false;
         this.errorBol = false;
         this.encontradoBol = true;
+        if (encontrado.respuesta.length > 12) {
+          this.disabledAnt = true;
+          this.disabledSig = false;
+        } else if (encontrado.respuesta.length < 11) {
+          this.disabledAnt = true;
+          this.disabledSig = true;
+        }
       } else {
         this.msg = encontrado.msg;
         this.encontrado = [];
         this.buscandoBol = false;
         this.errorBol = true;
         this.encontradoBol = false;
+      }
+    }, err => console.log(err.message));
+  }
+
+  cambiar(desde: number) {
+    this.encontrado = [];
+    this.buscandoBol = true;
+    this.errorBol = false;
+    this.encontradoBol = false;
+    this.desde = this.desde + desde;
+
+    if ( this.desde < 0 ) {
+      this.disabledAnt = true;
+      this.disabledSig = false;
+      return;
+    } else {
+      this.disabledAnt = false;
+      this.disabledSig = false;
+    }
+    this._productosService.buscarProductos(this.buscando, this.precio, this.desde).subscribe( (encontrado: any) => {
+      this.encontrado = [];
+      if (encontrado.status) {
+        this.encontrado = encontrado.respuesta;
+        this.buscandoBol = false;
+        this.errorBol = false;
+        this.encontradoBol = true;
+        if (this.desde === 0) {
+          this.disabledAnt = true;
+          this.disabledSig = false;
+        } else if (this.encontrado.length < 12) {
+          this.disabledAnt = false;
+          this.disabledSig = true;
+        }
       }
     });
   }

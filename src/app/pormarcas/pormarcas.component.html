@@ -1,91 +1,184 @@
 <div class="container my-5">
 
-    <nav class="breadcrumb bg-transparent">
-  
-      <a class="breadcrumb-item" routerLink="/inicio">Inicio</a>
-  
-      <span class="breadcrumb-item active">Productos {{marca}}</span>
-  
-    </nav>
-  
-    <div class="row">
-  
-      <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-  
-        <h2>PRODUCTOS {{marca | uppercase}}</h2>
-  
+  <nav class="breadcrumb bg-transparent">
+
+    <a class="breadcrumb-item" routerLink="/inicio">Inicio</a>
+
+    <span class="breadcrumb-item active">Productos {{marca | uppercase}}</span>
+
+  </nav>
+
+  <div class="row">
+
+    <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+
+      <!-- <h2>PRODUCTOS {{marca | uppercase}}</h2> -->
+
+      <img src="http://www.ferremayoristas.com.mx/assets/images/marcas/{{marca|lowercase}}.jpg" width="15%">
+
+    </div>
+
+    <div class="col-12 py-3">
+
+      <div class="d-flex justify-content-between">
+
+          <div class="p-2 bd-highlight">
+
+              <!-- <button type="button" class="btn btn-secondary" (click)="cambiar(-13)" [disabled]="disabledAnt">Anterior</button> -->
+
+              <button class="btn-anterior" type="button" (click)="cambiar(-13)" [disabled]="disabledAnt">
+
+                  <span class="text-uppercase">Anterior</span>
+
+              </button>
+              
+          </div>
+
+          <div class="p-2 bd-highlight">
+
+              <button class="btn-cart" type="button" (click)="cambiar(13)" [disabled]="disabledSig">
+
+                  <span class="text-uppercase">Siguiente</span>
+
+              </button>
+
+              <!-- <button type="button" class="btn btn-success" (click)="cambiar(13)" [disabled]="disabledSig">Siguiente</button> -->
+
+          </div>
+
       </div>
 
-      <div class="row mas-vendidos" *ngIf="productos.length === 0">
-
-        <div class="col-12 col-lg-3 col-md-6 col-sm-12 pt-2" *ngFor="let pre of precarga">
-    
-            <div class="card">
-    
-                <div class="card-body text-center">
-    
-                    <img src="assets/images/precarga/cart-loading.gif" class="img-fluig" width="250">
-    
-                </div>
-    
-            </div>
-    
-        </div>
-    
     </div>
+
+    <div class="row mas-vendidos" *ngIf="productos.length === 0">
+
+      <div class="col-12 col-lg-3 col-md-6 col-sm-12 pt-2" *ngFor="let pre of precarga">
   
-      <div class="col-lg-4 col-md-4 col-sm-12 col-12" *ngFor="let producto of productos">
+          <div class="card">
   
-        <div class="card">
+              <div class="card-body text-center">
   
-          <div class="card-body text-center">
+                  <img src="assets/images/precarga/cart-loading.gif" class="img-fluig" width="250">
   
-            <img [src]="producto.imagen" class="img-fluig" width="200">
-  
-            <h5 class="pt-2 pb-4 text-truncate">{{producto.descripcion}}</h5>
-  
-            <h3 *ngIf="producto.descuento > 0">
-  
-              <span class="badge badge-danger">{{ (producto.descuento * 100) }}% de Descuento</span>
-  
-            </h3>
-  
-            <h6 class="text-muted">
-  
-              <small>
-  
-                <s>{{ producto.precioNormal | currency }}</s>
-                  
-              </small>
-  
-            </h6>
-  
-            <h4 class="font-weight-bold text-danger">
-  
-              {{ producto.precio | currency }}
-  
-            </h4>
-  
-            <h3>{{ producto.marca }}</h3>
-  
-            <h3>
-  
-              <span class="badge badge-pill badge-dark">Código: {{ producto.codigo }} | Clave: {{ producto.clave }}</span>
-  
-            </h3>
-  
-            <button class="btn btn-linkedin" type="button" (click)="irA(producto)">
-  
-              Comprar
-  
-            </button>
+              </div>
   
           </div>
   
-        </div>
-    
       </div>
   
     </div>
+
+    <div class="col-lg-4 col-md-4 col-sm-12 col-12 el-element-overlay" *ngFor="let producto of productos">
+
+      <div class="card">
+
+        <div class="el-card-item text-center">
+
+          <div class="el-card-avatar el-overlay-1 rounded-circle">
+
+            <img [src]="producto.imagen" class="img-fluig" width="100">
+
+            <div class="el-overlay">
+
+              <ul class="el-info">
+
+                <li>
+
+                  <span class="btn default btn-outline image-popup-vertical-fit" data-toggle="tooltip" title="Código: {{ producto.codigo }}">
+
+                    Código: {{ producto.codigo }}
+
+                  </span>
+
+                </li>
+
+                <li>
+
+                  <span class="btn default btn-outline image-popup-vertical-fit" data-toggle="tooltip" title="Clave: {{ producto.clave }}">
+
+                    Clave: {{ producto.clave }}
+
+                  </span>
+
+                </li>
+
+              </ul>
+
+            </div>
+
+          </div>
+
+          <h5 class="pt-2 pb-4 text-truncate">{{producto.descripcion}}</h5>
+
+          <small *ngIf="producto.descuento > 0">
+
+            <span class="badge badge-danger">{{ (producto.descuento * 100) }}%</span>
+
+          </small>
+
+          <br *ngIf="producto.descuento > 0">
+
+          <small class="text-muted" *ngIf="producto.descuento > 0"><del>{{ producto.precio | currency }}</del></small>
+
+          <h4 class="font-weight-bold text-danger">
+
+            <span *ngIf="producto.descuento > 0">{{ (producto.precio - (producto.precio * (producto.descuento))) | currency }}</span>
+            <span *ngIf="producto.descuento === 0">{{ producto.precio | currency }}</span>
+
+          </h4>
+
+          <!-- <small>
+
+            <span class="badge badge-pill badge-dark">Código: {{ producto.codigo }} | Clave: {{ producto.clave }}</span>
+
+          </small>
+
+          <br> -->
+
+          <button class="btn-cart mt-3" type="button" (click)="irA(producto)">
+
+            <span class="text-uppercase">Comprar</span>
+
+          </button>
+
+        </div>
+
+      </div>
   
+    </div>
+
+    <div class="col-12 py-3">
+
+      <div class="d-flex justify-content-between">
+
+          <div class="p-2 bd-highlight">
+
+              <!-- <button type="button" class="btn btn-secondary" (click)="cambiar(-13)" [disabled]="disabledAnt">Anterior</button> -->
+
+              <button class="btn-anterior" type="button" (click)="cambiar(-13)" [disabled]="disabledAnt">
+
+                  <span class="text-uppercase">Anterior</span>
+
+              </button>
+              
+          </div>
+
+          <div class="p-2 bd-highlight">
+
+              <button class="btn-cart" type="button" (click)="cambiar(13)" [disabled]="disabledSig">
+
+                  <span class="text-uppercase">Siguiente</span>
+
+              </button>
+
+              <!-- <button type="button" class="btn btn-success" (click)="cambiar(13)" [disabled]="disabledSig">Siguiente</button> -->
+
+          </div>
+
+      </div>
+
+    </div>
+
   </div>
+
+</div>

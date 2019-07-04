@@ -68,29 +68,97 @@
 
     </div>
 
+    <div class="col-12 py-3" *ngIf="encontradoBol">
+
+        <div class="d-flex justify-content-between">
+
+            <div class="p-2 bd-highlight">
+
+                <!-- <button type="button" class="btn btn-secondary" (click)="cambiar(-13)" [disabled]="disabledAnt">Anterior</button> -->
+
+                <button class="btn-anterior" type="button" (click)="cambiar(-13)" [disabled]="disabledAnt">
+
+                    <span class="text-uppercase">Anterior</span>
+
+                </button>
+                
+            </div>
+
+            <div class="p-2 bd-highlight">
+
+                <button class="btn-cart" type="button" (click)="cambiar(13)" [disabled]="disabledSig">
+
+                    <span class="text-uppercase">Siguiente</span>
+
+                </button>
+
+                <!-- <button type="button" class="btn btn-success" (click)="cambiar(13)" [disabled]="disabledSig">Siguiente</button> -->
+
+            </div>
+
+        </div>
+
+    </div>
+
     <div class="row mas-vendidos pb-5" *ngIf="encontrado.length > 0">
 
-        <div class="col-12 col-lg-3 col-md-6 col-sm-12 pt-4" *ngFor="let enc of encontrado">
+        <div class="col-12 col-lg-3 col-md-6 col-sm-12 pt-4 el-element-overlay" *ngFor="let enc of encontrado">
 
             <div class="card">
 
-                <div class="card-body text-center">
+                <div class="el-card-item text-center">
 
-                    <img [src]="enc.imagen" class="img-fluig" width="200">
+                    <div class="el-card-avatar el-overlay-1 rounded-circle">
+
+                        <img [src]="enc.imagen" class="img-fluig" width="200">
+            
+                        <div class="el-overlay">
+            
+                            <ul class="el-info">
+            
+                            <li>
+            
+                                <span class="btn default btn-outline image-popup-vertical-fit" data-toggle="tooltip" title="Código: {{ enc.codigo }}">
+            
+                                Código: {{ enc.codigo }}
+            
+                                </span>
+            
+                            </li>
+            
+                            <li>
+            
+                                <span class="btn default btn-outline image-popup-vertical-fit" data-toggle="tooltip" title="Clave: {{ enc.clave }}">
+            
+                                Clave: {{ enc.clave }}
+            
+                                </span>
+            
+                            </li>
+            
+                            </ul>
+            
+                        </div>
+            
+                    </div>
 
                     <h5 class="pt-2 pb-4 text-truncate">{{enc.descripcion}}</h5>
 
                     <div class="centro" style="height: 95px; min-height: 95px; max-height: 95px;">
 
-                        <h6 class="text-muted" *ngIf="enc.descuento > 0">
+                        <small *ngIf="enc.descuento > 0">
 
-                            <small>
+                            <span class="badge badge-danger">-{{ (enc.descuento * 100) }}%</span>
+        
+                        </small>
+        
+                        <br *ngIf="enc.descuento > 0">
 
-                                <s>{{ enc.precioAumentado | currency }}</s>
-                                
-                            </small>
+                        <small class="text-muted" *ngIf="enc.descuento > 0">
 
-                        </h6>
+                            <del>{{ enc.preciooriginal | currency }}</del>
+                            
+                        </small>
 
                         <h4 class="font-weight-bold text-danger">
 
@@ -98,19 +166,7 @@
 
                         </h4>
 
-                        <h3 *ngIf="enc.descuento > 0">
-
-                            <span class="badge badge-inverse">{{ (enc.descuento * 100) }}% de Descuento</span>
-
-                        </h3>
-
                     </div>
-
-                    <h3>
-
-                        <span class="badge badge-light">{{ enc.marca }}</span>
-
-                    </h3>
 
                     <button class="btn-cart" type="button" (click)="irA(enc)">
 
@@ -123,6 +179,38 @@
             </div>
 
             <hr>
+
+        </div>
+
+    </div>
+
+    <div class="col-12 py-3" *ngIf="encontradoBol">
+
+        <div class="d-flex justify-content-between">
+
+            <div class="p-2 bd-highlight">
+
+                <!-- <button type="button" class="btn btn-secondary" (click)="cambiar(-13)" [disabled]="disabledAnt">Anterior</button> -->
+
+                <button class="btn-anterior" type="button" (click)="cambiar(-13)" [disabled]="disabledAnt">
+
+                    <span class="text-uppercase">Anterior</span>
+
+                </button>
+                
+            </div>
+
+            <div class="p-2 bd-highlight">
+
+                <button class="btn-cart" type="button" (click)="cambiar(13)" [disabled]="disabledSig">
+
+                    <span class="text-uppercase">Siguiente</span>
+
+                </button>
+
+                <!-- <button type="button" class="btn btn-success" (click)="cambiar(13)" [disabled]="disabledSig">Siguiente</button> -->
+
+            </div>
 
         </div>
 

@@ -41,8 +41,8 @@ export class ProductosService {
     return this.http.get(url);
   }
 
-  obtenerProductosPorMarca(marca: any, precio: number) {
-    const url = LINK + '/productos/productos/marca/' + marca + '/' + precio;
+  obtenerProductosPorMarca(marca: any, precio: number, desde: number = 0, hasta: number = 12) {
+    const url = LINK + '/productos/productos/marca/' + marca + '/' + precio + '/' + desde + '/' + hasta;
 
     return this.http.get(url);
   }
@@ -65,8 +65,8 @@ export class ProductosService {
     return this.http.get(url);
   }
 
-  buscarProductos(termino: any, precio: number = 3) {
-    const url = LINK + '/productos/buscar/' + termino + '/' + precio;
+  buscarProductos(termino: any, precio: number = 3, desde: number = 0, hasta: number = 12) {
+    const url = LINK + '/productos/buscar/' + termino + '/' + precio + '/' + desde + '/' + hasta;
 
     return this.http.get(url);
   }

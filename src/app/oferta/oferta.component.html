@@ -66,13 +66,45 @@
 
     <div class="row mas-vendidos" *ngIf="mejores.length > 0">
 
-        <div class="col-12 col-lg-3 col-md-6 col-sm-12 pt-2" *ngFor="let mejor of mejores">
+        <div class="col-12 col-lg-3 col-md-6 col-sm-12 pt-2 el-element-overlay" *ngFor="let mejor of mejores">
 
             <div class="card">
 
-                <div class="card-body text-center">
+                <div class="el-card-item text-center">
 
-                    <img [src]="mejor.imagen" class="img-fluig" width="200">
+                    <div class="el-card-avatar el-overlay-1 rounded-circle">
+
+                        <img [src]="mejor.imagen" class="img-fluig" width="200">
+            
+                        <div class="el-overlay">
+            
+                            <ul class="el-info">
+            
+                            <li>
+            
+                                <span class="btn default btn-outline image-popup-vertical-fit" data-toggle="tooltip" title="Código: {{ mejor.codigo }}">
+            
+                                Código: {{ mejor.codigo }}
+            
+                                </span>
+            
+                            </li>
+            
+                            <li>
+            
+                                <span class="btn default btn-outline image-popup-vertical-fit" data-toggle="tooltip" title="Clave: {{ mejor.clave }}">
+            
+                                Clave: {{ mejor.clave }}
+            
+                                </span>
+            
+                            </li>
+            
+                            </ul>
+            
+                        </div>
+            
+                    </div>
 
                     <h5 class="pt-2 pb-4 text-truncate">{{mejor.descripcion}}</h5>
 

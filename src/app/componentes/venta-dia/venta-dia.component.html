@@ -16,15 +16,38 @@
 
 </div>
 
-<div class="row mas-vendidos" *ngIf="mejores.length > 0">
+<div class="row mas-vendidos el-element-overlay" *ngIf="mejores.length > 0">
 
     <div class="col-12 col-lg-3 col-md-6 col-sm-12 pt-2" *ngFor="let mejor of mejores">
 
         <div class="card">
 
-            <div class="card-body text-center">
+            <div class="el-card-item text-center">
 
-                <img [src]="mejor.imagen" class="img-fluig" width="200">
+                <div class="el-card-avatar el-overlay-1 rounded-circle">
+
+                    <img [src]="mejor.imagen" class="img-fluig" width="200">
+
+                    <div class="el-overlay">
+
+                        <ul class="el-info">
+
+                            <li>
+
+                                <a class="btn default btn-outline image-popup-vertical-fit" data-toggle="tooltip" title="Actividad" (click)="irA(mejor)">
+
+                                    <i class="mdi mdi-launch"></i>
+
+                                </a>
+
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+                </div>
+
 
                 <!-- <h5 class="pt-2 text-truncate">{{mejor.descripcion}}</h5> -->
                 <h6 class="pt-2" style="height: 45px; font-size: 12px;">{{mejor.descripcion}}</h6>
