@@ -135,7 +135,7 @@ export class BuscadorComponent implements OnInit, OnDestroy {
   }
 
   irA(producto: Producto) {
-    // this._webSocket.acciones('producto-visto', producto);
+    this._webSocket.acciones('producto-visto', producto);
     this.route.navigate(['/ver/', producto.articuloid]);
   }
 

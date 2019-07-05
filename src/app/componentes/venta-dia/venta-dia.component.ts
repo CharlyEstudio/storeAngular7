@@ -25,7 +25,7 @@ export class VentaDiaComponent implements OnInit {
     private _productosServices: ProductosService,
     private _usuarioService: UsuarioServicesService,
     private router: Router,
-    private _webSocket: WebsocketService
+    private _ws: WebsocketService
   ) {
     this.precarga = Array(8).fill(4);
     if (this._usuarioService.usuario !== null) {
@@ -50,7 +50,7 @@ export class VentaDiaComponent implements OnInit {
   }
 
   irA(producto: Producto) {
-    // this._webSocket.acciones('producto-visto', producto);
+    this._ws.acciones('producto-visto', producto);
     this.router.navigate(['/ver/', producto.articuloid]);
   }
 

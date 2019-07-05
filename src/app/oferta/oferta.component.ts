@@ -84,7 +84,7 @@ export class OfertaComponent implements OnInit {
   }
 
   irA(producto: Producto) {
-    // this._webSocket.acciones('producto-visto', producto);
+    this._webSocket.acciones('producto-visto', producto);
     this.router.navigate(['/ver/', producto.articuloid]);
   }
 
