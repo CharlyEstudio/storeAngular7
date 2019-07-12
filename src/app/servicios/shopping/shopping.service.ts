@@ -4,9 +4,17 @@ import { HttpClient } from '@angular/common/http';
 
 import { BehaviorSubject } from 'rxjs';
 
+// Alertas
+import * as _swal from 'sweetalert';
+import { SweetAlert } from 'sweetalert/typings/core'; // Importante para que funcione el sweet alert
+const swal: SweetAlert = _swal as any;
+
 // Modelos
 import { Producto } from 'src/app/modelos/productos.model';
 import { XmlString } from 'src/app/modelos/xml.model';
+
+// URL PRINCIPAL
+import { LINK, PATH_LINK } from 'src/app/config/config';
 
 // Servicios
 import { UsuarioServicesService } from '../usuario-servicios/usuario-services.service';
@@ -102,25 +110,25 @@ export class ShoppingService {
   }
 
   enviarPedido(xml: XmlString) {
-    const url = 'http://177.244.55.122:3001/ferrum/subir/pedido/7854956231457643';
+    const url = `${LINK}/ferrum/subir/pedido/7854956231457643`;
 
     return this.http.post(url, xml);
   }
 
   descPromotruper() {
-    const url = 'http://177.244.55.122:3001/cobertura/promotruper/desc';
+    const url = `${LINK}/cobertura/promotruper/desc`;
 
     return this.http.get(url);
   }
 
   productosDesc(desc: any, precio: any) {
-    const url = 'http://177.244.55.122:3001/cobertura/promotruper/desc/num/' + desc + '/' + precio;
+    const url = `${LINK}/cobertura/promotruper/desc/num/${desc}/${precio}`;
 
     return this.http.get(url);
   }
 
   porBajar(usuario: any, fecha: any) {
-    let url = 'http://177.244.55.122:3001/bigdata/obtener/porbajar/' + usuario.idFerrum + '/' + fecha;
+    let url = `${LINK}/bigdata/obtener/porbajar/${usuario.idFerrum}/${fecha}`;
 
     url += '?token=' + this.token;
 
@@ -128,7 +136,7 @@ export class ShoppingService {
   }
 
   porSurtir(usuario: any, fecha: any) {
-    let url = 'http://177.244.55.122:3001/bigdata/obtener/porsurtir/' + usuario.idFerrum + '/' + fecha;
+    let url = `${LINK}/bigdata/obtener/porsurtir/${usuario.idFerrum}/${fecha}`;
 
     url += '?token=' + this.token;
 
@@ -136,7 +144,7 @@ export class ShoppingService {
   }
 
   facturado(usuario: any, fecha: any) {
-    let url = 'http://177.244.55.122:3001/bigdata/obtener/facturados/' + usuario.idFerrum + '/' + fecha;
+    let url = `${LINK}/bigdata/obtener/facturados/${usuario.idFerrum}/${fecha}`;
 
     url += '?token=' + this.token;
 
@@ -144,13 +152,13 @@ export class ShoppingService {
   }
 
   partidas(docid: any) {
-    const url = 'http://177.244.55.122:3001/bigdata/obtener/partidas/' + docid ;
+    const url = `${LINK}/bigdata/obtener/partidas/${docid}` ;
 
     return this.http.get(url);
   }
 
   allPedidos(usuario: any, fecha: any) {
-    const url = 'http://177.244.55.122:3001/bigdata/obtener/allpedido/' + usuario.idFerrum + '/' + fecha;
+    const url = `${LINK}/bigdata/obtener/allpedido/${usuario.idFerrum}/${fecha}`;
 
     return this.http.get(url);
   }

@@ -22,17 +22,27 @@ export class AppComponent {
         private meta: Meta,
         private _webSocket: WebsocketService
   ) {
-      this.getDataRoute().subscribe( data => {
-        this.titulo = data.titulo;
-        this.name = data.name;
-        this.title.setTitle(this.titulo);
-        const metaTag = {
-          name: this.name,
-          content: this.titulo
-        };
+    this.getDataRoute().subscribe( data => {
+      this.titulo = data.titulo;
+      this.name = data.name;
+      this.title.setTitle(this.titulo);
+      const metaTag = {
+        name: this.name,
+        content: this.titulo
+      };
 
-        this.meta.updateTag( metaTag );
+      this.meta.updateTag( metaTag );
+    });
+    if (window.navigator.geolocation) {
+      window.navigator.geolocation.getCurrentPosition((position: any) => {
+        const lugar = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+          time: position.timestamp
+        };
+        this._webSocket.acciones('visitas-tienda', lugar);
       });
+    }
   }
 
   getDataRoute() {

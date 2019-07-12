@@ -14,7 +14,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class CarruselComponent implements OnInit, OnDestroy {
 
   desc: number = 0;
-  movie: any = 'http://ferremayoristas.com.mx/movie/banner3.mp4';
+  movie: any = 'https://ferremayoristas.com.mx/movie/banner3.mp4';
   src: any;
   intervalo: any;
 

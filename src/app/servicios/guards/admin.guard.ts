@@ -1,6 +1,11 @@
 import { Injectable } from '@angular/core';
 import { CanActivate } from '@angular/router';
 
+// Alertas
+import * as _swal from 'sweetalert';
+import { SweetAlert } from 'sweetalert/typings/core'; // Importante para que funcione el sweet alert
+const swal: SweetAlert = _swal as any;
+
 // Servicios
 import { UsuarioServicesService } from '../usuario-servicios/usuario-services.service';
 

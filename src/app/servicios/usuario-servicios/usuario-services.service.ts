@@ -7,7 +7,7 @@ import { map } from 'rxjs/operators';
 import 'rxjs';
 
 // URL PRINCIPAL
-import { LINK } from 'src/app/config/config';
+import { LINK, PATH_LINK } from 'src/app/config/config';
 
 // Modelos
 import { Usuario } from 'src/app/modelos/usuarios.model';
@@ -196,7 +196,7 @@ export class UsuarioServicesService {
   }
 
   enviarConsulta(info: any) {
-    const url = `http://177.244.55.122/api/clientes.php?opcion=12`;
+    const url = `${PATH_LINK}/api/clientes.php?opcion=12`;
     return this.http.post(url, {data: info}, { headers: { 'content-Type': 'application/x-www-form-urlencoded' } });
   }
 
