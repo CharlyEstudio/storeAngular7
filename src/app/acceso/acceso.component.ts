@@ -45,7 +45,7 @@ export class AccesoComponent implements OnInit {
 
     this.iniciar = true;
 
-    const usuario = new Usuario( null, forma.value.email, forma.value.password, null );
+    const usuario = new Usuario( null, forma.value.email, forma.value.password );
 
     this._usuarioService.login(usuario, forma.value.recuerdame).subscribe((resp: any) => {
       if (resp.status) {

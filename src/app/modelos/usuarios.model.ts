@@ -3,7 +3,7 @@ export class Usuario {
         public nombre: string,
         public email: string,
         public password: string,
-        public factura: boolean,
+        public factura?: boolean,
         public numero?: string,
         public idFerrum?: string,
         public cat_cli?: string,

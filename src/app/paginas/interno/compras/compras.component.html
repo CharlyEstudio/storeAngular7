@@ -94,11 +94,11 @@
 
                 <div class="flex-column">
 
-                    <i class="mdi mdi-car-connected fa-2x text-white"></i>
+                    <i class="mdi mdi-car-connected fa-2x text-white"></i> <span class="badge badge-danger" *ngIf="entregando">{{entrega.chofer}}</span>
 
                     <p class="text-white">Entrega</p>
 
-                    <h3 class="text-white font-light">Hay <span class="font-bold">#</span> pedido<br> en ruta. <span class="badge badge-danger">offline</span></h3>
+                    <h3 class="text-white font-light"><span *ngIf="!entregando">No hay pedidos <br> en ruta.</span> <span class="font-bold" *ngIf="entregando">Hay {{entregadoCant}} guía<br> en ruta.</span></h3>
 
                 </div>
 

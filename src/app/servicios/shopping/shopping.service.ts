@@ -162,4 +162,16 @@ export class ShoppingService {
 
     return this.http.get(url);
   }
+
+  obtenerChoferEntrega(clienteid: number) {
+    const url = `${LINK}/bigdata/obtener/reparto/${clienteid}`;
+
+    return this.http.get(url);
+  }
+
+  obtenerGuiasEntregados(clienteid: number) {
+    const url = `${LINK}/bigdata/obtener/reparto/entregado/${clienteid}`;
+
+    return this.http.get(url);
+  }
 }

@@ -14,7 +14,7 @@
 
       <!-- <h2>PRODUCTOS {{marca | uppercase}}</h2> -->
 
-      <img src="http://www.ferremayoristas.com.mx/assets/images/marcas/{{marca|lowercase}}.jpg" width="15%">
+      <img src="https://www.ferremayoristas.com.mx/assets/images/marcas/{{marca|lowercase}}.jpg" width="15%">
 
     </div>
 
@@ -76,33 +76,37 @@
 
           <div class="el-card-avatar el-overlay-1 rounded-circle">
 
-            <img [src]="producto.imagen" class="img-fluig" width="100">
+            <div style="height: 400px;max-height: 400px;min-height: 400px">
 
-            <div class="el-overlay">
+              <img [src]="producto.imagen" class="img-fluig" width="100">
 
-              <ul class="el-info">
+              <div class="el-overlay">
 
-                <li>
-
-                  <span class="btn default btn-outline image-popup-vertical-fit" data-toggle="tooltip" title="Código: {{ producto.codigo }}">
-
-                    Código: {{ producto.codigo }}
-
-                  </span>
-
-                </li>
-
-                <li>
-
-                  <span class="btn default btn-outline image-popup-vertical-fit" data-toggle="tooltip" title="Clave: {{ producto.clave }}">
-
-                    Clave: {{ producto.clave }}
-
-                  </span>
-
-                </li>
-
-              </ul>
+                <ul class="el-info">
+  
+                  <li>
+  
+                    <span class="btn default btn-outline image-popup-vertical-fit" data-toggle="tooltip" title="Código: {{ producto.codigo }}">
+  
+                      Código: {{ producto.codigo }}
+  
+                    </span>
+  
+                  </li>
+  
+                  <li>
+  
+                    <span class="btn default btn-outline image-popup-vertical-fit" data-toggle="tooltip" title="Clave: {{ producto.clave }}">
+  
+                      Clave: {{ producto.clave }}
+  
+                    </span>
+  
+                  </li>
+  
+                </ul>
+  
+              </div>
 
             </div>
 

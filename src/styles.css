@@ -11,6 +11,11 @@ body {
     font-family: 'Montserrat Alternates', 'serif'!important;
 } */
 
+.blinker {
+    font-family: 'Blinker', sans-serif!important;
+    color: rgb(129, 129, 129)!important;
+}
+
 .text-grey,
 .text-claro {
     color: #6c757d!important;
@@ -400,6 +405,11 @@ a.link-cart:hover {
     background-position: center;
     background-size: 100%;
     height: 500px;
+}
+
+.marcas-lista {
+    width: 250px!important;
+    max-width: 250px!important;
 }
 
 .dividir-columnas {
@@ -1125,8 +1135,9 @@ User card page
 }
 
 .el-element-overlay .el-card-item .el-overlay-1 {
+    max-height: 350px;
     width: 100%;
-    height: 100%;
+    height: 10%;
     overflow: hidden;
     position: relative;
     text-align: center;
@@ -1134,7 +1145,7 @@ User card page
 }
 
 .el-element-overlay .el-card-item .el-overlay-1 img {
-    display: block;
+    /*display: block;*/
     position: relative;
     -webkit-transition: all .4s linear;
     -o-transition: all .4s linear;

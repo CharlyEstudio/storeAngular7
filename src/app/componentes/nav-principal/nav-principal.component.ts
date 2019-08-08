@@ -81,4 +81,8 @@ export class NavPrincipalComponent implements OnInit {
     this.route.navigate(['/pormarcas', marca]);
   }
 
+  irMarca(marca: any) {
+    this.route.navigate(['/marcas', marca]);
+  }
+
 }

@@ -53,6 +53,7 @@ import { PolGarantiaComponent } from './pol-garantia/pol-garantia.component';
 import { ContactoComponent } from './contacto/contacto.component';
 import { BolsaTrabajoComponent } from './bolsa-trabajo/bolsa-trabajo.component';
 import { SeccionesComponent } from './secciones/secciones.component';
+import { MarcasComponent } from './marcas/marcas.component';
 
 @NgModule({
   declarations: [
@@ -86,7 +87,8 @@ import { SeccionesComponent } from './secciones/secciones.component';
     PolGarantiaComponent,
     ContactoComponent,
     BolsaTrabajoComponent,
-    SeccionesComponent
+    SeccionesComponent,
+    MarcasComponent
   ],
   imports: [
     BrowserModule,

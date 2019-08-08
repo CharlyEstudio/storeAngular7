@@ -40,7 +40,7 @@ export class AppComponent {
           lng: position.coords.longitude,
           time: position.timestamp
         };
-        this._webSocket.acciones('visitas-tienda', lugar);
+        // this._webSocket.acciones('visitas-tienda', lugar);
       });
     }
   }

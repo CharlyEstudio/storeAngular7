@@ -189,6 +189,30 @@
         
                             </li>
 
+                            <li class="nav-item dropdown">
+        
+                                <a class="dropdown-toggle nav-link text-uppercase font-weight-bold" style="font-size: 11px;" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Marcas
+                                </a>
+        
+                                <div class="dropdown-menu marcas-lista" aria-labelledby="navbarDropdown">
+        
+                                    <a (click)="irMarca('Truper')" class="pormarcas">
+                                        
+                                        <span class="pormarcas-span blinker">Catálogo Truper</span>
+                                    
+                                    </a>
+
+                                    <a (click)="irMarca('Fmo')" class="pormarcas">
+                                        
+                                        <span class="pormarcas-span blinker">Catálogo Ferremayoristas</span>
+                                    
+                                    </a>
+                                            
+                                </div>
+        
+                            </li>
+
                             <!-- <li class="nav-item centro">
         
                                 <a class="nav-link text-uppercase font-weight-bold" style="font-size: 11px;" routerLink="/">Herramientas</a>
@@ -237,7 +261,7 @@
         
                             </li> -->
         
-                            <li class="nav-item dropdown centro">
+                            <!-- <li class="nav-item dropdown centro">
         
                                 <a class="dropdown-toggle nav-link text-uppercase font-weight-bold" style="font-size: 11px;" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Marcas Truper
@@ -247,7 +271,7 @@
         
                                     <a class="pormarcas" (click)="irPorMarcas(truper.marca)" *ngFor="let truper of marcasTru">
                                         
-                                        <!-- <span class="pormarcas-span" [ngClass]="{'truper': truper.marca === 'Truper', 'fiero': truper.marca === 'Fiero', 'volteck': truper.marca === 'Volteck' || truper.marca === 'Voltech', 'foset': truper.marca === 'Foset', 'hermex': truper.marca === 'Hermex', 'klintek': truper.marca === 'Klintek', 'pretul': truper.marca === 'Pretul', 'ultracraft': truper.marca === 'Ultracraft'}">{{ truper.marca }}</span> -->
+                                        <span class="pormarcas-span" [ngClass]="{'truper': truper.marca === 'Truper', 'fiero': truper.marca === 'Fiero', 'volteck': truper.marca === 'Volteck' || truper.marca === 'Voltech', 'foset': truper.marca === 'Foset', 'hermex': truper.marca === 'Hermex', 'klintek': truper.marca === 'Klintek', 'pretul': truper.marca === 'Pretul', 'ultracraft': truper.marca === 'Ultracraft'}">{{ truper.marca }}</span>
                                         <span class="pormarcas-span">{{ truper.marca }}</span>
                                     
                                     </a>
@@ -280,7 +304,7 @@
         
                                 </div>
         
-                            </li>
+                            </li> -->
         
                         </ul>
         

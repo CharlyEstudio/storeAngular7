@@ -1,0 +1,47 @@
+<div class="container my-5">
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light" *ngIf="marca === 'Fmo'">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav m-auto">
+        <li class="nav-item active">
+          <a class="nav-link tipo-cursor" (click)="elegirMenu(1)">Todos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link tipo-cursor" (click)="elegirMenu(2)">Comerciales</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link tipo-cursor" (click)="elegirMenu(3)">Genericos</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="row mas-vendidos" *ngIf="marcas.length > 0">
+
+      <div class="col-12 col-lg-3 col-md-6 col-sm-12 pt-2 el-element-overlay" *ngFor="let mc of marcas">
+
+          <div class="card">
+
+              <div class="el-card-item text-center">
+
+                  <div class="el-card-avatar el-overlay-1 rounded-circle">
+
+                      <img [src]="mc.img" class="img-fluig tipo-cursor" width="200" (click)="irPorMarcas(mc.marca)">
+          
+                  </div>
+
+                  <h5 class="pt-2 pb-4 text-truncate">{{mc.marca}}</h5>
+
+              </div>
+
+          </div>
+
+      </div>
+
+  </div>
+
+</div>

@@ -26,11 +26,13 @@ import { PolGarantiaComponent } from './pol-garantia/pol-garantia.component';
 import { ContactoComponent } from './contacto/contacto.component';
 import { BolsaTrabajoComponent } from './bolsa-trabajo/bolsa-trabajo.component';
 import { SeccionesComponent } from './secciones/secciones.component';
+import { MarcasComponent } from './marcas/marcas.component';
 
 const appRoutes: Routes = [
     { path: 'inicio', component: InicioComponent, data: { titulo: 'Sitio Oficial Ferremayoristas Olvera', name: 'description' } },
     { path: 'marcaTruper', component: TruperComponent, data: { titulo: 'Marca Truper', name: 'description' } },
     { path: 'marcaFmo', component: FmoComponent, data: { titulo: 'Marca FMO', name: 'description' } },
+    { path: 'marcas/:marca', component: MarcasComponent, data: { titulo: 'Marcas', name: 'description' } },
     { path: 'nosotros', component: NosotrosComponent, data: { titulo: 'Nosotros', name: 'description' } },
     { path: 'cobertura', component: CoberturaComponent, data: { titulo: 'Cobertura', name: 'description' } },
     { path: 'registro', component: RegistroComponent, data: { titulo: 'Registro', name: 'description' } },
