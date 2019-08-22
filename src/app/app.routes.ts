@@ -59,4 +59,4 @@ const appRoutes: Routes = [
     { path: '**', redirectTo: '/inicio', } // Aquí arregle para que redirigiera a inicio
 ];
 
-export const APP_ROUTES = RouterModule.forRoot( appRoutes );
+export const APP_ROUTES = RouterModule.forRoot( appRoutes, { useHash: true } );

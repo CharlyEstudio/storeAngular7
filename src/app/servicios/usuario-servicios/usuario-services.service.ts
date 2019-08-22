@@ -130,9 +130,9 @@ export class UsuarioServicesService {
 
   login( usuario: Usuario, recordar: boolean = false ) {
     if ( recordar ) {
-      localStorage.setItem( 'emailStore', usuario.email );
+      localStorage.setItem( 'clienteStore', usuario.numero );
     } else {
-      localStorage.removeItem( 'emailStore' );
+      localStorage.removeItem( 'clienteStore' );
     }
 
     const url = LINK + '/clientes/login';

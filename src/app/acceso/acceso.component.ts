@@ -9,6 +9,11 @@ import { AccesoService } from './acceso.service';
 // Modelos
 import { Usuario } from '../modelos/usuarios.model';
 
+// Alertas
+import * as _swal from 'sweetalert';
+import { SweetAlert } from 'sweetalert/typings/core'; // Importante para que funcione el sweet alert
+const swal: SweetAlert = _swal as any;
+
 @Component({
   selector: 'app-acceso',
   templateUrl: './acceso.component.html',
@@ -16,7 +21,7 @@ import { Usuario } from '../modelos/usuarios.model';
 })
 export class AccesoComponent implements OnInit {
 
-  email: any;
+  numero: any;
   password: any;
   saldoVenc: number = 0;
   vigente: boolean = false;
@@ -28,9 +33,9 @@ export class AccesoComponent implements OnInit {
     public _usuarioService: UsuarioServicesService,
     private _accesoService: AccesoService
   ) {
-    this.email = localStorage.getItem('emailStore') || '';
+    this.numero = localStorage.getItem('clienteStore') || '';
 
-    if ( this.email.length > 1) {
+    if ( this.numero.length > 1) {
       this.recuerdame = true;
     }
   }
@@ -45,7 +50,7 @@ export class AccesoComponent implements OnInit {
 
     this.iniciar = true;
 
-    const usuario = new Usuario( null, forma.value.email, forma.value.password );
+    const usuario = new Usuario( null, forma.value.numero, forma.value.password );
 
     this._usuarioService.login(usuario, forma.value.recuerdame).subscribe((resp: any) => {
       if (resp.status) {

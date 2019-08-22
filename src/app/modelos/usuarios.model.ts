@@ -1,10 +1,10 @@
 export class Usuario {
     constructor(
         public nombre: string,
-        public email: string,
+        public numero: string,
         public password: string,
         public factura?: boolean,
-        public numero?: string,
+        public email?: string,
         public idFerrum?: string,
         public cat_cli?: string,
         public diavis?: string,
