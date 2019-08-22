@@ -74,8 +74,8 @@ export class FacturasComponent implements OnInit {
         }
       }
       this.selectMes.push(agregarMes);
-      this.seleccionarMes = agregarMes;
     }
+    this.seleccionarMes = this.selectMes[0];
   }
 
   ngOnInit() {
@@ -119,8 +119,18 @@ export class FacturasComponent implements OnInit {
 
     switch (ext) {
       case 'pdf':
+        let extension;
+        if (this.seleccionarMes.year >= 2019) {
+          if (this.seleccionarMes.mes >= 6) {
+            extension = 'xml.def.' + ext;
+          } else {
+            extension = ext;
+          }
+        } else {
+          extension = ext;
+        }
         carpeta = String(arregloFecha[0] + arregloFecha[1]);
-        file = String(arregloFecha[0] + arregloFecha[1] + dia[0] + '-' + factura.SERIE.toLowerCase() + factura.FOLIO + '.' + ext);
+        file = String(arregloFecha[0] + arregloFecha[1] + dia[0] + '-' + factura.SERIE.toLowerCase() + factura.FOLIO + '.' + extension);
         this.pdf = carpeta + '/' + file;
       break;
       case 'xml':

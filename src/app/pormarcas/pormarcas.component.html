@@ -4,7 +4,9 @@
 
     <a class="breadcrumb-item" routerLink="/inicio">Inicio</a>
 
-    <span class="breadcrumb-item active">Productos {{marca | uppercase}}</span>
+    <a class="breadcrumb-item" [routerLink]="['/marcas', marca]">{{marca}}</a>
+
+    <span class="breadcrumb-item active">Productos {{nombre | uppercase}}</span>
 
   </nav>
 
@@ -14,7 +16,7 @@
 
       <!-- <h2>PRODUCTOS {{marca | uppercase}}</h2> -->
 
-      <img src="https://www.ferremayoristas.com.mx/assets/images/marcas/{{marca|lowercase}}.jpg" width="15%">
+      <img src="https://www.ferremayoristas.com.mx/assets/images/marcas/{{buscar|lowercase}}" width="15%">
 
     </div>
 

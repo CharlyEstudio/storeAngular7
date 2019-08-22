@@ -15,6 +15,8 @@ import { UsuarioServicesService, ProductosService, WebsocketService } from '../s
 export class PormarcasComponent implements OnInit {
 
   marca: any = '';
+  buscar: any;
+  nombre: any;
   productos: any[] = [];
   precarga: any[] = [];
 
@@ -35,9 +37,11 @@ export class PormarcasComponent implements OnInit {
     this.route.events.subscribe((event: any) => {
       if (event instanceof NavigationEnd) {
         this.productos = [];
-        this.marca = '';
         this.precarga = Array(8).fill(4);
-        this.marca = this.router.snapshot.paramMap.get('prod');
+        this.marca = this.router.snapshot.paramMap.get('familia');
+        this.nombre = this.router.snapshot.paramMap.get('nombre');
+        const b = this.router.snapshot.paramMap.get('buscar');
+        this.buscar = b.split('/')[6];
 
         if (this._usuarioService.usuario !== null) {
           this.precio = this._usuarioService.usuario.precio;
@@ -47,8 +51,6 @@ export class PormarcasComponent implements OnInit {
         this.obtenerProductos();
       }
     });
-    this.marca = this.router.snapshot.paramMap.get('prod');
-    this.precarga = Array(8).fill(4);
   }
 
   ngOnInit() {
@@ -60,15 +62,15 @@ export class PormarcasComponent implements OnInit {
           this.precio = 3;
         }
         this.productos = [];
-        this.obtenerProductos();
+        // this.obtenerProductos();
       } else {
-        this.obtenerProductos();
+        // this.obtenerProductos();
       }
     });
   }
 
   obtenerProductos() {
-    this._productosService.obtenerProductosPorMarca(this.marca, this.precio).subscribe((prod: any) => {
+    this._productosService.obtenerProductosPorMarca(this.buscar, this.precio).subscribe((prod: any) => {
       if (prod.status) {
         this.productos = prod.respuesta;
         this.precarga = [];

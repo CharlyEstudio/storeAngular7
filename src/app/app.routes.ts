@@ -42,7 +42,7 @@ const appRoutes: Routes = [
     { path: 'ver/:producto', component: DescripcionComponent, data: { titulo: 'Descripción', name: 'description' } },
     { path: 'ofertas', component: OfertaComponent, data: { titulo: 'PROMOTRUPER DEL MES', name: 'description' } },
     { path: 'descuentos/:desc', component: DescuentosComponent, data: { titulo: 'DESCUENTO DEL MES', name: 'description' } },
-    { path: 'pormarcas/:prod', component: PormarcasComponent, data: { titulo: 'PRODCUTO POR MARCA', name: 'description' } },
+    { path: 'pormarcas/:nombre/:buscar/:familia', component: PormarcasComponent, data: { titulo: 'PRODCUTO POR MARCA', name: 'description' } },
     { path: 'sop-factura', component: SopFacturaComponent, data: { titulo: 'Soporte al cliente - Facturación', name: 'description' } },
     { path: 'pol-venta', component: PolVentaComponent, data: { titulo: 'Políticas - Ventas', name: 'description' } },
     { path: 'pol-devolucion', component: PolDevolucionComponent, data: { titulo: 'Políticas - Devoluciones', name: 'description' } },
@@ -56,7 +56,7 @@ const appRoutes: Routes = [
         canActivate: [ LoginGuard ],
         loadChildren: './paginas/paginas.module#PaginasModule'
     },
-    { path: '**', component: NopagefoundComponent }
+    { path: '**', redirectTo: '/inicio', } // Aquí arregle para que redirigiera a inicio
 ];
 
-export const APP_ROUTES = RouterModule.forRoot( appRoutes, { useHash: true } );
+export const APP_ROUTES = RouterModule.forRoot( appRoutes );

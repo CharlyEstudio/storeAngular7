@@ -30,7 +30,7 @@
 
                     <select #selMes [(ngModel)]="seleccionarMes" name="mes" id="mes" class="form-control" (change)="obtenerBackOrder()">
 
-                        <option value="0">Mes</option>
+                        <!-- <option value="0">Mes</option> -->
 
                         <option *ngFor="let mes of selectMes" [ngValue]="mes">{{ mes.mes }}-{{mes.year}}</option>
 

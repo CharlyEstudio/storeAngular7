@@ -23,6 +23,12 @@ export class ProductosService {
     return this.http.get(url);
   }
 
+  promotruperCarrusel(precio: number) {
+    const url = LINK + '/productos/promotruper/carrusel/' + precio;
+
+    return this.http.get(url);
+  }
+
   obtenerMarca (id: any) {
     const url = LINK + '/productos/marca/' + id;
 

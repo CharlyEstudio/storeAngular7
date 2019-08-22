@@ -28,6 +28,7 @@ export class BonoComponent implements OnInit {
 
   pasaCompras: boolean = false;
   pasaComision: boolean = false;
+  procesoComision: boolean = false;
 
   lineChartLabels: Array<any> = ['Semana 1', 'Semana 2', 'Semana 3', 'Semana 4'];
   lineChartOptions: any = {
@@ -293,6 +294,15 @@ export class BonoComponent implements OnInit {
           {data: [fecMes3Sem1, fecMes3Sem2, fecMes3Sem3, fecMes3Sem4], label: this.mes3},
           {data: [2, 2, 2, 2], label: 'Mínimo'}
         ];
+
+        const d = Date.parse(this._datoService.trimestreBono(this.mes, this.year).fecMes3Sem4Inicio + ' 00:00:00');
+        const fechaFin = d;
+        const fechaActual = Date.now();
+        if (fechaActual >= fechaFin) {
+          this.procesoComision = false;
+        } else {
+          this.procesoComision = true;
+        }
 
         if (this.compras >= 20000 && this.numVenc === 0 && this.pasaCompras) {
           this.pasaComision = true;

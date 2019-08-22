@@ -68,8 +68,17 @@ export class BackOrderComponent implements OnInit {
         }
       }
       this.selectMes.push(agregarMes);
-      this.seleccionarMes = agregarMes;
     }
+    this.selectMes.sort((a, b) => {
+      if (a.indice > b.indice) {
+        return 1;
+      }
+      if (a.indice < b.indice) {
+        return -1;
+      }
+      return 0;
+    });
+    this.seleccionarMes = this.selectMes[0];
   }
 
   ngOnInit() {
@@ -84,8 +93,8 @@ export class BackOrderComponent implements OnInit {
       mes = this.seleccionarMes.mes;
     }
     const diaFinal = new Date(this.seleccionarMes.year, this.seleccionarMes.mes, 0).getDate();
-    this.inicio = this.seleccionarMes.year + '-' + mes + '-' + diaFinal;
-    this.final = this.seleccionarMes.year + '-' + mes + '-01';
+    this.inicio = this.seleccionarMes.year + '-' + mes + '-01';
+    this.final = this.seleccionarMes.year + '-' + mes + '-' + diaFinal;
     this._productoService.obtenerBackOrder(this.numero, this.inicio, this.final, this.precio).subscribe((back: any) => {
       if (back.status) {
         this.backOrder = back.respuesta;

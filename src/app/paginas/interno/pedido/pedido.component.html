@@ -4,7 +4,7 @@
 
     <div class="row pb-5">
 
-        <div class="col-lg-6 col-md-6 col-sm-12 centro">
+        <div class="col-lg-4 col-md-4 col-sm-12 centro">
 
             <div class="card bg-danger">
 
@@ -52,7 +52,7 @@
 
         </div>
 
-        <div class="col-lg-6 col-md-6 col-sm-12 centro">
+        <div class="col-lg-4 col-md-4 col-sm-12 centro">
 
             <div class="card">
 
@@ -93,6 +93,14 @@
                 </div>
 
             </div>
+
+        </div>
+
+        <div class="col-lg-4 col-md-4 col-sm-12 centro">
+
+            <h4>Promotruper del Mes</h4>
+
+            <app-carrusel-promo></app-carrusel-promo>
 
         </div>
 
@@ -157,9 +165,11 @@
 
                             <th scope="col" class="text-center">PRECIO DIST</th>
 
+                            <th scope="col" class="text-center">PRECIO DIST C/IVA</th>
+
                             <th scope="col" class="text-center">DESC</th>
 
-                            <th scope="col" class="text-center">PRECIO DIST CON DESC</th>
+                            <th scope="col" class="text-center">PRECIO DIST CON DESC/IVA</th>
 
                             <th scope="col" class="text-center">Eliminar</th>
 
@@ -222,6 +232,8 @@
                             </td>
 
                             <td class="text-center" width="7.14%">{{ prod.producto.precioneto | currency }}</td>
+
+                            <td class="text-center" width="7.14%">{{ prod.producto.precio | currency }}</td>
 
                             <td class="text-center" width="7.14%">{{ (prod.producto.descuento / 100) | percent }}</td>
 

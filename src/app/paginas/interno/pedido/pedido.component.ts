@@ -111,8 +111,8 @@ export class PedidoComponent implements OnInit {
         }
         const agregar = {
           producto: producto.respuesta[0],
-          precioFinal: (producto.respuesta[0].precioneto * producto.respuesta[0].lote),
-          precioDesc: (producto.respuesta[0].precioneto * producto.respuesta[0].lote),
+          precioFinal: (producto.respuesta[0].preciocdesc * producto.respuesta[0].lote),
+          precioDesc: (producto.respuesta[0].preciocdesc * producto.respuesta[0].lote),
           precioTot: producto.respuesta[0].precio,
           cantidad: producto.respuesta[0].lote,
           claveUnidad: producto.respuesta[0].claveUnidad,

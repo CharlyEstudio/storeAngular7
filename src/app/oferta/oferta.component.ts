@@ -19,6 +19,7 @@ export class OfertaComponent implements OnInit {
   public precio: number = 3;
 
   desde: number = 0;
+  hasta: number = 0;
 
   disabledAnt: boolean = true;
   disabledSig: boolean = false;
@@ -33,6 +34,11 @@ export class OfertaComponent implements OnInit {
     if (this._usuarioService.usuario !== null) {
       this.precio = this._usuarioService.usuario.precio;
     }
+    this._productosServices.promotruperCarrusel(this.precio).subscribe((resp: any) => {
+      if (resp.status) {
+        this.hasta = resp.respuesta.length;
+      }
+    });
   }
 
   ngOnInit() {
@@ -62,25 +68,33 @@ export class OfertaComponent implements OnInit {
   cambiar(desde: number) {
     this.desde = this.desde + desde;
 
-    if ( this.desde < 0 ) {
-      this.disabledAnt = true;
-      this.disabledSig = false;
-      return;
+    if (this.desde < this.hasta) {
+      if ( this.desde < 0 ) {
+        this.disabledAnt = true;
+        this.disabledSig = false;
+        return;
+      } else {
+        this.disabledAnt = false;
+        this.disabledSig = false;
+      }
+      this._productosServices.promotruper(this.precio, this.desde).subscribe( (mejores: any) => {
+        this.mejores = [];
+        this.precarga = Array(8).fill(4);
+        if (mejores.status) {
+          this.mejores = mejores.respuesta;
+          if (this.desde === 0) {
+            this.disabledAnt = true;
+            this.disabledSig = false;
+          }
+        }
+      });
     } else {
       this.disabledAnt = false;
-      this.disabledSig = false;
+      this.disabledSig = true;
     }
-    this._productosServices.promotruper(this.precio, this.desde).subscribe( (mejores: any) => {
-      this.mejores = [];
-      this.precarga = Array(8).fill(4);
-      if (mejores.status) {
-        this.mejores = mejores.respuesta;
-        if (this.desde === 0) {
-          this.disabledAnt = true;
-          this.disabledSig = false;
-        }
-      }
-    });
+
+    console.log(this.desde, this.hasta);
+
   }
 
   irA(producto: Producto) {

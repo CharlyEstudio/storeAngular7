@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription, Observable, Subscriber } from 'rxjs';
 
 // Modelos
 import { Usuario } from 'src/app/modelos/usuarios.model';
@@ -12,7 +13,11 @@ import { PATH_LINK } from 'src/app/config/config';
   templateUrl: './compras.component.html',
   styles: []
 })
-export class ComprasComponent implements OnInit {
+export class ComprasComponent implements OnInit, OnDestroy {
+
+  // Observable
+  observar: Subscription;
+  intervalo: any;
 
   usuario: Usuario;
   fecha: any;
@@ -55,10 +60,45 @@ export class ComprasComponent implements OnInit {
         }
       }
     });
+
     this.actualizar();
+
+    this.observar = this.regresa().subscribe();
+  }
+
+  regresa(): Observable<any> {
+    return new Observable((observer: Subscriber<any>) => {
+      this.intervalo = setInterval(() => {
+        this._shoppingService.allPedidos(this.usuario, this.fecha).subscribe((allPed: any) => {
+          if (allPed.status) {
+            this.allPed = allPed.respuesta;
+            let pedbajar = 0;
+            let pedsurtir = 0;
+            let pedfacturado = 0;
+            for (let i = 0; i < allPed.respuesta.length; i++) {
+              if (allPed.respuesta[i].tipo === 'POR BAJAR') {
+                pedbajar += Number(allPed.respuesta[i].cantidad);
+              }
+              if (allPed.respuesta[i].tipo === 'POR SURTIR') {
+                pedsurtir += Number(allPed.respuesta[i].cantidad);
+              }
+              if (allPed.respuesta[i].tipo === 'REMISIONADO') {
+                pedfacturado += Number(allPed.respuesta[i].cantidad);
+              }
+            }
+            this.porBajarCant = pedbajar;
+            this.porSurtirCant = pedsurtir;
+            this.facturadoCant = pedfacturado;
+            this.pedidosBol = true;
+          }
+        });
+      }, 5000);
+    });
   }
 
   ngOnInit() {}
+
+  ngOnDestroy() {}
 
   openModal(data: any) {
     this.partidas = [];

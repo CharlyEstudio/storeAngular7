@@ -142,7 +142,7 @@
 
                     <h2 class="text-uppercase">
 
-                        <span class="font-weight-bold" [ngClass]="{'text-success': compras >= 15000, 'text-danger': compras < 15000}">mxn {{compras | currency}}</span>
+                        <span class="font-weight-bold" [ngClass]="{'text-success': compras >= 15000, 'text-danger': compras < 20000}">mxn {{compras | currency}}</span>
 
                     </h2>
 
@@ -152,7 +152,7 @@
 
                     <blockquote class="blockquote" style="height: 100%!important;">
 
-                        <p class="mb-0">Sus compras trimestrales debe ser mayor o igual a <span class="font-weight-bold text-blue">$ 15,000.00</span> pesos.</p>
+                        <p class="mb-0">Sus compras trimestrales debe ser mayor o igual a <span class="font-weight-bold text-blue">$ 20,000.00</span> pesos.</p>
 
                         <footer class="blockquote-footer">No entran los códigos que inicien con <cite title="Source Title">8/5/6</cite>, excepto de la marca <b>Klintek</b>.</footer>
 
@@ -166,19 +166,17 @@
 
         <div class="col-lg-6 col-md-6 col-sm-12 text-center pt-3 pb-5 centro">
 
-            <div class="jumbotron" style="margin-bottom: 0px!important" [ngClass]="{'bg-danger': compras < 15000 && compras < 5000, 'bg-info': compras >= 7500, 'bg-success': compras >= 15000}">
+            <div class="jumbotron" style="margin-bottom: 0px!important" [ngClass]="{'bg-danger': compras < 10000, 'bg-info': compras >= 15000 && compras < 20000, 'bg-success': compras >= 20000}">
 
                 <h1 class="text-white">
 
-                    <i class="fa fa-exclamation-circle " aria-hidden="true" *ngIf="compras < 15000 && compras <= 14999"></i>
+                    <i class="fa fa-exclamation-circle " aria-hidden="true" *ngIf="compras <= 19999"></i>
 
-                    <span *ngIf="compras < 15000 && compras < 5000">No Aplica</span>
+                    <span *ngIf="compras < 20000">No Aplica</span>
 
-                    <span *ngIf="compras >= 5000 && compras <= 14999">Posible</span>
+                    <i class="mdi mdi-check-circle" aria-hidden="true" *ngIf="compras >= 20000"></i>
 
-                    <i class="mdi mdi-check-circle" aria-hidden="true" *ngIf="compras >= 15000"></i>
-
-                    <span *ngIf="compras >= 15000">Aplica</span>
+                    <span *ngIf="compras >= 20000">Aplica</span>
 
                 </h1>
 
@@ -286,7 +284,7 @@
 
                     <blockquote class="blockquote" style="height: 100%!important;">
 
-                        <p class="mb-0">Debe de tener registrado por lo menos 1 compra por semana distinta.</p>
+                        <p class="mb-0">Debe de tener registrado por lo menos 1 compra por semana distinta. 12 Compras en 3 meses con 1 compra por semana.</p>
 
                         <footer class="blockquote-footer">No se puede registrar <cite title="Source Title"><b>4 compras al principio o final del mes</b></cite>.</footer>
 
@@ -300,7 +298,19 @@
 
         <div class="col-lg-6 col-md-6 col-sm-12 text-center  pt-3 pb-5 centro">
 
-            <div class="jumbotron bg-danger" style="margin-bottom: 0px!important" *ngIf="pasaCompras === false">
+            <div class="jumbotron bg-warning" style="margin-bottom: 0px!important" *ngIf="procesoComision">
+
+                <h1 class="text-white">
+
+                    <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+
+                    <span class="text-white">En proceso</span>
+
+                </h1>
+
+            </div>
+
+            <div class="jumbotron bg-danger" style="margin-bottom: 0px!important" *ngIf="pasaCompras === false && procesoComision === false">
 
                 <h1 class="text-white">
 
@@ -312,7 +322,7 @@
 
             </div>
 
-            <div class="jumbotron bg-info" style="margin-bottom: 0px!important" *ngIf="pasaCompras">
+            <div class="jumbotron bg-info" style="margin-bottom: 0px!important" *ngIf="pasaCompras  && procesoComision === false">
 
                 <h1 class="text-white">
 
@@ -332,7 +342,7 @@
 
         </div>
 
-        <div class="col-lg-12 col-md-12 col-sm-12 pt-5">
+        <div class="col-lg-12 col-md-12 col-sm-12 pt-5" *ngIf="procesoComision === false">
 
             <div class="jumbotron" [ngClass]="{'bg-danger': pasaComision === false, 'bg-success': pasaComision === true}">
 
@@ -345,6 +355,20 @@
                 <h1 class="text-white text-center text-uppercase" *ngIf="pasaComision === false">
 
                     <span>No aplica para bono.</span>
+
+                </h1>
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-12 col-md-12 col-sm-12 pt-5" *ngIf="procesoComision">
+
+            <div class="jumbotron bg-warning">
+
+                <h1 class="text-white text-center text-uppercase">
+
+                    <span>En Proceso</span>
 
                 </h1>
 

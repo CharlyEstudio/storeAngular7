@@ -24,6 +24,7 @@ import { FavoritosComponent } from './interno/favoritos/favoritos.component';
 import { OfertasComponent } from './interno/ofertas/ofertas.component';
 import { PerfilComponent } from './interno/perfil/perfil.component';
 import { GraficaLinealComponent } from '../componentes/grafica-lineal/grafica-lineal.component';
+import { CarruselPromoComponent } from '../componentes/carrusel-promo/carrusel-promo.component';
 
 @NgModule({
     declarations: [
@@ -38,7 +39,8 @@ import { GraficaLinealComponent } from '../componentes/grafica-lineal/grafica-li
         OfertasComponent,
         PerfilComponent,
         GraficaLinealComponent,
-        PedidoComponent
+        PedidoComponent,
+        CarruselPromoComponent
     ],
     exports: [
         ComprasComponent

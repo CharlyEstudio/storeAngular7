@@ -16,6 +16,19 @@ body {
     color: rgb(129, 129, 129)!important;
 }
 
+.carousel-control-next-icon:after
+{
+  content: '>';
+  font-size: 35px;
+  color: red;
+}
+
+.carousel-control-prev-icon:after {
+  content: '<';
+  font-size: 35px;
+  color: red;
+}
+
 .text-grey,
 .text-claro {
     color: #6c757d!important;
@@ -25,18 +38,24 @@ body {
     color: #232324!important;
 }
 
+.centro-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .centro {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column
+    flex-direction: column;
 }
 
 .centrar {
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    flex-direction: column
+    flex-direction: column;
 }
 
 .centrar-fas {

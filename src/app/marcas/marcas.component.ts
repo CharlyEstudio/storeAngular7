@@ -15,6 +15,7 @@ export class MarcasComponent implements OnInit {
   marca: any = '';
   marcas: any[] = [];
   dividirMarcas: any[] = [];
+  precarga: any[] = [];
   imagen: any;
 
   constructor(
@@ -23,6 +24,7 @@ export class MarcasComponent implements OnInit {
     private route: Router,
     private _productoService: ProductosService
   ) {
+    this.precarga = Array(8).fill(4);
     this.route.events.subscribe((event: any) => {
       if (event instanceof NavigationEnd) {
         this.marcas = [];
@@ -37,7 +39,7 @@ export class MarcasComponent implements OnInit {
   }
 
   irPorMarcas(marca: any) {
-    this.route.navigate(['/pormarcas', marca]);
+    this.route.navigate(['/pormarcas', marca.marca, marca.img, this.marca]);
   }
 
   obtenerMarcas() {
