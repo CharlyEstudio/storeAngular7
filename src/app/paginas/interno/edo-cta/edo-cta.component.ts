@@ -282,7 +282,7 @@ export class EdoCtaComponent implements OnInit {
     this.pedido = [];
 
     if (numero === 0) {
-      this.factura = factura.folio;
+      this.factura = factura.numero;
       this.fechaCreada = factura.feccap;
       this.importeInicial = factura.importe;
       this.saldoFactura = factura.saldo;

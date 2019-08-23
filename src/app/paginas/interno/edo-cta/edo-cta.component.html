@@ -213,7 +213,7 @@
 
                             <td class="text-center text-w">
 
-                                <span class="mr-1" [ngClass]="{'badge badge-warning': sal.dias < 5, 'badge badge-danger': sal.dias < 0}">
+                                <span class="mr-1" [ngClass]="{'badge badge-warning': sal.dias <= 5, 'badge badge-danger': sal.dias < 0}" *ngIf="sal.dias <= 5">
 
                                 <i class="mdi mdi-information-outline text-white" style="padding: 1px 2px 1px 2px!important; font-size: 15px;" aria-hidden="true"></i>
 
@@ -221,7 +221,7 @@
 
                                 <a href="#modalFolio" data-toggle="modal" (click)="modalFolio(sal , 0)">
 
-                                    <b id="{{sal.folio}}">{{sal.folio}}</b>
+                                    <b id="{{sal.numero}}">{{sal.numero}}</b>
 
                                 </a>
 
@@ -245,13 +245,13 @@
 
                             <td class="text-center">
 
-                                <a *ngIf="saldoVencido === 0" class="btn btn-success" href="#modalFolio" data-toggle="modal" (click)="modalFolio(sal, 1)">
+                                <a *ngIf="saldoVencido === 0" class="btn btn-success" href="#modalFolio" data-toggle="modal" (click)="modalFolio(sal, 0)">
 
                                     <i class="mdi mdi-credit-card-scan" aria-hidden="true"></i>
 
                                 </a>
 
-                                <a *ngIf="sal.dias < 0" class="btn btn-success" href="#modalFolio" data-toggle="modal" (click)="modalFolio(sal, 1)">
+                                <a *ngIf="sal.dias < 0" class="btn btn-success" href="#modalFolio" data-toggle="modal" (click)="modalFolio(sal, 0)">
 
                                     <i class="mdi mdi-credit-card-scan" aria-hidden="true"></i>
 
@@ -385,11 +385,11 @@
 
                 <div class="modal-header">
 
-                    <p class="lead">Productos Factura <b>{{ factura }}</b></p>
+                    <p class="lead">Productos Remisión <b>{{ factura }}</b></p>
 
                     <p class="lead">Fecha <b>{{ fechaCreada | date: 'dd-MM-yyyy' }}</b></p>
 
-                    <p class="lead">Importe <b>{{ importeInicial | currency }}</b></p>
+                    <p class="lead">Saldo <b>{{ importeInicial | currency }}</b></p>
 
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 
@@ -415,7 +415,7 @@
 
                                     <th scope="col" class="text-center">Cantidad</th>
 
-                                    <th scope="col" class="text-center">Tipo</th>
+                                    <th scope="col" class="text-center">Uni</th>
 
                                     <th scope="col" class="text-center">Descripción</th>
 

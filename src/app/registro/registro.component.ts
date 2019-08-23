@@ -22,13 +22,15 @@ export class RegistroComponent implements OnInit {
   contacto: FormGroup;
 
   esperando: boolean = false;
+  existe: boolean = false;
+  dist: boolean = false;
 
   constructor(
     public router: Router,
     public _usuarioService: UsuarioServicesService,
     private _webSocket: WebsocketService,
     public _datosService: DatosService
-  ) { }
+  ) {}
 
   sonIguales( campo1: string, campo2: string ) {
     return ( group: FormGroup ) => {
@@ -64,13 +66,30 @@ export class RegistroComponent implements OnInit {
 
     // this.forma.setValue({
     //   nombre: 'Carlos',
-    //   numero: '', // 03804
+    //   numero: '03804', // 03804
     //   email: 'me@me.com',
     //   pass: 'Charly098',
     //   passVal: 'Charly098',
     //   condiciones: false,
     //   factura: false
     // });
+  }
+
+  buscarNumero() {
+    if (this.forma.value.numero !== null && this.forma.value.numero !== '') {
+      this._datosService.obtenerClienteFerrum(this.forma.value.numero).subscribe((resp: any) => {
+        if (resp.status) {
+          this.dist = true;
+          this.existe = true;
+        } else {
+          this.dist = true;
+          this.existe = false;
+        }
+      });
+    } else {
+      this.dist = false;
+      this.existe = false;
+    }
   }
 
   registrar() {
@@ -90,10 +109,10 @@ export class RegistroComponent implements OnInit {
         if (cliente.status) {
           usuario = new Usuario(
             cliente.respuesta[0].NOMBRE,
-            this.forma.value.email,
-            this.forma.value.pass,
-            this.forma.value.factura,
             this.forma.value.numero,
+            this.forma.value.pass,
+            this.forma.value.email,
+            this.forma.value.factura,
             cliente.respuesta[0].CLIENTEID,
             cliente.respuesta[0].CATALOGO,
             cliente.respuesta[0].DIAVIS,
@@ -106,8 +125,9 @@ export class RegistroComponent implements OnInit {
         } else {
           usuario = new Usuario(
             this.forma.value.nombre,
-            this.forma.value.email,
+            this.forma.value.numero,
             this.forma.value.pass,
+            this.forma.value.email,
             this.forma.value.factura
           );
         }
@@ -116,7 +136,7 @@ export class RegistroComponent implements OnInit {
         .subscribe( (resp: any) => {
           if (resp.status) {
             this._webSocket.acciones('registro-watch', usuario);
-            swal ('Usuario creado', usuario.email + '. El administrador activará su cuenta.', 'success');
+            swal ('Usuario creado', usuario.numero + '. El administrador activará su cuenta.', 'success');
           } else {
             swal('Error al Crear Usuario' , resp.msg, 'error');
           }
@@ -125,8 +145,9 @@ export class RegistroComponent implements OnInit {
     } else {
       usuario = new Usuario(
         this.forma.value.nombre,
-        this.forma.value.email,
+        this.forma.value.numero,
         this.forma.value.pass,
+        this.forma.value.email,
         this.forma.value.factura
       );
 

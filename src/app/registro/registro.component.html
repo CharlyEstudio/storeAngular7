@@ -132,31 +132,33 @@
         
                         <div class="form-group">
         
-                            <input type="text" name="nombre" formControlName="nombre" placeholder="*Nombre Completo" class="form-control" required>
+                            <input type="text" name="nombre" formControlName="nombre" placeholder="*Nombre Completo" class="form-control" autocomplete="off" required>
         
                         </div>
         
                         <div class="form-group">
         
-                            <input type="email" name="email" formControlName="email" placeholder="*Correo Electrónico" class="form-control" required>
+                            <input type="email" name="email" formControlName="email" placeholder="*Correo Electrónico" class="form-control" autocomplete="off" required>
         
                         </div>
         
                         <div class="form-group">
         
-                            <input type="text" name="numero" formControlName="numero" placeholder="*Número si eres distribuidor eje. 03804" class="form-control">
+                            <input type="text" name="numero" formControlName="numero" placeholder="*Número si eres distribuidor eje. 03804" class="form-control" (keyup)="buscarNumero()" autocomplete="off">
+                            <span class="badge badge-danger" *ngIf="dist && !existe">No existe el Distribuidor</span>
+                            <span class="badge badge-success" *ngIf="dist && existe">Número Correcto</span>
         
                         </div>
         
                         <div class="form-group">
         
-                            <input type="password" name="pass" formControlName="pass" placeholder="*Contraseña" class="form-control" required>
+                            <input type="password" name="pass" formControlName="pass" placeholder="*Contraseña" class="form-control" autocomplete="off" required>
         
                         </div>
         
                         <div class="form-group">
         
-                            <input type="password" name="passVal" formControlName="passVal" placeholder="*Repetir Contraseña" class="form-control" required>
+                            <input type="password" name="passVal" formControlName="passVal" placeholder="*Repetir Contraseña" class="form-control" autocomplete="off" required>
         
                         </div>
         

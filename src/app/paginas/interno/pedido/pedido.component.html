@@ -112,7 +112,7 @@
 
                     <button type="button" class="btn btn-info" (click)="procesar()" *ngIf="vigente">Procesar Pedido</button>
 
-                    <div class="alert alert-danger" role="alert" *ngIf="!vigente">En este momento no puedes realizar tu pedido, solo es una cotización.</div>
+                    <span class="bg-light-danger p-1 font-weight-bold text-uppercase" *ngIf="!vigente">En este momento no puedes realizar tu pedido, solo es una cotizacion.</span>
 
                 </div>
 
