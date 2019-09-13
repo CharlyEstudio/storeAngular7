@@ -56,6 +56,13 @@ export class MarcasComponent implements OnInit {
           if (fmo.status) {
             this.marcas = fmo.respuesta;
             this.dividirMarcas = fmo.respuesta;
+            let array = [];
+            for (const mc of this.marcas) {
+              if (mc.marca !== 'Generico') {
+                array.push(mc);
+              }
+            }
+            this.marcas = array;
           }
         });
     }
@@ -88,9 +95,15 @@ export class MarcasComponent implements OnInit {
         }
         this.marcas = array;
         break;
-      break;
+      default:
         this.marcas = [];
         this.marcas = this.dividirMarcas;
+        for (const mc of this.marcas) {
+          if (mc.marca !== 'Generico') {
+            array.push(mc);
+          }
+        }
+        this.marcas = array;
     }
   }
 

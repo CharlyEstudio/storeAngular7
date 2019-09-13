@@ -48,7 +48,9 @@ export class ProductosService {
   }
 
   obtenerProductosPorMarca(marca: any, precio: number, desde: number = 0, hasta: number = 12) {
+  // obtenerProductosPorMarca(marca: any, precio: number) {
     const url = LINK + '/productos/productos/marca/' + marca + '/' + precio + '/' + desde + '/' + hasta;
+    // const url = LINK + '/productos/productos/marca/' + marca + '/' + precio;
 
     return this.http.get(url);
   }

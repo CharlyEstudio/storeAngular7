@@ -100,9 +100,80 @@
 
     </div>
 
-    <div class="row mas-vendidos pb-5" *ngIf="encontrado.length > 0">
+    <div class="row mas-vendidos pb-5 el-element-overlay" *ngIf="encontrado.length > 0">
 
-        <div class="col-12 col-lg-3 col-md-6 col-sm-12 pt-4 el-element-overlay" *ngFor="let enc of encontrado">
+        <div class="col-12 col-lg-3 col-md-6 col-sm-12 pt-2" *ngFor="let mejor of encontrado">
+
+            <div class="card">
+    
+                <div class="el-card-item text-center">
+    
+                    <div class="el-card-avatar el-overlay-1 rounded-circle" style="max-height: 250px!important">
+    
+                        <img [src]="mejor.imagen" class="img-fluig" width="200">
+    
+                        <div class="el-overlay">
+    
+                            <ul class="el-info">
+    
+                                <li>
+            
+                                    <span class="btn default btn-outline image-popup-vertical-fit" data-toggle="tooltip" title="Código: {{ mejor.codigo }}">
+                
+                                    Código: {{ mejor.codigo }}
+                
+                                    </span>
+                
+                                </li>
+                
+                                <li>
+                
+                                    <span class="btn default btn-outline image-popup-vertical-fit" data-toggle="tooltip" title="Clave: {{ mejor.clave }}">
+                
+                                    Clave: {{ mejor.clave }}
+                
+                                    </span>
+                
+                                </li>
+    
+                            </ul>
+    
+                        </div>
+    
+                    </div>
+    
+    
+                    <h6 class="pt-2" style="height: 45px; font-size: 12px;">{{mejor.descripcion}}</h6>
+    
+                    <small *ngIf="mejor.descuento > 0">
+    
+                        <span class="badge badge-danger">-{{ (mejor.descuento * 100) }}%</span>
+    
+                    </small>
+    
+                    <br>
+    
+                    <small class="text-muted" *ngIf="mejor.descuento > 0"><del>{{ mejor.preciooriginal| currency }}</del></small>
+    
+                    <h4 class="font-weight-bold text-truper">
+    
+                        {{ mejor.precio | currency }}
+    
+                    </h4>
+    
+                    <button class="btn-cart" type="button" (click)="irA(mejor)">
+    
+                        <span class="text-uppercase">Comprar</span>
+    
+                    </button>
+    
+                </div>
+    
+            </div>
+    
+        </div>
+
+        <!-- <div class="col-12 col-lg-3 col-md-6 col-sm-12 pt-4 el-element-overlay" *ngFor="let enc of encontrado">
 
             <div class="card">
 
@@ -116,25 +187,25 @@
             
                             <ul class="el-info">
             
-                            <li>
-            
-                                <span class="btn default btn-outline image-popup-vertical-fit" data-toggle="tooltip" title="Código: {{ enc.codigo }}">
-            
-                                Código: {{ enc.codigo }}
-            
-                                </span>
-            
-                            </li>
-            
-                            <li>
-            
-                                <span class="btn default btn-outline image-popup-vertical-fit" data-toggle="tooltip" title="Clave: {{ enc.clave }}">
-            
-                                Clave: {{ enc.clave }}
-            
-                                </span>
-            
-                            </li>
+                                <li>
+                
+                                    <span class="btn default btn-outline image-popup-vertical-fit" data-toggle="tooltip" title="Código: {{ enc.codigo }}">
+                
+                                    Código: {{ enc.codigo }}
+                
+                                    </span>
+                
+                                </li>
+                
+                                <li>
+                
+                                    <span class="btn default btn-outline image-popup-vertical-fit" data-toggle="tooltip" title="Clave: {{ enc.clave }}">
+                
+                                    Clave: {{ enc.clave }}
+                
+                                    </span>
+                
+                                </li>
             
                             </ul>
             
@@ -180,7 +251,7 @@
 
             <hr>
 
-        </div>
+        </div> -->
 
     </div>
 
@@ -189,8 +260,6 @@
         <div class="d-flex justify-content-between">
 
             <div class="p-2 bd-highlight">
-
-                <!-- <button type="button" class="btn btn-secondary" (click)="cambiar(-13)" [disabled]="disabledAnt">Anterior</button> -->
 
                 <button class="btn-anterior" type="button" (click)="cambiar(-13)" [disabled]="disabledAnt">
 
@@ -207,8 +276,6 @@
                     <span class="text-uppercase">Siguiente</span>
 
                 </button>
-
-                <!-- <button type="button" class="btn btn-success" (click)="cambiar(13)" [disabled]="disabledSig">Siguiente</button> -->
 
             </div>
 

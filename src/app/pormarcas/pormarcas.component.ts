@@ -24,8 +24,8 @@ export class PormarcasComponent implements OnInit {
 
   desde: number = 0;
 
-  disabledAnt: boolean = true;
-  disabledSig: boolean = false;
+  // disabledAnt: boolean = true;
+  disabledSig: boolean = true;
 
   constructor(
     private router: ActivatedRoute,
@@ -74,13 +74,13 @@ export class PormarcasComponent implements OnInit {
       if (prod.status) {
         this.productos = prod.respuesta;
         this.precarga = [];
-        if (prod.respuesta.length > 12) {
-          this.disabledAnt = true;
-          this.disabledSig = false;
-        } else if (prod.respuesta.length < 12) {
-          this.disabledAnt = true;
-          this.disabledSig = true;
-        }
+        // if (prod.respuesta.length > 12) {
+        //   this.disabledAnt = true;
+        //   this.disabledSig = false;
+        // } else if (prod.respuesta.length < 12) {
+        //   this.disabledAnt = true;
+        //   this.disabledSig = true;
+        // }
       }
     });
   }
@@ -88,26 +88,28 @@ export class PormarcasComponent implements OnInit {
   cambiar(desde: number) {
     this.desde = this.desde + desde;
 
-    if ( this.desde < 0 ) {
-      this.disabledAnt = true;
-      this.disabledSig = false;
-      return;
-    } else {
-      this.disabledAnt = false;
-      this.disabledSig = false;
-    }
-    this._productosService.obtenerProductosPorMarca(this.marca, this.precio, this.desde).subscribe( (prod: any) => {
+    // if ( this.desde < 0 ) {
+    //   this.disabledAnt = true;
+    //   this.disabledSig = false;
+    //   return;
+    // } else {
+    //   this.disabledAnt = false;
+    //   this.disabledSig = false;
+    // }
+    this._productosService.obtenerProductosPorMarca(this.buscar, this.precio, this.desde).subscribe( (prod: any) => {
+    // this._productosService.obtenerProductosPorMarca(this.marca, this.precio).subscribe( (prod: any) => {
+      const arraySave = this.productos;
       this.productos = [];
       this.precarga = Array(8).fill(4);
       if (prod.status) {
-        this.productos = prod.respuesta;
-        if (this.desde === 0) {
-          this.disabledAnt = true;
-          this.disabledSig = false;
-        } else if (this.productos.length < 11) {
-          this.disabledAnt = false;
-          this.disabledSig = true;
+        this.productos = arraySave;
+        for (const art of prod.respuesta) {
+          this.productos.push(art);
         }
+        this.disabledSig = true;
+      } else {
+        this.productos = arraySave;
+        this.disabledSig = false;
       }
     });
   }
