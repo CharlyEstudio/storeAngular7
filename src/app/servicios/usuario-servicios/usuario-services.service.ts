@@ -22,7 +22,7 @@ export class UsuarioServicesService {
   private user: Usuario[] = [];
 
   usuario: Usuario;
-  token: string;
+  token: string = '';
   menu: any[] = [];
   rol: any;
 

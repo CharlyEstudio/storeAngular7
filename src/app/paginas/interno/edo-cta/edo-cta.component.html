@@ -444,6 +444,44 @@
 
                     </div>
 
+                    <!-- <div class="row">
+
+                        <div class="col-6">
+
+                            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                                <input type="hidden" name="cmd" value="_s-xclick">
+                                <input type="hidden" name="hosted_button_id" value="YQVQNRMUJ6BGS">
+                                <input type="hidden" name="item_name" value="{{nombre}}">
+                                <input type="hidden" name="item_number" value="{{factura}}">
+                                <input type="hidden" name="amount" value="{{total}}">
+                                <input type="hidden" name="lc" value="ES">
+                                <table>
+                                    <tr><td><input class="form-control font-16" type="hidden" name="on0" value="REMISION">REMISION</td></tr><tr><td><input class="form-control" type="text" [value]="factura" readonly="true" name="os0" maxlength="200"></td></tr>
+                                    <tr><td><input class="form-control font-16" type="hidden" name="on1" value="IMPORTE">IMPORTE</td></tr><tr><td><input type="text" class="form-control" [value]="total" readonly="true" name="os1" maxlength="200"></td></tr>
+                                </table>
+                                <br>
+                                <input type="image" src="https://www.paypalobjects.com/es_XC/MX/i/btn/btn_paynowCC_LG.gif" border="0" name="submit" alt="PayPal, la forma más segura y rápida de pagar en línea.">
+                                <img alt="" border="0" src="https://www.paypalobjects.com/es_XC/i/scr/pixel.gif" width="1" height="1">
+                            </form>
+
+                        </div>
+
+                        <div class="col-6">
+
+                            <div class="text-right pt-3">
+
+                                <p class="font-weight-bold">Sub Total {{ subtotal | currency }}</p>
+        
+                                <p class="font-weight-bold">IVA {{ iva | currency }}</p>
+        
+                                <p class="font-weight-bold">Total {{ total | currency }}</p>
+        
+                            </div>
+
+                        </div>
+
+                    </div> -->
+
                     <div class="text-right pt-3">
 
                         <p class="font-weight-bold">Sub Total {{ subtotal | currency }}</p>
@@ -456,7 +494,7 @@
 
                 </div>
 
-                <div class="modal-footer">
+                <div class="modal-footer">                            
 
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
 

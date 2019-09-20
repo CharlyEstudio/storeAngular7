@@ -1,3 +1,4 @@
+
 // Guardias
 export { LoginGuard } from './guards/login.guard';
 export { AdminGuard } from './guards/admin.guard';
@@ -11,4 +12,4 @@ export { ShoppingService } from './shopping/shopping.service';
 export { MenuService } from './menu/menu.service';
 export { ExportarService } from './exportar/exportar.service';
 export { WebsocketService } from './websocket/websocket.service';
-
+export { BotoncomprarService } from '../componentes/botoncomprar/botoncomprar.service';

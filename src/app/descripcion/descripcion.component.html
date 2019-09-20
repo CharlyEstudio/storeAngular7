@@ -102,7 +102,9 @@
 
                 <div class="form-group">
 
-                    <button type="button" class="btn btn-outline-danger" (click)="agregarCarrito(producto, f)">Agregar al Carrito</button>
+                    <app-botoncomprar [producto]="producto" [cantidad]="input.value"></app-botoncomprar>
+
+                    <!-- <button type="button" class="btn btn-outline-danger" (click)="agregarCarrito(producto, f)">Agregar al Carrito</button> -->
 
                 </div>
 

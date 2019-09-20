@@ -17,6 +17,7 @@ export class PormarcasComponent implements OnInit {
   marca: any = '';
   buscar: any;
   nombre: any;
+  menu: any;
   productos: any[] = [];
   precarga: any[] = [];
 
@@ -24,7 +25,6 @@ export class PormarcasComponent implements OnInit {
 
   desde: number = 0;
 
-  // disabledAnt: boolean = true;
   disabledSig: boolean = true;
 
   constructor(
@@ -40,6 +40,7 @@ export class PormarcasComponent implements OnInit {
         this.precarga = Array(8).fill(4);
         this.marca = this.router.snapshot.paramMap.get('familia');
         this.nombre = this.router.snapshot.paramMap.get('nombre');
+        this.menu = this.router.snapshot.paramMap.get('menu');
         const b = this.router.snapshot.paramMap.get('buscar');
         this.buscar = b.split('/')[6];
 
@@ -62,7 +63,6 @@ export class PormarcasComponent implements OnInit {
           this.precio = 3;
         }
         this.productos = [];
-        // this.obtenerProductos();
       } else {
         // this.obtenerProductos();
       }
@@ -74,30 +74,13 @@ export class PormarcasComponent implements OnInit {
       if (prod.status) {
         this.productos = prod.respuesta;
         this.precarga = [];
-        // if (prod.respuesta.length > 12) {
-        //   this.disabledAnt = true;
-        //   this.disabledSig = false;
-        // } else if (prod.respuesta.length < 12) {
-        //   this.disabledAnt = true;
-        //   this.disabledSig = true;
-        // }
       }
     });
   }
 
   cambiar(desde: number) {
     this.desde = this.desde + desde;
-
-    // if ( this.desde < 0 ) {
-    //   this.disabledAnt = true;
-    //   this.disabledSig = false;
-    //   return;
-    // } else {
-    //   this.disabledAnt = false;
-    //   this.disabledSig = false;
-    // }
     this._productosService.obtenerProductosPorMarca(this.buscar, this.precio, this.desde).subscribe( (prod: any) => {
-    // this._productosService.obtenerProductosPorMarca(this.marca, this.precio).subscribe( (prod: any) => {
       const arraySave = this.productos;
       this.productos = [];
       this.precarga = Array(8).fill(4);

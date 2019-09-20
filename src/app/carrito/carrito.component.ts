@@ -1,18 +1,21 @@
 import { Component, OnInit, ɵConsole } from '@angular/core';
-
-import { Subscription, Observable, Subscriber } from 'rxjs';
 import { Router } from '@angular/router';
 
+// Alertas
+import * as _swal from 'sweetalert';
+import { SweetAlert } from 'sweetalert/typings/core'; // Importante para que funcione el sweet alert
+const swal: SweetAlert = _swal as any;
+
 // Modelos
-import { Producto } from '../modelos/productos.model';
+// import { Producto } from '../modelos/productos.model';
 import { XmlString } from 'src/app/modelos/xml.model';
 import { Usuario } from '../modelos/usuarios.model';
 
 // Link
-import { PATH_LINK } from '../config/config';
+// import { PATH_LINK } from '../config/config';
 
 // Servicios
-import { ProductosService, ShoppingService, UsuarioServicesService, DatosService } from '../servicios/servicios.index';
+import { ShoppingService, UsuarioServicesService, BotoncomprarService } from '../servicios/servicios.index';
 
 @Component({
   selector: 'app-carrito',
@@ -33,16 +36,11 @@ export class CarritoComponent implements OnInit {
 
   vigente: boolean = false;
 
-  // Observar para el carrito
-  car: Subscription;
-  intervalo: any;
-
   constructor(
     private router: Router,
     private _usuarioService: UsuarioServicesService,
-    private _productosServices: ProductosService,
     private _shoppingCar: ShoppingService,
-    private _datosService: DatosService
+    private _agregarService: BotoncomprarService
   ) {
     const carro = JSON.parse(localStorage.getItem('carrito'));
 
@@ -80,6 +78,7 @@ export class CarritoComponent implements OnInit {
         this._shoppingCar.deleteProducto(index);
         this.carrito.splice(index, 1);
         this.items = this.carrito.length;
+        this._agregarService.agregar.emit(this.carrito);
       }
     });
   }
@@ -98,7 +97,7 @@ export class CarritoComponent implements OnInit {
       if (accion) {
         this.carrito = [];
         localStorage.removeItem('carrito');
-        this._shoppingCar.clearCarrito();
+        this._agregarService.agregar.emit([]);
         this.router.navigate(['/inicio']);
       }
     });

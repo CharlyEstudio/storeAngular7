@@ -35,34 +35,40 @@ export class ShoppingService {
   ) {
     // this.token = this._usuarioService.token;
     // this.token = localStorage.getItem('token');
-    this.subject.subscribe((data) => {
-      let num;
-      if (data) {
-        num = data;
-      } else {
-        num = [];
-      }
-      return this.itemsCarrito = num;
-    });
+    // this.subject.subscribe((data) => {
+    //   let num;
+    //   if (data) {
+    //     num = data;
+    //   } else {
+    //     num = [];
+    //   }
+    //   return this.itemsCarrito = num;
+    // });
+
+    this.getCarrito();
   }
 
   /**
    * addCarrito
    * @param producto
    */
-  addCarrito(producto: Producto) {
-    this.subject.next([...this.itemsCarrito, producto]);
-  }
+  // addCarrito(producto: Producto) {
+  //   this.subject.next([...this.itemsCarrito, producto]);
+  // }
+
+  // getCarrito() {
+  //   return this.subject;
+  // }
 
   getCarrito() {
-    return this.subject;
+    return JSON.parse(localStorage.getItem('carrito'));
   }
 
-  getTotal() {
-    return this.itemsCarrito.reduce((total, producto: Producto) => {
-      return total + producto.precio;
-    }, 0);
-  }
+  // getTotal() {
+  //   return this.itemsCarrito.reduce((total, producto: Producto) => {
+  //     return total + producto.precio;
+  //   }, 0);
+  // }
 
   clearCarrito() {
     this.itemsCarrito = [];

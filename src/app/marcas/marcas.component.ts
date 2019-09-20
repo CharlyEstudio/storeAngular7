@@ -17,6 +17,7 @@ export class MarcasComponent implements OnInit {
   dividirMarcas: any[] = [];
   precarga: any[] = [];
   imagen: any;
+  tipo: any;
 
   constructor(
     public sanitizer: DomSanitizer,
@@ -30,41 +31,61 @@ export class MarcasComponent implements OnInit {
         this.marcas = [];
         this.marca = '';
         this.marca = this.router.snapshot.paramMap.get('marca');
+        this.tipo = this.router.snapshot.paramMap.get('menu');
         this.obtenerMarcas();
       }
     });
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   irPorMarcas(marca: any) {
-    this.route.navigate(['/pormarcas', marca.marca, marca.img, this.marca]);
+    this.route.navigate(['/pormarcas', marca.marca, marca.img, this.marca, this.tipo]);
   }
 
   obtenerMarcas() {
     this.marcas = [];
-    if (this.marca === 'Truper') {
-      this._productoService.obtenerMarcasTruper().subscribe((truper: any) => {
-        if (truper.status) {
-          this.marcas = truper.respuesta;
-          this.dividirMarcas = truper.respuesta;
+    if (this.tipo === 'GENERICO') {
+      this._productoService.obtenerMarcasFMO().subscribe((fmo: any) => {
+        if (fmo.status) {
+          this.marcas = fmo.respuesta;
+          this.dividirMarcas = fmo.respuesta;
+          let array = [];
+          for (const mc of this.marcas) {
+            if (mc.marca === 'Generico') {
+              array.push(mc);
+            }
+          }
+          this.marcas = array;
         }
       });
-    } else if (this.marca === 'Fmo') {
-        this._productoService.obtenerMarcasFMO().subscribe((fmo: any) => {
-          if (fmo.status) {
-            this.marcas = fmo.respuesta;
-            this.dividirMarcas = fmo.respuesta;
-            let array = [];
-            for (const mc of this.marcas) {
-              if (mc.marca !== 'Generico') {
-                array.push(mc);
-              }
-            }
-            this.marcas = array;
+      this.elegirMenu(3);
+    } else {
+      if (this.marca === 'Truper') {
+        this._productoService.obtenerMarcasTruper().subscribe((truper: any) => {
+          if (truper.status) {
+            this.marcas = truper.respuesta;
+            this.dividirMarcas = truper.respuesta;
           }
         });
+      } else if (this.marca === 'Fmo') {
+          this._productoService.obtenerMarcasFMO().subscribe((fmo: any) => {
+            if (fmo.status) {
+              this.marcas = fmo.respuesta;
+              this.dividirMarcas = fmo.respuesta;
+              let array = [];
+              for (const mc of this.marcas) {
+                if (mc.marca !== 'Generico') {
+                  this.tipo = 'MARCAS';
+                  array.push(mc);
+                } else {
+                  this.tipo = 'GENERICO';
+                }
+              }
+              this.marcas = array;
+            }
+          });
+      }
     }
   }
 
@@ -81,6 +102,7 @@ export class MarcasComponent implements OnInit {
         for (const mc of this.marcas) {
           if (mc.marca !== 'Generico') {
             array.push(mc);
+            this.tipo = 'MARCAS';
           }
         }
         this.marcas = array;
@@ -91,6 +113,7 @@ export class MarcasComponent implements OnInit {
         for (const mc of this.marcas) {
           if (mc.marca === 'Generico') {
             array.push(mc);
+            this.tipo = 'GENERICO';
           }
         }
         this.marcas = array;
@@ -101,6 +124,7 @@ export class MarcasComponent implements OnInit {
         for (const mc of this.marcas) {
           if (mc.marca !== 'Generico') {
             array.push(mc);
+            this.tipo = 'MARCAS';
           }
         }
         this.marcas = array;

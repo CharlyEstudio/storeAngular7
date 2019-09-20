@@ -2,7 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 
 // Servicios
-import { UsuarioServicesService, ShoppingService, ProductosService } from 'src/app/servicios/servicios.index';
+import { UsuarioServicesService, ShoppingService, ProductosService, BotoncomprarService } from 'src/app/servicios/servicios.index';
 import { SalirService } from './salir.service';
 
 @Component({
@@ -28,7 +28,8 @@ export class NavPrincipalComponent implements OnInit {
     private _usuarioService: UsuarioServicesService,
     private _shoppingCar: ShoppingService,
     private _productoService: ProductosService,
-    private _salirService: SalirService
+    private _salirService: SalirService,
+    private _botonService: BotoncomprarService
   ) {
     this._productoService.obtenerMarcasTruper().subscribe((truper: any) => {
       this.marcasTru = truper.respuesta;
@@ -53,7 +54,7 @@ export class NavPrincipalComponent implements OnInit {
         }
     });
 
-    this._shoppingCar.getCarrito().subscribe(data => {
+    this._botonService.agregar.subscribe((add: any) => {
       let carrito;
       if (localStorage.getItem('carrito') !== null) {
         carrito = JSON.parse(localStorage.getItem('carrito'));
@@ -65,6 +66,24 @@ export class NavPrincipalComponent implements OnInit {
         this.carrito = false;
       }
     });
+
+    if (this._shoppingCar.getCarrito() !== null) {
+      this.cantidad = this._shoppingCar.getCarrito().length;
+      this.carrito = true;
+    }
+
+    // this._shoppingCar.getCarrito().subscribe(data => {
+    //   let carrito;
+    //   if (localStorage.getItem('carrito') !== null) {
+    //     carrito = JSON.parse(localStorage.getItem('carrito'));
+    //     this.cantidad = carrito.length;
+    //     this.carrito = true;
+    //   } else {
+    //     carrito = [];
+    //     this.cantidad = 0;
+    //     this.carrito = false;
+    //   }
+    // });
   }
 
   obtener(event: any) {
@@ -76,13 +95,13 @@ export class NavPrincipalComponent implements OnInit {
     this._salirService.notificacion.emit(true);
   }
 
-  irPorMarcas(marca: any) {
-    this.cambioValor.emit(marca);
-    this.route.navigate(['/pormarcas', marca]);
-  }
+  // irPorMarcas(marca: any) {
+  //   this.cambioValor.emit(marca);
+  //   this.route.navigate(['/pormarcas', marca]);
+  // }
 
-  irMarca(marca: any) {
-    this.route.navigate(['/marcas', marca]);
+  irMarca(marca: any, menu: any) {
+    this.route.navigate(['/marcas', marca, menu]);
   }
 
 }

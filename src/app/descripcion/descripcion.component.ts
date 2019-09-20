@@ -35,7 +35,7 @@ export class DescripcionComponent implements OnInit {
   clave: any;
   codigo: any;
   marca: any;
-  marca_imagen: any;
+  marca_imagen = 'assets/images/precarga/product_loader.gif';
   articuloid: any;
   imagen = 'assets/images/precarga/product_loader.gif';
   precio: number = 0;
@@ -102,6 +102,7 @@ export class DescripcionComponent implements OnInit {
         this.cant_ma = producto.respuesta[0].cant_ma;
         this.unidad = producto.respuesta[0].unidad;
 
+
         if (producto.respuesta[0].descuento > 0) {
           this.descuentoBol = true;
         }
@@ -117,15 +118,15 @@ export class DescripcionComponent implements OnInit {
     }
   }
 
-  agregarCarrito(producto: any, forma: NgForm) {
-    const cantidad =  Number(forma.value.cantidad);
+  // agregarCarrito(producto: any, forma: NgForm) {
+  //   const cantidad =  Number(forma.value.cantidad);
 
-    producto.cantidad = cantidad;
-    producto.precioFinal = producto.precioneto * cantidad;
+  //   producto.cantidad = cantidad;
+  //   producto.precioFinal = producto.precioneto * cantidad;
 
-    this._shoppingService.guardarCarrito(producto);
-    this._shoppingService.addCarrito(producto);
-  }
+  //   this._shoppingService.guardarCarrito(producto);
+  //   this._shoppingService.addCarrito(producto);
+  // }
 
   agregarFavoritos(producto: any, forma: NgForm) {
     console.log('Agregando Producto a Favoritos:', producto);

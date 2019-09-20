@@ -32,7 +32,7 @@ const appRoutes: Routes = [
     { path: 'inicio', component: InicioComponent, data: { titulo: 'Sitio Oficial Ferremayoristas Olvera', name: 'description' } },
     { path: 'marcaTruper', component: TruperComponent, data: { titulo: 'Marca Truper', name: 'description' } },
     { path: 'marcaFmo', component: FmoComponent, data: { titulo: 'Marca FMO', name: 'description' } },
-    { path: 'marcas/:marca', component: MarcasComponent, data: { titulo: 'Marcas', name: 'description' } },
+    { path: 'marcas/:marca/:menu', component: MarcasComponent, data: { titulo: 'Marcas', name: 'description' } },
     { path: 'nosotros', component: NosotrosComponent, data: { titulo: 'Nosotros', name: 'description' } },
     { path: 'cobertura', component: CoberturaComponent, data: { titulo: 'Cobertura', name: 'description' } },
     { path: 'registro', component: RegistroComponent, data: { titulo: 'Registro', name: 'description' } },
@@ -42,7 +42,7 @@ const appRoutes: Routes = [
     { path: 'ver/:producto', component: DescripcionComponent, data: { titulo: 'Descripción', name: 'description' } },
     { path: 'ofertas', component: OfertaComponent, data: { titulo: 'PROMOTRUPER DEL MES', name: 'description' } },
     { path: 'descuentos/:desc', component: DescuentosComponent, data: { titulo: 'DESCUENTO DEL MES', name: 'description' } },
-    { path: 'pormarcas/:nombre/:buscar/:familia', component: PormarcasComponent, data: { titulo: 'PRODCUTO POR MARCA', name: 'description' } },
+    { path: 'pormarcas/:nombre/:buscar/:familia/:menu', component: PormarcasComponent, data: { titulo: 'PRODCUTO POR MARCA', name: 'description' } },
     { path: 'sop-factura', component: SopFacturaComponent, data: { titulo: 'Soporte al cliente - Facturación', name: 'description' } },
     { path: 'pol-venta', component: PolVentaComponent, data: { titulo: 'Políticas - Ventas', name: 'description' } },
     { path: 'pol-devolucion', component: PolDevolucionComponent, data: { titulo: 'Políticas - Devoluciones', name: 'description' } },
@@ -56,7 +56,7 @@ const appRoutes: Routes = [
         canActivate: [ LoginGuard ],
         loadChildren: './paginas/paginas.module#PaginasModule'
     },
-    { path: '**', redirectTo: '/inicio', } // Aquí arregle para que redirigiera a inicio
+    { path: '**', redirectTo: '/inicio', pathMatch: 'full' } // Aquí arregle para que redirigiera a inicio
 ];
 
 export const APP_ROUTES = RouterModule.forRoot( appRoutes, { useHash: true } );

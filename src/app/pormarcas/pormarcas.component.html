@@ -1,14 +1,32 @@
 <div class="container my-5">
 
-  <nav class="breadcrumb bg-transparent">
+  <div class="row">
 
-    <a class="breadcrumb-item" routerLink="/inicio">Inicio</a>
+    <div class="col-6">
 
-    <a class="breadcrumb-item" [routerLink]="['/marcas', marca]">{{marca}}</a>
+      <nav class="breadcrumb bg-transparent">
 
-    <span class="breadcrumb-item active">Productos {{nombre | uppercase}}</span>
+        <a class="breadcrumb-item" routerLink="/inicio">Inicio</a>
+    
+        <a class="breadcrumb-item" [routerLink]="['/marcas', marca, menu]">{{marca}}</a>
+    
+        <span class="breadcrumb-item active">{{nombre | uppercase}}</span>
+    
+      </nav>
 
-  </nav>
+    </div>
+
+    <div class="col-6 text-right">
+
+      <button [routerLink]="['/marcas', marca, menu]" class="btn btn-rounded btn-danger">
+
+        <i class="mdi mdi-chevron-left"></i> Regresar
+
+      </button>
+
+    </div>
+
+  </div>
 
   <div class="row">
 

@@ -13,7 +13,8 @@ import {
     ShoppingService,
     MenuService,
     ExportarService,
-    WebsocketService
+    WebsocketService,
+    BotoncomprarService
 } from './servicios.index';
 
 @NgModule({
@@ -33,7 +34,8 @@ import {
         ShoppingService,
         MenuService,
         ExportarService,
-        WebsocketService
+        WebsocketService,
+        BotoncomprarService
     ],
     declarations: []
 })
