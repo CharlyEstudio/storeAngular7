@@ -106,6 +106,7 @@ export class EdoCtaComponent implements OnInit {
           this.saldoTotal += saldo.respuesta[m].saldo;
         }
 
+        // 1900
         this._datoService.obtenerFacturas(this._usuarioService.usuario.idFerrum, this.firstDate).subscribe( ( facturas: any ) => {
 
           if (facturas.status) {
@@ -114,10 +115,6 @@ export class EdoCtaComponent implements OnInit {
               if (edocta[i].SALDOFINAL > 0) {
                 this.abonos += edocta[i].ABONO;
 
-                if (edocta[i].SALDOFINAL !== 0) {
-                  this.saldos += edocta[i].SALDOFINAL;
-                }
-
                 const esFolio = (factura) => {
                   return factura.FOLIO === edocta[i].FOLIO;
                 };
@@ -125,15 +122,6 @@ export class EdoCtaComponent implements OnInit {
                 if (this.edocta.find(esFolio)) {
                   let newSaldo;
                   let cargo;
-                  if (edocta[i].TOTALGADO === edocta[i].TOTAL) {
-                    newSaldo = (edocta[i].TOTAL - edocta[i].ABONO) - edocta[i].SALDO;
-                  } else {
-                    if (edocta[i].ABONO < 0) {
-                      newSaldo = edocta[i].SALDOFINAL + (-1 * edocta[i].ABONO);
-                    } else {
-                      newSaldo = edocta[i].SALDOFINAL;
-                    }
-                  }
 
                   if (this.edocta.find(esFolio).SALDO !== 0) {
                     cargo = this.edocta.find(esFolio).SALDO;
@@ -142,6 +130,16 @@ export class EdoCtaComponent implements OnInit {
                       cargo = 0;
                     } else {
                       cargo = edocta[i].CARGO;
+                    }
+                  }
+
+                  if (edocta[i].TOTALGADO === edocta[i].TOTAL) {
+                    newSaldo = (edocta[i].TOTAL - edocta[i].ABONO) - edocta[i].SALDO;
+                  } else {
+                    if (edocta[i].ABONO < 0) {
+                      newSaldo = edocta[i].SALDOFINAL + (-1 * edocta[i].ABONO);
+                    } else {
+                      newSaldo = edocta[i].SALDOFINAL;
                     }
                   }
 
@@ -166,7 +164,12 @@ export class EdoCtaComponent implements OnInit {
                   this.edocta.push(nuevo[0]);
                 } else {
                   this.edocta.push(edocta[i]);
+                  if (edocta[i].SALDOFINAL !== 0) {
+                    this.saldos += edocta[i].SALDOFINAL;
+                  }
                 }
+              } else {
+                console.log(edocta[i].SALDOFINAL);
               }
             }
 
@@ -202,10 +205,6 @@ export class EdoCtaComponent implements OnInit {
             const edocta = facturas.respuesta;
             for (let i = 0; i < edocta.length; i++) {
               this.abonos += edocta[i].ABONO;
-
-              if (edocta[i].SALDOFINAL !== 0) {
-                this.saldos += edocta[i].SALDOFINAL;
-              }
 
               const esFolio = (factura) => {
                 return factura.FOLIO === edocta[i].FOLIO;
@@ -255,6 +254,9 @@ export class EdoCtaComponent implements OnInit {
                 this.edocta.push(nuevo[0]);
               } else {
                 this.edocta.push(edocta[i]);
+                if (edocta[i].SALDOFINAL !== 0) {
+                  this.saldos += edocta[i].SALDOFINAL;
+                }
               }
             }
 

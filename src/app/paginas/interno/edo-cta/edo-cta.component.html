@@ -333,9 +333,11 @@
 
                             <td class="text-center" style="color: #06d79c; font-weight: 700;" *ngIf="dato.ABONO === 0"></td>
 
-                            <td class="text-center" style="color: #f62d51; font-weight: 700;" *ngIf="dato.SALDOFINAL === 0">{{ dato.SALDO | currency }}</td>
+                            <td class="text-center" style="color: #f62d51; font-weight: 700;" *ngIf="dato.SALDOFINAL === 0">{{ dato.SALDOFINAL | currency }}</td>
 
-                            <td class="text-center" style="color: #f62d51; font-weight: 700;" *ngIf="dato.SALDOFINAL > 0">{{ dato.SALDOFINAL | currency }}</td>
+                            <td class="text-center" style="color: #f62d51; font-weight: 700;" *ngIf="dato.SALDOFINAL > 0 && dato.SALDO !== 0">{{ dato.SALDO | currency }}</td>
+
+                            <td class="text-center" style="color: #f62d51; font-weight: 700;" *ngIf="dato.SALDOFINAL > 0 && dato.SALDO === 0">{{ dato.SALDOFINAL | currency }}</td>
 
                             <td class="text-center font-weight-bold" *ngIf="dato.RECIBO != 0">{{ dato.RECIBO }}</td>
 
