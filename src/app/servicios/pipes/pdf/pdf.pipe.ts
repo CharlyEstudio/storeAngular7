@@ -3,14 +3,19 @@ import { DomSanitizer } from '@angular/platform-browser';
 
 // Links
 import { LINK } from 'src/app/config/config';
-import { componentNeedsResolution } from '@angular/core/src/metadata/resource_loading';
+
+// Servicios
+import { UsuarioServicesService } from 'src/app/servicios/servicios.index';
 
 @Pipe({
   name: 'pdf'
 })
 export class PdfPipe implements PipeTransform {
+  token: any = '';
+
   constructor(
-    public sanitizer: DomSanitizer
+    public sanitizer: DomSanitizer,
+    private usuarioServicesService: UsuarioServicesService
   ) {}
 
   transform(pdf: string, tipo: string = 'pdf'): any {
@@ -27,17 +32,19 @@ export class PdfPipe implements PipeTransform {
     }
 
     let file;
+    this.token = this.usuarioServicesService.token;
 
     switch ( tipo ) {
       case 'pdf':
-        url += '/' + pdf;
+        url += '/' + pdf + '?token=' + this.token;
 
         file = this.sanitizer.bypassSecurityTrustResourceUrl(url);
         break;
-      case 'xml':
-        url += '/' + pdf;
+        case 'xml':
+          url += '/xml/' + pdf + '?token=' + this.token;
 
-        file = url;
+          // file = url;
+          file = this.sanitizer.bypassSecurityTrustResourceUrl(url);
         break;
       default:
         console.log('Tipo de formato no existe');
