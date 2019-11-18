@@ -305,7 +305,6 @@ export class EdoCtaComponent implements OnInit {
       });
     } else if (numero === 1) {
       this.error = true;
-      console.log(factura, numero);
     } else if (numero === 2) {
       this.factura = factura.FOLIO;
       this.fechaCreada = factura.FECHA;
