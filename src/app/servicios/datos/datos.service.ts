@@ -367,8 +367,8 @@ export class DatosService {
     return this.http.get(url);
   }
 
-  obtenerProductos(factura: any) {
-    const url = LINK + '/cobertura/productos/factura/' + factura;
+  obtenerProductos(factura: any, clienteid: any) {
+    const url = LINK + '/cobertura/productos/factura/' + factura + '/' + clienteid;
 
     return this.http.get(url);
   }

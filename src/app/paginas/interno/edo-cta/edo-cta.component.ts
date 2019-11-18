@@ -95,6 +95,7 @@ export class EdoCtaComponent implements OnInit {
     this._datoService.obtenerSaldo(this.fecha, this._usuarioService.usuario.numero).subscribe((saldo: any) => {
       if (saldo.status) {
         this.saldo = saldo.respuesta;
+        console.log(this.saldo);
         this.firstDate = saldo.respuesta[0].feccap.substring(0, 10);
         this.proximoVenc = saldo.respuesta[0].folio;
         this.diasProximoVenc = saldo.respuesta[0].dias;
@@ -289,7 +290,7 @@ export class EdoCtaComponent implements OnInit {
       this.importeInicial = factura.importe;
       this.saldoFactura = factura.saldo;
 
-      this._datoService.obtenerProductos(this.factura).subscribe((pedido: any) => {
+      this._datoService.obtenerProductos(this.factura, this.idFerrum).subscribe((pedido: any) => {
         if (pedido.status) {
           this.pedido = pedido.respuesta;
           for (let i = 0; i < this.pedido.length; i++) {
@@ -311,7 +312,7 @@ export class EdoCtaComponent implements OnInit {
       this.importeInicial = factura.TOTAL;
       this.saldoFactura = factura.SALDO;
 
-      this._datoService.obtenerProductos(this.factura).subscribe((pedido: any) => {
+      this._datoService.obtenerProductos(this.factura, this.idFerrum).subscribe((pedido: any) => {
         if (pedido.status) {
           this.pedido = pedido.respuesta;
           for (let i = 0; i < this.pedido.length; i++) {
