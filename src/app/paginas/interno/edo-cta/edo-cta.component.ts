@@ -95,7 +95,6 @@ export class EdoCtaComponent implements OnInit {
     this._datoService.obtenerSaldo(this.fecha, this._usuarioService.usuario.numero).subscribe((saldo: any) => {
       if (saldo.status) {
         this.saldo = saldo.respuesta;
-        console.log(this.saldo);
         this.firstDate = saldo.respuesta[0].feccap.substring(0, 10);
         this.proximoVenc = saldo.respuesta[0].folio;
         this.diasProximoVenc = saldo.respuesta[0].dias;
