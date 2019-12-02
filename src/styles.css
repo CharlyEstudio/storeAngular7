@@ -16,18 +16,48 @@ body {
     color: rgb(129, 129, 129)!important;
 }
 
-.carousel-control-next-icon:after
+.carousel-control-prev-icon {
+    background-image: none!important;
+}
+
+.chevron::before {
+	border-style: solid;
+	border-width: 0.25em 0.25em 0 0;
+	content: '';
+	display: inline-block;
+	height: 0.45em;
+	left: 0.15em;
+	position: relative;
+	top: 0.15em;
+	transform: rotate(-45deg);
+	vertical-align: top;
+    width: 0.45em;
+    font-size: 40px;
+    color: #e43d0a;
+}
+
+.chevron.left:before {
+	left: 0.25em;
+	transform: rotate(-135deg);
+}
+
+.chevron.right:before {
+	left: 0;
+	transform: rotate(45deg);
+}
+
+/* .carousel-control-next-icon:after
 {
   content: '>';
   font-size: 35px;
   color: red;
-}
+} */
 
-.carousel-control-prev-icon:after {
+/* .carousel-control-prev-icon:after {
   content: '<';
   font-size: 35px;
   color: red;
-}
+} */
 
 .text-grey,
 .text-claro {
