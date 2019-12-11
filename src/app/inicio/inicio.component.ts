@@ -1,6 +1,8 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 
+declare var $: any;
+
 // Servicios
 import { ShoppingService } from '../servicios/servicios.index';
 
@@ -37,6 +39,8 @@ export class InicioComponent implements OnInit {
   }
 
   ngOnInit() {
+    $(document).snowfall();
+    $('#elementid').snowfall({flakeCount : 100, maxSpeed : 1});
   }
 
   cambiarVista(tipo: any) {
