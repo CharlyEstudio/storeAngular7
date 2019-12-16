@@ -25,6 +25,7 @@ export class UsuarioServicesService {
   token: string = '';
   menu: any[] = [];
   rol: any;
+  activo: boolean = false;
 
   constructor(
     public router: Router,
@@ -145,34 +146,38 @@ export class UsuarioServicesService {
           this.usuario = data.usuario;
           this.menu = data.menu;
           this.rol = data.usuario.rol;
-          this._datosService.obtenerSaldo(fecha, data.usuario.numero).subscribe((saldo: any) => {
-            if (saldo.status) {
-              let saldoVenc: number = 0;
-              for (let i = 0; i < saldo.respuesta.length; i++) {
-                if (saldo.respuesta[i].vence < fecha) {
-                  saldoVenc += saldo.respuesta[i].saldo;
-                }
-              }
+          this.activo = data.activado;
+          // this._datosService.obtenerSaldo(fecha, data.usuario.numero).subscribe((saldo: any) => {
+          //   if (saldo.status) {
+          //     let saldoVenc: number = 0;
+          //     for (let i = 0; i < saldo.respuesta.length; i++) {
+          //       if (saldo.respuesta[i].vence < fecha) {
+          //         saldoVenc += saldo.respuesta[i].saldo;
+          //       }
+          //     }
 
-              if (saldoVenc > 0) {
-                this.superheros(data.usuario.numero).subscribe((supers: any) => {
-                  if (supers.status) {
-                    this.guardarStorage(data.usuario._id, data.token, data.usuario, data.menu, data.usuario.rol, true);
-                  } else {
-                    this.guardarStorage(data.usuario._id, data.token, data.usuario, data.menu, data.usuario.rol, false);
-                  }
-                });
-              } else {
-                this.guardarStorage(data.usuario._id, data.token, data.usuario, data.menu, data.usuario.rol, true);
-              }
-              this.iniciar(usuario);
-              this.cargarStorage();
-            } else {
-              this.guardarStorage(data.usuario._id, data.token, data.usuario, data.menu, data.usuario.rol, true);
-              this.iniciar(usuario);
-              this.cargarStorage();
-            }
-          });
+          //     if (saldoVenc > 0) {
+          //       this.superheros(data.usuario.numero).subscribe((supers: any) => {
+          //         if (supers.status) {
+          //           this.guardarStorage(data.usuario._id, data.token, data.usuario, data.menu, data.usuario.rol, this.activo);
+          //         } else {
+          //           this.guardarStorage(data.usuario._id, data.token, data.usuario, data.menu, data.usuario.rol, this.activo);
+          //         }
+          //       });
+          //     } else {
+          //       this.guardarStorage(data.usuario._id, data.token, data.usuario, data.menu, data.usuario.rol, this.activo);
+          //     }
+          //     this.iniciar(usuario);
+          //     this.cargarStorage();
+          //   } else {
+          //     this.guardarStorage(data.usuario._id, data.token, data.usuario, data.menu, data.usuario.rol, this.activo);
+          //     this.iniciar(usuario);
+          //     this.cargarStorage();
+          //   }
+          // });
+          this.guardarStorage(data.usuario._id, data.token, data.usuario, data.menu, data.usuario.rol, this.activo);
+          this.iniciar(usuario);
+          this.cargarStorage();
           return data;
         } else {
           return data;

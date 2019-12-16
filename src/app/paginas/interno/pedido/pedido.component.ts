@@ -19,6 +19,7 @@ export class PedidoComponent implements OnInit {
   @ViewChild('input')  input: ElementRef;
 
   cliente: Usuario;
+  activo: boolean = false;
   rol: any;
   fecha: number = Date.now();
 
@@ -45,6 +46,7 @@ export class PedidoComponent implements OnInit {
   ) {
     this.precio = this._usuarioService.usuario.precio;
     this.cliente = this._usuarioService.usuario;
+    this.activo = this._usuarioService.activo;
     this.rol = this.cliente.rol;
     if (localStorage.getItem('pedidoDist') !== null) {
       this.productos = JSON.parse(localStorage.getItem('pedidoDist'));
@@ -53,6 +55,8 @@ export class PedidoComponent implements OnInit {
       this.total = Number(localStorage.getItem('totalPed'));
       // console.log(this.productos);
     }
+
+    this.activo = localStorage.getItem('vigente') === 'true' ? true : false;
 
     this.router.queryParams.subscribe((params: any) => {
       if (params.dato) {

@@ -24,6 +24,7 @@ export class RegistroComponent implements OnInit {
   esperando: boolean = false;
   existe: boolean = false;
   dist: boolean = false;
+  correcto: boolean = true;
 
   constructor(
     public router: Router,
@@ -47,13 +48,13 @@ export class RegistroComponent implements OnInit {
 
   ngOnInit() {
     this.forma = new FormGroup({
-      nombre: new FormControl(null, Validators.required),
+      // nombre: new FormControl(null, Validators.required),
       numero: new FormControl(null, Validators.nullValidator),
       email: new FormControl(null, Validators.required),
       pass: new FormControl(null, Validators.required),
       passVal: new FormControl(null, Validators.required),
-      condiciones: new FormControl(null, Validators.required),
-      factura: new FormControl(null, Validators.nullValidator)
+      condiciones: new FormControl(null, Validators.required)
+      // factura: new FormControl(null, Validators.nullValidator)
     }, { validators: this.sonIguales('pass', 'passVal') });
 
     this.contacto = new FormGroup({
@@ -76,6 +77,7 @@ export class RegistroComponent implements OnInit {
   }
 
   buscarNumero() {
+    this.correcto = true;
     if (this.forma.value.numero !== null && this.forma.value.numero !== '') {
       this._datosService.obtenerClienteFerrum(this.forma.value.numero).subscribe((resp: any) => {
         if (resp.status) {
@@ -107,12 +109,13 @@ export class RegistroComponent implements OnInit {
     if (this.forma.value.numero !== '') {
       this._datosService.obtenerClienteFerrum(this.forma.value.numero).subscribe(( cliente: any ) => {
         if (cliente.status) {
+          this.correcto = true;
           usuario = new Usuario(
             cliente.respuesta[0].NOMBRE,
             this.forma.value.numero,
             this.forma.value.pass,
             this.forma.value.email,
-            this.forma.value.factura,
+            true,
             cliente.respuesta[0].CLIENTEID,
             cliente.respuesta[0].CATALOGO,
             cliente.respuesta[0].DIAVIS,
@@ -122,47 +125,23 @@ export class RegistroComponent implements OnInit {
             cliente.respuesta[0].RFC,
             'NOT',
           );
+          this._usuarioService.crearCliente( usuario )
+          .subscribe( (resp: any) => {
+            if (resp.status) {
+              this._webSocket.acciones('registro-watch', usuario);
+              swal ('Usuario creado', usuario.numero + '. El administrador activará su cuenta.', 'success');
+              this.router.navigate(['/acceso']);
+            } else {
+              swal('Error al Crear Usuario' , resp.msg, 'error');
+            }
+          });
         } else {
-          usuario = new Usuario(
-            this.forma.value.nombre,
-            this.forma.value.numero,
-            this.forma.value.pass,
-            this.forma.value.email,
-            this.forma.value.factura
-          );
+          this.correcto = false;
         }
-
-        this._usuarioService.crearCliente( usuario )
-        .subscribe( (resp: any) => {
-          if (resp.status) {
-            this._webSocket.acciones('registro-watch', usuario);
-            swal ('Usuario creado', usuario.numero + '. El administrador activará su cuenta.', 'success');
-          } else {
-            swal('Error al Crear Usuario' , resp.msg, 'error');
-          }
-        });
       });
     } else {
-      usuario = new Usuario(
-        this.forma.value.nombre,
-        this.forma.value.numero,
-        this.forma.value.pass,
-        this.forma.value.email,
-        this.forma.value.factura
-      );
-
-      this._usuarioService.crearCliente( usuario )
-      .subscribe( (resp: any) => {
-        if (resp.status) {
-          this._webSocket.acciones('registro-watch', resp.respuesta);
-          swal ('Usuario creado', usuario.email + '. El administrador activará su cuenta.', 'success');
-        } else {
-          swal('Error al Crear Usuario' , resp.msg, 'error');
-        }
-      });
+      this.correcto = false;
     }
-
-    this.router.navigate(['/acceso']);
   }
 
   comentar() {
@@ -172,7 +151,7 @@ export class RegistroComponent implements OnInit {
       return;
     }
     this._usuarioService.enviarConsulta(this.contacto.value).subscribe((resp: any) => {
-      if (resp.length === 0) {
+      if (resp.length > 0) {
         this.esperando = false;
         this.contacto.reset();
         this._webSocket.acciones('registro-watch', this.contacto.value);
