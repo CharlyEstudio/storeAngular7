@@ -1,0 +1,41 @@
+<div class="pl-5 pr-5 pt-3 pb-5">
+
+  <div class="row">
+
+    <div class="col-md-12 col-lg-12 col-sm-12 text-center">
+      
+      <img src="assets/images/logo2.png" class="img-fluid" width="20%">
+      
+    </div>
+
+    <div class="col-md-12 col-lg-12 col-sm-12 text-center" *ngIf="activo">
+
+        <h1>Cuenta Activada</h1>
+
+        <p>Gracias por registrarte en nuestra tienda!</p>
+
+    </div>
+
+  </div>
+
+  <div class="col-md-12 col-lg-12 col-sm-12 text-center" *ngIf="!activo">
+
+    <h1>Solicitud Desactivada</h1>
+
+  </div>
+
+  <div class="col-md-12 col-lg-12 col-sm-12 text-center" *ngIf="!activo">
+
+    <div class="card">
+
+      <div class="card-body">
+  
+        <h4>Esta solicitud ya paso más de 8 horas y fue desactivada. Favor de realizar otra solicitud.</h4>
+  
+      </div>
+  
+    </div>
+
+  </div>
+
+</div>

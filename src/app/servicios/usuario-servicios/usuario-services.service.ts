@@ -205,6 +205,11 @@ export class UsuarioServicesService {
     return this.http.post(url, {data: info}, { headers: { 'content-Type': 'application/x-www-form-urlencoded' } });
   }
 
+  validarToken(token: any) {
+    const url = `${PATH_LINK}:3001/cambio/verificar/activotoken/activar?token=${token}`;
+    return this.http.get(url);
+  }
+
   crearCliente(usuario: Usuario) {
     const url = LINK + '/clientes';
 

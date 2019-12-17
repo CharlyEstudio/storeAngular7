@@ -27,6 +27,7 @@ import { ContactoComponent } from './contacto/contacto.component';
 import { BolsaTrabajoComponent } from './bolsa-trabajo/bolsa-trabajo.component';
 import { SeccionesComponent } from './secciones/secciones.component';
 import { MarcasComponent } from './marcas/marcas.component';
+import { ActivarComponent } from './activar/activar.component';
 
 const appRoutes: Routes = [
     { path: 'inicio', component: InicioComponent, data: { titulo: 'Sitio Oficial Ferremayoristas Olvera', name: 'description' } },
@@ -50,6 +51,7 @@ const appRoutes: Routes = [
     { path: 'contacto', component: ContactoComponent, data: { titulo: 'Contáctanos', name: 'description' } },
     { path: 'bolsa-trabajo', component: BolsaTrabajoComponent, data: { titulo: 'Bolsa de Trabajo', name: 'description' } },
     { path: 'secciones/:seccion', component: SeccionesComponent, data: { titulo: 'Sección', name: 'description' } },
+    { path: 'activar/:token', component: ActivarComponent, data: { titulo: 'Activar Cuenta', name: 'description' } },
     {
         path: '',
         component: PaginasComponent,

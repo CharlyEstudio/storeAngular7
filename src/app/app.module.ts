@@ -55,6 +55,8 @@ import { BolsaTrabajoComponent } from './bolsa-trabajo/bolsa-trabajo.component';
 import { SeccionesComponent } from './secciones/secciones.component';
 import { MarcasComponent } from './marcas/marcas.component';
 import { BotoncomprarComponent } from './componentes/botoncomprar/botoncomprar.component';
+import { RecuperarComponent } from './recuperar/recuperar.component';
+import { ActivarComponent } from './activar/activar.component';
 
 @NgModule({
   declarations: [
@@ -90,7 +92,9 @@ import { BotoncomprarComponent } from './componentes/botoncomprar/botoncomprar.c
     BolsaTrabajoComponent,
     SeccionesComponent,
     MarcasComponent,
-    BotoncomprarComponent
+    BotoncomprarComponent,
+    RecuperarComponent,
+    ActivarComponent
   ],
   imports: [
     BrowserModule,

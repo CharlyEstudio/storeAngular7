@@ -129,7 +129,7 @@ export class RegistroComponent implements OnInit {
           .subscribe( (resp: any) => {
             if (resp.status) {
               this._webSocket.acciones('registro-watch', usuario);
-              swal ('Usuario creado', usuario.numero + '. El administrador activará su cuenta.', 'success');
+              swal ('Usuario creado', usuario.numero + '. Se envío un correo a tu email para activar tu cuenta.', 'success');
               this.router.navigate(['/acceso']);
             } else {
               swal('Error al Crear Usuario' , resp.msg, 'error');
