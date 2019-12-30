@@ -266,11 +266,12 @@ footer .redes ul li a:hover {
 }
 
 .banner-register {
-    background-image: url('assets/images/background/carretillas.jpg');
+    /* background-image: url('assets/images/background/carretillas.jpg'); */
+    background-image: url('assets/images/background/register.jpg');
     background-position: center;
     background-repeat: no-repeat;
     border-radius: 10px;
-    height: 200px;
+    height: 300px;
     width: 100%;
 }
 
@@ -440,7 +441,8 @@ a.link-cart:hover {
 }
 
 .fondo-nosotros {
-    background-image: url('assets/images/background/fondo_3.jpg');
+    /* background-image: url('assets/images/background/fondo_3.jpg'); */
+    background-image: url('assets/images/background/3.jpg');
     background-repeat: no-repeat;
     background-position: center;
     background-size: 100%;
@@ -448,8 +450,8 @@ a.link-cart:hover {
 }
 
 .fondo-cobertura {
-    /* background-image: url('assets/images/background/fondo_2.jpg'); */
     background-image: url('assets/images/background/fondo_4.jpg');
+    /* background-image: url('assets/images/background/register.jpg'); */
     background-repeat: no-repeat;
     background-position: center;
     background-size: 100%;

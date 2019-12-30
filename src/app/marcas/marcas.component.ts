@@ -5,6 +5,9 @@ import { DomSanitizer } from '@angular/platform-browser';
 // Servicios
 import { ProductosService } from 'src/app/servicios/servicios.index';
 
+// JQuery
+declare var $: any;
+
 @Component({
   selector: 'app-marcas',
   templateUrl: './marcas.component.html',
@@ -18,6 +21,8 @@ export class MarcasComponent implements OnInit {
   precarga: any[] = [];
   imagen: any;
   tipo: any;
+  virtual: boolean = false;
+  urlMendoza: any = 'https://cdn.flipsnack.com/widget/v2/widget.html?hash=fdplofipr&t=1577150828';
 
   constructor(
     public sanitizer: DomSanitizer,
@@ -37,7 +42,16 @@ export class MarcasComponent implements OnInit {
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    $(function() {
+      // single book
+      $('#mybook').booklet({
+        width:  '87%',
+        height: 655,
+        pagePadding: 0,
+      });
+  });
+  }
 
   irPorMarcas(marca: any) {
     this.route.navigate(['/pormarcas', marca.marca, marca.img, this.marca, this.tipo]);
@@ -50,13 +64,14 @@ export class MarcasComponent implements OnInit {
         if (fmo.status) {
           this.marcas = fmo.respuesta;
           this.dividirMarcas = fmo.respuesta;
-          let array = [];
+          const array = [];
           for (const mc of this.marcas) {
             if (mc.marca === 'Generico') {
               array.push(mc);
             }
           }
           this.marcas = array;
+          this.virtual = false;
         }
       });
       this.elegirMenu(3);
@@ -66,6 +81,7 @@ export class MarcasComponent implements OnInit {
           if (truper.status) {
             this.marcas = truper.respuesta;
             this.dividirMarcas = truper.respuesta;
+            this.virtual = false;
           }
         });
       } else if (this.marca === 'Fmo') {
@@ -73,7 +89,7 @@ export class MarcasComponent implements OnInit {
             if (fmo.status) {
               this.marcas = fmo.respuesta;
               this.dividirMarcas = fmo.respuesta;
-              let array = [];
+              const array = [];
               for (const mc of this.marcas) {
                 if (mc.marca !== 'Generico') {
                   this.tipo = 'MARCAS';
@@ -83,8 +99,13 @@ export class MarcasComponent implements OnInit {
                 }
               }
               this.marcas = array;
+              this.virtual = false;
             }
           });
+      } else if (this.marca === 'Virtual') {
+        console.log('Mostrar el catálogo virtual');
+        this.marcas = [];
+        this.virtual = true;
       }
     }
   }

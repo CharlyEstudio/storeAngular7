@@ -30,7 +30,7 @@
     
   </nav>
 
-  <div class="row mas-vendidos" *ngIf="marcas.length === 0">
+  <div class="row mas-vendidos" *ngIf="marcas.length === 0 && !virtual">
 
       <div class="col-12 col-lg-3 col-md-6 col-sm-12 pt-2" *ngFor="let pre of precarga">
   
@@ -48,7 +48,7 @@
   
   </div>
 
-  <div class="row mas-vendidos" *ngIf="marcas.length > 0">
+  <div class="row mas-vendidos" *ngIf="marcas.length > 0 && !virtual">
 
       <div class="col-12 col-lg-3 col-md-6 col-sm-12 pt-2 el-element-overlay" *ngFor="let mc of marcas">
 
@@ -71,5 +71,51 @@
       </div>
 
   </div>
+
+  <div class="col-lg-12 col-md-12 col-sm-12 mb-5" *ngIf="marcas.length === 0 && virtual">
+
+    <h1>Catálogo Virtual Mendoza</h1>
+
+  </div>
+
+  <div class="col-lg-12 col-md-12 col-sm-12" *ngIf="marcas.length === 0 && virtual">
+
+    <div id="mybook">
+
+      <div>
+
+        <img src="assets/images/revista/page_1.jpg">
+
+      </div>
+
+      <div>
+
+        <img src="assets/images/revista/page_2.jpg">
+
+      </div>
+
+      <div>
+
+        <img src="assets/images/revista/page_3.jpg">
+
+      </div>
+
+      <div>
+
+        <img src="assets/images/revista/page_4.jpg">
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="col-lg-12 col-md-12 col-sm-12 text-center mt-4" *ngIf="marcas.length === 0 && virtual">
+
+    <a type="button" href="assets/pdf/promo.pdf" class="btn btn-linkedin" target="_blank">Descargar</a>
+
+  </div>
+
+  <!-- <iframe [src]="sanitizer.bypassSecurityTrustResourceUrl(urlMendoza)" width="100%" height="700"></iframe> -->
 
 </div>

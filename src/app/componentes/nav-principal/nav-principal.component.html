@@ -1,144 +1,137 @@
-<!-- <header class="text-white"> -->
 <header>
 
-    <!-- <div class="nav-top-oscuro"> -->
+    <div class="container">
 
-        <div class="container">
+        <div class="row pt-2 pb-2">
 
-            <!-- <div class="row p-4" style="border-bottom: 1px solid #DEDEDE"> -->
-            <div class="row pt-2 pb-2">
+            <div class="col-lg-5 col-md-12 col-sm-12 col-12 info-nav">
+    
+                <ul class="list-inline" style="margin-bottom: 0px!important;">
 
-                <div class="col-lg-5 col-md-12 col-sm-12 col-12 info-nav">
-        
-                    <ul class="list-inline" style="margin-bottom: 0px!important;">
+                    <li class="list-inline-item">
 
-                        <li class="list-inline-item">
-    
-                            <a class="nav-link dir-tel" style="font-size: 12px">
-    
-                                <i class="mdi mdi-map-marker-radius"></i> Prol. Constituyentes 1905-2
-    
-                            </a>
-    
-                        </li>
+                        <a class="nav-link dir-tel" style="font-size: 12px">
 
-                        <li class="list-inline-item">
-    
-                            <a class="nav-link dir-tel" style="font-size: 12px">
-    
-                                <i class="mdi mdi-cellphone-iphone"></i> (01 442) 196 8555 / 196 6846
-    
-                            </a>
-    
-                        </li>
-    
-                    </ul>
-        
-                </div>
+                            <i class="mdi mdi-map-marker-radius"></i> Prol. Constituyentes 1905-2
 
-                <div class="col-lg-3 col-md-12 col-sm-12 col-12 info-nav">
-        
-                    <ul class="list-inline" style="margin-bottom: 0px!important;">
+                        </a>
 
-                        <li class="list-inline-item font-weight-bold" *ngIf="logeado">
-    
-                            <a routerLink="" class="nav-link" style="font-size: 12px; font-weight: 500;">
-    
-                                <i class="mdi mdi-account-outline"></i> Mi Cuenta
-    
-                            </a>
-    
-                        </li>
-    
-                        <li class="list-inline-item font-weight-bold" *ngIf="!logeado">
-    
-                            <a routerLink="/registro" class="nav-link" style="font-size: 12px; font-weight: 500;">
-    
-                                <i class="mdi mdi-human-greeting"></i> Registro
-    
-                            </a>
-    
-                        </li>
-    
-                        <li class="list-inline-item font-weight-bold" *ngIf="!logeado">
-    
-                            <a routerLink="/acceso" class="nav-link " style="font-size: 12px; font-weight: 500;">
-    
-                                <i class="mdi mdi-access-point"></i> Accesar
-    
-                            </a>
-    
-                        </li>
-    
-                        <li class="list-inline-item font-weight-bold" *ngIf="logeado">
-    
-                            <a routerLink="" class="nav-link" (click)="logout()" style="font-size: 12px; font-weight: 500;">
-    
-                                <i class="mdi mdi-logout"></i> Salir
-    
-                            </a>
-    
-                        </li>
-    
-                    </ul>
-        
-                </div>
+                    </li>
 
-                <div class="col-lg-3 col-md-12 col-sm-12 col-12 info-nav">
+                    <li class="list-inline-item">
 
-                    <ul class="list-inline float-right" style="margin-bottom: 0px!important;">
+                        <a class="nav-link dir-tel" style="font-size: 12px">
 
-                        <li class="list-inline-item">
-    
-                            <div class="buscador">
+                            <i class="mdi mdi-cellphone-iphone"></i> (01 442) 196 8555 / 196 6846
 
-                                <app-buscar (actualizaValor)="obtener($event)"></app-buscar>
-                
-                            </div>
-    
-                        </li>
-    
-                    </ul>
+                        </a>
 
-                </div>
+                    </li>
 
-                <div class="col-lg-1 col-md-12 col-sm-12 col-12 info-nav">
+                </ul>
+    
+            </div>
 
-                    <ul class="list-inline float-right" style="margin-bottom: 0px!important;">
+            <div class="col-lg-3 col-md-12 col-sm-12 col-12 info-nav">
+    
+                <ul class="list-inline" style="margin-bottom: 0px!important;">
 
-                        <li class="list-inline-item">
-    
-                            <a href="https://www.facebook.com/FerremayoristasOlvera/" class="link-red" style="padding: 0px!important; margin-right: 10px;" target="_blank">
-    
-                                <i class="mdi mdi-facebook-box"></i>
-    
-                            </a>
-    
-                        </li>
-    
-                        <li class="list-inline-item">
-    
-                            <a href="https://www.linkedin.com/" class="link-red" style="padding: 0px!important;" target="_blank">
-    
-                                <i class="mdi mdi-linkedin-box"></i>
-    
-                            </a>
-    
-                        </li>
-    
-                    </ul>
+                    <li class="list-inline-item font-weight-bold" *ngIf="logeado">
 
-                </div>
+                        <a routerLink="" class="nav-link" style="font-size: 12px; font-weight: 500;">
+
+                            <i class="mdi mdi-account-outline"></i> Mi Cuenta
+
+                        </a>
+
+                    </li>
+
+                    <li class="list-inline-item font-weight-bold" *ngIf="!logeado">
+
+                        <a routerLink="/registro" class="nav-link" style="font-size: 12px; font-weight: 500;">
+
+                            <i class="mdi mdi-human-greeting"></i> Registro
+
+                        </a>
+
+                    </li>
+
+                    <li class="list-inline-item font-weight-bold" *ngIf="!logeado">
+
+                        <a routerLink="/acceso" class="nav-link " style="font-size: 12px; font-weight: 500;">
+
+                            <i class="mdi mdi-access-point"></i> Accesar
+
+                        </a>
+
+                    </li>
+
+                    <li class="list-inline-item font-weight-bold" *ngIf="logeado">
+
+                        <a routerLink="" class="nav-link" (click)="logout()" style="font-size: 12px; font-weight: 500;">
+
+                            <i class="mdi mdi-logout"></i> Salir
+
+                        </a>
+
+                    </li>
+
+                </ul>
+    
+            </div>
+
+            <div class="col-lg-3 col-md-12 col-sm-12 col-12 info-nav">
+
+                <ul class="list-inline float-right" style="margin-bottom: 0px!important;">
+
+                    <li class="list-inline-item">
+
+                        <div class="buscador">
+
+                            <app-buscar (actualizaValor)="obtener($event)"></app-buscar>
+            
+                        </div>
+
+                    </li>
+
+                </ul>
+
+            </div>
+
+            <div class="col-lg-1 col-md-12 col-sm-12 col-12 info-nav">
+
+                <ul class="list-inline float-right" style="margin-bottom: 0px!important;">
+
+                    <li class="list-inline-item">
+
+                        <a href="https://www.facebook.com/FerremayoristasOlvera/" class="link-red" style="padding: 0px!important; margin-right: 10px;" target="_blank">
+
+                            <i class="mdi mdi-facebook-box"></i>
+
+                        </a>
+
+                    </li>
+
+                    <li class="list-inline-item">
+
+                        <a href="https://www.linkedin.com/" class="link-red" style="padding: 0px!important;" target="_blank">
+
+                            <i class="mdi mdi-linkedin-box"></i>
+
+                        </a>
+
+                    </li>
+
+                </ul>
 
             </div>
 
         </div>
 
-    <!-- </div> -->
+    </div>
 
 </header>
 
-<!-- <header class="nav-bottom-oscuro-dark"> -->
 <header>
 
     <div class="container pb-4">
@@ -147,7 +140,7 @@
 
             <div class="col-lg-3 col-md-3 col-sm-12 logo_nav centro text-center" style="padding: 0px!important;">
 
-                <img routerLink="/inicio" src="assets/images/logo-min.png" alt="Ferremayoristas Olvera" class="img-fluid dir-tel" width="100%">
+                <img routerLink="/inicio" src="assets/images/logo-min.png" alt="Ferremayoristas Olvera" class="img-fluid dir-tel" width="85%">
 
             </div>
 
@@ -208,103 +201,16 @@
                                         <span class="pormarcas-span blinker">Catálogo Ferremayoristas</span>
                                     
                                     </a>
-                                            
-                                </div>
-        
-                            </li>
 
-                            <!-- <li class="nav-item centro">
-        
-                                <a class="nav-link text-uppercase font-weight-bold" style="font-size: 11px;" routerLink="/">Herramientas</a>
-        
-                            </li>
-        
-                            <li class="nav-item centro">
-                                
-                                <a class="nav-link text-uppercase font-weight-bold" style="font-size: 11px;" routerLink="/">Material Eléctrico</a>
-        
-                            </li>
-
-                            <li class="nav-item centro">
-                                
-                                <a class="nav-link text-uppercase font-weight-bold" style="font-size: 11px;" routerLink="/">Iluminación</a>
-        
-                            </li>
-
-                            <li class="nav-item centro">
-                                
-                                <a class="nav-link text-uppercase font-weight-bold" style="font-size: 11px;" routerLink="/">Plomeria y Grifería</a>
-        
-                            </li>
-
-                            <li class="nav-item centro">
-                                
-                                <a class="nav-link text-uppercase font-weight-bold" style="font-size: 11px;" routerLink="/">Cerrajería</a>
-        
-                            </li>
-
-                            <li class="nav-item centro">
-                                
-                                <a class="nav-link text-uppercase font-weight-bold" style="font-size: 11px;" routerLink="/">Automotríz</a>
-        
-                            </li>
-
-                            <li class="nav-item centro">
-                                
-                                <a class="nav-link text-uppercase font-weight-bold" style="font-size: 11px;" routerLink="/">Ferretería</a>
-        
-                            </li>
-
-                            <li class="nav-item centro">
-                                
-                                <a class="nav-link text-uppercase font-weight-bold" style="font-size: 11px;" routerLink="/">Limpieza y Hogar</a>
-        
-                            </li> -->
-        
-                            <!-- <li class="nav-item dropdown centro">
-        
-                                <a class="dropdown-toggle nav-link text-uppercase font-weight-bold" style="font-size: 11px;" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Marcas Truper
-                                </a>
-        
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-        
-                                    <a class="pormarcas" (click)="irPorMarcas(truper.marca)" *ngFor="let truper of marcasTru">
+                                    <a (click)="irMarca('Virtual', 'MARCAS')" class="pormarcas">
                                         
-                                        <span class="pormarcas-span" [ngClass]="{'truper': truper.marca === 'Truper', 'fiero': truper.marca === 'Fiero', 'volteck': truper.marca === 'Volteck' || truper.marca === 'Voltech', 'foset': truper.marca === 'Foset', 'hermex': truper.marca === 'Hermex', 'klintek': truper.marca === 'Klintek', 'pretul': truper.marca === 'Pretul', 'ultracraft': truper.marca === 'Ultracraft'}">{{ truper.marca }}</span>
-                                        <span class="pormarcas-span">{{ truper.marca }}</span>
+                                        <span class="pormarcas-span blinker">Catálogo Virtual Mendoza</span>
                                     
                                     </a>
-        
+                                            
                                 </div>
         
                             </li>
-        
-                            <li class="nav-item dropdown">
-        
-                                <a class="dropdown-toggle nav-link text-uppercase font-weight-bold" style="font-size: 11px;" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Marcas FMO
-                                </a>
-        
-                                <div class="dropdown-menu dividir-columnas" aria-labelledby="navbarDropdown">
-        
-                                    <ul>
-        
-                                        <li *ngFor="let fmo of marcasFmo" class="pormarcasli">
-        
-                                            <a (click)="irPorMarcas(fmo.marca)" class="pormarcas">
-                                                
-                                                <span class="pormarcas-span">{{ fmo.marca }}</span>
-                                            
-                                            </a>
-                                            
-                                        </li>
-        
-                                    </ul>
-        
-                                </div>
-        
-                            </li> -->
         
                         </ul>
         
@@ -313,12 +219,6 @@
                 </nav>
 
             </div>
-
-            <!-- <div class="col-lg-4 col-md-4 col-sm-12 buscador">
-
-                <app-buscar (actualizaValor)="obtener($event)"></app-buscar>
-
-            </div> -->
 
             <div class="col-lg-1 col-md-1 col-sm-12 centro" style="padding: 0px!important;">
 
@@ -361,18 +261,3 @@
     </div>
 
 </header>
-
-<!-- <header style="background: #f8f9fa; border-bottom: 2px solid #E4E7ED; position: absolute; z-index: 99; width: 100%;"> -->
-<!-- <header class="menu-principal">
-
-    <div class="container">
-
-        <div class="pt-3 pb-1 text-center">
-
-            <h4 class="text-white text-uppercase">Soluciones para el hogar y los negocios.</h4>
-
-        </div>
-
-    </div>
-
-</header> -->
