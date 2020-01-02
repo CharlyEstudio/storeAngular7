@@ -30,7 +30,7 @@ import { MarcasComponent } from './marcas/marcas.component';
 import { ActivarComponent } from './activar/activar.component';
 
 const appRoutes: Routes = [
-    { path: 'inicio', component: InicioComponent, data: { titulo: 'Sitio Oficial Ferremayoristas Olvera', name: 'description' } },
+    { path: 'inicio', component: InicioComponent, data: { titulo: 'Sitio Oficial Grupo Ferremayoristas del Bajío', name: 'description' } },
     { path: 'marcaTruper', component: TruperComponent, data: { titulo: 'Marca Truper', name: 'description' } },
     { path: 'marcaFmo', component: FmoComponent, data: { titulo: 'Marca FMO', name: 'description' } },
     { path: 'marcas/:marca/:menu', component: MarcasComponent, data: { titulo: 'Marcas', name: 'description' } },
