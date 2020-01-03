@@ -39,8 +39,8 @@ export class InicioComponent implements OnInit {
   }
 
   ngOnInit() {
-    $(document).snowfall();
-    $('#elementid').snowfall({flakeCount : 100, maxSpeed : 1});
+    // $(document).snowfall();
+    // $('#elementid').snowfall({flakeCount : 100, maxSpeed : 1});
   }
 
   cambiarVista(tipo: any) {

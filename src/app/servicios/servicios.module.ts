@@ -14,7 +14,8 @@ import {
     MenuService,
     ExportarService,
     WebsocketService,
-    BotoncomprarService
+    BotoncomprarService,
+    UtilsService
 } from './servicios.index';
 
 @NgModule({
@@ -35,7 +36,8 @@ import {
         MenuService,
         ExportarService,
         WebsocketService,
-        BotoncomprarService
+        BotoncomprarService,
+        UtilsService
     ],
     declarations: []
 })

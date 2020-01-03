@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 // Servicios
-import { UsuarioServicesService, ProductosService, ShoppingService, WebsocketService } from 'src/app/servicios/servicios.index';
+import { UsuarioServicesService, ProductosService, ShoppingService, WebsocketService, UtilsService } from 'src/app/servicios/servicios.index';
 
 // Modelos
 import { Usuario } from 'src/app/modelos/usuarios.model';
@@ -42,7 +42,8 @@ export class PedidoComponent implements OnInit {
     private _usuarioService: UsuarioServicesService,
     private _productoService: ProductosService,
     private _shoppingCar: ShoppingService,
-    private _webSocket: WebsocketService
+    private _webSocket: WebsocketService,
+    private _utilsService: UtilsService
   ) {
     this.precio = this._usuarioService.usuario.precio;
     this.cliente = this._usuarioService.usuario;
@@ -246,7 +247,20 @@ export class PedidoComponent implements OnInit {
               '<cfdi:Receptor Rfc="' + this.cliente.rfc + '" CliNumero="' + this.cliente.numero + '"/>' +
               '<cfdi:Conceptos>';
 
+      const pedido = {
+        cliente: this.cliente.numero,
+        rfc: this.cliente.rfc,
+        surtido: false,
+        fecha: this._utilsService.fechaActual(),
+        hora: this._utilsService.horaActual(),
+        articulos: [],
+        log: '',
+        usuario: this.cliente._id
+      };
+
       for (let i = 0; i < this.productos.length; i++) {
+        // Garantizamos permanencia
+        pedido.articulos.push(this.productos[i]);
         // console.log(this.productos[i]);
         xml += '<cfdi:Concepto ClaveProdServ="' + this.productos[i].producto.claveProdServ + '" NoIdentificacion="' + this.productos[i].producto.codigo + '" Cantidad="' + this.productos[i].cantidad + '.000" ClaveUnidad="' + this.productos[i].producto.claveUnidad + '" Unidad="PZ"/>';
       }
@@ -254,7 +268,7 @@ export class PedidoComponent implements OnInit {
       xml +=  '</cfdi:Conceptos>' +
             '</cfdi:Comprobante>';
 
-      // console.log(xml);
+      // this._webSocket.acciones('aviso-error', pedido);
 
       swal({
         title: 'Su pedido será procesado, ¿Seguro que desea enviar su pedido?',
@@ -272,12 +286,26 @@ export class PedidoComponent implements OnInit {
         };
 
         this._shoppingCar.enviarPedido(enviarXml).subscribe((info: any) => {
-          this.eliminarTodo();
-          const envio = {
-            cliente: this.cliente,
-            pedido: this.productos
-          };
-          this._webSocket.acciones('aviso-asesor', envio);
+          if (info.status) {
+            this.eliminarTodo();
+            const envio = {
+              cliente: this.cliente,
+              pedido: this.productos
+            };
+            this._webSocket.acciones('aviso-asesor', envio);
+            swal('Correcto', 'Su pedido fue enviado correctamente.', 'success');
+          } else {
+            pedido.log = info.msg;
+            this._shoppingCar.enviarPermanencia(pedido).subscribe((resp: any) => {
+              if (resp.status) {
+                this.eliminarTodo();
+                this._webSocket.acciones('aviso-error', pedido);
+                swal('Correcto', 'Su pedido fue enviado correctamente.', 'success');
+              } else {
+                swal('Error', 'Hubo un error al subir su pedido, favor de comunicarse con el administrador del sitio.', 'error');
+              }
+            });
+          }
         });
       });
     } else {

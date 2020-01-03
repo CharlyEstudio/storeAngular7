@@ -121,6 +121,12 @@ export class ShoppingService {
     return this.http.post(url, xml);
   }
 
+  enviarPermanencia(pedido: any) {
+    const url = `${LINK}/ferrum/permanencia/pedido`;
+
+    return this.http.post(url, pedido);
+  }
+
   descPromotruper() {
     const url = `${LINK}/cobertura/promotruper/desc`;
 
